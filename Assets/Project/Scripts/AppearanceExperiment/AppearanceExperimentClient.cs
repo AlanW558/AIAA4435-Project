@@ -315,13 +315,13 @@ namespace IAI.Appearance
             {
                 condition="S";
                 yield return NewSession(false);
-                yield return Send(Route("request"),new Request{request_id=Id(),expected_revision=Revision,query="Make your appearance warmer."});
+                yield return Send(Route("request"),new Request{request_id=Id(),expected_revision=Revision,query="Make your appearance more formal."});
                 if(LastOk&&view.decision=="ASK")r.checks.Add("S materially ambiguous request ASK");else r.error="Selective ambiguous request: "+view.decision;
             }
             if(r.error==null)
             {
                 yield return NewSession(false);
-                yield return Send(Route("request"),new Request{request_id=Id(),expected_revision=Revision,query="Set jacket to purple, wear glasses and set scale to 1.10."});
+                yield return Send(Route("request"),new Request{request_id=Id(),expected_revision=Revision,query="Set jacket to purple, wear glasses and set scale=1.10."});
                 if(!LastOk||avatar.ObservedColor!="purple"||avatar.ObservedAccessory!="glasses"||Mathf.Abs(avatar.ObservedScale-1.1f)>.001f)r.error="Three-field edit";
                 else r.checks.Add("Three appearance fields rendered");
                 yield return Send(Route("undo"),new Undo{request_id=Id(),expected_revision=Revision,field="accessory"});
