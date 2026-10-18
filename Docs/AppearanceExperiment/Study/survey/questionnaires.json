@@ -2,9 +2,10 @@
   "schema_version": "appearance-survey-v0.1",
   "authored_on": "2026-10-18",
   "status": "draft_for_pilot",
-  "language": "en",
-  "measurement_note": "Four custom single items; not a validated scale and not a combined UX score.",
-  "publication_status": "Local artifacts only. No external questionnaire has been created or published by this generator.",
+  "language": "zh-CN",
+  "content_revision": "appearance-survey-v0.1-zh-CN.1",
+  "measurement_note": "四项均为自拟的单题指标，未经量表验证，分别分析，不合成为体验总分。",
+  "publication_status": "本生成器只制作本地文件，不创建或发布外部问卷。",
   "participant_ids": {
     "formal": "P001–P020",
     "pilot": [
@@ -13,113 +14,113 @@
     ]
   },
   "session_metadata": {
-    "participant_id": "Researcher-assigned pseudonymous ID. Required.",
-    "session_id": "Use the participant-wide study_session_id from Unity client markers, shared across all four blocks; not a per-condition backend session_id. Required.",
-    "phase": "Derived from participant ID; never participant-selected.",
-    "block": "1–4 for the block form only; participant sees neutral block number.",
-    "condition": "Never ask or display; join from the frozen schedule during analysis."
+    "participant_id": "研究者分配的参与者编号，必填。",
+    "session_id": "必填，使用 Unity 客户端记录中整场实验共用的 study_session_id。四轮使用同一个编号，不填写各条件的后端 session_id。",
+    "phase": "根据参与者编号确定，不由参与者选择。",
+    "block": "仅用于每轮结束后的问卷，填写 1 至 4；参与者只看到轮次。",
+    "condition": "不提问、不展示；分析时依据已冻结的分配表关联。"
   },
   "study_information": [
-    "This AIAA4435 course study examines how people make changes to a virtual character’s appearance. You will complete tasks in four blocks and answer short questions about your experience. There are no right or preferred answers.",
-    "Participation is voluntary. You may skip opinion questions, take a break, or stop the session. Tell the researcher immediately if you feel uncomfortable, including discomfort from the headset.",
-    "We record your task requests, choices, appearance changes, timing, questionnaire answers, and screenshots of the virtual character and interface. This form does not record microphone or camera input. Do not include personal or sensitive information in requests or answers.",
-    "Task requests are processed by an external AI service (DeepSeek). These questionnaire responses are kept separate from model prompts. Use only the study ID given by the researcher; do not enter your name or contact details.",
-    "The researcher will explain who can access the study data, its storage and retention arrangements, and how to request withdrawal. Please ask any questions before deciding whether to take part."
+    "这是 AIAA4435 课程的一项研究，想了解大家如何修改虚拟角色的外形。你将完成四轮任务，并回答一些关于使用体验的问题。回答没有对错，请按实际情况和感受填写。",
+    "参加研究完全自愿。你可以跳过体验问题，随时休息或结束实验。如果感到不适，包括佩戴头显引起的不适，请立即告诉研究者。",
+    "我们会记录你提出的修改要求、操作选择、外形变化、用时、问卷回答，以及虚拟角色和界面的截图。本表单不录音，也不调用摄像头。请不要在指令或回答中填写个人信息或敏感信息。",
+    "你的修改要求会交给外部人工智能服务 DeepSeek 处理。问卷回答与模型收到的指令分开保存。请只使用研究者给你的参与者编号，不要填写姓名或联系方式。",
+    "研究者会说明谁能访问数据、数据存在哪里、保存多久，以及如何申请撤回。有疑问的话，请先询问，再决定是否参加。"
   ],
   "forms": [
     {
       "id": "pre",
-      "title": "Character Appearance Study — Before the Session",
-      "description": "Please read the study information, then answer the background questions. Consent is required to begin; the background questions are optional.",
+      "title": "虚拟角色外形修改研究：实验开始前",
+      "description": "请先阅读研究说明，再决定是否参加。只有同意参加后才继续实验，其他问题都可以跳过。",
       "questions": [
         {
           "id": "consent",
-          "title": "I have read the study information, had an opportunity to ask questions, and agree to take part.",
+          "title": "我已阅读研究说明，有机会向研究者提问，并同意参加本次研究。",
           "type": "single_choice",
           "required": true,
           "options": [
             {
               "value": "agree",
-              "label": "I agree to take part."
+              "label": "我同意参加。"
             },
             {
               "value": "decline",
-              "label": "I do not agree to take part."
+              "label": "我不同意参加。"
             }
           ]
         },
         {
           "id": "vr_experience",
-          "title": "Before today, approximately how many times have you used a VR headset?",
+          "title": "在今天之前，你大约使用过多少次虚拟现实头显？",
           "type": "single_choice",
           "required": false,
           "options": [
             {
               "value": "never",
-              "label": "Never"
+              "label": "从未用过"
             },
             {
               "value": "one_to_two",
-              "label": "1–2 times"
+              "label": "1 至 2 次"
             },
             {
               "value": "three_to_ten",
-              "label": "3–10 times"
+              "label": "3 至 10 次"
             },
             {
               "value": "more_than_ten",
-              "label": "More than 10 times"
+              "label": "10 次以上"
             },
             {
               "value": "cannot_recall",
-              "label": "Cannot recall / prefer not to answer"
+              "label": "记不清／不想回答"
             }
           ]
         },
         {
           "id": "prior_prototype_exposure",
-          "title": "Before today, have you tried this appearance-customisation prototype?",
+          "title": "在今天之前，你是否试用过这套修改虚拟角色外形的原型？",
           "type": "single_choice",
           "required": false,
           "options": [
             {
               "value": "no",
-              "label": "No"
+              "label": "没有"
             },
             {
               "value": "yes",
-              "label": "Yes"
+              "label": "有"
             },
             {
               "value": "unsure",
-              "label": "Not sure / prefer not to answer"
+              "label": "不确定／不想回答"
             }
           ]
         },
         {
           "id": "prior_link_consent",
-          "title": "If an anonymous code exists for your earlier course questionnaire, may we link that response to this session?",
+          "title": "如果你之前填写的课程问卷有匿名编号，你是否同意我们用这个编号，将那份回答与本次实验记录对应起来？",
           "type": "single_choice",
           "required": false,
-          "help": "This is optional. We will not try to identify an anonymous earlier response by its wording.",
+          "help": "这项关联由你自愿选择。我们不会根据旧问卷的措辞猜测填写者的身份。",
           "options": [
             {
               "value": "yes",
-              "label": "Yes, using a code I can provide."
+              "label": "同意，我可以提供已有的匿名编号。"
             },
             {
               "value": "no",
-              "label": "No."
+              "label": "不同意。"
             },
             {
               "value": "unavailable",
-              "label": "I do not have a code / I am not sure."
+              "label": "我没有匿名编号／不确定。"
             }
           ]
         },
         {
           "id": "prior_survey_code",
-          "title": "Earlier questionnaire code — optional",
+          "title": "旧问卷的匿名编号",
           "type": "short_text",
           "required": false,
           "show_if": {
@@ -127,263 +128,263 @@
             "equals": "yes"
           },
           "max_length": 80,
-          "help": "Enter only an existing anonymous code. Do not enter your name, email address, or phone number."
+          "help": "请只填写已有的匿名编号。可以留空，不要填写姓名、邮箱或手机号。"
         }
       ],
       "consent_gate": {
         "field": "consent",
         "proceed_if": "agree",
-        "otherwise": "End the form without storing answers."
+        "otherwise": "结束填写，不保存回答。"
       }
     },
     {
       "id": "block",
-      "title": "Character Appearance Study — After a Block",
-      "description": "Please answer only about the block you have just completed. The four statements use the same 1–7 agreement scale. Each answer is optional.",
+      "title": "虚拟角色外形修改研究：每轮结束后",
+      "description": "请只根据刚完成的这一轮作答。四道评分题都使用 1 至 7 分，表示你对这句话的同意程度。每道题都可以跳过。",
       "questions": [
         {
           "id": "interruption_1to7",
-          "title": "The system’s questions interrupted my task.",
+          "title": "系统的提问打断了我完成任务的过程。",
           "type": "rating",
           "required": false,
-          "help": "If the system asked no questions in this block, select 1 (strongly disagree).",
+          "help": "如果这一轮系统没有提问，请选 1（非常不同意）。",
           "options": [
             {
               "value": 1,
-              "label": "1 — Strongly disagree"
+              "label": "1：非常不同意"
             },
             {
               "value": 2,
-              "label": "2 — Disagree"
+              "label": "2：不同意"
             },
             {
               "value": 3,
-              "label": "3 — Somewhat disagree"
+              "label": "3：比较不同意"
             },
             {
               "value": 4,
-              "label": "4 — Neither agree nor disagree"
+              "label": "4：说不上同意或不同意"
             },
             {
               "value": 5,
-              "label": "5 — Somewhat agree"
+              "label": "5：比较同意"
             },
             {
               "value": 6,
-              "label": "6 — Agree"
+              "label": "6：同意"
             },
             {
               "value": 7,
-              "label": "7 — Strongly agree"
+              "label": "7：非常同意"
             },
             {
               "value": "cannot_judge",
-              "label": "Cannot judge / prefer not to answer"
+              "label": "无法判断／不想回答"
             }
           ]
         },
         {
           "id": "control_1to7",
-          "title": "I could control which appearance properties were changed.",
+          "title": "我能控制哪些外形特征会被修改。",
           "type": "rating",
           "required": false,
           "help": null,
           "options": [
             {
               "value": 1,
-              "label": "1 — Strongly disagree"
+              "label": "1：非常不同意"
             },
             {
               "value": 2,
-              "label": "2 — Disagree"
+              "label": "2：不同意"
             },
             {
               "value": 3,
-              "label": "3 — Somewhat disagree"
+              "label": "3：比较不同意"
             },
             {
               "value": 4,
-              "label": "4 — Neither agree nor disagree"
+              "label": "4：说不上同意或不同意"
             },
             {
               "value": 5,
-              "label": "5 — Somewhat agree"
+              "label": "5：比较同意"
             },
             {
               "value": 6,
-              "label": "6 — Agree"
+              "label": "6：同意"
             },
             {
               "value": 7,
-              "label": "7 — Strongly agree"
+              "label": "7：非常同意"
             },
             {
               "value": "cannot_judge",
-              "label": "Cannot judge / prefer not to answer"
+              "label": "无法判断／不想回答"
             }
           ]
         },
         {
           "id": "effort_1to7",
-          "title": "Completing the changes required a lot of effort.",
+          "title": "完成这些修改需要我投入很多精力。",
           "type": "rating",
           "required": false,
           "help": null,
           "options": [
             {
               "value": 1,
-              "label": "1 — Strongly disagree"
+              "label": "1：非常不同意"
             },
             {
               "value": 2,
-              "label": "2 — Disagree"
+              "label": "2：不同意"
             },
             {
               "value": 3,
-              "label": "3 — Somewhat disagree"
+              "label": "3：比较不同意"
             },
             {
               "value": 4,
-              "label": "4 — Neither agree nor disagree"
+              "label": "4：说不上同意或不同意"
             },
             {
               "value": 5,
-              "label": "5 — Somewhat agree"
+              "label": "5：比较同意"
             },
             {
               "value": 6,
-              "label": "6 — Agree"
+              "label": "6：同意"
             },
             {
               "value": 7,
-              "label": "7 — Strongly agree"
+              "label": "7：非常同意"
             },
             {
               "value": "cannot_judge",
-              "label": "Cannot judge / prefer not to answer"
+              "label": "无法判断／不想回答"
             }
           ]
         },
         {
           "id": "satisfaction_1to7",
-          "title": "I was satisfied with the customisation experience in this block.",
+          "title": "我对这一轮修改外形的体验感到满意。",
           "type": "rating",
           "required": false,
           "help": null,
           "options": [
             {
               "value": 1,
-              "label": "1 — Strongly disagree"
+              "label": "1：非常不同意"
             },
             {
               "value": 2,
-              "label": "2 — Disagree"
+              "label": "2：不同意"
             },
             {
               "value": 3,
-              "label": "3 — Somewhat disagree"
+              "label": "3：比较不同意"
             },
             {
               "value": 4,
-              "label": "4 — Neither agree nor disagree"
+              "label": "4：说不上同意或不同意"
             },
             {
               "value": 5,
-              "label": "5 — Somewhat agree"
+              "label": "5：比较同意"
             },
             {
               "value": 6,
-              "label": "6 — Agree"
+              "label": "6：同意"
             },
             {
               "value": 7,
-              "label": "7 — Strongly agree"
+              "label": "7：非常同意"
             },
             {
               "value": "cannot_judge",
-              "label": "Cannot judge / prefer not to answer"
+              "label": "无法判断／不想回答"
             }
           ]
         },
         {
           "id": "block_comment",
-          "title": "Is there anything about this block you would like us to know? — optional",
+          "title": "关于这一轮体验，你还有什么想补充的吗？",
           "type": "long_text",
           "required": false,
           "max_length": 1000,
-          "help": "A short comment is enough. Please do not include personal information."
+          "help": "可以留空。简单写几句即可，请不要填写个人信息。"
         }
       ],
-      "repeat": "After each of the four blocks; same wording and response order."
+      "repeat": "四轮结束后各填写一次，题目措辞和选项顺序保持一致。"
     },
     {
       "id": "exit",
-      "title": "Character Appearance Study — At the End",
-      "description": "Think about the four blocks you completed. All questions are optional. Short answers are sufficient.",
+      "title": "虚拟角色外形修改研究：全部结束后",
+      "description": "请回顾刚完成的四轮任务。所有问题都可以跳过，简单写几句即可。",
       "questions": [
         {
           "id": "preferred_block",
-          "title": "Which block would you prefer to use for similar appearance changes?",
+          "title": "如果以后还要做类似的外形修改，你更愿意使用哪一轮的系统？",
           "type": "single_choice",
           "required": false,
-          "help": "Refer to the neutral block numbers shown during the session.",
+          "help": "请按实验中显示的轮次选择。",
           "options": [
             {
               "value": "1",
-              "label": "Block 1"
+              "label": "第 1 轮"
             },
             {
               "value": "2",
-              "label": "Block 2"
+              "label": "第 2 轮"
             },
             {
               "value": "3",
-              "label": "Block 3"
+              "label": "第 3 轮"
             },
             {
               "value": "4",
-              "label": "Block 4"
+              "label": "第 4 轮"
             },
             {
               "value": "no_preference",
-              "label": "No preference"
+              "label": "没有特别偏好"
             },
             {
               "value": "none",
-              "label": "I would prefer none of them"
+              "label": "这几轮的系统我都不想用"
             },
             {
               "value": "cannot_judge",
-              "label": "Cannot judge / prefer not to answer"
+              "label": "无法判断／不想回答"
             }
           ]
         },
         {
           "id": "preference_reason",
-          "title": "What influenced that choice? — optional",
+          "title": "你为什么这样选择？",
           "type": "long_text",
           "required": false,
           "max_length": 1000
         },
         {
           "id": "helpful_question",
-          "title": "Was there a question that helped you make a change? If so, what made it helpful? — optional",
+          "title": "有没有哪次提问帮你完成了修改？如果有，它帮在什么地方？",
           "type": "long_text",
           "required": false,
           "max_length": 1000,
-          "help": "“None” is also a useful answer."
+          "help": "可以留空，也可以回答“没有”。"
         },
         {
           "id": "unhelpful_question",
-          "title": "Was there a question you did not need or could not answer? If so, describe it. — optional",
+          "title": "有没有哪次提问让你觉得没必要，或者不知道怎么回答？如果有，请描述一下。",
           "type": "long_text",
           "required": false,
           "max_length": 1000,
-          "help": "“None” is also a useful answer."
+          "help": "可以留空，也可以回答“没有”。"
         },
         {
           "id": "other_feedback",
-          "title": "Anything else you would change about making, checking, or undoing appearance changes? — optional",
+          "title": "对于修改外形、检查结果或撤销操作，你还有什么改进建议？",
           "type": "long_text",
           "required": false,
           "max_length": 1000

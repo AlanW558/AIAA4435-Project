@@ -1,22 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Character Appearance Study</title>
+<title>虚拟角色外形修改研究问卷</title>
 <style>
 :root{font-family:system-ui,sans-serif;color:#192b3b;background:#f3f5f8;line-height:1.5}body{margin:0}main{max-width:850px;margin:24px auto;padding:24px;background:white;border-radius:16px}h1{font-size:1.6rem;margin:.5rem 0}h2{font-size:1.2rem}label{display:block;margin:.4rem 0}input[type=text],textarea,select{font:inherit;box-sizing:border-box;padding:10px;border:1px solid #899aaa;border-radius:6px;width:100%}textarea{min-height:85px}input[type=radio]{margin-right:8px;accent-color:#185f99}fieldset{border:0;border-top:1px solid #d8e1ea;margin:24px 0;padding:20px 0 0}legend{font-weight:650;padding:0 8px 0 0}button{font:inherit;padding:10px 14px;border:1px solid #185f99;border-radius:7px;background:#185f99;color:white;cursor:pointer}button.secondary{background:white;color:#185f99}button:disabled{opacity:.5;cursor:not-allowed}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.notice{background:#edf4fb;border-left:4px solid #185f99;padding:12px;margin:12px 0}.help{font-size:.9rem;color:#45576a;margin:4px 0 10px}.choice{padding:8px;background:#f4f7fa;border-radius:6px}.optional{font-size:.8rem;font-weight:400;color:#536274}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}#status{min-height:24px;font-weight:600}details{margin:16px 0}summary{cursor:pointer}a{color:#185f99}@media(max-width:600px){main{margin:0;border-radius:0;padding:18px}.row{grid-template-columns:1fr}}
 </style>
 </head>
 <body><main>
-<div class="notice"><strong>Local questionnaire.</strong> Answers stay on this page until you choose “Download answers”. Nothing is uploaded. Give the downloaded file to the researcher using the agreed local transfer method.</div>
-<nav aria-label="Form selection"><label for="formSelect">Form</label><select id="formSelect"><option value="pre">Before the session</option><option value="block">After a block</option><option value="exit">At the end</option></select></nav>
+<div class="notice">这是本地问卷。点击“下载回答”后，答案会保存为文件，不会上传。请按现场约定的方式把文件交给研究者。刷新或关闭页面前，请先下载要保留的回答。</div>
+<nav aria-label="选择问卷"><label for="formSelect">选择问卷</label><select id="formSelect"><option value="pre">实验开始前</option><option value="block">每轮结束后</option><option value="exit">全部结束后</option></select></nav>
 <h1 id="title"></h1><p id="description"></p>
-<details id="studyInfo"><summary>Study information</summary><div id="information"></div></details>
+<details id="studyInfo"><summary>研究说明</summary><div id="information"></div></details>
 <form id="survey" novalidate>
-<div class="row"><label>Study ID given by the researcher <input id="participant" name="participant" type="text" autocomplete="off" maxlength="16" required placeholder="P001 or PILOT01"></label><label>Session code given by the researcher <input id="session" name="session" type="text" autocomplete="off" maxlength="80" required placeholder="Match the session code shown by the researcher"></label></div>
-<label id="blockLabel">Block just completed <select id="block"><option value="">Choose a block</option><option value="1">Block 1</option><option value="2">Block 2</option><option value="3">Block 3</option><option value="4">Block 4</option></select></label>
-<div id="questions"></div><div class="actions"><button type="submit" id="save">Download answers</button><button type="button" class="secondary" id="clear">Clear answers</button></div><p id="status" role="status" aria-live="polite"></p>
-</form><p class="help">Version appearance-survey-v0.1 · No external scripts, analytics, or automatic storage. Keep your downloaded response file until the researcher confirms it has been saved.</p>
+<div class="row"><label>研究者提供的参与者编号 <input id="participant" name="participant" type="text" autocomplete="off" maxlength="16" required placeholder="例如 P001 或 PILOT01"></label><label>研究者提供的本次实验编号 <input id="session" name="session" type="text" autocomplete="off" maxlength="80" required placeholder="请按研究者提供的编号填写"></label></div>
+<label id="blockLabel">刚完成的轮次 <select id="block"><option value="">请选择轮次</option><option value="1">第 1 轮</option><option value="2">第 2 轮</option><option value="3">第 3 轮</option><option value="4">第 4 轮</option></select></label>
+<div id="questions"></div><div class="actions"><button type="submit" id="save">下载回答</button><button type="button" class="secondary" id="clear">清空回答</button></div><p id="status" role="status" aria-live="polite"></p>
+</form><p class="help">中文文案第 1 版。页面不加载外部脚本，不进行访问统计，也不自动保存回答。请保留下载的文件，直到研究者确认已收到。</p>
 </main>
 <script id="spec" type="application/json">__SPEC_JSON__</script>
 <script>
@@ -41,7 +41,7 @@ function refreshConditional(){
     box.querySelectorAll('input,textarea,button').forEach(e=>e.disabled=box.hidden);
   }
   if(currentForm().id==='pre'&&selected('consent')==='decline'){
-    statusArea.textContent='Thank you. You do not need to continue. No answers have been saved.';
+    statusArea.textContent='你可以结束填写，本次回答没有保存。';
     document.getElementById('save').disabled=true;
   }else{statusArea.textContent='';document.getElementById('save').disabled=false;}
 }
@@ -55,11 +55,11 @@ function render(){
   for(const q of f.questions){
     const box=node('fieldset');box.id='q_'+q.id;
     const legend=node('legend',q.title);box.appendChild(legend);
-    if(!q.required)legend.appendChild(node('span','  Optional','optional'));
+    if(!q.required)legend.appendChild(node('span','（选填）','optional'));
     if(q.help)box.appendChild(node('p',q.help,'help'));
     if(q.options){
       q.options.forEach((o,i)=>{const label=node('label',undefined,'choice');const input=node('input');input.type='radio';input.name=q.id;input.id=q.id+'_'+i;input.value=String(o.value);input.required=q.required;label.append(input,document.createTextNode(o.label));box.appendChild(label);});
-      if(!q.required){const clear=node('button','Clear selection','secondary');clear.type='button';clear.addEventListener('click',()=>{box.querySelectorAll('input').forEach(i=>i.checked=false);refreshConditional();});box.appendChild(clear);}
+      if(!q.required){const clear=node('button','清除选择','secondary');clear.type='button';clear.addEventListener('click',()=>{box.querySelectorAll('input').forEach(i=>i.checked=false);refreshConditional();});box.appendChild(clear);}
     }else{
       const input=node(q.type==='long_text'?'textarea':'input');if(input.tagName==='INPUT')input.type='text';input.name=q.id;input.id=q.id;input.maxLength=q.max_length||1000;input.required=q.required;input.autocomplete='off';input.setAttribute('aria-label',q.title);box.appendChild(input);
     }
@@ -73,17 +73,17 @@ if(['pre','block','exit'].includes(params.get('form')))formSelect.value=params.g
 document.getElementById('participant').value=params.get('participant')||'';
 document.getElementById('session').value=params.get('session')||'';
 if(['1','2','3','4'].includes(params.get('block')))document.getElementById('block').value=params.get('block');
-formSelect.addEventListener('change',()=>{if(!confirm('Switch form and clear unsaved question answers?')){formSelect.value=questionArea.dataset.form||'pre';return;}render();questionArea.dataset.form=formSelect.value;});
-document.getElementById('clear').addEventListener('click',()=>{if(confirm('Clear the answers on this form? Study and session IDs will remain.'))render();});
+formSelect.addEventListener('change',()=>{if(!confirm('切换问卷会清空当前未下载的题目回答。确定切换吗？')){formSelect.value=questionArea.dataset.form||'pre';return;}render();questionArea.dataset.form=formSelect.value;});
+document.getElementById('clear').addEventListener('click',()=>{if(confirm('确定清空当前问卷的回答吗？参与者编号和实验编号会保留。'))render();});
 survey.addEventListener('submit',event=>{
  event.preventDefault();const f=currentForm();
  const pid=document.getElementById('participant').value.trim().toUpperCase();
  const session=document.getElementById('session').value.trim();
- if(!/^(P00[1-9]|P01[0-9]|P020|PILOT0[12])$/.test(pid)){statusArea.textContent='Please check the study ID with the researcher (P001–P020 or PILOT01–PILOT02).';return;}
- if(!/^[A-Za-z0-9_-]{3,80}$/.test(session)){statusArea.textContent='Please enter the session code given by the researcher; use letters, numbers, underscores, or hyphens.';return;}
- if(f.id==='pre'&&selected('consent')!=='agree'){statusArea.textContent='Please decide whether you agree to take part. If you do not agree, close this form without saving.';return;}
+ if(!/^(P00[1-9]|P01[0-9]|P020|PILOT0[12])$/.test(pid)){statusArea.textContent='请向研究者核对参与者编号：正式实验为 P001 至 P020，预实验为 PILOT01 或 PILOT02。';return;}
+ if(!/^[A-Za-z0-9_-]{3,80}$/.test(session)){statusArea.textContent='请填写研究者提供的实验编号，只能包含英文字母、数字、下划线或连字符。';return;}
+ if(f.id==='pre'&&selected('consent')!=='agree'){statusArea.textContent='请先决定是否同意参加。如果不同意，可以直接关闭问卷，无需保存。';return;}
  const block=f.id==='block'?Number(document.getElementById('block').value):null;
- if(f.id==='block'&&![1,2,3,4].includes(block)){statusArea.textContent='Please select the block you just completed.';return;}
+ if(f.id==='block'&&![1,2,3,4].includes(block)){statusArea.textContent='请选择刚完成的轮次。';return;}
  const answers={},answerStatus={};
  for(const q of f.questions){
    const box=document.getElementById('q_'+q.id);
@@ -93,9 +93,9 @@ survey.addEventListener('submit',event=>{
    if(q.type==='rating'&&/^[1-7]$/.test(value))value=Number(value);
    answers[q.id]=value;answerStatus[q.id]=value==='cannot_judge'?'cannot_judge':'answered';
  }
- const record={schema_version:spec.schema_version,form_id:f.id,participant_id:pid,session_id:session,phase:pid.startsWith('PILOT')?'pilot':'formal',block,recorded_at_utc:new Date().toISOString(),page_elapsed_ms:Date.now()-started,save_sequence:++savedCount,answers,answer_status:answerStatus};
+ const record={schema_version:spec.schema_version,content_revision:spec.content_revision,language:spec.language,form_id:f.id,participant_id:pid,session_id:session,phase:pid.startsWith('PILOT')?'pilot':'formal',block,recorded_at_utc:new Date().toISOString(),page_elapsed_ms:Date.now()-started,save_sequence:++savedCount,answers,answer_status:answerStatus};
  const blob=new Blob([JSON.stringify(record,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=node('a');a.href=url;a.download=`${session}_${f.id}${block?'_'+block:''}_${Date.now()}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
- statusArea.textContent='Download requested. Please check that the JSON file was saved, then tell the researcher. Downloading again creates a revision, not another participant response.';
+ statusArea.textContent='已请求下载。请确认回答文件已保存，再告诉研究者。重复下载会生成新的修订文件，请交给研究者确认保留哪一份。';
 });
 render();questionArea.dataset.form=formSelect.value;
 </script></body></html>

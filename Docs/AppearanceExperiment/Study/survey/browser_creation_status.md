@@ -1,33 +1,43 @@
-# 内置浏览器制作状态
+# 问卷星制作与浏览器接入记录
 
-检查日期：2026-10-18（Asia/Singapore）。
+检查日期：2026-10-18（Asia/Singapore）。中文文案版本：`appearance-survey-v0.1-zh-CN.1`。
 
-**状态：问卷内容和导入材料可在本地完成；尚未在问卷星创建、保存或发布新问卷。** 当前无法执行 Codex 内置浏览器操作，不能把本地文件视为线上已创建的问卷。
+三份中文问卷、本地填写页面和问卷星导入稿已完成 humanizer 复核，并同步到本地与台式机项目。问卷星的三个新草稿尚未证实创建或保存；本地文件不能当作线上草稿链接。
 
-## 已验证的环境阻塞
+## 已确认的台式机聊天
 
-1. 通过工具元数据确认当前提供 `mcp__node_repl__js`、`js_reset` 和 `js_add_node_module_dir`；没有独立的内置浏览器导航、标签页或点击工具。
-2. 执行只读取 `nodeRepl.cwd` 和运行时可用属性的 JavaScript，工具在执行 JavaScript 前返回：
+已按用户要求查找台式机的课程相关聊天，包括归档状态。找到的聊天为“录入问卷星问卷内容”，编号 `01a09608-5657-7a91-9b79-e4c7220cd422`，未归档，工作目录为 `/home/enjixiong/wjx_questionnaire_20260912_215109`。
 
-   ```text
-   Mcp error: -32602: js: codex/sandbox-state-meta:
-   sandboxCwd is not a local file URI:
-   file:///mnt/d/HKUST(GZ)/assignments/7th%20semester/AIAA4435%20-%20Interactive%20AI%20System
-   ```
+该聊天的历史记录确认：2026-09-12 曾通过内置浏览器创建问卷星问卷 `384478976`，标题为 `Adjusting an AI Through Conversation`，用于 AIAA4435 的虚拟语言导师研究。因此，用户说台式机曾经能完成这项操作，有历史记录支持。旧问卷与旧回答没有被本次任务修改。
 
-3. `js_reset` 返回 `js kernel reset`，随后重试仍得到相同错误。
-4. 因而未能读取浏览器标签页、确认问卷星登录状态或操作问卷编辑界面。这个错误不是问卷星拒绝访问，也不是审批系统拒绝操作；尚无证据能把它归因于用户登录或文件权限。
+## 本次接入结果
 
-没有用独立的无头浏览器冒充 Codex 内置浏览器，也没有修改旧问卷、发布新问卷、发送邀请或提交实验回答。
+当前 WSL 聊天的 Node REPL 在执行 JavaScript 前仍返回：
 
-## 浏览器恢复后的继续步骤
+```text
+Mcp error: -32602: js: codex/sandbox-state-meta:
+sandboxCwd is not a local file URI:
+file:///mnt/d/HKUST(GZ)/assignments/7th%20semester/AIAA4435%20-%20Interactive%20AI%20System
+```
 
-1. 在 Codex 内置浏览器打开问卷星，并确认使用预期账户。若需要登录，由用户在浏览器中完成；不读取或保存账号凭据。
-2. 新建三份独立草稿：实验前问卷、每个条件结束后的问卷、实验结束问卷。保留旧的需求问卷原样。
-3. 使用本目录的问卷文本与设置说明录入。问卷星官方提供 [从文本创建问卷](https://www.wjx.cn/help/help.aspx?h=1&helpid=138)；本次已经读取该帮助页面，但尚未验证当前账户的实际导入界面。
-4. 核对题目、选项、必答/选答、显示逻辑及停止规则。参与者界面只显示 block 编号，不显示 E/A/N/S 或任何策略名称。
-5. 每个条件问卷会由同一参与者填写四次。需核对平台的重复填写限制不会阻止第 2–4 次填写；只保存草稿，此时不发布。
-6. 用预览检查允许缺失、退出与不适处理。不要为测试创建会被误当成真实参与者回答的正式数据。
-7. 记录三份草稿的真实编辑链接、题数、预览核验结果和保存时间，随后将本文件状态更新为相应的已验证结果。
+这只能说明当前聊天的连接失败，不能据此判断台式机不能使用内置浏览器。
 
-本地 HTML 仅是问卷预览和手工导出工具。没有平台登录或服务端保存能力；它的存在不能证明线上问卷已经制作。
+台式机的官方浏览器技能和运行时存在于 `/usr/lib/chatgpt/resources/plugins/openai-bundled/plugins/browser/`。已阅读其 [SKILL.md](/usr/lib/chatgpt/resources/plugins/openai-bundled/plugins/browser/skills/control-in-app-browser/SKILL.md)。其中规定：“The in-app browser is available only when the Browser skill is listed for the session.” 也规定只能通过官方 Node REPL 控制选定浏览器。文件存在不等于当前恢复会话已加载这项能力。
+
+通过官方 `codex queue` 已向上述已有聊天排入三份草稿的制作任务；随后使用 `codex resume` 恢复同一聊天，记录已出现新的任务开始事件。没有创建新聊天。使用 `--remote unix://` 的首次连接因默认控制 socket 不存在而失败，默认连接方式成功。
+
+恢复会话已报告 Node REPL 可用，但当前技能列表缺少 Browser skill。已补充官方技能的实际路径，要求核对后如仍不可用就记录阻塞，不切换浏览器或使用底层接口代替。台式机聊天已完成核对，具体结果保存为 [desktop_wjx_result.md](desktop_wjx_result.md)：当前恢复会话没有 Browser skill，本次新建草稿数为 0。只有记录真实编辑链接、保存与预览结果后，才可把对应问卷标记为已创建。
+
+## 从台式机继续
+
+在台式机 Codex Desktop 中打开“录入问卷星问卷内容”，选择内置浏览器，再继续制作。输入材料已在：
+
+```text
+/home/enjixiong/academics/AIAA4435/AIAA4435-Project/Docs/AppearanceExperiment/Study/survey/
+```
+
+按 `researcher_guide.md` 和三个 `wjx_*_import.txt` 制作独立草稿，分别为实验开始前 7 题、每轮结束后 8 题、全部结束后 7 题。只保存草稿，不发布、不邀请、不提交测试或正式答卷。保留旧问卷原样。
+
+逐项核对中文题目、必答与选填、同意后继续、旧编号条件显示、1 至 7 的评分、独立的“无法判断／不想回答”，以及每轮表允许同设备重复四次。参与者只看到第 1 至 4 轮。记录真实编辑链接、保存时间和未完成设置；需要登录时由用户在浏览器中完成。
+
+问卷星提供 [从文本创建问卷](https://www.wjx.cn/help/help.aspx?h=1&helpid=138) 功能。实际账户的当前界面、导入结果与预览仍需通过浏览器核验。

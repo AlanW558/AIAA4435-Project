@@ -1,27 +1,27 @@
-Character Appearance Study — At the End
+虚拟角色外形修改研究：全部结束后
 
-Think about the four blocks you completed. All questions are optional. Short answers are sufficient.
+请回顾刚完成的四轮任务。所有问题都可以跳过，简单写几句即可。
 
-1. Study ID given by the researcher [填空题]
+1. 研究者提供的参与者编号 [填空题]
 
-2. Session code given by the researcher [填空题]
+2. 研究者提供的本次实验编号 [填空题]
 
-3. Which block would you prefer to use for similar appearance changes? [单选题]
-Refer to the neutral block numbers shown during the session.
-A. Block 1
-B. Block 2
-C. Block 3
-D. Block 4
-E. No preference
-F. I would prefer none of them
-G. Cannot judge / prefer not to answer
+3. 如果以后还要做类似的外形修改，你更愿意使用哪一轮的系统？ [单选题]
+请按实验中显示的轮次选择。
+A. 第 1 轮
+B. 第 2 轮
+C. 第 3 轮
+D. 第 4 轮
+E. 没有特别偏好
+F. 这几轮的系统我都不想用
+G. 无法判断／不想回答
 
-4. What influenced that choice? — optional [填空题]
+4. 你为什么这样选择？ [填空题]
 
-5. Was there a question that helped you make a change? If so, what made it helpful? — optional [填空题]
-“None” is also a useful answer.
+5. 有没有哪次提问帮你完成了修改？如果有，它帮在什么地方？ [填空题]
+可以留空，也可以回答“没有”。
 
-6. Was there a question you did not need or could not answer? If so, describe it. — optional [填空题]
-“None” is also a useful answer.
+6. 有没有哪次提问让你觉得没必要，或者不知道怎么回答？如果有，请描述一下。 [填空题]
+可以留空，也可以回答“没有”。
 
-7. Anything else you would change about making, checking, or undoing appearance changes? — optional [填空题]
+7. 对于修改外形、检查结果或撤销操作，你还有什么改进建议？ [填空题]

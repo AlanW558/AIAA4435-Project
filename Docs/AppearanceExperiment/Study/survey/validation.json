@@ -1,5 +1,9 @@
 {
   "schema_version": "appearance-survey-v0.1",
+  "content_revision": "appearance-survey-v0.1-zh-CN.1",
+  "language": "zh-CN",
+  "participant_copy_checks": "中文题干、选项、说明及静态界面文本检查通过",
+  "humanizer_review": "humanizer_review.md",
   "static_schema_checks": "passed",
   "python_syntax": "passed",
   "javascript_syntax": "passed",
@@ -11,7 +15,7 @@
   },
   "block_rating_items": 4,
   "network_or_automatic_storage": "none in local HTML",
-  "browser_interaction": "not verified; built-in browser tool failed before JavaScript execution",
+  "browser_interaction": "本脚本不验证浏览器交互；实际操作记录见 browser_creation_status.md",
   "real_responses_generated": 0,
-  "online_forms_created": 0
+  "online_forms_created_by_this_validator": 0
 }

@@ -65,5 +65,14 @@
       "sha256": "8526a6c71e5ece9374f86c824fc9b319c70aa0046d9f47cd5edaa3234cfc345e",
       "source": "project_design/appearance/materials/validation.json"
     }
+  ],
+  "later_revisions": [
+    {
+      "date": "2026-10-18",
+      "path": "materials/protocol.md",
+      "sha256": "c95b070943d8d5595a11a0a9feda1273346a80530f5ae2d9c4d33e6e3b5379ed",
+      "reason": "用户确认本次另有22位真实参与者可安排；核实旧22份记录含19份模拟，另3份来源未核实，修正样本来源与关联条件。",
+      "original_copy_hash_preserved": true
+    }
   ]
 }

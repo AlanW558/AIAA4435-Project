@@ -2,7 +2,9 @@
 
 本目录把已确定的研究材料带入队友的 Unity 项目，开发不依赖 Pico 已经连接。当前桌面原型与真实头显采集必须分开报告；Pico 的沉浸式显示、追踪与控制器尚待本项目真机验收。
 
-参与者池是原问卷的同一批 **22 人**，其中 `PILOT01`、`PILOT02` 做预实验，`P001`–`P020` 做正式探索性实验。正式每人四个 block，每个 block 四项任务，计划 320 项试次；这些是计划数量，当前材料不是已收集数据。
+2026-10-18，用户确认本次另有 22 位真实参与者可以安排，构成本次招募池。其中 `PILOT01`、`PILOT02` 做预实验，`P001` 至 `P020` 做正式探索性实验。正式实验每人四轮，每轮四项任务，计划 320 项试次；这些是计划数量，尚不代表已完成采集。
+
+旧问卷的录入记录显示，22 份回答中包含 19 份模拟回答和原有的 3 份；原有 3 份的来源也尚未核实。因此不能把旧问卷的 22 份记录当作 22 位真人样本，也不能据此认定与本次招募池重合。模拟或来源未核实的回答不进入真人研究结果。旧回答须逐条核实真实来源，并取得本人关联同意、核对已有匿名编号后，才能与本次记录关联。详见 [研究协议](materials/protocol.md)。
 
 - [RUNBOOK.md](RUNBOOK.md)：主持、任务时序、问卷转换、导出与现场检查。
 - [materials/protocol.md](materials/protocol.md)：保存的研究协议；旧阶段状态描述保留供溯源，当前实现状态以项目运行结果为准。
@@ -10,7 +12,7 @@
 - [materials/tasks_private.json](materials/tasks_private.json)：16 项私有评分目标；**不能传给模型或 Native gate**。
 - [materials/public_task_resets.json](materials/public_task_resets.json)：16 项公开上下文的后端 reset 格式。去掉客户端提供的 revision，历史转换为 `{"state": ...}`；公开偏好转换为 `field/value/text`，不含私有目标。
 - [materials/participant_schedule.csv](materials/participant_schedule.csv)、[materials/trial_schedule.csv](materials/trial_schedule.csv)：冻结前的 20 人分配与 320 项计划试次。
-- [survey/README.md](survey/README.md)：英文问卷、本地可填写 HTML、问卷星导入草稿和导入器。
+- [survey/README.md](survey/README.md)：中文问卷、本地可填写 HTML、问卷星导入草稿和导入器。
 - [source_material_manifest.json](source_material_manifest.json)：从原工作目录复制的研究材料、来源与 SHA-256。
 - [analyze_trials.py](analyze_trials.py)：原研究的参与者内客观指标分析器，不自动分析主观评分。
 

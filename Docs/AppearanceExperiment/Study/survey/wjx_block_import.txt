@@ -1,57 +1,57 @@
-Character Appearance Study — After a Block
+虚拟角色外形修改研究：每轮结束后
 
-Please answer only about the block you have just completed. The four statements use the same 1–7 agreement scale. Each answer is optional.
+请只根据刚完成的这一轮作答。四道评分题都使用 1 至 7 分，表示你对这句话的同意程度。每道题都可以跳过。
 
-1. Study ID given by the researcher [填空题]
+1. 研究者提供的参与者编号 [填空题]
 
-2. Session code given by the researcher [填空题]
+2. 研究者提供的本次实验编号 [填空题]
 
-3. Which block have you just completed? [单选题]
-A. Block 1
-B. Block 2
-C. Block 3
-D. Block 4
+3. 你刚完成的是第几轮？ [单选题]
+A. 第 1 轮
+B. 第 2 轮
+C. 第 3 轮
+D. 第 4 轮
 
-4. The system’s questions interrupted my task. [单选题]
-If the system asked no questions in this block, select 1 (strongly disagree).
-A. 1 — Strongly disagree
-B. 2 — Disagree
-C. 3 — Somewhat disagree
-D. 4 — Neither agree nor disagree
-E. 5 — Somewhat agree
-F. 6 — Agree
-G. 7 — Strongly agree
-H. Cannot judge / prefer not to answer
+4. 系统的提问打断了我完成任务的过程。 [单选题]
+如果这一轮系统没有提问，请选 1（非常不同意）。
+A. 1：非常不同意
+B. 2：不同意
+C. 3：比较不同意
+D. 4：说不上同意或不同意
+E. 5：比较同意
+F. 6：同意
+G. 7：非常同意
+H. 无法判断／不想回答
 
-5. I could control which appearance properties were changed. [单选题]
-A. 1 — Strongly disagree
-B. 2 — Disagree
-C. 3 — Somewhat disagree
-D. 4 — Neither agree nor disagree
-E. 5 — Somewhat agree
-F. 6 — Agree
-G. 7 — Strongly agree
-H. Cannot judge / prefer not to answer
+5. 我能控制哪些外形特征会被修改。 [单选题]
+A. 1：非常不同意
+B. 2：不同意
+C. 3：比较不同意
+D. 4：说不上同意或不同意
+E. 5：比较同意
+F. 6：同意
+G. 7：非常同意
+H. 无法判断／不想回答
 
-6. Completing the changes required a lot of effort. [单选题]
-A. 1 — Strongly disagree
-B. 2 — Disagree
-C. 3 — Somewhat disagree
-D. 4 — Neither agree nor disagree
-E. 5 — Somewhat agree
-F. 6 — Agree
-G. 7 — Strongly agree
-H. Cannot judge / prefer not to answer
+6. 完成这些修改需要我投入很多精力。 [单选题]
+A. 1：非常不同意
+B. 2：不同意
+C. 3：比较不同意
+D. 4：说不上同意或不同意
+E. 5：比较同意
+F. 6：同意
+G. 7：非常同意
+H. 无法判断／不想回答
 
-7. I was satisfied with the customisation experience in this block. [单选题]
-A. 1 — Strongly disagree
-B. 2 — Disagree
-C. 3 — Somewhat disagree
-D. 4 — Neither agree nor disagree
-E. 5 — Somewhat agree
-F. 6 — Agree
-G. 7 — Strongly agree
-H. Cannot judge / prefer not to answer
+7. 我对这一轮修改外形的体验感到满意。 [单选题]
+A. 1：非常不同意
+B. 2：不同意
+C. 3：比较不同意
+D. 4：说不上同意或不同意
+E. 5：比较同意
+F. 6：同意
+G. 7：非常同意
+H. 无法判断／不想回答
 
-8. Is there anything about this block you would like us to know? — optional [填空题]
-A short comment is enough. Please do not include personal information.
+8. 关于这一轮体验，你还有什么想补充的吗？ [填空题]
+可以留空。简单写几句即可，请不要填写个人信息。

@@ -33,7 +33,7 @@ N 是 **Native-gate**，并非完全自由规划的原生 agent。N 的额外模
 ## 任务、问卷与数据
 
 - [Study/RUNBOOK.md](Study/RUNBOOK.md)：22人流程，建议2pilot+20formal，以及桌面/Pico实验边界。
-- [Study/survey/questionnaire.html](Study/survey/questionnaire.html)：开始前、每block后、结束后英文问卷；本地导出 JSON，不自动上传。
+- [Study/survey/questionnaire.html](Study/survey/questionnaire.html)：实验开始前、每轮结束后、全部结束后的中文问卷；本地导出 JSON，不自动上传。
 - [Study/survey/README.md](Study/survey/README.md)：问卷星导入文本和真实回答导入器。
 
 主持人先建立分配会话以生成编号，再让参与者填写开始前问卷；阅读任务卡不开始计时，点击 Send 才开始。问卷使用界面底部的研究级 `Study` 编号，贯穿四个 block；它不同于每个条件的后端 session ID。问卷只显示 block 编号，不显示策略标签。四项 1–7 评分是自拟单项，不合成未经验证的总分。
