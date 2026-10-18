@@ -27,7 +27,7 @@ exit_questions=[
  question('other_feedback','对于修改外形、检查结果或撤销操作，你还有什么改进建议？','long_text',max_length=1000)]
 content={
  'schema_version':'appearance-survey-v0.1','authored_on':'2026-10-18','status':'draft_for_pilot',
- 'language':'zh-CN','content_revision':'appearance-survey-v0.1-zh-CN.1','measurement_note':'四项均为自拟的单题指标，未经量表验证，分别分析，不合成为体验总分。',
+ 'language':'zh-CN','content_revision':'appearance-survey-v0.1-zh-CN.2','measurement_note':'四项均为自拟的单题指标，未经量表验证，分别分析，不合成为体验总分。',
  'publication_status':'本生成器只制作本地文件，不创建或发布外部问卷。',
  'participant_ids':{'formal':'P001–P020','pilot':['PILOT01','PILOT02']},
  'session_metadata':{'participant_id':'研究者分配的参与者编号，必填。','session_id':'必填，使用 Unity 客户端记录中整场实验共用的 study_session_id。四轮使用同一个编号，不填写各条件的后端 session_id。','phase':'根据参与者编号确定，不由参与者选择。','block':'仅用于每轮结束后的问卷，填写 1 至 4；参与者只看到轮次。','condition':'不提问、不展示；分析时依据已冻结的分配表关联。'},
@@ -39,9 +39,9 @@ content={
   '研究者会说明谁能访问数据、数据存在哪里、保存多久，以及如何申请撤回。有疑问的话，请先询问，再决定是否参加。'
  ],
  'forms':[
-  {'id':'pre','title':'虚拟角色外形修改研究：实验开始前','description':'请先阅读研究说明，再决定是否参加。只有同意参加后才继续实验，其他问题都可以跳过。','questions':pre,'consent_gate':{'field':'consent','proceed_if':'agree','otherwise':'结束填写，不保存回答。'}},
-  {'id':'block','title':'虚拟角色外形修改研究：每轮结束后','description':'请只根据刚完成的这一轮作答。四道评分题都使用 1 至 7 分，表示你对这句话的同意程度。每道题都可以跳过。','questions':block,'repeat':'四轮结束后各填写一次，题目措辞和选项顺序保持一致。'},
-  {'id':'exit','title':'虚拟角色外形修改研究：全部结束后','description':'请回顾刚完成的四轮任务。所有问题都可以跳过，简单写几句即可。','questions':exit_questions}
+  {'id':'pre','title':'虚拟角色外形修改研究：实验开始前','description':'请先阅读研究说明，再决定是否参加。参与者编号、实验编号和是否参加这一题需要作答，其余问题可以跳过。只有同意参加后才继续实验。','questions':pre,'consent_gate':{'field':'consent','proceed_if':'agree','otherwise':'结束填写，不保存回答。'}},
+  {'id':'block','title':'虚拟角色外形修改研究：每轮结束后','description':'请只根据刚完成的这一轮作答。参与者编号、实验编号和轮次为必填。四道评分题使用 1 至 7 分表示同意程度，可以跳过；最后的补充意见也可以留空。','questions':block,'repeat':'四轮结束后各填写一次，题目措辞和选项顺序保持一致。'},
+  {'id':'exit','title':'虚拟角色外形修改研究：全部结束后','description':'请回顾刚完成的四轮任务。参与者编号和实验编号为必填，其余问题可以跳过，简单写几句即可。','questions':exit_questions}
  ]}
 (ROOT/'questionnaires.json').write_text(json.dumps(content,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 for form in content['forms']:

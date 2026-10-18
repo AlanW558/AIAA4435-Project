@@ -12,7 +12,7 @@ ROOT=Path(__file__).resolve().parent
 spec=json.loads((ROOT/'questionnaires.json').read_text(encoding='utf-8'))
 forms={f['id']:f for f in spec['forms']}
 assert spec['language']=='zh-CN'
-assert spec['content_revision']=='appearance-survey-v0.1-zh-CN.1'
+assert spec['content_revision']=='appearance-survey-v0.1-zh-CN.2'
 participant_text=list(spec['study_information'])
 for form in forms.values():
     participant_text.extend([form['title'],form['description']])
