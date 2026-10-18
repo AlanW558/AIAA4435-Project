@@ -3,20 +3,36 @@
   "authored_on": "2026-10-18",
   "status": "draft_for_pilot",
   "language": "zh-CN",
-  "content_revision": "appearance-survey-v0.1-zh-CN.2",
+  "content_revision": "appearance-survey-v0.1-zh-CN.3",
   "measurement_note": "四项均为自拟的单题指标，未经量表验证，分别分析，不合成为体验总分。",
   "publication_status": "本生成器只制作本地文件，不创建或发布外部问卷。",
   "participant_ids": {
-    "formal": "P001–P020",
+    "formal": "P001–P020（预留槽位，按实际到场使用）",
     "pilot": [
       "PILOT01",
       "PILOT02"
-    ]
+    ],
+    "debug": "DEBUG01 等调试编号"
   },
+  "phase_options": [
+    {
+      "value": "debug",
+      "label": "调试"
+    },
+    {
+      "value": "pilot",
+      "label": "预实验"
+    },
+    {
+      "value": "formal",
+      "label": "正式实验"
+    }
+  ],
+  "recruitment_note": "原先希望安排22人，目前到场人数不确定；预留2个预实验和20个正式槽位，按实际参加和完成人数报告。",
   "session_metadata": {
     "participant_id": "研究者分配的参与者编号，必填。",
-    "session_id": "必填，使用 Unity 客户端记录中整场实验共用的 study_session_id。四轮使用同一个编号，不填写各条件的后端 session_id。",
-    "phase": "根据参与者编号确定，不由参与者选择。",
+    "session_id": "本地页面自动生成并保留在研究者关联信息中，三份表及四轮共用；启动客户端时读取同一关联配置。问卷星用参与者编号和实验类型关联研究者保存的配置，不要求参与者手填此编号。",
+    "phase": "必选：调试、预实验或正式实验。按研究者安排选择，分别保存和分析。",
     "block": "仅用于每轮结束后的问卷，填写 1 至 4；参与者只看到轮次。",
     "condition": "不提问、不展示；分析时依据已冻结的分配表关联。"
   },
@@ -31,7 +47,7 @@
     {
       "id": "pre",
       "title": "虚拟角色外形修改研究：实验开始前",
-      "description": "请先阅读研究说明，再决定是否参加。参与者编号、实验编号和是否参加这一题需要作答，其余问题可以跳过。只有同意参加后才继续实验。",
+      "description": "请先阅读研究说明，再决定是否参加。参与者编号、实验类型和是否参加这一题需要作答，其余问题可以跳过。只有同意参加后才继续实验。",
       "questions": [
         {
           "id": "consent",
@@ -140,7 +156,7 @@
     {
       "id": "block",
       "title": "虚拟角色外形修改研究：每轮结束后",
-      "description": "请只根据刚完成的这一轮作答。参与者编号、实验编号和轮次为必填。四道评分题使用 1 至 7 分表示同意程度，可以跳过；最后的补充意见也可以留空。",
+      "description": "请只根据刚完成的这一轮作答。参与者编号、实验类型和轮次为必填。四道评分题使用 1 至 7 分表示同意程度，可以跳过；最后的补充意见也可以留空。",
       "questions": [
         {
           "id": "interruption_1to7",
@@ -320,7 +336,7 @@
     {
       "id": "exit",
       "title": "虚拟角色外形修改研究：全部结束后",
-      "description": "请回顾刚完成的四轮任务。参与者编号和实验编号为必填，其余问题可以跳过，简单写几句即可。",
+      "description": "请回顾刚完成的四轮任务。参与者编号和实验类型为必填，其余问题可以跳过，简单写几句即可。",
       "questions": [
         {
           "id": "preferred_block",

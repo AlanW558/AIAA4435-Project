@@ -4,6 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>虚拟角色外形修改研究问卷</title>
 <style>
+[hidden]{display:none!important}
 :root{font-family:system-ui,sans-serif;color:#192b3b;background:#f3f5f8;line-height:1.5}body{margin:0}main{max-width:850px;margin:24px auto;padding:24px;background:white;border-radius:16px}h1{font-size:1.6rem;margin:.5rem 0}h2{font-size:1.2rem}label{display:block;margin:.4rem 0}input[type=text],textarea,select{font:inherit;box-sizing:border-box;padding:10px;border:1px solid #899aaa;border-radius:6px;width:100%}textarea{min-height:85px}input[type=radio]{margin-right:8px;accent-color:#185f99}fieldset{border:0;border-top:1px solid #d8e1ea;margin:24px 0;padding:20px 0 0}legend{font-weight:650;padding:0 8px 0 0}button{font:inherit;padding:10px 14px;border:1px solid #185f99;border-radius:7px;background:#185f99;color:white;cursor:pointer}button.secondary{background:white;color:#185f99}button:disabled{opacity:.5;cursor:not-allowed}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.notice{background:#edf4fb;border-left:4px solid #185f99;padding:12px;margin:12px 0}.help{font-size:.9rem;color:#45576a;margin:4px 0 10px}.choice{padding:8px;background:#f4f7fa;border-radius:6px}.optional{font-size:.8rem;font-weight:400;color:#536274}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}#status{min-height:24px;font-weight:600}details{margin:16px 0}summary{cursor:pointer}a{color:#185f99}@media(max-width:600px){main{margin:0;border-radius:0;padding:18px}.row{grid-template-columns:1fr}}
 </style>
 </head>
@@ -13,12 +14,14 @@
 <h1 id="title"></h1><p id="description"></p>
 <details id="studyInfo"><summary>研究说明</summary><div id="information"></div></details>
 <form id="survey" novalidate>
-<div class="row"><label>研究者提供的参与者编号 <input id="participant" name="participant" type="text" autocomplete="off" maxlength="16" required placeholder="例如 P001 或 PILOT01"></label><label>研究者提供的本次实验编号 <input id="session" name="session" type="text" autocomplete="off" maxlength="80" required placeholder="请按研究者提供的编号填写"></label></div>
+<div class="row"><label>研究者提供的参与者编号 <input id="participant" name="participant" type="text" autocomplete="off" maxlength="48" required placeholder="请填写研究者提供的编号"></label><label>本次实验类型 <select id="phase" name="phase" required><option value="">请选择实验类型</option><option value="debug">调试</option><option value="pilot">预实验</option><option value="formal">正式实验</option></select></label></div>
+<p class="help">请按研究者的安排选择实验类型。同一人的三份问卷和四轮体验使用相同的参与者编号与类型。</p>
+<details id="researcherTools"><summary>研究者：关联记录</summary><p class="help">关联编号会自动生成，无需参与者填写。先下载关联配置，用它启动互动界面；三份问卷保持同一个编号。重新打开页面时，可读取该配置继续填写。</p><label>自动生成的关联编号 <input id="session" type="text" readonly autocomplete="off"></label><button type="button" id="downloadSession" class="secondary">下载关联配置</button><label>读取已有的关联配置 <input id="loadSession" type="file" accept="application/json,.json"></label></details>
 <label id="blockLabel">刚完成的轮次 <select id="block"><option value="">请选择轮次</option><option value="1">第 1 轮</option><option value="2">第 2 轮</option><option value="3">第 3 轮</option><option value="4">第 4 轮</option></select></label>
-<div id="questions"></div><div class="actions"><button type="submit" id="save">下载回答</button><button type="button" class="secondary" id="clear">清空回答</button></div><p id="status" role="status" aria-live="polite"></p>
-</form><p class="help">中文文案第 2 版。页面不加载外部脚本，不进行访问统计，也不自动保存回答。请保留下载的文件，直到研究者确认已收到。</p>
+<div id="questions"></div><div class="actions"><button type="submit" id="save">下载回答</button><button type="button" class="secondary" id="clear">清空本表回答</button><button type="button" class="secondary" id="nextParticipant">换下一位</button></div><p id="status" role="status" aria-live="polite"></p>
+</form><p class="help">中文文案第 3 版。页面不加载外部脚本，不进行访问统计，也不自动保存回答。请保留下载的文件，直到研究者确认已收到。</p>
 </main>
-<script id="spec" type="application/json">{"schema_version": "appearance-survey-v0.1", "authored_on": "2026-10-18", "status": "draft_for_pilot", "language": "zh-CN", "content_revision": "appearance-survey-v0.1-zh-CN.2", "measurement_note": "四项均为自拟的单题指标，未经量表验证，分别分析，不合成为体验总分。", "publication_status": "本生成器只制作本地文件，不创建或发布外部问卷。", "participant_ids": {"formal": "P001–P020", "pilot": ["PILOT01", "PILOT02"]}, "session_metadata": {"participant_id": "研究者分配的参与者编号，必填。", "session_id": "必填，使用 Unity 客户端记录中整场实验共用的 study_session_id。四轮使用同一个编号，不填写各条件的后端 session_id。", "phase": "根据参与者编号确定，不由参与者选择。", "block": "仅用于每轮结束后的问卷，填写 1 至 4；参与者只看到轮次。", "condition": "不提问、不展示；分析时依据已冻结的分配表关联。"}, "study_information": ["这是 AIAA4435 课程的一项研究，想了解大家如何修改虚拟角色的外形。你将完成四轮任务，并回答一些关于使用体验的问题。回答没有对错，请按实际情况和感受填写。", "参加研究完全自愿。你可以跳过体验问题，随时休息或结束实验。如果感到不适，包括佩戴头显引起的不适，请立即告诉研究者。", "我们会记录你提出的修改要求、操作选择、外形变化、用时、问卷回答，以及虚拟角色和界面的截图。本表单不录音，也不调用摄像头。请不要在指令或回答中填写个人信息或敏感信息。", "你的修改要求会交给外部人工智能服务 DeepSeek 处理。问卷回答与模型收到的指令分开保存。请只使用研究者给你的参与者编号，不要填写姓名或联系方式。", "研究者会说明谁能访问数据、数据存在哪里、保存多久，以及如何申请撤回。有疑问的话，请先询问，再决定是否参加。"], "forms": [{"id": "pre", "title": "虚拟角色外形修改研究：实验开始前", "description": "请先阅读研究说明，再决定是否参加。参与者编号、实验编号和是否参加这一题需要作答，其余问题可以跳过。只有同意参加后才继续实验。", "questions": [{"id": "consent", "title": "我已阅读研究说明，有机会向研究者提问，并同意参加本次研究。", "type": "single_choice", "required": true, "options": [{"value": "agree", "label": "我同意参加。"}, {"value": "decline", "label": "我不同意参加。"}]}, {"id": "vr_experience", "title": "在今天之前，你大约使用过多少次虚拟现实头显？", "type": "single_choice", "required": false, "options": [{"value": "never", "label": "从未用过"}, {"value": "one_to_two", "label": "1 至 2 次"}, {"value": "three_to_ten", "label": "3 至 10 次"}, {"value": "more_than_ten", "label": "10 次以上"}, {"value": "cannot_recall", "label": "记不清／不想回答"}]}, {"id": "prior_prototype_exposure", "title": "在今天之前，你是否试用过这套修改虚拟角色外形的原型？", "type": "single_choice", "required": false, "options": [{"value": "no", "label": "没有"}, {"value": "yes", "label": "有"}, {"value": "unsure", "label": "不确定／不想回答"}]}, {"id": "prior_link_consent", "title": "如果你之前填写的课程问卷有匿名编号，你是否同意我们用这个编号，将那份回答与本次实验记录对应起来？", "type": "single_choice", "required": false, "help": "这项关联由你自愿选择。我们不会根据旧问卷的措辞猜测填写者的身份。", "options": [{"value": "yes", "label": "同意，我可以提供已有的匿名编号。"}, {"value": "no", "label": "不同意。"}, {"value": "unavailable", "label": "我没有匿名编号／不确定。"}]}, {"id": "prior_survey_code", "title": "旧问卷的匿名编号", "type": "short_text", "required": false, "show_if": {"field": "prior_link_consent", "equals": "yes"}, "max_length": 80, "help": "请只填写已有的匿名编号。可以留空，不要填写姓名、邮箱或手机号。"}], "consent_gate": {"field": "consent", "proceed_if": "agree", "otherwise": "结束填写，不保存回答。"}}, {"id": "block", "title": "虚拟角色外形修改研究：每轮结束后", "description": "请只根据刚完成的这一轮作答。参与者编号、实验编号和轮次为必填。四道评分题使用 1 至 7 分表示同意程度，可以跳过；最后的补充意见也可以留空。", "questions": [{"id": "interruption_1to7", "title": "系统的提问打断了我完成任务的过程。", "type": "rating", "required": false, "help": "如果这一轮系统没有提问，请选 1（非常不同意）。", "options": [{"value": 1, "label": "1：非常不同意"}, {"value": 2, "label": "2：不同意"}, {"value": 3, "label": "3：比较不同意"}, {"value": 4, "label": "4：说不上同意或不同意"}, {"value": 5, "label": "5：比较同意"}, {"value": 6, "label": "6：同意"}, {"value": 7, "label": "7：非常同意"}, {"value": "cannot_judge", "label": "无法判断／不想回答"}]}, {"id": "control_1to7", "title": "我能控制哪些外形特征会被修改。", "type": "rating", "required": false, "help": null, "options": [{"value": 1, "label": "1：非常不同意"}, {"value": 2, "label": "2：不同意"}, {"value": 3, "label": "3：比较不同意"}, {"value": 4, "label": "4：说不上同意或不同意"}, {"value": 5, "label": "5：比较同意"}, {"value": 6, "label": "6：同意"}, {"value": 7, "label": "7：非常同意"}, {"value": "cannot_judge", "label": "无法判断／不想回答"}]}, {"id": "effort_1to7", "title": "完成这些修改需要我投入很多精力。", "type": "rating", "required": false, "help": null, "options": [{"value": 1, "label": "1：非常不同意"}, {"value": 2, "label": "2：不同意"}, {"value": 3, "label": "3：比较不同意"}, {"value": 4, "label": "4：说不上同意或不同意"}, {"value": 5, "label": "5：比较同意"}, {"value": 6, "label": "6：同意"}, {"value": 7, "label": "7：非常同意"}, {"value": "cannot_judge", "label": "无法判断／不想回答"}]}, {"id": "satisfaction_1to7", "title": "我对这一轮修改外形的体验感到满意。", "type": "rating", "required": false, "help": null, "options": [{"value": 1, "label": "1：非常不同意"}, {"value": 2, "label": "2：不同意"}, {"value": 3, "label": "3：比较不同意"}, {"value": 4, "label": "4：说不上同意或不同意"}, {"value": 5, "label": "5：比较同意"}, {"value": 6, "label": "6：同意"}, {"value": 7, "label": "7：非常同意"}, {"value": "cannot_judge", "label": "无法判断／不想回答"}]}, {"id": "block_comment", "title": "关于这一轮体验，你还有什么想补充的吗？", "type": "long_text", "required": false, "max_length": 1000, "help": "可以留空。简单写几句即可，请不要填写个人信息。"}], "repeat": "四轮结束后各填写一次，题目措辞和选项顺序保持一致。"}, {"id": "exit", "title": "虚拟角色外形修改研究：全部结束后", "description": "请回顾刚完成的四轮任务。参与者编号和实验编号为必填，其余问题可以跳过，简单写几句即可。", "questions": [{"id": "preferred_block", "title": "如果以后还要做类似的外形修改，你更愿意使用哪一轮的系统？", "type": "single_choice", "required": false, "help": "请按实验中显示的轮次选择。", "options": [{"value": "1", "label": "第 1 轮"}, {"value": "2", "label": "第 2 轮"}, {"value": "3", "label": "第 3 轮"}, {"value": "4", "label": "第 4 轮"}, {"value": "no_preference", "label": "没有特别偏好"}, {"value": "none", "label": "这几轮的系统我都不想用"}, {"value": "cannot_judge", "label": "无法判断／不想回答"}]}, {"id": "preference_reason", "title": "你为什么这样选择？", "type": "long_text", "required": false, "max_length": 1000}, {"id": "helpful_question", "title": "有没有哪次提问帮你完成了修改？如果有，它帮在什么地方？", "type": "long_text", "required": false, "max_length": 1000, "help": "可以留空，也可以回答“没有”。"}, {"id": "unhelpful_question", "title": "有没有哪次提问让你觉得没必要，或者不知道怎么回答？如果有，请描述一下。", "type": "long_text", "required": false, "max_length": 1000, "help": "可以留空，也可以回答“没有”。"}, {"id": "other_feedback", "title": "对于修改外形、检查结果或撤销操作，你还有什么改进建议？", "type": "long_text", "required": false, "max_length": 1000}]}]}</script>
+<script id="spec" type="application/json">{"schema_version": "appearance-survey-v0.1", "authored_on": "2026-10-18", "status": "draft_for_pilot", "language": "zh-CN", "content_revision": "appearance-survey-v0.1-zh-CN.3", "measurement_note": "四项均为自拟的单题指标，未经量表验证，分别分析，不合成为体验总分。", "publication_status": "本生成器只制作本地文件，不创建或发布外部问卷。", "participant_ids": {"formal": "P001–P020（预留槽位，按实际到场使用）", "pilot": ["PILOT01", "PILOT02"], "debug": "DEBUG01 等调试编号"}, "phase_options": [{"value": "debug", "label": "调试"}, {"value": "pilot", "label": "预实验"}, {"value": "formal", "label": "正式实验"}], "recruitment_note": "原先希望安排22人，目前到场人数不确定；预留2个预实验和20个正式槽位，按实际参加和完成人数报告。", "session_metadata": {"participant_id": "研究者分配的参与者编号，必填。", "session_id": "本地页面自动生成并保留在研究者关联信息中，三份表及四轮共用；启动客户端时读取同一关联配置。问卷星用参与者编号和实验类型关联研究者保存的配置，不要求参与者手填此编号。", "phase": "必选：调试、预实验或正式实验。按研究者安排选择，分别保存和分析。", "block": "仅用于每轮结束后的问卷，填写 1 至 4；参与者只看到轮次。", "condition": "不提问、不展示；分析时依据已冻结的分配表关联。"}, "study_information": ["这是 AIAA4435 课程的一项研究，想了解大家如何修改虚拟角色的外形。你将完成四轮任务，并回答一些关于使用体验的问题。回答没有对错，请按实际情况和感受填写。", "参加研究完全自愿。你可以跳过体验问题，随时休息或结束实验。如果感到不适，包括佩戴头显引起的不适，请立即告诉研究者。", "我们会记录你提出的修改要求、操作选择、外形变化、用时、问卷回答，以及虚拟角色和界面的截图。本表单不录音，也不调用摄像头。请不要在指令或回答中填写个人信息或敏感信息。", "你的修改要求会交给外部人工智能服务 DeepSeek 处理。问卷回答与模型收到的指令分开保存。请只使用研究者给你的参与者编号，不要填写姓名或联系方式。", "研究者会说明谁能访问数据、数据存在哪里、保存多久，以及如何申请撤回。有疑问的话，请先询问，再决定是否参加。"], "forms": [{"id": "pre", "title": "虚拟角色外形修改研究：实验开始前", "description": "请先阅读研究说明，再决定是否参加。参与者编号、实验类型和是否参加这一题需要作答，其余问题可以跳过。只有同意参加后才继续实验。", "questions": [{"id": "consent", "title": "我已阅读研究说明，有机会向研究者提问，并同意参加本次研究。", "type": "single_choice", "required": true, "options": [{"value": "agree", "label": "我同意参加。"}, {"value": "decline", "label": "我不同意参加。"}]}, {"id": "vr_experience", "title": "在今天之前，你大约使用过多少次虚拟现实头显？", "type": "single_choice", "required": false, "options": [{"value": "never", "label": "从未用过"}, {"value": "one_to_two", "label": "1 至 2 次"}, {"value": "three_to_ten", "label": "3 至 10 次"}, {"value": "more_than_ten", "label": "10 次以上"}, {"value": "cannot_recall", "label": "记不清／不想回答"}]}, {"id": "prior_prototype_exposure", "title": "在今天之前，你是否试用过这套修改虚拟角色外形的原型？", "type": "single_choice", "required": false, "options": [{"value": "no", "label": "没有"}, {"value": "yes", "label": "有"}, {"value": "unsure", "label": "不确定／不想回答"}]}, {"id": "prior_link_consent", "title": "如果你之前填写的课程问卷有匿名编号，你是否同意我们用这个编号，将那份回答与本次实验记录对应起来？", "type": "single_choice", "required": false, "help": "这项关联由你自愿选择。我们不会根据旧问卷的措辞猜测填写者的身份。", "options": [{"value": "yes", "label": "同意，我可以提供已有的匿名编号。"}, {"value": "no", "label": "不同意。"}, {"value": "unavailable", "label": "我没有匿名编号／不确定。"}]}, {"id": "prior_survey_code", "title": "旧问卷的匿名编号", "type": "short_text", "required": false, "show_if": {"field": "prior_link_consent", "equals": "yes"}, "max_length": 80, "help": "请只填写已有的匿名编号。可以留空，不要填写姓名、邮箱或手机号。"}], "consent_gate": {"field": "consent", "proceed_if": "agree", "otherwise": "结束填写，不保存回答。"}}, {"id": "block", "title": "虚拟角色外形修改研究：每轮结束后", "description": "请只根据刚完成的这一轮作答。参与者编号、实验类型和轮次为必填。四道评分题使用 1 至 7 分表示同意程度，可以跳过；最后的补充意见也可以留空。", "questions": [{"id": "interruption_1to7", "title": "系统的提问打断了我完成任务的过程。", "type": "rating", "required": false, "help": "如果这一轮系统没有提问，请选 1（非常不同意）。", "options": [{"value": 1, "label": "1：非常不同意"}, {"value": 2, "label": "2：不同意"}, {"value": 3, "label": "3：比较不同意"}, {"value": 4, "label": "4：说不上同意或不同意"}, {"value": 5, "label": "5：比较同意"}, {"value": 6, "label": "6：同意"}, {"value": 7, "label": "7：非常同意"}, {"value": "cannot_judge", "label": "无法判断／不想回答"}]}, {"id": "control_1to7", "title": "我能控制哪些外形特征会被修改。", "type": "rating", "required": false, "help": null, "options": [{"value": 1, "label": "1：非常不同意"}, {"value": 2, "label": "2：不同意"}, {"value": 3, "label": "3：比较不同意"}, {"value": 4, "label": "4：说不上同意或不同意"}, {"value": 5, "label": "5：比较同意"}, {"value": 6, "label": "6：同意"}, {"value": 7, "label": "7：非常同意"}, {"value": "cannot_judge", "label": "无法判断／不想回答"}]}, {"id": "effort_1to7", "title": "完成这些修改需要我投入很多精力。", "type": "rating", "required": false, "help": null, "options": [{"value": 1, "label": "1：非常不同意"}, {"value": 2, "label": "2：不同意"}, {"value": 3, "label": "3：比较不同意"}, {"value": 4, "label": "4：说不上同意或不同意"}, {"value": 5, "label": "5：比较同意"}, {"value": 6, "label": "6：同意"}, {"value": 7, "label": "7：非常同意"}, {"value": "cannot_judge", "label": "无法判断／不想回答"}]}, {"id": "satisfaction_1to7", "title": "我对这一轮修改外形的体验感到满意。", "type": "rating", "required": false, "help": null, "options": [{"value": 1, "label": "1：非常不同意"}, {"value": 2, "label": "2：不同意"}, {"value": 3, "label": "3：比较不同意"}, {"value": 4, "label": "4：说不上同意或不同意"}, {"value": 5, "label": "5：比较同意"}, {"value": 6, "label": "6：同意"}, {"value": 7, "label": "7：非常同意"}, {"value": "cannot_judge", "label": "无法判断／不想回答"}]}, {"id": "block_comment", "title": "关于这一轮体验，你还有什么想补充的吗？", "type": "long_text", "required": false, "max_length": 1000, "help": "可以留空。简单写几句即可，请不要填写个人信息。"}], "repeat": "四轮结束后各填写一次，题目措辞和选项顺序保持一致。"}, {"id": "exit", "title": "虚拟角色外形修改研究：全部结束后", "description": "请回顾刚完成的四轮任务。参与者编号和实验类型为必填，其余问题可以跳过，简单写几句即可。", "questions": [{"id": "preferred_block", "title": "如果以后还要做类似的外形修改，你更愿意使用哪一轮的系统？", "type": "single_choice", "required": false, "help": "请按实验中显示的轮次选择。", "options": [{"value": "1", "label": "第 1 轮"}, {"value": "2", "label": "第 2 轮"}, {"value": "3", "label": "第 3 轮"}, {"value": "4", "label": "第 4 轮"}, {"value": "no_preference", "label": "没有特别偏好"}, {"value": "none", "label": "这几轮的系统我都不想用"}, {"value": "cannot_judge", "label": "无法判断／不想回答"}]}, {"id": "preference_reason", "title": "你为什么这样选择？", "type": "long_text", "required": false, "max_length": 1000}, {"id": "helpful_question", "title": "有没有哪次提问帮你完成了修改？如果有，它帮在什么地方？", "type": "long_text", "required": false, "max_length": 1000, "help": "可以留空，也可以回答“没有”。"}, {"id": "unhelpful_question", "title": "有没有哪次提问让你觉得没必要，或者不知道怎么回答？如果有，请描述一下。", "type": "long_text", "required": false, "max_length": 1000, "help": "可以留空，也可以回答“没有”。"}, {"id": "other_feedback", "title": "对于修改外形、检查结果或撤销操作，你还有什么改进建议？", "type": "long_text", "required": false, "max_length": 1000}]}]}</script>
 <script>
 'use strict';
 const spec=JSON.parse(document.getElementById('spec').textContent);
@@ -29,6 +32,44 @@ const questionArea=document.getElementById('questions');
 const statusArea=document.getElementById('status');
 let started=Date.now();
 let savedCount=0;
+const participantInput=document.getElementById('participant');
+const phaseInput=document.getElementById('phase');
+const sessionInput=document.getElementById('session');
+let identity={participant_id:'',phase:'',study_session_id:''};
+function validParticipant(pid,phase){
+  const patterns={debug:/^(DEBUG|ENGINEERING)[A-Z0-9_-]{0,36}$/,pilot:/^PILOT0[12]$/,formal:/^(P00[1-9]|P01[0-9]|P020)$/};
+  return Boolean(patterns[phase]&&patterns[phase].test(pid));
+}
+function newSessionId(pid,phase){
+  const bytes=crypto.getRandomValues(new Uint8Array(8));
+  return phase+'_'+pid+'_'+Date.now().toString(36)+'_'+Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+}
+function downloadObject(value,name){
+  const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)+'\n'],{type:'application/json'}));
+  const a=node('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function hasAnswers(){return Array.from(questionArea.querySelectorAll('input,textarea')).some(e=>e.type==='radio'?e.checked:Boolean(e.value));}
+function setIdentity(pid,phase,sid=''){
+  participantInput.value=pid;phaseInput.value=phase;
+  identity={participant_id:pid,phase,study_session_id:validParticipant(pid,phase)?sid||newSessionId(pid,phase):''};
+  sessionInput.value=identity.study_session_id;
+}
+function identityChanged(){
+  const pid=participantInput.value.trim().toUpperCase(),phase=phaseInput.value;
+  if(pid===identity.participant_id&&phase===identity.phase)return;
+  if(hasAnswers()&&!confirm('更换编号或实验类型会清空本表回答，并生成新的关联编号。确定更换吗？')){
+    participantInput.value=identity.participant_id;phaseInput.value=identity.phase;return;
+  }
+  setIdentity(pid,phase);document.getElementById('block').value='';render();
+}
+function checkIdentity(){
+  identityChanged();
+  if(!phaseInput.value){statusArea.textContent='请选择本次实验类型。';return false;}
+  if(!validParticipant(identity.participant_id,identity.phase)){
+    statusArea.textContent='请核对编号与实验类型：调试用 DEBUG 开头的编号，预实验用 PILOT01 或 PILOT02，正式实验使用已分配的 P001 至 P020 槽位，无需填满。';return false;
+  }
+  return Boolean(identity.study_session_id);
+}
 function node(tag,text,cls){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;}
 function selected(id){const e=survey.querySelector(`input[name="${id}"]:checked`);return e?e.value:null;}
 function currentForm(){return spec.forms.find(f=>f.id===formSelect.value);}
@@ -70,17 +111,40 @@ function render(){
 questionArea.addEventListener('change',refreshConditional);
 for(const p of spec.study_information)document.getElementById('information').appendChild(node('p',p));
 if(['pre','block','exit'].includes(params.get('form')))formSelect.value=params.get('form');
-document.getElementById('participant').value=params.get('participant')||'';
-document.getElementById('session').value=params.get('session')||'';
+const initialPid=(params.get('participant')||'').trim().toUpperCase();
+const initialPhase=params.get('phase')||(initialPid.startsWith('PILOT')?'pilot':initialPid.startsWith('P')?'formal':/^(DEBUG|ENGINEERING)/.test(initialPid)?'debug':'');
+const suppliedSession=params.get('session')||'';
+setIdentity(initialPid,initialPhase,/^[A-Za-z0-9_-]{3,80}$/.test(suppliedSession)?suppliedSession:'');
+participantInput.addEventListener('change',identityChanged);phaseInput.addEventListener('change',identityChanged);
 if(['1','2','3','4'].includes(params.get('block')))document.getElementById('block').value=params.get('block');
 formSelect.addEventListener('change',()=>{if(!confirm('切换问卷会清空当前未下载的题目回答。确定切换吗？')){formSelect.value=questionArea.dataset.form||'pre';return;}render();questionArea.dataset.form=formSelect.value;});
-document.getElementById('clear').addEventListener('click',()=>{if(confirm('确定清空当前问卷的回答吗？参与者编号和实验编号会保留。'))render();});
+document.getElementById('clear').addEventListener('click',()=>{if(confirm('确定清空本表回答吗？参与者编号、实验类型和关联编号会保留。'))render();});
+document.getElementById('nextParticipant').addEventListener('click',()=>{
+  if(!confirm('确定换下一位吗？当前未下载的回答、编号和轮次都会清空。'))return;
+  const cleanUrl=new URL(location.href);for(const key of ['participant','phase','session','block','form'])cleanUrl.searchParams.delete(key);
+  history.replaceState(null,'',cleanUrl.href);
+  setIdentity('','');formSelect.value='pre';document.getElementById('block').value='';document.getElementById('loadSession').value='';document.getElementById('researcherTools').open=false;render();questionArea.dataset.form='pre';
+});
+document.getElementById('downloadSession').addEventListener('click',()=>{
+  if(!checkIdentity())return;
+  downloadObject({schema_version:'appearance-session-v1',...identity},identity.study_session_id+'_session.json');
+  statusArea.textContent='已请求下载关联配置。它不包含问卷答案，请交给研究者用于关联互动日志。';
+});
+document.getElementById('loadSession').addEventListener('change',async event=>{
+  const file=event.target.files[0];if(!file)return;
+  try{
+    if(file.size>4096)throw new Error();
+    const data=JSON.parse(await file.text());
+    if(data.schema_version!=='appearance-session-v1'||!validParticipant(data.participant_id,data.phase)||typeof data.study_session_id!=='string'||!/^[A-Za-z0-9_-]{3,80}$/.test(data.study_session_id))throw new Error();
+    if(hasAnswers()&&!confirm('读取配置会清空本表回答，确定继续吗？'))return;
+    setIdentity(data.participant_id,data.phase,data.study_session_id);document.getElementById('block').value='';render();statusArea.textContent='已读取关联配置，请核对参与者和实验类型。';
+  }catch(error){statusArea.textContent='无法读取。请选择本页面下载的关联配置，不要选择回答文件。';}
+  finally{event.target.value='';}
+});
 survey.addEventListener('submit',event=>{
  event.preventDefault();const f=currentForm();
- const pid=document.getElementById('participant').value.trim().toUpperCase();
- const session=document.getElementById('session').value.trim();
- if(!/^(P00[1-9]|P01[0-9]|P020|PILOT0[12])$/.test(pid)){statusArea.textContent='请向研究者核对参与者编号：正式实验为 P001 至 P020，预实验为 PILOT01 或 PILOT02。';return;}
- if(!/^[A-Za-z0-9_-]{3,80}$/.test(session)){statusArea.textContent='请填写研究者提供的实验编号，只能包含英文字母、数字、下划线或连字符。';return;}
+ if(!checkIdentity())return;
+ const pid=identity.participant_id,session=identity.study_session_id;
  if(f.id==='pre'&&selected('consent')!=='agree'){statusArea.textContent='请先决定是否同意参加。如果不同意，可以直接关闭问卷，无需保存。';return;}
  const block=f.id==='block'?Number(document.getElementById('block').value):null;
  if(f.id==='block'&&![1,2,3,4].includes(block)){statusArea.textContent='请选择刚完成的轮次。';return;}
@@ -93,7 +157,7 @@ survey.addEventListener('submit',event=>{
    if(q.type==='rating'&&/^[1-7]$/.test(value))value=Number(value);
    answers[q.id]=value;answerStatus[q.id]=value==='cannot_judge'?'cannot_judge':'answered';
  }
- const record={schema_version:spec.schema_version,content_revision:spec.content_revision,language:spec.language,form_id:f.id,participant_id:pid,session_id:session,phase:pid.startsWith('PILOT')?'pilot':'formal',block,recorded_at_utc:new Date().toISOString(),page_elapsed_ms:Date.now()-started,save_sequence:++savedCount,answers,answer_status:answerStatus};
+ const record={schema_version:spec.schema_version,content_revision:spec.content_revision,language:spec.language,form_id:f.id,participant_id:pid,session_id:session,phase:identity.phase,block,recorded_at_utc:new Date().toISOString(),page_elapsed_ms:Date.now()-started,save_sequence:++savedCount,answers,answer_status:answerStatus};
  const blob=new Blob([JSON.stringify(record,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=node('a');a.href=url;a.download=`${session}_${f.id}${block?'_'+block:''}_${Date.now()}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
  statusArea.textContent='已请求下载。请确认回答文件已保存，再告诉研究者。重复下载会生成新的修订文件，请交给研究者确认保留哪一份。';
 });

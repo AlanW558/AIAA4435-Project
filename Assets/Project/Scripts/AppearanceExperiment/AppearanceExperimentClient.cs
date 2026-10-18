@@ -33,15 +33,15 @@ namespace IAI.Appearance
         public AppearanceAvatar avatar;
         public SessionView view = new SessionView();
         public bool Busy { get; private set; }
-        public string Status { get; private set; } = "Start a session to connect.";
+        public string Status { get; private set; } = "正在连接，请稍候。";
         public bool LastOk { get; private set; }
-        public string participant="DEBUG01",phase="debug",condition="S",query="把外衣改成橙色，帽子和大小保持不变。",answerText="";
-        bool researcher=true, trialActive, initialSent, finished, awaitingBlock,validating,capturedFirst;
+        public string participant="DEBUG01",phase="debug",condition="S",query="",answerText="";
+        bool controlledTask, trialActive, initialSent, finished, awaitingBlock,validating,capturedFirst;
         StudyTask[] tasks=Array.Empty<StudyTask>();
         List<TrialRow> schedule = new List<TrialRow>();
         int taskIndex,trialIndex=-1,fieldIndex;
         float started;
-        string taskGoal="Try changing the jacket, accessory, or size.", lastResponse="", studySessionId="";
+        string lastResponse="", studySessionId="";
         string[] fields={"all","jacket_color","accessory","scale"};
         string[] policies={"E","A","N","S"};
         Font font;
@@ -58,6 +58,29 @@ namespace IAI.Appearance
             if(File.Exists(path)) tasks=JsonUtility.FromJson<TaskList>(File.ReadAllText(path)).tasks;
             font=Font.CreateDynamicFontFromOSFont(new[]{"Noto Sans CJK SC","Noto Sans","DejaVu Sans","Arial"},20);
             if(Array.IndexOf(System.Environment.GetCommandLineArgs(),"-appearance-smoke")>=0) StartCoroutine(Smoke());
+            else StartCoroutine(InitializeInteraction());
+        }
+
+        IEnumerator InitializeInteraction()
+        {
+            participant=System.Environment.GetEnvironmentVariable("APPEARANCE_PARTICIPANT_ID")??"DEBUG01";
+            phase=System.Environment.GetEnvironmentVariable("APPEARANCE_PHASE")??"debug";
+            condition=System.Environment.GetEnvironmentVariable("APPEARANCE_CONDITION")??"S";
+            studySessionId=System.Environment.GetEnvironmentVariable("APPEARANCE_STUDY_SESSION_ID")??"";
+            bool assigned=System.Environment.GetEnvironmentVariable("APPEARANCE_ASSIGNED")=="1";
+            if((phase!="debug"&&phase!="pilot"&&phase!="formal")||Array.IndexOf(policies,condition)<0||
+               (phase!="debug"&&string.IsNullOrEmpty(studySessionId))||(phase=="formal"&&!assigned))
+            {Status="互动尚未准备好，请稍候。";Debug.LogError("Invalid researcher launch configuration; use launch_session.py.");yield break;}
+            query="";
+            if(assigned) {yield return StartScheduled();yield break;}
+            string selectedTask=System.Environment.GetEnvironmentVariable("APPEARANCE_TASK_ID");
+            if(!string.IsNullOrEmpty(selectedTask))
+            {
+                taskIndex=Array.FindIndex(tasks,t=>t.task_id==selectedTask);
+                if(taskIndex<0){Status="互动尚未准备好，请稍候。";Debug.LogError("Unknown task in researcher launch configuration.");yield break;}
+                yield return NewSession(true);
+            }
+            else yield return NewSession(false);
         }
 
         string Id()=>Guid.NewGuid().ToString("N");
@@ -76,7 +99,7 @@ namespace IAI.Appearance
                 {
                     SessionView err=null;
                     try { err=JsonUtility.FromJson<SessionView>(lastResponse); } catch(Exception) { }
-                    Status=err!=null&&!string.IsNullOrEmpty(err.message)?err.message:"Connection failed ("+req.responseCode+"). Check the backend.";
+                    Status=err!=null&&!string.IsNullOrEmpty(err.message)?err.message:"连接失败，请稍后重试。";
                     // A revision conflict is recovered explicitly from the authoritative snapshot.
                     if(err!=null&&err.state!=null&&err.state.scale>0) { view=err; avatar.Apply(err.state); }
                     Debug.LogWarning("Appearance request failed: HTTP "+req.responseCode);
@@ -87,7 +110,7 @@ namespace IAI.Appearance
                     if(update)
                     {
                         var next=JsonUtility.FromJson<SessionView>(lastResponse);
-                        view=next; Status=next.message??next.decision;
+                        view=next; Status=next.decision=="READY"?"你可以告诉我想怎样修改外形。":next.message??"已收到。";
                         if(next.state!=null) avatar.Apply(next.state);
                     }
                 }
@@ -104,7 +127,7 @@ namespace IAI.Appearance
                     req.uploadHandler=new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(ack)));
                     req.downloadHandler=new DownloadHandlerBuffer(); req.SetRequestHeader("Content-Type","application/json"); req.timeout=10;
                     Busy=true; yield return req.SendWebRequest();
-                    if(req.result!=UnityWebRequest.Result.Success) {Status="State rendered, but the render log could not be saved. Stop this trial.";LastOk=false;}
+                    if(req.result!=UnityWebRequest.Result.Success) {Status="修改已显示，但保存记录失败，请暂停操作。";LastOk=false;}
                 }
             }
             Busy=false;
@@ -121,23 +144,28 @@ namespace IAI.Appearance
         }
         IEnumerator NewSession(bool loadTask)
         {
-            if(string.IsNullOrEmpty(studySessionId))studySessionId=participant+"_"+DateTime.UtcNow.ToString("yyyyMMddTHHmmss");
+            if(string.IsNullOrEmpty(studySessionId))studySessionId=phase+"_"+participant+"_"+Guid.NewGuid().ToString("N");
             yield return Send("/sessions",new CreateSession{participant_id=participant,condition=condition,phase=phase});
             if(LastOk&&loadTask) yield return LoadTask();
+            else if(LastOk)
+            {
+                controlledTask=false;taskIndex=-1;query="";answerText="";initialSent=false;finished=false;capturedFirst=false;trialActive=true;started=Time.realtimeSinceStartup;
+                yield return Marker("interaction_ready","");
+            }
         }
         IEnumerator LoadTask()
         {
-            if(tasks.Length==0) yield break;
+            if(taskIndex<0||taskIndex>=tasks.Length) yield break;
             var t=tasks[taskIndex];var c=t.model_visible;
             yield return Send(Route("reset"),new Reset{request_id=Id(),expected_revision=Revision,state=c.state,history=c.visible_history,soft_preferences=c.soft_preferences,task_id=t.task_id});
             if(!LastOk) yield break;
-            query=c.initial_query;taskGoal=t.participant_goal;answerText="";initialSent=false;trialActive=true;finished=false;capturedFirst=false;started=Time.realtimeSinceStartup;
+            controlledTask=true;query=c.initial_query;answerText="";initialSent=false;trialActive=true;finished=false;capturedFirst=false;started=Time.realtimeSinceStartup;
             yield return Marker("task_ready","");
         }
         IEnumerator Marker(string kind,string value)
         {
             var row=trialIndex>=0&&trialIndex<schedule.Count?schedule[trialIndex]:null;
-            yield return Send(Route("events"),new MarkerEvent{payload=new MarkerPayload{kind=kind,value=value,study_session_id=studySessionId,observed_build_sha256=System.Environment.GetEnvironmentVariable("APPEARANCE_BUILD_SHA256")??"",trial_id=row?.trialId??"debug",task_id=tasks.Length>0?tasks[taskIndex].task_id:"free",block=row?.block??0,within_block=row?.withinBlock??0,elapsed_seconds=Time.realtimeSinceStartup-started}},false);
+            yield return Send(Route("events"),new MarkerEvent{payload=new MarkerPayload{kind=kind,value=value,study_session_id=studySessionId,observed_build_sha256=System.Environment.GetEnvironmentVariable("APPEARANCE_BUILD_SHA256")??"",trial_id=row?.trialId??"debug",task_id=controlledTask&&taskIndex>=0&&taskIndex<tasks.Length?tasks[taskIndex].task_id:"free",block=row?.block??0,within_block=row?.withinBlock??0,elapsed_seconds=Time.realtimeSinceStartup-started}},false);
         }
         IEnumerator Submit()
         {
@@ -157,45 +185,47 @@ namespace IAI.Appearance
             if(!LastOk){validating=false;yield break;}
             yield return Send(Route("finish"),new Mutation{request_id=Id(),expected_revision=Revision});
             if(!LastOk){validating=false;yield break;}
-            string[] turns={"Tutor: We can continue when you are ready.","Tutor: Take a moment to review the character.","Tutor: The next task will begin after this check."};
+            string[] turns={"修改已完成。","你可以看看现在的外形。","外形会保持当前状态。"};
             for(int i=0;i<turns.Length;i++)
             {
                 float probeStarted=Time.realtimeSinceStartup;Status=turns[i];yield return new WaitForSeconds(1.5f);
                 yield return Send(Route("events"),new RenderEvent{@event="probe",payload=new RenderPayload{revision=Revision,state=Observed(),probe_index=i+1,duration_ms=(Time.realtimeSinceStartup-probeStarted)*1000,message=turns[i],screenshot=Capture("probe-"+(i+1))}},false);
                 if(!LastOk){validating=false;yield break;}
             }
-            validating=false;finished=true;Status="Task complete. Thank you.";
+            validating=false;finished=true;Status="本次修改已结束。";Debug.Log("APPEARANCE_READY_FOR_NEXT block="+(trialIndex>=0?schedule[trialIndex].block:0)+" within="+(trialIndex>=0?schedule[trialIndex].withinBlock:0));
         }
         IEnumerator StartScheduled()
         {
-            if(phase!="formal"){Status="Assigned sessions require formal mode. For engineering or pilot checks use a manual session.";yield break;}
-            schedule.Clear();trialIndex=-1;studySessionId=participant+"_"+DateTime.UtcNow.ToString("yyyyMMddTHHmmss");
+            if(phase!="formal"){Status="互动尚未准备好，请稍候。";Debug.LogError("Assigned schedule requires formal phase.");yield break;}
+            schedule.Clear();trialIndex=-1;
             string path=Path.Combine(Application.streamingAssetsPath,"AppearanceStudy/trial_schedule.csv");
             foreach(var line in File.ReadAllLines(path))
             {
                 var c=line.Split(',');if(c.Length<6||c[0]!=participant) continue;
                 schedule.Add(new TrialRow {trialId=c[1],block=int.Parse(c[2]),withinBlock=int.Parse(c[3]),condition=c[4],taskId=c[5]});
             }
-            if(schedule.Count!=16) {Status="Use a scheduled ID P001–P020. Pilot IDs use manual debug/pilot tasks.";yield break;}
-            trialIndex=0;researcher=false;yield return ScheduledTrial();
+            if(schedule.Count!=16) {Status="互动尚未准备好，请稍候。";Debug.LogError("No complete frozen schedule for this participant ID.");yield break;}
+            trialIndex=0;yield return ScheduledTrial();
         }
         IEnumerator ScheduledTrial()
         {
             var row=schedule[trialIndex]; condition=row.condition;
             taskIndex=Array.FindIndex(tasks,t=>t.task_id==row.taskId);
-            if(taskIndex<0) {Status="Missing task configuration.";yield break;}
+            if(taskIndex<0) {Status="互动尚未准备好，请稍候。";yield break;}
             if(row.withinBlock==1) yield return NewSession(true);else yield return LoadTask();
         }
         IEnumerator Next()
         {
-            if(trialIndex<0) {yield return LoadTask();yield break;}
-            if(trialIndex==schedule.Count-1) {Status="All four blocks are complete. Please complete the final questionnaire.";awaitingBlock=true;yield break;}
+            if(trialIndex<0) {if(controlledTask)yield return LoadTask();else yield return NewSession(false);yield break;}
+            if(trialIndex==schedule.Count-1) {Status="本次互动已结束，谢谢。";awaitingBlock=true;yield break;}
             trialIndex++;awaitingBlock=false;yield return ScheduledTrial();
         }
 
         void Update()
         {
-            if(UnityEngine.InputSystem.Keyboard.current!=null&&UnityEngine.InputSystem.Keyboard.current.f1Key.wasPressedThisFrame) researcher=!researcher;
+            // Researcher advances the frozen schedule between interactions; no study panel is rendered.
+            if(UnityEngine.InputSystem.Keyboard.current!=null&&UnityEngine.InputSystem.Keyboard.current.f8Key.wasPressedThisFrame&&finished&&!awaitingBlock&&!Busy&&!validating)
+                StartCoroutine(Next());
             if(trialActive&&initialSent&&!Busy&&Time.realtimeSinceStartup-started>=120) StartCoroutine(Finish("timeout"));
         }
         Texture2D Tex(Color c) {var t=new Texture2D(1,1);t.SetPixel(0,0,c);t.Apply();return t;}
@@ -216,44 +246,10 @@ namespace IAI.Appearance
             Styles();GUI.matrix=Matrix4x4.Scale(new Vector3(Screen.width/Width,Screen.height/Height,1));
             GUI.DrawTexture(new Rect(0,0,548,Height),panelTexture);
             GUILayout.BeginArea(new Rect(32,28,484,844));
-            GUILayout.Label("APPEARANCE LAB",small);GUILayout.Space(6);GUILayout.Label("Shape your companion",title);
+            GUILayout.Label("外形调整",title);
             GUILayout.Space(14);
             scroll=GUILayout.BeginScrollView(scroll);
-            if(researcher)
-            {
-                GUILayout.BeginVertical(card);GUILayout.Label("Researcher setup  ·  F1 to hide",small);
-                bool configure=trialIndex<0||(finished&&awaitingBlock);GUI.enabled=!Busy&&!validating&&configure;
-                GUILayout.BeginHorizontal();participant=GUILayout.TextField(participant,input,GUILayout.Width(220));
-                foreach(var p in new[]{"debug","pilot","formal"}) if(GUILayout.Toggle(phase==p,p,button))phase=p;
-                GUILayout.EndHorizontal();
-                GUILayout.BeginHorizontal();foreach(var p in policies)if(GUILayout.Toggle(condition==p,p,button))condition=p;GUILayout.EndHorizontal();
-                GUILayout.Label("Manual condition: E execute / A ask / N native gate / S selective",small);
-                GUI.enabled=!Busy&&!validating&&configure;
-                if(Button("Start manual session")) {trialIndex=-1;studySessionId="";schedule.Clear();StartCoroutine(NewSession(true));}
-                if(Button("Start assigned 16-task session"))StartCoroutine(StartScheduled());
-                if(tasks.Length>0)
-                {
-                    GUILayout.BeginHorizontal();
-                    if(Button("Previous",35))taskIndex=(taskIndex+tasks.Length-1)%tasks.Length;
-                    GUILayout.Label(tasks[taskIndex].task_id,body,GUILayout.Width(90));
-                    if(Button("Next",35))taskIndex=(taskIndex+1)%tasks.Length;
-                    GUILayout.EndHorizontal();
-                    GUI.enabled=!Busy&&!validating&&configure&&!string.IsNullOrEmpty(view.session_id);
-                    if(Button("Load selected task",35))StartCoroutine(LoadTask());
-                }
-                GUI.enabled=true;GUILayout.EndVertical();GUILayout.Space(12);
-            }
-            if(trialIndex>=0) GUILayout.Label("Block "+schedule[trialIndex].block+" / 4    ·    Task "+schedule[trialIndex].withinBlock+" / 4",small);
-            GUILayout.BeginVertical(card);GUILayout.Label("YOUR GOAL",small);GUILayout.Label(taskGoal,body);
-            if(tasks.Length>0&&trialActive)
-            {
-                var context=tasks[taskIndex].model_visible;
-                if(context.visible_history!=null&&context.visible_history.Length>0)
-                {GUILayout.Label("PUBLIC HISTORY (earliest first)",small);foreach(var h in context.visible_history)GUILayout.Label(h.jacket_color+" / "+h.accessory+" / "+h.scale.ToString("0.00"),small);}
-                if(context.soft_preferences!=null)foreach(var p in context.soft_preferences)GUILayout.Label("Preference: "+p,small);
-            }
-            GUILayout.EndVertical();GUILayout.Space(14);
-            GUILayout.Label(Busy?"Working…":Status,body);GUILayout.Space(12);
+            GUILayout.Label(Busy?"正在处理…":Status,body);GUILayout.Space(12);
             GUI.enabled=!Busy&&!validating&&!string.IsNullOrEmpty(view.session_id)&&!finished;
             if(view.decision=="ASK"&&view.question!=null)
             {
@@ -263,45 +259,37 @@ namespace IAI.Appearance
                     if(option.id=="other")continue;
                     var captured=option.id;if(Button(option.label))StartCoroutine(SubmitAnswer(captured));
                 }
-                GUILayout.Label("Or describe what you mean",small);answerText=GUILayout.TextArea(answerText,input,GUILayout.Height(68));
-                GUI.enabled=!Busy&&!validating&&!string.IsNullOrWhiteSpace(answerText);if(Button("Use this explanation"))StartCoroutine(SubmitAnswer("other"));
+                GUILayout.Label("也可以补充你的想法",small);answerText=GUILayout.TextArea(answerText,input,GUILayout.Height(68));
+                GUI.enabled=!Busy&&!validating&&!string.IsNullOrWhiteSpace(answerText);if(Button("发送补充说明"))StartCoroutine(SubmitAnswer("other"));
                 GUI.enabled=!Busy&&!validating;GUILayout.EndVertical();
             }
             else
             {
-                GUILayout.Label(initialSent?"REPAIR / FOLLOW-UP":"YOUR REQUEST",small);
+                GUILayout.Label("你想怎样修改？",small);
                 // Controlled first request is fixed; repairs are free text.
-                bool editable=initialSent||researcher;GUI.enabled=!Busy&&!validating&&editable&&!finished;
+                bool editable=initialSent||!controlledTask;GUI.enabled=!Busy&&!validating&&editable&&!finished;
                 query=GUILayout.TextArea(query,input,GUILayout.Height(100));
                 GUI.enabled=!Busy&&!validating&&!string.IsNullOrWhiteSpace(query)&&!string.IsNullOrEmpty(view.session_id)&&!finished;
-                if(Button(initialSent?"Send repair":"Send request"))StartCoroutine(Submit());
+                if(Button("发送"))StartCoroutine(Submit());
             }
             GUILayout.Space(12);GUI.enabled=!Busy&&!validating&&!string.IsNullOrEmpty(view.session_id)&&!finished;
-            GUILayout.BeginHorizontal();fieldIndex=GUILayout.SelectionGrid(fieldIndex,new[]{"All","Color","Accessory","Size"},4,button);GUILayout.EndHorizontal();
-            if(Button(fieldIndex==0?"Undo last change":"Undo "+fields[fieldIndex]+" change"))StartCoroutine(Send(Route("undo"),new Undo{request_id=Id(),expected_revision=Revision,field=fields[fieldIndex]}));
-            if(initialSent&&Button("Finish this task"))StartCoroutine(Finish("participant_done"));
+            GUILayout.BeginHorizontal();fieldIndex=GUILayout.SelectionGrid(fieldIndex,new[]{"全部","颜色","配饰","大小"},4,button);GUILayout.EndHorizontal();
+            if(Button("撤销上次修改"))StartCoroutine(Send(Route("undo"),new Undo{request_id=Id(),expected_revision=Revision,field=fields[fieldIndex]}));
+            if(initialSent&&Button("完成修改"))StartCoroutine(Finish("participant_done"));
             GUI.enabled=!Busy&&!validating;
-            if(finished)
-            {
-                bool blockEnd=trialIndex>=0&&schedule[trialIndex].withinBlock==4;
-                if(blockEnd)GUILayout.Label("Please complete the post-block questionnaire before continuing. Use block "+schedule[trialIndex].block+" and the session ID below.",body);
-                if(!awaitingBlock&&Button(blockEnd?"Questionnaire complete · continue":"Next task"))StartCoroutine(Next());
-            }
-            GUI.enabled=true;GUILayout.EndScrollView();GUILayout.Space(10);
-            GUILayout.Label("Study: "+studySessionId+(phase=="debug"?"  ·  DEBUG":""),small);
-            if(researcher)GUILayout.Label("Backend: "+(view.session_id??"not started"),small);
-            GUILayout.Label("F1  researcher controls    ·    Changes remain undoable",small);
+            if(finished&&trialIndex<0&&Button("继续修改"))StartCoroutine(Next());
+            GUI.enabled=true;GUILayout.EndScrollView();
             GUILayout.EndArea();
-            GUI.Label(new Rect(620,42,700,44),"A familiar face. A different look.",title);
-            GUI.Label(new Rect(620,90,700,50),"JACKET COLOR    /    ACCESSORY    /    SIZE",small);
-            if(view.state!=null)GUI.Label(new Rect(620,820,750,50),view.state.jacket_color.ToUpperInvariant()+"     ·     "+view.state.accessory.ToUpperInvariant()+"     ·     "+view.state.scale.ToString("0.00")+"×",body);
+            GUI.Label(new Rect(620,42,700,44),"看看现在的样子",title);
+            GUI.Label(new Rect(620,90,700,50),"衣服颜色    /    配饰    /    大小",small);
+
         }
 
         [Serializable] class SmokeResult { public bool passed; public string error; public List<string> checks=new List<string>(); }
         void Check(bool value,string label,SmokeResult r) {if(!value)throw new Exception(label+" failed");r.checks.Add(label);}
         IEnumerator Smoke()
         {
-            researcher=false;var r=new SmokeResult();
+            var r=new SmokeResult();
             // Same HTTP client, avatar application and acknowledgement path as the participant UI.
             foreach(string p in policies)
             {

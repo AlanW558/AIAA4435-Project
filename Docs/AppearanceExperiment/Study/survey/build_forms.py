@@ -27,10 +27,12 @@ exit_questions=[
  question('other_feedback','对于修改外形、检查结果或撤销操作，你还有什么改进建议？','long_text',max_length=1000)]
 content={
  'schema_version':'appearance-survey-v0.1','authored_on':'2026-10-18','status':'draft_for_pilot',
- 'language':'zh-CN','content_revision':'appearance-survey-v0.1-zh-CN.2','measurement_note':'四项均为自拟的单题指标，未经量表验证，分别分析，不合成为体验总分。',
+ 'language':'zh-CN','content_revision':'appearance-survey-v0.1-zh-CN.3','measurement_note':'四项均为自拟的单题指标，未经量表验证，分别分析，不合成为体验总分。',
  'publication_status':'本生成器只制作本地文件，不创建或发布外部问卷。',
- 'participant_ids':{'formal':'P001–P020','pilot':['PILOT01','PILOT02']},
- 'session_metadata':{'participant_id':'研究者分配的参与者编号，必填。','session_id':'必填，使用 Unity 客户端记录中整场实验共用的 study_session_id。四轮使用同一个编号，不填写各条件的后端 session_id。','phase':'根据参与者编号确定，不由参与者选择。','block':'仅用于每轮结束后的问卷，填写 1 至 4；参与者只看到轮次。','condition':'不提问、不展示；分析时依据已冻结的分配表关联。'},
+ 'participant_ids':{'formal':'P001–P020（预留槽位，按实际到场使用）','pilot':['PILOT01','PILOT02'],'debug':'DEBUG01 等调试编号'},
+ 'phase_options':[{'value':'debug','label':'调试'},{'value':'pilot','label':'预实验'},{'value':'formal','label':'正式实验'}],
+ 'recruitment_note':'原先希望安排22人，目前到场人数不确定；预留2个预实验和20个正式槽位，按实际参加和完成人数报告。',
+ 'session_metadata':{'participant_id':'研究者分配的参与者编号，必填。','session_id':'本地页面自动生成并保留在研究者关联信息中，三份表及四轮共用；启动客户端时读取同一关联配置。问卷星用参与者编号和实验类型关联研究者保存的配置，不要求参与者手填此编号。','phase':'必选：调试、预实验或正式实验。按研究者安排选择，分别保存和分析。','block':'仅用于每轮结束后的问卷，填写 1 至 4；参与者只看到轮次。','condition':'不提问、不展示；分析时依据已冻结的分配表关联。'},
  'study_information':[
   '这是 AIAA4435 课程的一项研究，想了解大家如何修改虚拟角色的外形。你将完成四轮任务，并回答一些关于使用体验的问题。回答没有对错，请按实际情况和感受填写。',
   '参加研究完全自愿。你可以跳过体验问题，随时休息或结束实验。如果感到不适，包括佩戴头显引起的不适，请立即告诉研究者。',
@@ -39,16 +41,16 @@ content={
   '研究者会说明谁能访问数据、数据存在哪里、保存多久，以及如何申请撤回。有疑问的话，请先询问，再决定是否参加。'
  ],
  'forms':[
-  {'id':'pre','title':'虚拟角色外形修改研究：实验开始前','description':'请先阅读研究说明，再决定是否参加。参与者编号、实验编号和是否参加这一题需要作答，其余问题可以跳过。只有同意参加后才继续实验。','questions':pre,'consent_gate':{'field':'consent','proceed_if':'agree','otherwise':'结束填写，不保存回答。'}},
-  {'id':'block','title':'虚拟角色外形修改研究：每轮结束后','description':'请只根据刚完成的这一轮作答。参与者编号、实验编号和轮次为必填。四道评分题使用 1 至 7 分表示同意程度，可以跳过；最后的补充意见也可以留空。','questions':block,'repeat':'四轮结束后各填写一次，题目措辞和选项顺序保持一致。'},
-  {'id':'exit','title':'虚拟角色外形修改研究：全部结束后','description':'请回顾刚完成的四轮任务。参与者编号和实验编号为必填，其余问题可以跳过，简单写几句即可。','questions':exit_questions}
+  {'id':'pre','title':'虚拟角色外形修改研究：实验开始前','description':'请先阅读研究说明，再决定是否参加。参与者编号、实验类型和是否参加这一题需要作答，其余问题可以跳过。只有同意参加后才继续实验。','questions':pre,'consent_gate':{'field':'consent','proceed_if':'agree','otherwise':'结束填写，不保存回答。'}},
+  {'id':'block','title':'虚拟角色外形修改研究：每轮结束后','description':'请只根据刚完成的这一轮作答。参与者编号、实验类型和轮次为必填。四道评分题使用 1 至 7 分表示同意程度，可以跳过；最后的补充意见也可以留空。','questions':block,'repeat':'四轮结束后各填写一次，题目措辞和选项顺序保持一致。'},
+  {'id':'exit','title':'虚拟角色外形修改研究：全部结束后','description':'请回顾刚完成的四轮任务。参与者编号和实验类型为必填，其余问题可以跳过，简单写几句即可。','questions':exit_questions}
  ]}
 (ROOT/'questionnaires.json').write_text(json.dumps(content,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 for form in content['forms']:
     lines=[form['title'],'',form['description'],'']
     if form['id']=='pre':
         lines+=content['study_information']+['']
-    meta=[question('participant_id','研究者提供的参与者编号','short_text',required=True),question('session_id','研究者提供的本次实验编号','short_text',required=True)]
+    meta=[question('participant_id','研究者提供的参与者编号','short_text',required=True),question('phase','本次实验类型',options=[(o['value'],o['label']) for o in content['phase_options']],required=True,help='请按研究者的安排选择。')]
     if form['id']=='block':
         meta.append(question('block','你刚完成的是第几轮？',options=[(str(i),f'第 {i} 轮') for i in range(1,5)],required=True))
     for n,q in enumerate(meta+form['questions'],1):

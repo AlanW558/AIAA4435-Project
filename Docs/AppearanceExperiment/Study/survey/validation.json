@@ -1,6 +1,6 @@
 {
   "schema_version": "appearance-survey-v0.1",
-  "content_revision": "appearance-survey-v0.1-zh-CN.2",
+  "content_revision": "appearance-survey-v0.1-zh-CN.3",
   "language": "zh-CN",
   "participant_copy_checks": "中文题干、选项、说明及静态界面文本检查通过",
   "humanizer_review": "humanizer_review.md",

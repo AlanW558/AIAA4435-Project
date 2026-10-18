@@ -12,7 +12,7 @@ ROOT=Path(__file__).resolve().parent
 spec=json.loads((ROOT/'questionnaires.json').read_text(encoding='utf-8'))
 forms={f['id']:f for f in spec['forms']}
 assert spec['language']=='zh-CN'
-assert spec['content_revision']=='appearance-survey-v0.1-zh-CN.2'
+assert spec['content_revision']=='appearance-survey-v0.1-zh-CN.3'
 participant_text=list(spec['study_information'])
 for form in forms.values():
     participant_text.extend([form['title'],form['description']])
@@ -36,7 +36,7 @@ for f in forms.values():
             assert [o['value'] for o in q['options']]==list(range(1,8))+['cannot_judge']
 assert forms['pre']['questions'][-1]['show_if']=={'field':'prior_link_consent','equals':'yes'}
 assert forms['pre']['consent_gate']['proceed_if']=='agree'
-for script in ('build_forms.py','import_responses.py','validate_artifacts.py'):
+for script in ('build_forms.py','import_responses.py','validate_artifacts.py','session_identity.py'):
     ast.parse((ROOT/script).read_text(encoding='utf-8'))
 html=(ROOT/'questionnaire.html').read_text(encoding='utf-8')
 assert '__SPEC_JSON__' not in html
@@ -55,7 +55,7 @@ class VisibleCopy(HTMLParser):
 copy=VisibleCopy();copy.feed(html)
 for text in copy.text:
     assert not re.search('[—–]',text),text
-    assert not re.search('[A-Za-z]{2,}',text.replace('PILOT01','').replace('P001','')),text
+    assert not re.search('[A-Za-z]{2,}',text.replace('PILOT01','').replace('P001','').replace('DEBUG','')),text
 
 embedded=re.search(r'<script id="spec" type="application/json">(.*?)</script>',html,re.S).group(1)
 assert json.loads(embedded)==spec

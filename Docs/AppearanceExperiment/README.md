@@ -11,9 +11,17 @@ bash Tools/AppearanceExperiment/run_desktop.sh
 
 脚本使用现存后端或启动本地 `127.0.0.1:8765` 服务，再打开 Unity 独立程序。DeepSeek 密钥只由后端读取用户目录下的私有配置文件；客户端、Git 和实验日志不含密钥。停止客户端不会停止后端；已有会话只存在后端内存中，重启后请重新建会话，JSONL 审计记录仍保留。
 
-首次使用选 `debug`、条件 `S`，点击 **Start manual session**，发送任务的初始请求。`F1` 隐藏研究者设置；之后可以回答澄清、输入修复、撤销全次修改或指定属性。角色支持六种衣服颜色、三种配饰和 0.85–1.15 的比例，步长 0.05。不会执行模型生成的任意代码。
+直接运行默认为调试自由交互，启动后自动连接。Unity只显示角色、修改输入、澄清、撤销和完成修改，不显示研究者设置、编号、阶段、策略、题目卡片或轮次；F1不会打开研究面板。角色仍支持六种衣服颜色、三种配饰和0.85至1.15的比例。
 
-正式分配模式需要明确选择 `formal` 和 `P001`–`P020`，按冻结 CSV 自动运行四个 block、每 block 四项任务。两个 pilot 单独使用 `pilot` 和不同编号，不能占正式编号。正式采集前先完成两人预实验并冻结规则、材料、超时和版本；原型工程测试不计入22名参与者。
+需要关联问卷时，先在本地问卷选择实验类型、填写参与者编号，在“研究者：关联记录”下载配置，再运行：
+
+```bash
+python3 Tools/AppearanceExperiment/launch_session.py --session-file /path/to/session.json
+```
+
+正式模式从既有CSV加载该槽位的16项任务。目标卡与公开历史、偏好由研究者在Unity之外提供；初始请求仍按统一实验脚本预填，后续修复可自由输入。每次完成修改后研究者按F8继续，每四项先暂停填问卷。调试和预实验可用 `--condition E/A/N/S`，指定 `--task` 才加载既有任务，否则自由交互。预实验不应使用正式目标卡作为练习。
+
+22人是原始招募目标，实际到场未定。现有2个预实验、20个正式编号是预留槽位，不要求填满；调试、预实验、正式数据分开。正式采集前完成预实验并冻结规则、材料、超时和版本。
 
 ## 四条件的公平边界
 
@@ -32,11 +40,11 @@ N 是 **Native-gate**，并非完全自由规划的原生 agent。N 的额外模
 
 ## 任务、问卷与数据
 
-- [Study/RUNBOOK.md](Study/RUNBOOK.md)：22人流程，建议2pilot+20formal，以及桌面/Pico实验边界。
+- [Study/RUNBOOK.md](Study/RUNBOOK.md)：按实际到场人数运行，预留2个预实验和20个正式槽位，以及桌面/Pico实验边界。
 - [Study/survey/questionnaire.html](Study/survey/questionnaire.html)：实验开始前、每轮结束后、全部结束后的中文问卷；本地导出 JSON，不自动上传。
 - [Study/survey/README.md](Study/survey/README.md)：问卷星导入文本和真实回答导入器。
 
-主持人先建立分配会话以生成编号，再让参与者填写开始前问卷；阅读任务卡不开始计时，点击 Send 才开始。问卷使用界面底部的研究级 `Study` 编号，贯穿四个 block；它不同于每个条件的后端 session ID。问卷只显示 block 编号，不显示策略标签。四项 1–7 评分是自拟单项，不合成未经验证的总分。
+主持人在问卷中生成关联配置，取得参与同意后用同一配置启动互动。阅读独立任务卡不开始计时，点击“发送”才开始。问卷和客户端marker使用相同的 `study_session_id`，贯穿四轮；它不同于每个条件的后端session ID。四项1至7评分是自拟单项，不合成未经验证的总分。
 
 `StudyData/` 被 Git 忽略，保存 JSONL、实际角色截图、客户端日志和私有导出。完成后的三个固定中性回合分别读取材质、配饰 active 状态和 transform；端到端时间不含随后探针。构建 manifest 对实际二进制、数据和运行库逐文件计算 SHA-256，构建指纹随任务事件记录。
 
@@ -47,7 +55,7 @@ python3 Tools/AppearanceExperiment/export_study.py \
 
 默认只导出 live/formal；debug、mock、pilot 都不混入正式结果。缺失探针/渲染/版本证据保留空值，不能把未测量写成成功。图表和结论必须等待真实参与者数据。
 
-Codex 内置浏览器目前在执行前报工作目录 URI 错误，所以没有创建线上问卷。现成 HTML 与问卷星导入稿可用；具体错误和续作步骤见 [browser_creation_status.md](Study/survey/browser_creation_status.md)。
+问卷星已有三份未发布草稿，仍待同步本次实验类型改动；最新浏览器状态见 [browser_use_creation_status.md](Study/survey/browser_use_creation_status.md)。用户已改用Codex Replay，本轮不再使用Browser Use。
 
 ## 编辑、构建与检查
 

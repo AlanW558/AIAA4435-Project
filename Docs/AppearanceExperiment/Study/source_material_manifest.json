@@ -1,7 +1,7 @@
 {
   "copied_on": "2026-10-18",
   "status": "authored_study_materials_not_observed_participant_data",
-  "participant_pool": 22,
+  "participant_pool": null,
   "pilot": 2,
   "formal": 20,
   "files": [
@@ -73,6 +73,15 @@
       "sha256": "c95b070943d8d5595a11a0a9feda1273346a80530f5ae2d9c4d33e6e3b5379ed",
       "reason": "用户确认本次另有22位真实参与者可安排；核实旧22份记录含19份模拟，另3份来源未核实，修正样本来源与关联条件。",
       "original_copy_hash_preserved": true
+    },
+    {
+      "date": "2026-10-18",
+      "path": "materials/protocol.md",
+      "sha256": "6096a4c676792f44428059cd338d4a095e1fb45da50bd630253e47d1b210bd4c",
+      "reason": "用户更新：实际到场可能少于22；阶段选择放问卷，Unity只显示互动；增加按既有槽位顺序分配的规则。",
+      "original_copy_hash_preserved": true
     }
-  ]
+  ],
+  "recruitment_target": 22,
+  "participant_pool_status": "attendance_unconfirmed; planned slots are capacity, not observed sample"
 }
