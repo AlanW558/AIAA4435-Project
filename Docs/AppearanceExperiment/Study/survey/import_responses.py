@@ -71,6 +71,29 @@ def validate_record(record, spec):
     return record
 
 
+def unpack_response(data, spec):
+    """Validate either a legacy page file or one complete six-page bundle."""
+    if not isinstance(data, dict) or data.get('schema_version') != 'appearance-survey-bundle-v1':
+        return [validate_record(data, spec)]
+    validate_identity(data.get('participant_id'), data.get('phase'), data.get('session_id'))
+    revision = data.get('content_revision')
+    if revision != 'appearance-survey-v0.1-zh-CN.4-unified':
+        raise ValueError('Unknown unified questionnaire revision.')
+    records = data.get('records')
+    if not isinstance(records, list) or len(records) != 6:
+        raise ValueError('A complete bundle must contain six page records.')
+    expected = [('pre', None), *[('block', n) for n in range(1, 5)], ('exit', None)]
+    for record, page in zip(records, expected):
+        validate_record(record, spec)
+        if (record['form_id'], record['block']) != page:
+            raise ValueError('Bundle pages must be pre, blocks 1–4, then exit, exactly once.')
+        if any(record.get(key) != data[key] for key in ('participant_id', 'phase', 'session_id')):
+            raise ValueError('Bundle and page identities disagree.')
+        if record.get('content_revision') != revision:
+            raise ValueError('Bundle contains mixed content revisions.')
+    return records
+
+
 def import_records(input_dir,schedule_path,out_dir,phase='formal'):
     if phase not in ('debug','pilot','formal'):
         raise ValueError('Choose debug, pilot or formal explicitly.')
@@ -78,28 +101,32 @@ def import_records(input_dir,schedule_path,out_dir,phase='formal'):
     sources=sorted(input_dir.glob('*.json'))
     if not sources:
         raise ValueError('No actual JSON response files found. Empty folders are not data.')
-    records=[];identities=set();participant_sessions={};session_participants={};excluded=Counter();config_files=0
+    records=[];identities=set();participant_sessions={};session_participants={};excluded=Counter();excluded_records=Counter();config_files=0;included_files=0
     for path in sources:
         try:
             data=json.loads(path.read_text(encoding='utf-8'))
             if isinstance(data,dict) and data.get('schema_version')=='appearance-session-v1':
                 validate_config(data);config_files+=1;continue
-            record=validate_record(data,spec)
+            page_records=unpack_response(data,spec)
         except (ValueError,TypeError,KeyError) as exc:
             raise ValueError(f'{path.name}: {exc}') from None
-        if record['phase']!=phase:
-            excluded[record['phase']]+=1;continue
-        pid,sid=record['participant_id'],record['session_id']
-        identity=(sid,record['form_id'],record['block'])
-        if identity in identities:
-            raise ValueError(f'Duplicate response/revision for {identity}; explicitly retain the intended revision before importing.')
-        identities.add(identity)
-        if pid in participant_sessions and participant_sessions[pid]!=sid:
-            raise ValueError(f'{pid} has multiple sessions; adjudicate resumed/repeated sessions before pooling.')
-        if sid in session_participants and session_participants[sid]!=pid:
-            raise ValueError(f'{sid} was used for multiple participants.')
-        participant_sessions[pid]=sid;session_participants[sid]=pid
-        records.append(record)
+        if page_records[0]['phase']!=phase:
+            excluded[page_records[0]['phase']]+=1
+            excluded_records[page_records[0]['phase']]+=len(page_records)
+            continue
+        included_files+=1
+        for record in page_records:
+            pid,sid=record['participant_id'],record['session_id']
+            identity=(sid,record['form_id'],record['block'])
+            if identity in identities:
+                raise ValueError(f'Duplicate response/revision for {identity}; explicitly retain the intended revision before importing.')
+            identities.add(identity)
+            if pid in participant_sessions and participant_sessions[pid]!=sid:
+                raise ValueError(f'{pid} has multiple sessions; adjudicate resumed/repeated sessions before pooling.')
+            if sid in session_participants and session_participants[sid]!=pid:
+                raise ValueError(f'{sid} was used for multiple participants.')
+            participant_sessions[pid]=sid;session_participants[sid]=pid
+            records.append(record)
     if not records:
         raise ValueError(f'No {phase} responses found; other phases are not substitutes.')
     consent_sessions={r['session_id'] for r in records if r['form_id']=='pre' and r['answers']['consent']=='agree'}
@@ -129,7 +156,7 @@ def import_records(input_dir,schedule_path,out_dir,phase='formal'):
             if row[key]=='':missing[f'{key}:{record["answer_status"][key]}']+=1
         rows.append(row);by_participant[pid].append(block)
     participants={pid:{'session_id':sid,'phase':phase,'blocks_present':sorted(by_participant[pid]),'missing_blocks':sorted(set(range(1,5))-set(by_participant[pid])),'has_exit':any(r['participant_id']==pid and r['form_id']=='exit' for r in records)} for pid,sid in participant_sessions.items()}
-    report={'schema_version':spec['schema_version'],'source':'actual_local_questionnaire_files','phase':phase,'excluded_response_files_by_phase':dict(excluded),'session_config_files_ignored':config_files,'response_files':len(records),'participants':participants,'participant_count':len(participants),'block_rows':len(rows),'missing_ratings_by_reason':dict(missing),'notes':['No questionnaire responses were generated by this importer.','Only the requested phase is exported; debug/pilot never supplement formal recruitment.','Pilot/debug condition is blank because the formal schedule does not specify their assignments.','cannot_judge and skipped are blank in the CSV; original distinctions remain in response_records.json.','Questionnaire scores remain separate single items; do not compute an overall UX score.','Recruitment targets are not minimum import counts; actual participants and missing blocks are reported.']}
+    report={'schema_version':spec['schema_version'],'source':'actual_local_questionnaire_files','phase':phase,'excluded_response_files_by_phase':dict(excluded),'excluded_response_records_by_phase':dict(excluded_records),'session_config_files_ignored':config_files,'response_files':included_files,'response_records':len(records),'participants':participants,'participant_count':len(participants),'block_rows':len(rows),'missing_ratings_by_reason':dict(missing),'notes':['No questionnaire responses were generated by this importer.','One unified bundle contains six page records and four block rows for one session; records are not participant counts.','Only the requested phase is exported; debug/pilot never supplement formal recruitment.','Pilot/debug condition is blank because the formal schedule does not specify their assignments.','cannot_judge and skipped are blank in the CSV; original distinctions remain in response_records.json.','Questionnaire scores remain separate single items; do not compute an overall UX score.','Recruitment targets are not minimum import counts; actual participants and missing blocks are reported.']}
     out_dir.mkdir(parents=True,exist_ok=True)
     outputs=[out_dir/'block_ratings.csv',out_dir/'response_records.json',out_dir/'response_import_report.json']
     if any(p.exists() for p in outputs):
@@ -151,7 +178,7 @@ def main():
     args=parser.parse_args()
     try:report=import_records(args.input_dir,args.schedule,args.out_dir,args.phase)
     except (ValueError,OSError,json.JSONDecodeError) as exc:parser.error(str(exc))
-    print(f'Imported {report["response_files"]} actual files and {report["block_rows"]} block ratings. No response content printed.')
+    print(f'Imported {report["response_files"]} files, {report["response_records"]} page records, {report["participant_count"]} participants and {report["block_rows"]} block rows. No response content printed.')
 
 
 if __name__=='__main__':main()

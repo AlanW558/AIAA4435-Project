@@ -17,5 +17,18 @@
   "network_or_automatic_storage": "none in local HTML",
   "browser_interaction": "本脚本不验证浏览器交互；实际操作记录见 browser_creation_status.md",
   "real_responses_generated": 0,
-  "online_forms_created_by_this_validator": 0
+  "online_forms_created_by_this_validator": 0,
+  "unified": {
+    "content_revision": "appearance-survey-v0.1-zh-CN.4-unified",
+    "pages": 6,
+    "questions": 32,
+    "required_questions": [
+      1,
+      2,
+      3
+    ],
+    "identical_round_items": true,
+    "checks": "passed",
+    "browser_evidence": "../../Validation/survey-ui-unified.json"
+  }
 }

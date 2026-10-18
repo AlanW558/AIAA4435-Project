@@ -1,0 +1,41 @@
+{
+  "evidence_class": "engineering_mock_debug_only",
+  "participant_responses_generated": 0,
+  "real_provider_calls": 0,
+  "automatic_startup_preserves_questionnaire_session": true,
+  "study_session_id": "debug_UI_V3_3b233aef5ec44495a09f1064412a971b",
+  "smoke_exit_code": 0,
+  "smoke": {
+    "passed": true,
+    "error": "",
+    "checks": [
+      "E request/clarification/render: ACT",
+      "E field undo rendered blue",
+      "A request/clarification/render: ASK",
+      "A field undo rendered blue",
+      "N request/clarification/render: ACT",
+      "N field undo rendered blue",
+      "S request/clarification/render: ACT",
+      "S field undo rendered blue",
+      "S materially ambiguous request ASK",
+      "Three appearance fields rendered",
+      "Accessory-only undo preserves color and scale",
+      "Undo all remaining fields",
+      "Controlled task reset and submit",
+      "Finish plus three actual renderer probes"
+    ]
+  },
+  "build": {
+    "result": "Succeeded",
+    "errors": 1,
+    "warnings": 9
+  },
+  "build_sha256": "0b6cfc0b3f804303f9cd8774621cc007b923628887a6a6bec64585bfd1bebe26",
+  "passed": true,
+  "limits": [
+    "Mock provider checks interaction and renderer plumbing; no new live DeepSeek or PICO validation.",
+    "No manual mouse/keyboard callback test in this pass.",
+    "Target cards and questionnaire editing remain outside the participant UI.",
+    "Existing desktop client and live backend were not targeted by this check."
+  ]
+}

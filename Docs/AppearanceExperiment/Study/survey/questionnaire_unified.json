@@ -1,0 +1,1305 @@
+{
+  "schema_version": "appearance-unified-questionnaire-v1",
+  "content_revision": "appearance-survey-v0.1-zh-CN.4-unified",
+  "language": "zh-CN",
+  "status": "unpublished_draft",
+  "title": "虚拟角色外形修改研究（全流程）",
+  "description": "本问卷按实验顺序分为六页：开始前、四轮体验后的反馈，以及最后的回顾。参与者编号和实验类型只填一次。每轮体验结束后，回到本问卷继续填写，不用重新扫码。请保持页面打开，最后统一提交。除参与者编号、实验类型和参加同意外，其余问题都可以跳过。",
+  "study_information": [
+    "这是 AIAA4435 课程的一项研究，想了解大家如何修改虚拟角色的外形。你将完成四轮任务，并回答一些关于使用体验的问题。回答没有对错，请按实际情况和感受填写。",
+    "参加研究完全自愿。你可以跳过体验问题，随时休息或结束实验。如果感到不适，包括佩戴头显引起的不适，请立即告诉研究者。",
+    "我们会记录你提出的修改要求、操作选择、外形变化、用时、问卷回答，以及虚拟角色和界面的截图。本表单不录音，也不调用摄像头。请不要在指令或回答中填写个人信息或敏感信息。",
+    "你的修改要求会交给外部人工智能服务 DeepSeek 处理。问卷回答与模型收到的指令分开保存。请只使用研究者给你的参与者编号，不要填写姓名或联系方式。",
+    "研究者会说明谁能访问数据、数据存在哪里、保存多久，以及如何申请撤回。有疑问的话，请先询问，再决定是否参加。"
+  ],
+  "pages": [
+    {
+      "id": "pre",
+      "title": "开始前",
+      "description": "请先阅读研究说明，再决定是否参加。",
+      "questions": [
+        {
+          "id": "pre.participant_id",
+          "title": "研究者提供的参与者编号",
+          "type": "short_text",
+          "required": true,
+          "max_length": 40,
+          "number": 1,
+          "source_field": "participant_id",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false
+        },
+        {
+          "id": "pre.phase",
+          "title": "本次实验类型",
+          "type": "single_choice",
+          "required": true,
+          "help": "请按研究者的安排选择。",
+          "options": [
+            {
+              "value": "debug",
+              "label": "调试"
+            },
+            {
+              "value": "pilot",
+              "label": "预实验"
+            },
+            {
+              "value": "formal",
+              "label": "正式实验"
+            }
+          ],
+          "number": 2,
+          "source_field": "phase",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false
+        },
+        {
+          "id": "pre.consent",
+          "title": "我已阅读研究说明，有机会向研究者提问，并同意参加本次研究。",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            {
+              "value": "agree",
+              "label": "我同意参加。"
+            },
+            {
+              "value": "decline",
+              "label": "我不同意参加。"
+            }
+          ],
+          "number": 3,
+          "source_field": "consent",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false
+        },
+        {
+          "id": "pre.vr_experience",
+          "title": "在今天之前，你大约使用过多少次虚拟现实头显？",
+          "type": "single_choice",
+          "required": false,
+          "options": [
+            {
+              "value": "never",
+              "label": "从未用过"
+            },
+            {
+              "value": "one_to_two",
+              "label": "1 至 2 次"
+            },
+            {
+              "value": "three_to_ten",
+              "label": "3 至 10 次"
+            },
+            {
+              "value": "more_than_ten",
+              "label": "10 次以上"
+            },
+            {
+              "value": "cannot_recall",
+              "label": "记不清／不想回答"
+            }
+          ],
+          "number": 4,
+          "source_field": "vr_experience",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "pre.prior_prototype_exposure",
+          "title": "在今天之前，你是否试用过这套修改虚拟角色外形的原型？",
+          "type": "single_choice",
+          "required": false,
+          "options": [
+            {
+              "value": "no",
+              "label": "没有"
+            },
+            {
+              "value": "yes",
+              "label": "有"
+            },
+            {
+              "value": "unsure",
+              "label": "不确定／不想回答"
+            }
+          ],
+          "number": 5,
+          "source_field": "prior_prototype_exposure",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "pre.prior_link_consent",
+          "title": "如果你之前填写的课程问卷有匿名编号，你是否同意我们用这个编号，将那份回答与本次实验记录对应起来？",
+          "type": "single_choice",
+          "required": false,
+          "help": "这项关联由你自愿选择。我们不会根据旧问卷的措辞猜测填写者的身份。",
+          "options": [
+            {
+              "value": "yes",
+              "label": "同意，我可以提供已有的匿名编号。"
+            },
+            {
+              "value": "no",
+              "label": "不同意。"
+            },
+            {
+              "value": "unavailable",
+              "label": "我没有匿名编号／不确定。"
+            }
+          ],
+          "number": 6,
+          "source_field": "prior_link_consent",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "pre.prior_survey_code",
+          "title": "旧问卷的匿名编号",
+          "type": "short_text",
+          "required": false,
+          "max_length": 80,
+          "help": "请只填写已有的匿名编号。可以留空，不要填写姓名、邮箱或手机号。",
+          "number": 7,
+          "source_field": "prior_survey_code",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            },
+            {
+              "field": "pre.prior_link_consent",
+              "equals": "yes"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "block_1",
+      "form": "block",
+      "block": 1,
+      "title": "第 1 轮结束后",
+      "description": "请先完成第 1 轮体验，再填写本页。只根据这一轮作答，所有题目都可以跳过。填写后保留此页面，按研究者的安排继续。",
+      "questions": [
+        {
+          "id": "block_1.interruption_1to7",
+          "title": "系统的提问打断了我完成任务的过程。",
+          "type": "rating",
+          "required": false,
+          "help": "如果这一轮系统没有提问，请选 1（非常不同意）。",
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 8,
+          "source_field": "interruption_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_1.control_1to7",
+          "title": "我能控制哪些外形特征会被修改。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 9,
+          "source_field": "control_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_1.effort_1to7",
+          "title": "完成这些修改需要我投入很多精力。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 10,
+          "source_field": "effort_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_1.satisfaction_1to7",
+          "title": "我对这一轮修改外形的体验感到满意。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 11,
+          "source_field": "satisfaction_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_1.block_comment",
+          "title": "关于这一轮体验，你还有什么想补充的吗？",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "help": "可以留空。简单写几句即可，请不要填写个人信息。",
+          "number": 12,
+          "source_field": "block_comment",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "block_2",
+      "form": "block",
+      "block": 2,
+      "title": "第 2 轮结束后",
+      "description": "请先完成第 2 轮体验，再填写本页。只根据这一轮作答，所有题目都可以跳过。填写后保留此页面，按研究者的安排继续。",
+      "questions": [
+        {
+          "id": "block_2.interruption_1to7",
+          "title": "系统的提问打断了我完成任务的过程。",
+          "type": "rating",
+          "required": false,
+          "help": "如果这一轮系统没有提问，请选 1（非常不同意）。",
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 13,
+          "source_field": "interruption_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_2.control_1to7",
+          "title": "我能控制哪些外形特征会被修改。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 14,
+          "source_field": "control_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_2.effort_1to7",
+          "title": "完成这些修改需要我投入很多精力。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 15,
+          "source_field": "effort_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_2.satisfaction_1to7",
+          "title": "我对这一轮修改外形的体验感到满意。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 16,
+          "source_field": "satisfaction_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_2.block_comment",
+          "title": "关于这一轮体验，你还有什么想补充的吗？",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "help": "可以留空。简单写几句即可，请不要填写个人信息。",
+          "number": 17,
+          "source_field": "block_comment",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "block_3",
+      "form": "block",
+      "block": 3,
+      "title": "第 3 轮结束后",
+      "description": "请先完成第 3 轮体验，再填写本页。只根据这一轮作答，所有题目都可以跳过。填写后保留此页面，按研究者的安排继续。",
+      "questions": [
+        {
+          "id": "block_3.interruption_1to7",
+          "title": "系统的提问打断了我完成任务的过程。",
+          "type": "rating",
+          "required": false,
+          "help": "如果这一轮系统没有提问，请选 1（非常不同意）。",
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 18,
+          "source_field": "interruption_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_3.control_1to7",
+          "title": "我能控制哪些外形特征会被修改。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 19,
+          "source_field": "control_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_3.effort_1to7",
+          "title": "完成这些修改需要我投入很多精力。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 20,
+          "source_field": "effort_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_3.satisfaction_1to7",
+          "title": "我对这一轮修改外形的体验感到满意。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 21,
+          "source_field": "satisfaction_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_3.block_comment",
+          "title": "关于这一轮体验，你还有什么想补充的吗？",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "help": "可以留空。简单写几句即可，请不要填写个人信息。",
+          "number": 22,
+          "source_field": "block_comment",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "block_4",
+      "form": "block",
+      "block": 4,
+      "title": "第 4 轮结束后",
+      "description": "请先完成第 4 轮体验，再填写本页。只根据这一轮作答，所有题目都可以跳过。填写后保留此页面，按研究者的安排继续。",
+      "questions": [
+        {
+          "id": "block_4.interruption_1to7",
+          "title": "系统的提问打断了我完成任务的过程。",
+          "type": "rating",
+          "required": false,
+          "help": "如果这一轮系统没有提问，请选 1（非常不同意）。",
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 23,
+          "source_field": "interruption_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_4.control_1to7",
+          "title": "我能控制哪些外形特征会被修改。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 24,
+          "source_field": "control_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_4.effort_1to7",
+          "title": "完成这些修改需要我投入很多精力。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 25,
+          "source_field": "effort_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_4.satisfaction_1to7",
+          "title": "我对这一轮修改外形的体验感到满意。",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1：非常不同意"
+            },
+            {
+              "value": 2,
+              "label": "2：不同意"
+            },
+            {
+              "value": 3,
+              "label": "3：比较不同意"
+            },
+            {
+              "value": 4,
+              "label": "4：说不上同意或不同意"
+            },
+            {
+              "value": 5,
+              "label": "5：比较同意"
+            },
+            {
+              "value": 6,
+              "label": "6：同意"
+            },
+            {
+              "value": 7,
+              "label": "7：非常同意"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 26,
+          "source_field": "satisfaction_1to7",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "block_4.block_comment",
+          "title": "关于这一轮体验，你还有什么想补充的吗？",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "help": "可以留空。简单写几句即可，请不要填写个人信息。",
+          "number": 27,
+          "source_field": "block_comment",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "exit",
+      "title": "全部结束后",
+      "description": "请回顾刚完成的四轮任务。以下问题都可以跳过，填完后统一提交。",
+      "questions": [
+        {
+          "id": "exit.preferred_block",
+          "title": "如果以后还要做类似的外形修改，你更愿意使用哪一轮的系统？",
+          "type": "single_choice",
+          "required": false,
+          "help": "请按本问卷的第 1 至第 4 轮回想。",
+          "options": [
+            {
+              "value": "1",
+              "label": "第 1 轮"
+            },
+            {
+              "value": "2",
+              "label": "第 2 轮"
+            },
+            {
+              "value": "3",
+              "label": "第 3 轮"
+            },
+            {
+              "value": "4",
+              "label": "第 4 轮"
+            },
+            {
+              "value": "no_preference",
+              "label": "没有特别偏好"
+            },
+            {
+              "value": "none",
+              "label": "这几轮的系统我都不想用"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "无法判断／不想回答"
+            }
+          ],
+          "number": 28,
+          "source_field": "preferred_block",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "exit.preference_reason",
+          "title": "你为什么这样选择？",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "number": 29,
+          "source_field": "preference_reason",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "exit.helpful_question",
+          "title": "有没有哪次提问帮你完成了修改？如果有，它帮在什么地方？",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "help": "可以留空，也可以回答“没有”。",
+          "number": 30,
+          "source_field": "helpful_question",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "exit.unhelpful_question",
+          "title": "有没有哪次提问让你觉得没必要，或者不知道怎么回答？如果有，请描述一下。",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "help": "可以留空，也可以回答“没有”。",
+          "number": 31,
+          "source_field": "unhelpful_question",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        },
+        {
+          "id": "exit.other_feedback",
+          "title": "对于修改外形、检查结果或撤销操作，你还有什么改进建议？",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "number": 32,
+          "source_field": "other_feedback",
+          "default": null,
+          "randomize_options": false,
+          "score_enabled": false,
+          "display_conditions": [
+            {
+              "field": "pre.consent",
+              "equals": "agree"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "page_break_after_questions": [
+    7,
+    12,
+    17,
+    22,
+    27
+  ],
+  "consent_gate": {
+    "field": "pre.consent",
+    "proceed_if": "agree",
+    "otherwise": "结束问卷",
+    "platform_storage_status": "拒绝后是否保存记录未验证，不承诺零保存。"
+  },
+  "shared_device": {
+    "device_limit": false,
+    "ip_limit": false,
+    "account_limit": false,
+    "wechat_limit": false,
+    "resume": false,
+    "autofill_previous": false,
+    "response_quota": null
+  },
+  "measurement_note": "四项均为自拟的单题指标，未经量表验证，分别分析，不合成为体验总分。",
+  "export_note": "一份答卷对应一人一次实验；按固定分页将四轮评分展开为四条分轮记录，条件从研究者分配表关联。缺失评分保持缺失，不作为零分。"
+}

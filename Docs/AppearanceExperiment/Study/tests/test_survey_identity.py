@@ -1,5 +1,6 @@
 """Ephemeral engineering fixtures only; no participant responses are retained."""
 import importlib.util
+import copy
 import json
 from pathlib import Path
 import sys
@@ -9,7 +10,7 @@ import unittest
 STUDY = Path(__file__).resolve().parents[1]
 ROOT = STUDY.parents[2]
 sys.path.insert(0, str(STUDY/'survey'))
-from import_responses import import_records, validate_record
+from import_responses import import_records, validate_record, unpack_response
 from session_identity import validate_config
 loader = importlib.util.spec_from_file_location('researcher_launcher', ROOT/'Tools/AppearanceExperiment/launch_session.py')
 launcher = importlib.util.module_from_spec(loader)
@@ -31,6 +32,31 @@ def fixture(phase='debug', pid='DEBUG_TEST', fid='pre'):
 
 
 class SurveyIdentityTests(unittest.TestCase):
+    def test_unified_bundle_preserves_one_person_four_rounds_and_skipped_exit(self):
+        records=[fixture(fid='pre'),*[fixture(fid='block') for _ in range(4)],fixture(fid='exit')]
+        for index,record in enumerate(records):
+            record['content_revision']='appearance-survey-v0.1-zh-CN.4-unified'
+            if record['form_id']=='block':record['block']=index
+        bundle=dict(schema_version='appearance-survey-bundle-v1',content_revision=records[0]['content_revision'],
+                    participant_id=records[0]['participant_id'],phase='debug',session_id=records[0]['session_id'],records=records)
+        with tempfile.TemporaryDirectory() as d:
+            base=Path(d); source=base/'fixtures'; source.mkdir()
+            (source/'bundle.json').write_text(json.dumps(bundle))
+            report=import_records(source,STUDY/'materials/participant_schedule.csv',base/'out','debug')
+            self.assertEqual((report['response_files'],report['response_records'],report['participant_count'],report['block_rows']),(1,6,1,4))
+            self.assertEqual(report['participants']['DEBUG_TEST']['missing_blocks'],[])
+            self.assertEqual(sum(report['missing_ratings_by_reason'].values()),16)
+            (source/'duplicate_page.json').write_text(json.dumps(records[1]))
+            with self.assertRaisesRegex(ValueError,'Duplicate response'):
+                import_records(source,STUDY/'materials/participant_schedule.csv',base/'duplicate-out','debug')
+        for change in ('identity','page','revision','hidden'):
+            broken=copy.deepcopy(bundle)
+            if change=='identity':broken['records'][2]['session_id']='OTHER_SESSION'
+            if change=='page':broken['records'][2]['block']=1
+            if change=='revision':broken['records'][2]['content_revision']='other'
+            if change=='hidden':broken['records'][0]['answers']['prior_survey_code']='SHOULD_BE_CLEARED'
+            with self.subTest(change=change), self.assertRaises(ValueError):unpack_response(broken,SPEC)
+
     def test_phase_id_mismatch_rejected(self):
         with self.assertRaises(ValueError): validate_record(fixture('formal'), SPEC)
         with self.assertRaises(ValueError): validate_record(fixture('debug', 'P001'), SPEC)

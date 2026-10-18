@@ -65,3 +65,6 @@ if template.exists():
     embedded = json.dumps(content,ensure_ascii=False).replace('</','<\\/')
     (ROOT/'questionnaire.html').write_text(template.read_text(encoding='utf-8').replace('__SPEC_JSON__',embedded),encoding='utf-8')
 print('Wrote authored questionnaires, three import drafts, and local HTML when its template exists; no responses generated.')
+from build_unified_wjx import build
+build(content, ROOT)
+print('Also wrote the unified six-page questionnaire and WJX field mapping; no responses generated.')
