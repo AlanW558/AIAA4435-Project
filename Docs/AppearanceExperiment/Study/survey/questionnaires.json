@@ -1,0 +1,394 @@
+{
+  "schema_version": "appearance-survey-v0.1",
+  "authored_on": "2026-10-18",
+  "status": "draft_for_pilot",
+  "language": "en",
+  "measurement_note": "Four custom single items; not a validated scale and not a combined UX score.",
+  "publication_status": "Local artifacts only. No external questionnaire has been created or published by this generator.",
+  "participant_ids": {
+    "formal": "P001–P020",
+    "pilot": [
+      "PILOT01",
+      "PILOT02"
+    ]
+  },
+  "session_metadata": {
+    "participant_id": "Researcher-assigned pseudonymous ID. Required.",
+    "session_id": "Use the participant-wide study_session_id from Unity client markers, shared across all four blocks; not a per-condition backend session_id. Required.",
+    "phase": "Derived from participant ID; never participant-selected.",
+    "block": "1–4 for the block form only; participant sees neutral block number.",
+    "condition": "Never ask or display; join from the frozen schedule during analysis."
+  },
+  "study_information": [
+    "This AIAA4435 course study examines how people make changes to a virtual character’s appearance. You will complete tasks in four blocks and answer short questions about your experience. There are no right or preferred answers.",
+    "Participation is voluntary. You may skip opinion questions, take a break, or stop the session. Tell the researcher immediately if you feel uncomfortable, including discomfort from the headset.",
+    "We record your task requests, choices, appearance changes, timing, questionnaire answers, and screenshots of the virtual character and interface. This form does not record microphone or camera input. Do not include personal or sensitive information in requests or answers.",
+    "Task requests are processed by an external AI service (DeepSeek). These questionnaire responses are kept separate from model prompts. Use only the study ID given by the researcher; do not enter your name or contact details.",
+    "The researcher will explain who can access the study data, its storage and retention arrangements, and how to request withdrawal. Please ask any questions before deciding whether to take part."
+  ],
+  "forms": [
+    {
+      "id": "pre",
+      "title": "Character Appearance Study — Before the Session",
+      "description": "Please read the study information, then answer the background questions. Consent is required to begin; the background questions are optional.",
+      "questions": [
+        {
+          "id": "consent",
+          "title": "I have read the study information, had an opportunity to ask questions, and agree to take part.",
+          "type": "single_choice",
+          "required": true,
+          "options": [
+            {
+              "value": "agree",
+              "label": "I agree to take part."
+            },
+            {
+              "value": "decline",
+              "label": "I do not agree to take part."
+            }
+          ]
+        },
+        {
+          "id": "vr_experience",
+          "title": "Before today, approximately how many times have you used a VR headset?",
+          "type": "single_choice",
+          "required": false,
+          "options": [
+            {
+              "value": "never",
+              "label": "Never"
+            },
+            {
+              "value": "one_to_two",
+              "label": "1–2 times"
+            },
+            {
+              "value": "three_to_ten",
+              "label": "3–10 times"
+            },
+            {
+              "value": "more_than_ten",
+              "label": "More than 10 times"
+            },
+            {
+              "value": "cannot_recall",
+              "label": "Cannot recall / prefer not to answer"
+            }
+          ]
+        },
+        {
+          "id": "prior_prototype_exposure",
+          "title": "Before today, have you tried this appearance-customisation prototype?",
+          "type": "single_choice",
+          "required": false,
+          "options": [
+            {
+              "value": "no",
+              "label": "No"
+            },
+            {
+              "value": "yes",
+              "label": "Yes"
+            },
+            {
+              "value": "unsure",
+              "label": "Not sure / prefer not to answer"
+            }
+          ]
+        },
+        {
+          "id": "prior_link_consent",
+          "title": "If an anonymous code exists for your earlier course questionnaire, may we link that response to this session?",
+          "type": "single_choice",
+          "required": false,
+          "help": "This is optional. We will not try to identify an anonymous earlier response by its wording.",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Yes, using a code I can provide."
+            },
+            {
+              "value": "no",
+              "label": "No."
+            },
+            {
+              "value": "unavailable",
+              "label": "I do not have a code / I am not sure."
+            }
+          ]
+        },
+        {
+          "id": "prior_survey_code",
+          "title": "Earlier questionnaire code — optional",
+          "type": "short_text",
+          "required": false,
+          "show_if": {
+            "field": "prior_link_consent",
+            "equals": "yes"
+          },
+          "max_length": 80,
+          "help": "Enter only an existing anonymous code. Do not enter your name, email address, or phone number."
+        }
+      ],
+      "consent_gate": {
+        "field": "consent",
+        "proceed_if": "agree",
+        "otherwise": "End the form without storing answers."
+      }
+    },
+    {
+      "id": "block",
+      "title": "Character Appearance Study — After a Block",
+      "description": "Please answer only about the block you have just completed. The four statements use the same 1–7 agreement scale. Each answer is optional.",
+      "questions": [
+        {
+          "id": "interruption_1to7",
+          "title": "The system’s questions interrupted my task.",
+          "type": "rating",
+          "required": false,
+          "help": "If the system asked no questions in this block, select 1 (strongly disagree).",
+          "options": [
+            {
+              "value": 1,
+              "label": "1 — Strongly disagree"
+            },
+            {
+              "value": 2,
+              "label": "2 — Disagree"
+            },
+            {
+              "value": 3,
+              "label": "3 — Somewhat disagree"
+            },
+            {
+              "value": 4,
+              "label": "4 — Neither agree nor disagree"
+            },
+            {
+              "value": 5,
+              "label": "5 — Somewhat agree"
+            },
+            {
+              "value": 6,
+              "label": "6 — Agree"
+            },
+            {
+              "value": 7,
+              "label": "7 — Strongly agree"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "Cannot judge / prefer not to answer"
+            }
+          ]
+        },
+        {
+          "id": "control_1to7",
+          "title": "I could control which appearance properties were changed.",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1 — Strongly disagree"
+            },
+            {
+              "value": 2,
+              "label": "2 — Disagree"
+            },
+            {
+              "value": 3,
+              "label": "3 — Somewhat disagree"
+            },
+            {
+              "value": 4,
+              "label": "4 — Neither agree nor disagree"
+            },
+            {
+              "value": 5,
+              "label": "5 — Somewhat agree"
+            },
+            {
+              "value": 6,
+              "label": "6 — Agree"
+            },
+            {
+              "value": 7,
+              "label": "7 — Strongly agree"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "Cannot judge / prefer not to answer"
+            }
+          ]
+        },
+        {
+          "id": "effort_1to7",
+          "title": "Completing the changes required a lot of effort.",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1 — Strongly disagree"
+            },
+            {
+              "value": 2,
+              "label": "2 — Disagree"
+            },
+            {
+              "value": 3,
+              "label": "3 — Somewhat disagree"
+            },
+            {
+              "value": 4,
+              "label": "4 — Neither agree nor disagree"
+            },
+            {
+              "value": 5,
+              "label": "5 — Somewhat agree"
+            },
+            {
+              "value": 6,
+              "label": "6 — Agree"
+            },
+            {
+              "value": 7,
+              "label": "7 — Strongly agree"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "Cannot judge / prefer not to answer"
+            }
+          ]
+        },
+        {
+          "id": "satisfaction_1to7",
+          "title": "I was satisfied with the customisation experience in this block.",
+          "type": "rating",
+          "required": false,
+          "help": null,
+          "options": [
+            {
+              "value": 1,
+              "label": "1 — Strongly disagree"
+            },
+            {
+              "value": 2,
+              "label": "2 — Disagree"
+            },
+            {
+              "value": 3,
+              "label": "3 — Somewhat disagree"
+            },
+            {
+              "value": 4,
+              "label": "4 — Neither agree nor disagree"
+            },
+            {
+              "value": 5,
+              "label": "5 — Somewhat agree"
+            },
+            {
+              "value": 6,
+              "label": "6 — Agree"
+            },
+            {
+              "value": 7,
+              "label": "7 — Strongly agree"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "Cannot judge / prefer not to answer"
+            }
+          ]
+        },
+        {
+          "id": "block_comment",
+          "title": "Is there anything about this block you would like us to know? — optional",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "help": "A short comment is enough. Please do not include personal information."
+        }
+      ],
+      "repeat": "After each of the four blocks; same wording and response order."
+    },
+    {
+      "id": "exit",
+      "title": "Character Appearance Study — At the End",
+      "description": "Think about the four blocks you completed. All questions are optional. Short answers are sufficient.",
+      "questions": [
+        {
+          "id": "preferred_block",
+          "title": "Which block would you prefer to use for similar appearance changes?",
+          "type": "single_choice",
+          "required": false,
+          "help": "Refer to the neutral block numbers shown during the session.",
+          "options": [
+            {
+              "value": "1",
+              "label": "Block 1"
+            },
+            {
+              "value": "2",
+              "label": "Block 2"
+            },
+            {
+              "value": "3",
+              "label": "Block 3"
+            },
+            {
+              "value": "4",
+              "label": "Block 4"
+            },
+            {
+              "value": "no_preference",
+              "label": "No preference"
+            },
+            {
+              "value": "none",
+              "label": "I would prefer none of them"
+            },
+            {
+              "value": "cannot_judge",
+              "label": "Cannot judge / prefer not to answer"
+            }
+          ]
+        },
+        {
+          "id": "preference_reason",
+          "title": "What influenced that choice? — optional",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000
+        },
+        {
+          "id": "helpful_question",
+          "title": "Was there a question that helped you make a change? If so, what made it helpful? — optional",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "help": "“None” is also a useful answer."
+        },
+        {
+          "id": "unhelpful_question",
+          "title": "Was there a question you did not need or could not answer? If so, describe it. — optional",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000,
+          "help": "“None” is also a useful answer."
+        },
+        {
+          "id": "other_feedback",
+          "title": "Anything else you would change about making, checking, or undoing appearance changes? — optional",
+          "type": "long_text",
+          "required": false,
+          "max_length": 1000
+        }
+      ]
+    }
+  ]
+}

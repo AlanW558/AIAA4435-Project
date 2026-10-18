@@ -1,0 +1,76 @@
+{
+  "verified_on": "2026-10-18",
+  "scope": "Actual Unity desktop + live DeepSeek engineering debug trace; no human participant results, no Pico verification.",
+  "source_run": "final Unity smoke after float32 serialization fix; root smoke18480",
+  "phase": "debug",
+  "model_mode": "live",
+  "task_id": "A_T1",
+  "condition": "S",
+  "trial_id": "1902a54068ed439c8f9137ba28049795",
+  "backend_session_id": "43c4d089a52c44549d4ef11f33f831e2",
+  "study_session_id": "ENGINEERING_S_20261018T105743",
+  "last_event_utc": "2026-10-18T10:57:51.388090+00:00",
+  "metrics_from_actual_trace": {
+    "first_commit_success": 1,
+    "stable_goal_success": 1,
+    "collateral_change": 0,
+    "policy_questions": 0,
+    "repair_count": 0,
+    "undo_count": 0,
+    "unresolved": 0,
+    "timeout": 0,
+    "technical_failure": 0,
+    "candidate_coverage": 1,
+    "elapsed_ms": 1096.209,
+    "service_wait_ms": 991.962,
+    "probe_ms": 4512.156
+  },
+  "probe_indices": [
+    1,
+    2,
+    3
+  ],
+  "probe_renderer_matches": [
+    true,
+    true,
+    true
+  ],
+  "probe_actual_states": [
+    {
+      "jacket_color": "orange",
+      "accessory": "hat",
+      "scale": 1.0
+    },
+    {
+      "jacket_color": "orange",
+      "accessory": "hat",
+      "scale": 1.0
+    },
+    {
+      "jacket_color": "orange",
+      "accessory": "hat",
+      "scale": 1.0
+    }
+  ],
+  "probe_screenshot_paths_logged": 3,
+  "observed_build_sha256": "64eee5ae7e3238bb37dfd91102e051a28cdc33e4c23837b939b76d1105637f41",
+  "matches_copied_actual_build_manifest": true,
+  "all_csv_fields_present": true,
+  "export_issues": [],
+  "source_jsonl_sha256": "3732651dc5218eeaf13c8b6cee634badfc1635a636ea689a89e146562e234676",
+  "exporter_sha256": "04357559ba822192ab07c95b895fb472738fc2a2425bc4cd3898b7797b949e17",
+  "private_local_export": "StudyData/validation/debug-export-final-105751/engineering_debug_trial_results.csv",
+  "export_snapshot": {
+    "engineering_debug_rows": 24,
+    "older_or_exploratory_rows_missing_required_metrics": 22,
+    "analysis_ready": false
+  },
+  "limits": [
+    "One controlled A_T1 trace proves this measured engineering path, not strategy superiority or human completion speed.",
+    "22 other exploratory/backend-only rows remain incomplete; absent renderer, timing, or goal evidence was not filled in.",
+    "Two complete controlled engineering A_T1 traces are retained across smoke attempts; they are not two participants.",
+    "No questionnaire answers were created or imported.",
+    "Pico immersive behavior and the planned formal participant study remain unverified by this export.",
+    "Question count derives from backend ASK events; independent UI-exposure instrumentation is not claimed."
+  ]
+}

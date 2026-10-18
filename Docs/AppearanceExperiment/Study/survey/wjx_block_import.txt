@@ -1,0 +1,57 @@
+Character Appearance Study — After a Block
+
+Please answer only about the block you have just completed. The four statements use the same 1–7 agreement scale. Each answer is optional.
+
+1. Study ID given by the researcher [填空题]
+
+2. Session code given by the researcher [填空题]
+
+3. Which block have you just completed? [单选题]
+A. Block 1
+B. Block 2
+C. Block 3
+D. Block 4
+
+4. The system’s questions interrupted my task. [单选题]
+If the system asked no questions in this block, select 1 (strongly disagree).
+A. 1 — Strongly disagree
+B. 2 — Disagree
+C. 3 — Somewhat disagree
+D. 4 — Neither agree nor disagree
+E. 5 — Somewhat agree
+F. 6 — Agree
+G. 7 — Strongly agree
+H. Cannot judge / prefer not to answer
+
+5. I could control which appearance properties were changed. [单选题]
+A. 1 — Strongly disagree
+B. 2 — Disagree
+C. 3 — Somewhat disagree
+D. 4 — Neither agree nor disagree
+E. 5 — Somewhat agree
+F. 6 — Agree
+G. 7 — Strongly agree
+H. Cannot judge / prefer not to answer
+
+6. Completing the changes required a lot of effort. [单选题]
+A. 1 — Strongly disagree
+B. 2 — Disagree
+C. 3 — Somewhat disagree
+D. 4 — Neither agree nor disagree
+E. 5 — Somewhat agree
+F. 6 — Agree
+G. 7 — Strongly agree
+H. Cannot judge / prefer not to answer
+
+7. I was satisfied with the customisation experience in this block. [单选题]
+A. 1 — Strongly disagree
+B. 2 — Disagree
+C. 3 — Somewhat disagree
+D. 4 — Neither agree nor disagree
+E. 5 — Somewhat agree
+F. 6 — Agree
+G. 7 — Strongly agree
+H. Cannot judge / prefer not to answer
+
+8. Is there anything about this block you would like us to know? — optional [填空题]
+A short comment is enough. Please do not include personal information.

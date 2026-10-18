@@ -1,0 +1,17 @@
+{
+  "schema_version": "appearance-survey-v0.1",
+  "static_schema_checks": "passed",
+  "python_syntax": "passed",
+  "javascript_syntax": "passed",
+  "forms": 3,
+  "wjx_questions_including_metadata": {
+    "pre": 7,
+    "block": 8,
+    "exit": 7
+  },
+  "block_rating_items": 4,
+  "network_or_automatic_storage": "none in local HTML",
+  "browser_interaction": "not verified; built-in browser tool failed before JavaScript execution",
+  "real_responses_generated": 0,
+  "online_forms_created": 0
+}

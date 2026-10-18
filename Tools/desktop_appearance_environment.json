@@ -1,0 +1,55 @@
+{
+  "verified_date": "2026-10-18",
+  "timezone_for_report": "Asia/Singapore",
+  "host_alias": "desktop-ubuntu-ts",
+  "project_path": "/home/enjixiong/academics/AIAA4435/AIAA4435-Project",
+  "unity_editor": "/home/enjixiong/Unity/Hub/Editor/2022.3.62f3c1/Editor/Unity",
+  "display": {
+    "DISPLAY": ":1",
+    "XAUTHORITY": "/home/enjixiong/.Xauthority",
+    "xdpyinfo_verified": true
+  },
+  "external_packages": [
+    {
+      "name": "com.unity.xr.picoxr",
+      "version": "3.4.0",
+      "repository": "https://github.com/Pico-Developer/PICO-Unity-Integration-SDK",
+      "tag": "release_3.4.0",
+      "commit": "e0740bf309b26a0b9adae33c506514569bfe5d38",
+      "path": "/home/enjixiong/academics/AIAA4435/PICO Unity Integration SDK-3.4.0-20260226"
+    },
+    {
+      "name": "com.coplaydev.unity-mcp",
+      "version": "10.3.0",
+      "repository": "https://github.com/CoplayDev/unity-mcp",
+      "commit": "aa5fc638d623f56178d50329d9ad8c541a57fe66",
+      "path": "/home/enjixiong/academics/AIAA4435/Tools/unity-mcp/MCPForUnity"
+    }
+  ],
+  "git_lfs": {
+    "version": "3.8.0",
+    "path": "/home/enjixiong/.local/bin/git-lfs",
+    "archive_sha256": "e455e00f15d9b95661b8d53498ffb0c3367962cf1ec73c31ab7369516cd6ab8d",
+    "initial_project_asset_pointers": 74,
+    "remaining_project_asset_pointers": 0,
+    "pico_sample_pointer_fetched": true,
+    "project_fsck_passed": true,
+    "pico_sdk_fsck_passed": true,
+    "installed_system_wide": false
+  },
+  "deepseek": {
+    "credential_source": "/home/enjixiong/.cc-switch/cc-switch.db",
+    "source_provider": "DeepSeek",
+    "source_credential_field": "env.ANTHROPIC_AUTH_TOKEN",
+    "source_base_url": "https://api.deepseek.com/anthropic",
+    "backend_base_url": "https://api.deepseek.com",
+    "backend_env_path": "/home/enjixiong/.config/aiaa4435/appearance.env",
+    "backend_env_mode": "0600",
+    "requested_model": "deepseek-v4-flash",
+    "returned_model": "deepseek-flash",
+    "live_authentication_verified": true,
+    "verification_tokens": 10,
+    "credential_printed": false
+  },
+  "scope": "Dependency preparation only; Unity, VR and experiment verification are tracked separately."
+}

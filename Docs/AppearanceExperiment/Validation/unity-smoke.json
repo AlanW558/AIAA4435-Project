@@ -1,0 +1,20 @@
+{
+    "passed": true,
+    "error": "",
+    "checks": [
+        "E request/clarification/render: ACT",
+        "E field undo rendered blue",
+        "A request/clarification/render: ASK",
+        "A field undo rendered blue",
+        "N request/clarification/render: ACT",
+        "N field undo rendered blue",
+        "S request/clarification/render: ACT",
+        "S field undo rendered blue",
+        "S materially ambiguous request ASK",
+        "Three appearance fields rendered",
+        "Accessory-only undo preserves color and scale",
+        "Undo all remaining fields",
+        "Controlled task reset and submit",
+        "Finish plus three actual renderer probes"
+    ]
+}

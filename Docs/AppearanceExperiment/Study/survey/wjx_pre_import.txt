@@ -1,0 +1,38 @@
+Character Appearance Study — Before the Session
+
+Please read the study information, then answer the background questions. Consent is required to begin; the background questions are optional.
+
+This AIAA4435 course study examines how people make changes to a virtual character’s appearance. You will complete tasks in four blocks and answer short questions about your experience. There are no right or preferred answers.
+Participation is voluntary. You may skip opinion questions, take a break, or stop the session. Tell the researcher immediately if you feel uncomfortable, including discomfort from the headset.
+We record your task requests, choices, appearance changes, timing, questionnaire answers, and screenshots of the virtual character and interface. This form does not record microphone or camera input. Do not include personal or sensitive information in requests or answers.
+Task requests are processed by an external AI service (DeepSeek). These questionnaire responses are kept separate from model prompts. Use only the study ID given by the researcher; do not enter your name or contact details.
+The researcher will explain who can access the study data, its storage and retention arrangements, and how to request withdrawal. Please ask any questions before deciding whether to take part.
+
+1. Study ID given by the researcher [填空题]
+
+2. Session code given by the researcher [填空题]
+
+3. I have read the study information, had an opportunity to ask questions, and agree to take part. [单选题]
+A. I agree to take part.
+B. I do not agree to take part.
+
+4. Before today, approximately how many times have you used a VR headset? [单选题]
+A. Never
+B. 1–2 times
+C. 3–10 times
+D. More than 10 times
+E. Cannot recall / prefer not to answer
+
+5. Before today, have you tried this appearance-customisation prototype? [单选题]
+A. No
+B. Yes
+C. Not sure / prefer not to answer
+
+6. If an anonymous code exists for your earlier course questionnaire, may we link that response to this session? [单选题]
+This is optional. We will not try to identify an anonymous earlier response by its wording.
+A. Yes, using a code I can provide.
+B. No.
+C. I do not have a code / I am not sure.
+
+7. Earlier questionnaire code — optional [填空题]
+Enter only an existing anonymous code. Do not enter your name, email address, or phone number.

@@ -19,3 +19,6 @@
 *.mp3 filter=lfs diff=lfs merge=lfs -text
 Assets/Project/Textures/Room/CloudSeaSky.asset filter=lfs diff=lfs merge=lfs -text
 Assets/Project/Scenes/CloudConversationRoom/LightingData.asset filter=lfs diff=lfs merge=lfs -text
+
+# Preserve exact archived study-material bytes used by the provenance manifest.
+Docs/AppearanceExperiment/Study/materials/*.csv -text whitespace=cr-at-eol

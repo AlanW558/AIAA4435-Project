@@ -1,0 +1,113 @@
+{
+  "audit": "appearance-source-v0.1",
+  "passed": true,
+  "checks": [
+    {
+      "check": "materialized_lfs_asset_integrity",
+      "passed": true,
+      "detail": {
+        "files": 74,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "no_unresolved_asset_lfs_pointers",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "sixteen_unique_matching_tasks",
+      "passed": true,
+      "detail": {
+        "private": [
+          "A_T1",
+          "B_T1",
+          "C_T1",
+          "D_T1",
+          "A_T2",
+          "B_T2",
+          "C_T2",
+          "D_T2",
+          "A_T3",
+          "B_T3",
+          "C_T3",
+          "D_T3",
+          "A_T4",
+          "B_T4",
+          "C_T4",
+          "D_T4"
+        ],
+        "unity": [
+          "A_T1",
+          "B_T1",
+          "C_T1",
+          "D_T1",
+          "A_T2",
+          "B_T2",
+          "C_T2",
+          "D_T2",
+          "A_T3",
+          "B_T3",
+          "C_T3",
+          "D_T3",
+          "A_T4",
+          "B_T4",
+          "C_T4",
+          "D_T4"
+        ]
+      }
+    },
+    {
+      "check": "unity_public_context_and_participant_goal_join",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "task_initial_history_and_target_states_supported",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "unity_schedule_matches_frozen_source",
+      "passed": true,
+      "detail": {
+        "unity_rows": 320,
+        "source_rows": 320
+      }
+    },
+    {
+      "check": "twenty_planned_participants_four_conditions_320_trials",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "check": "four_separate_optional_rating_items",
+      "passed": true,
+      "detail": [
+        "interruption_1to7",
+        "control_1to7",
+        "effort_1to7",
+        "satisfaction_1to7"
+      ]
+    },
+    {
+      "check": "empty_planned_template_trial_results_EMPTY_TEMPLATE.csv",
+      "passed": true,
+      "detail": "Header-only templates must not be presented as observed data."
+    },
+    {
+      "check": "empty_planned_template_block_ratings_EMPTY_TEMPLATE.csv",
+      "passed": true,
+      "detail": "Header-only templates must not be presented as observed data."
+    }
+  ],
+  "scope": "Static source assets and authored study joins; no synthetic participant records.",
+  "not_verified": [
+    "Unity compilation",
+    "GUI interaction",
+    "actual rendered state",
+    "DeepSeek decisions",
+    "PICO integration",
+    "participant data quality"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "copied_on": "2026-10-18",
+  "status": "authored_study_materials_not_observed_participant_data",
+  "participant_pool": 22,
+  "pilot": 2,
+  "formal": 20,
+  "files": [
+    {
+      "path": "materials/appointments.csv",
+      "sha256": "e5a1501af8beab45419c283374a94f1dcd9448616d9a7cb252523299344021d2",
+      "source": "project_design/appearance/materials/appointments.csv"
+    },
+    {
+      "path": "materials/block_ratings_EMPTY_TEMPLATE.csv",
+      "sha256": "555d08ee49b99919c353c2518594a0f561f8c8842f2b72c2361b682220672d15",
+      "source": "project_design/appearance/materials/block_ratings_EMPTY_TEMPLATE.csv"
+    },
+    {
+      "path": "materials/data_dictionary.md",
+      "sha256": "32e6907ab6acc3ec67636d61d705bef22b06fc0977dc563b9ed80c861059ab1d",
+      "source": "project_design/appearance/materials/data_dictionary.md"
+    },
+    {
+      "path": "materials/implementation.md",
+      "sha256": "d51c2e6cc19a2b88b0fdbc3c42cd9bddab632441f213ab930d12c8da9d7bbbbf",
+      "source": "project_design/appearance/implementation.md"
+    },
+    {
+      "path": "materials/model_contexts.json",
+      "sha256": "432808bb93d247dc22f352bc5b22fad687d52aefe97abd03879cf07bab63970f",
+      "source": "project_design/appearance/materials/model_contexts.json"
+    },
+    {
+      "path": "materials/participant_schedule.csv",
+      "sha256": "594ea9b7ed4112e169b05698cd760c999f95d989355ca45f338bdaec8494f222",
+      "source": "project_design/appearance/materials/participant_schedule.csv"
+    },
+    {
+      "path": "materials/policy.json",
+      "sha256": "1a45a3f76af63a7a90bc46c7f77062c4cf52dde84e77133f669d3ff8b1b138f3",
+      "source": "project_design/appearance/policy.json"
+    },
+    {
+      "path": "materials/protocol.md",
+      "sha256": "3f923156d791af7a9a9b9909888ec42e45e06c908d963d70329d21776dcf5436",
+      "source": "project_design/appearance/protocol.md"
+    },
+    {
+      "path": "materials/tasks_private.json",
+      "sha256": "37ce37e68abfb8edae4f4fb45c6cc38b03e6590aca322d7991d93d3205cc1fda",
+      "source": "project_design/appearance/materials/tasks_private.json"
+    },
+    {
+      "path": "materials/trial_results_EMPTY_TEMPLATE.csv",
+      "sha256": "fca98a2ed4494f96116f3d7417fb0a8892ad1fd6c19dbb7f8ca0a4a84714399c",
+      "source": "project_design/appearance/materials/trial_results_EMPTY_TEMPLATE.csv"
+    },
+    {
+      "path": "materials/trial_schedule.csv",
+      "sha256": "6da449fc9b0a16a3e0476b4492d9bec5647a15c213fd6c65c9d946be40b621ad",
+      "source": "project_design/appearance/materials/trial_schedule.csv"
+    },
+    {
+      "path": "materials/validation.json",
+      "sha256": "8526a6c71e5ece9374f86c824fc9b319c70aa0046d9f47cd5edaa3234cfc345e",
+      "source": "project_design/appearance/materials/validation.json"
+    }
+  ]
+}

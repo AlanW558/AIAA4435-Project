@@ -1,0 +1,37 @@
+{
+  "verified_on": "2026-10-18",
+  "study_phase": "development_only_no_real_responses_generated",
+  "copied_material_count": 12,
+  "source_material_sha256_checks": "passed",
+  "public_reset_payloads_validated_against_backend": 16,
+  "questionnaire_static_schema_python_js_checks": "passed",
+  "built_in_browser_interaction": "blocked_by_tool_before_execution_see_survey/browser_creation_status.md",
+  "exporter_engineering_tests": {
+    "passed": 6,
+    "failed": 0,
+    "fixture": "temporary actual MockModel/debug backend traces with explicitly labeled renderer payload fixtures; not actual Unity or human evidence",
+    "checks": [
+      "default formal export excludes mock/debug",
+      "missing renderer evidence remains blank",
+      "three distinct probes required and exact CSV schema preserved",
+      "duplicate probe index cannot replace three probes",
+      "repair cannot retroactively make first commit successful",
+      "overlapping service waits are counted once"
+    ]
+  },
+  "remaining_measurement_gaps": [
+    "Actual Pico immersive test is not established by these checks.",
+    "Formal trial target-card screenshots and separate pilot/practice tasks remain prerequisites for data collection.",
+    "No actual participant data collected by this work."
+  ],
+  "exporter_sha256": "04357559ba822192ab07c95b895fb472738fc2a2425bc4cd3898b7797b949e17",
+  "actual_unity_integration_export": {
+    "status": "passed_for_one_completed_controlled_engineering_A_T1_trace",
+    "summary": "../Validation/study-export.json",
+    "trial_id": "1902a54068ed439c8f9137ba28049795",
+    "all_csv_fields_present": true,
+    "export_issues": [],
+    "phase": "debug",
+    "human_results": false
+  }
+}

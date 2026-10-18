@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Character Appearance Study</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#192b3b;background:#f3f5f8;line-height:1.5}body{margin:0}main{max-width:850px;margin:24px auto;padding:24px;background:white;border-radius:16px}h1{font-size:1.6rem;margin:.5rem 0}h2{font-size:1.2rem}label{display:block;margin:.4rem 0}input[type=text],textarea,select{font:inherit;box-sizing:border-box;padding:10px;border:1px solid #899aaa;border-radius:6px;width:100%}textarea{min-height:85px}input[type=radio]{margin-right:8px;accent-color:#185f99}fieldset{border:0;border-top:1px solid #d8e1ea;margin:24px 0;padding:20px 0 0}legend{font-weight:650;padding:0 8px 0 0}button{font:inherit;padding:10px 14px;border:1px solid #185f99;border-radius:7px;background:#185f99;color:white;cursor:pointer}button.secondary{background:white;color:#185f99}button:disabled{opacity:.5;cursor:not-allowed}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.notice{background:#edf4fb;border-left:4px solid #185f99;padding:12px;margin:12px 0}.help{font-size:.9rem;color:#45576a;margin:4px 0 10px}.choice{padding:8px;background:#f4f7fa;border-radius:6px}.optional{font-size:.8rem;font-weight:400;color:#536274}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}#status{min-height:24px;font-weight:600}details{margin:16px 0}summary{cursor:pointer}a{color:#185f99}@media(max-width:600px){main{margin:0;border-radius:0;padding:18px}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<div class="notice"><strong>Local questionnaire.</strong> Answers stay on this page until you choose “Download answers”. Nothing is uploaded. Give the downloaded file to the researcher using the agreed local transfer method.</div>
+<nav aria-label="Form selection"><label for="formSelect">Form</label><select id="formSelect"><option value="pre">Before the session</option><option value="block">After a block</option><option value="exit">At the end</option></select></nav>
+<h1 id="title"></h1><p id="description"></p>
+<details id="studyInfo"><summary>Study information</summary><div id="information"></div></details>
+<form id="survey" novalidate>
+<div class="row"><label>Study ID given by the researcher <input id="participant" name="participant" type="text" autocomplete="off" maxlength="16" required placeholder="P001 or PILOT01"></label><label>Session code given by the researcher <input id="session" name="session" type="text" autocomplete="off" maxlength="80" required placeholder="Match the session code shown by the researcher"></label></div>
+<label id="blockLabel">Block just completed <select id="block"><option value="">Choose a block</option><option value="1">Block 1</option><option value="2">Block 2</option><option value="3">Block 3</option><option value="4">Block 4</option></select></label>
+<div id="questions"></div><div class="actions"><button type="submit" id="save">Download answers</button><button type="button" class="secondary" id="clear">Clear answers</button></div><p id="status" role="status" aria-live="polite"></p>
+</form><p class="help">Version appearance-survey-v0.1 · No external scripts, analytics, or automatic storage. Keep your downloaded response file until the researcher confirms it has been saved.</p>
+</main>
+<script id="spec" type="application/json">__SPEC_JSON__</script>
+<script>
+'use strict';
+const spec=JSON.parse(document.getElementById('spec').textContent);
+const params=new URLSearchParams(location.search);
+const formSelect=document.getElementById('formSelect');
+const survey=document.getElementById('survey');
+const questionArea=document.getElementById('questions');
+const statusArea=document.getElementById('status');
+let started=Date.now();
+let savedCount=0;
+function node(tag,text,cls){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;}
+function selected(id){const e=survey.querySelector(`input[name="${id}"]:checked`);return e?e.value:null;}
+function currentForm(){return spec.forms.find(f=>f.id===formSelect.value);}
+function refreshConditional(){
+  for(const q of currentForm().questions){
+    const box=document.getElementById('q_'+q.id);
+    const passes=!q.show_if||selected(q.show_if.field)===q.show_if.equals;
+    const consentOK=currentForm().id!=='pre'||q.id==='consent'||selected('consent')==='agree';
+    box.hidden=!(passes&&consentOK);
+    box.querySelectorAll('input,textarea,button').forEach(e=>e.disabled=box.hidden);
+  }
+  if(currentForm().id==='pre'&&selected('consent')==='decline'){
+    statusArea.textContent='Thank you. You do not need to continue. No answers have been saved.';
+    document.getElementById('save').disabled=true;
+  }else{statusArea.textContent='';document.getElementById('save').disabled=false;}
+}
+function render(){
+  const f=currentForm();questionArea.replaceChildren();
+  document.getElementById('title').textContent=f.title;
+  document.getElementById('description').textContent=f.description;
+  document.getElementById('studyInfo').open=f.id==='pre';
+  document.getElementById('blockLabel').hidden=f.id!=='block';
+  document.getElementById('block').required=f.id==='block';
+  for(const q of f.questions){
+    const box=node('fieldset');box.id='q_'+q.id;
+    const legend=node('legend',q.title);box.appendChild(legend);
+    if(!q.required)legend.appendChild(node('span','  Optional','optional'));
+    if(q.help)box.appendChild(node('p',q.help,'help'));
+    if(q.options){
+      q.options.forEach((o,i)=>{const label=node('label',undefined,'choice');const input=node('input');input.type='radio';input.name=q.id;input.id=q.id+'_'+i;input.value=String(o.value);input.required=q.required;label.append(input,document.createTextNode(o.label));box.appendChild(label);});
+      if(!q.required){const clear=node('button','Clear selection','secondary');clear.type='button';clear.addEventListener('click',()=>{box.querySelectorAll('input').forEach(i=>i.checked=false);refreshConditional();});box.appendChild(clear);}
+    }else{
+      const input=node(q.type==='long_text'?'textarea':'input');if(input.tagName==='INPUT')input.type='text';input.name=q.id;input.id=q.id;input.maxLength=q.max_length||1000;input.required=q.required;input.autocomplete='off';input.setAttribute('aria-label',q.title);box.appendChild(input);
+    }
+    questionArea.appendChild(box);
+  }
+  started=Date.now();savedCount=0;refreshConditional();
+}
+questionArea.addEventListener('change',refreshConditional);
+for(const p of spec.study_information)document.getElementById('information').appendChild(node('p',p));
+if(['pre','block','exit'].includes(params.get('form')))formSelect.value=params.get('form');
+document.getElementById('participant').value=params.get('participant')||'';
+document.getElementById('session').value=params.get('session')||'';
+if(['1','2','3','4'].includes(params.get('block')))document.getElementById('block').value=params.get('block');
+formSelect.addEventListener('change',()=>{if(!confirm('Switch form and clear unsaved question answers?')){formSelect.value=questionArea.dataset.form||'pre';return;}render();questionArea.dataset.form=formSelect.value;});
+document.getElementById('clear').addEventListener('click',()=>{if(confirm('Clear the answers on this form? Study and session IDs will remain.'))render();});
+survey.addEventListener('submit',event=>{
+ event.preventDefault();const f=currentForm();
+ const pid=document.getElementById('participant').value.trim().toUpperCase();
+ const session=document.getElementById('session').value.trim();
+ if(!/^(P00[1-9]|P01[0-9]|P020|PILOT0[12])$/.test(pid)){statusArea.textContent='Please check the study ID with the researcher (P001–P020 or PILOT01–PILOT02).';return;}
+ if(!/^[A-Za-z0-9_-]{3,80}$/.test(session)){statusArea.textContent='Please enter the session code given by the researcher; use letters, numbers, underscores, or hyphens.';return;}
+ if(f.id==='pre'&&selected('consent')!=='agree'){statusArea.textContent='Please decide whether you agree to take part. If you do not agree, close this form without saving.';return;}
+ const block=f.id==='block'?Number(document.getElementById('block').value):null;
+ if(f.id==='block'&&![1,2,3,4].includes(block)){statusArea.textContent='Please select the block you just completed.';return;}
+ const answers={},answerStatus={};
+ for(const q of f.questions){
+   const box=document.getElementById('q_'+q.id);
+   if(box.hidden){answers[q.id]=null;answerStatus[q.id]='not_shown';continue;}
+   let value=q.options?selected(q.id):survey.elements.namedItem(q.id).value.trim();
+   if(value===''||value===null){answers[q.id]=null;answerStatus[q.id]='skipped';continue;}
+   if(q.type==='rating'&&/^[1-7]$/.test(value))value=Number(value);
+   answers[q.id]=value;answerStatus[q.id]=value==='cannot_judge'?'cannot_judge':'answered';
+ }
+ const record={schema_version:spec.schema_version,form_id:f.id,participant_id:pid,session_id:session,phase:pid.startsWith('PILOT')?'pilot':'formal',block,recorded_at_utc:new Date().toISOString(),page_elapsed_ms:Date.now()-started,save_sequence:++savedCount,answers,answer_status:answerStatus};
+ const blob=new Blob([JSON.stringify(record,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=node('a');a.href=url;a.download=`${session}_${f.id}${block?'_'+block:''}_${Date.now()}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ statusArea.textContent='Download requested. Please check that the JSON file was saved, then tell the researcher. Downloading again creates a revision, not another participant response.';
+});
+render();questionArea.dataset.form=formSelect.value;
+</script></body></html>

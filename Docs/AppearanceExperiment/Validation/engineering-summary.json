@@ -1,0 +1,32 @@
+{
+  "recorded_utc": "2026-10-18T11:00:37.394307+00:00",
+  "scope": "engineering only; no participant observations",
+  "backend_tests_passed": 24,
+  "exporter_tests_passed": 6,
+  "unity_player_smoke_checks_passed": 14,
+  "unity_player_smoke_file": "unity-smoke.json",
+  "actual_client_build_sha256": "64eee5ae7e3238bb37dfd91102e051a28cdc33e4c23837b939b76d1105637f41",
+  "live_model_requested": "deepseek-v4-flash",
+  "live_model_returned": "deepseek-flash",
+  "runtime_platform": "Ubuntu desktop / Unity 2022.3.62f3c1",
+  "source_sha256": {
+    "Backend/core.py": "d53278478de10c67a61c72d992f1e11d74abafba57425b4d910034bd9125eed5",
+    "Backend/model.py": "3aa8b4bebea53501227b738bb363707f65de22db55fca2a5ece1fcc3b80f0629",
+    "Backend/server.py": "4985e1c8ce0b95b6b4ebeb8831c159783ffeb051f0f19783171b3e527cf051ed",
+    "Backend/tests/test_backend.py": "5c05793f8212d90dcc99f5536341a35185c6d422f7527840b096cc7c071709ef",
+    "Backend/validate_live.py": "fcc2f1a42cb785ab8626ca871e7ee6719f965b9e728ae29dc046980592ea1145",
+    "Assets/Project/Scripts/AppearanceExperiment/AppearanceAvatar.cs": "0751c1483f36d0842ea3669af728f26024cb15b0a8a21a1bf4c71bd059fa07ea",
+    "Assets/Project/Scripts/AppearanceExperiment/AppearanceExperimentClient.cs": "1e40c3b29fc6d7d43f7568568c768c6a7a1ae4a1c8eb624a28cc4e6651b81d71",
+    "Assets/Editor/AppearanceExperimentSetup.cs": "98cd8dfdc6f071da573a415b6ef28bcdb9c16ee1386e8e40b5695482a2fdf08d",
+    "Assets/StreamingAssets/AppearanceStudy/tasks.json": "2f1e5a3e2619707c07afa12ca78282aff16a65c6fa5a81369723086e5ca064a3",
+    "Assets/StreamingAssets/AppearanceStudy/trial_schedule.csv": "9b325d634d5ff1a5b03fc5b1c66ae6393b5daf0e53b05dc1a81abb3eb791b13c"
+  },
+  "known_limits": [
+    "New appearance UI has not been validated on Pico; desktop validation only.",
+    "No actual participants tested or questionnaire responses generated.",
+    "Codex embedded browser failed before JavaScript execution; online forms not created.",
+    "Unity build succeeds with an unused PICO SpatialAudio sample shader GLCore error diagnostic.",
+    "Backend active sessions are in memory; restart begins new sessions."
+  ],
+  "gui_interaction": "Passed real mouse/keyboard manual workflow in isolated Xvfb display with software renderer; see gui/."
+}

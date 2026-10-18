@@ -1,0 +1,1 @@
+participant_id,phase,trial_id,condition,task_id,block,stable_goal_success,first_commit_success,collateral_change,policy_questions,repair_count,undo_count,unresolved,timeout,technical_failure,candidate_coverage,elapsed_ms,service_wait_ms,probe_ms,observed_build_sha256

@@ -1,0 +1,227 @@
+{
+  "A_T1": {
+    "initial_query": "把外衣改成橙色，帽子和大小保持不变。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "blue",
+      "accessory": "hat",
+      "scale": 1.0
+    },
+    "visible_history": [],
+    "soft_preferences": []
+  },
+  "B_T1": {
+    "initial_query": "平时保留帽子，但这次换成眼镜，颜色和大小不变。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "green",
+      "accessory": "hat",
+      "scale": 0.95
+    },
+    "visible_history": [],
+    "soft_preferences": [
+      "通常保留帽子。"
+    ]
+  },
+  "C_T1": {
+    "initial_query": "把大小比例设成 1.10，外衣颜色和眼镜都不要改。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "purple",
+      "accessory": "glasses",
+      "scale": 0.9
+    },
+    "visible_history": [],
+    "soft_preferences": []
+  },
+  "D_T1": {
+    "initial_query": "虽然平时用紫色，这次把外衣换成灰色，其他保持。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "purple",
+      "accessory": "none",
+      "scale": 1.05
+    },
+    "visible_history": [],
+    "soft_preferences": [
+      "通常用紫色外衣。"
+    ]
+  },
+  "A_T2": {
+    "initial_query": "让你稍微高一点点，其他别变。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "green",
+      "accessory": "glasses",
+      "scale": 1.0
+    },
+    "visible_history": [],
+    "soft_preferences": []
+  },
+  "B_T2": {
+    "initial_query": "让你稍微矮一点点，其他别变。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "orange",
+      "accessory": "none",
+      "scale": 1.0
+    },
+    "visible_history": [],
+    "soft_preferences": []
+  },
+  "C_T2": {
+    "initial_query": "整体再大一点点就好，外衣和配饰照旧。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "red",
+      "accessory": "hat",
+      "scale": 0.9
+    },
+    "visible_history": [],
+    "soft_preferences": []
+  },
+  "D_T2": {
+    "initial_query": "整体小一点点，颜色和配饰不用改。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "gray",
+      "accessory": "glasses",
+      "scale": 1.1
+    },
+    "visible_history": [],
+    "soft_preferences": []
+  },
+  "A_T3": {
+    "initial_query": "让你看起来清爽一点。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "orange",
+      "accessory": "hat",
+      "scale": 1.0
+    },
+    "visible_history": [],
+    "soft_preferences": []
+  },
+  "B_T3": {
+    "initial_query": "让你更显眼一点。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "gray",
+      "accessory": "none",
+      "scale": 0.95
+    },
+    "visible_history": [],
+    "soft_preferences": []
+  },
+  "C_T3": {
+    "initial_query": "让你看起来低调一些。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "red",
+      "accessory": "glasses",
+      "scale": 1.1
+    },
+    "visible_history": [],
+    "soft_preferences": []
+  },
+  "D_T3": {
+    "initial_query": "让外形简洁一些。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "blue",
+      "accessory": "glasses",
+      "scale": 1.0
+    },
+    "visible_history": [],
+    "soft_preferences": []
+  },
+  "A_T4": {
+    "initial_query": "换回之前那个颜色。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "green",
+      "accessory": "none",
+      "scale": 1.0
+    },
+    "visible_history": [
+      {
+        "jacket_color": "blue",
+        "accessory": "none",
+        "scale": 1.0
+      },
+      {
+        "jacket_color": "purple",
+        "accessory": "none",
+        "scale": 1.0
+      },
+      {
+        "jacket_color": "green",
+        "accessory": "none",
+        "scale": 1.0
+      }
+    ],
+    "soft_preferences": []
+  },
+  "B_T4": {
+    "initial_query": "这次换个轻便的样子。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "purple",
+      "accessory": "hat",
+      "scale": 1.0
+    },
+    "visible_history": [],
+    "soft_preferences": [
+      "通常保留帽子，之后的修改也维持这个偏好。"
+    ]
+  },
+  "C_T4": {
+    "initial_query": "用回之前那个配饰。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "orange",
+      "accessory": "none",
+      "scale": 0.95
+    },
+    "visible_history": [
+      {
+        "jacket_color": "orange",
+        "accessory": "hat",
+        "scale": 0.95
+      },
+      {
+        "jacket_color": "orange",
+        "accessory": "glasses",
+        "scale": 0.95
+      },
+      {
+        "jacket_color": "orange",
+        "accessory": "none",
+        "scale": 0.95
+      }
+    ],
+    "soft_preferences": []
+  },
+  "D_T4": {
+    "initial_query": "恢复上一步的大小，其他别动。",
+    "state": {
+      "revision": 0,
+      "jacket_color": "gray",
+      "accessory": "hat",
+      "scale": 1.1
+    },
+    "visible_history": [
+      {
+        "jacket_color": "gray",
+        "accessory": "hat",
+        "scale": 1.0
+      },
+      {
+        "jacket_color": "gray",
+        "accessory": "hat",
+        "scale": 1.1
+      }
+    ],
+    "soft_preferences": []
+  }
+}
