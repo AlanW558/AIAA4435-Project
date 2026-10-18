@@ -1,0 +1,1 @@
+Full-black max RGB: 0; alpha: 1

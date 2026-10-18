@@ -1,0 +1,11 @@
+{
+    "startedUtc": "2026-10-15T18:43:43.1000200Z",
+    "completedUtc": "2026-10-15T18:48:39.7473130Z",
+    "lightingData": "Assets/Project/Scenes/CloudConversationRoom/LightingData.asset",
+    "diagnostic": false,
+    "seconds": 296.67780880500006,
+    "maps": 1,
+    "lightmaps": [
+        "Assets/Project/Scenes/CloudConversationRoom/Lightmap-0_comp_light.exr"
+    ]
+}

@@ -1,0 +1,74 @@
+CLOUD CONVERSATION ROOM — first environment pass
+
+Scene: Assets/Project/Scenes/CloudConversationRoom.unity
+Unity 2022.3.62f3c1 / URP 14 / PICO Android target.
+
+Layout, in metres:
+  Clear interior: X 11.5, Y 6.75, Z 21.3333. User looks along +Z.
+  Glazing at X -5.75; floor and roof extend to X -6.35; 8 glass bays / 9 vertical frames.
+  One 1.8 x 0.85 x 0.74 table, two matching upholstered oak chairs.
+  User seat (0, 0, -0.8); tutor seat (0, 0, 0.8), facing -Z.
+  User reference eye height 1.2. Actual physical seated fit needs headset testing.
+
+Workflow:
+  Open the scene. Menus are under AIAA4435 > Room.
+  Build Cloud Conversation Room regenerates the authored environment assets.
+  Existing scene contents are copied to SetupBackups/Room before rebuilding;
+  dirty open scenes are separately saved as backup copies under Project/Scenes.
+  Rebuild is for regenerating this design, not preserving manual edits to its
+  generated meshes/materials. Duplicate assets before making independent variants.
+  After rebuilding, run AIAA4435 > Room > Lighting > Prepare Mobile Baked Lighting,
+  then Bake Production Lighting. For geometry/light changes in the prepared room,
+  use Bake Production Lighting. These menus manage the floor bake surface.
+  Capture Room Previews saves six actual Unity camera renders under Captures.
+
+Textures:
+  Wood: Poly Haven Oak Veneer 01, 4096 x 4096 diffuse and normal, CC0.
+  Attribution and verified checksums: Assets/Project/Textures/Room/PolyHaven/SOURCE.txt.
+  Floor: grain mapped across 1.8 m and along 2 m, offsets per plank, six tones.
+  Table: 1.8 metre longitudinal repeat; grain along the table's long edge.
+  Linen: procedural 1024 square texture represents 12 cm on seat/back upholstery.
+  Mipmaps + trilinear filtering + 16x anisotropy; Android ASTC 4x4.
+  Walls: warm greige #DED8CC. Ceiling: matte warm charcoal #484A48.
+  Plain plaster and ceiling intentionally have no coarse decorative texture.
+  Tools/generate_room_textures.py retains the original procedural texture sources;
+  the final wood materials use the Poly Haven scans instead of those fallbacks.
+
+Clouds:
+  CloudSkyBake.shader evaluates a static volume into a 1024-pixel-per-face cubemap.
+  Runtime uses a single sky texture, without a per-eye volume ray march.
+  The cloud volume is placed 24 m lower than the initial design.
+  This is a distant backdrop; it has no local cloud parallax or fly-through support.
+  AIAA4435 > Room > Bake Cloud Sky regenerates the background separately.
+
+Integration:
+  RoomReferences exposes userSeat, tutorSeat, tutorEye, tableSurface, tableDecor.
+  Optional notebook and pen may be hidden by disabling tableDecor, then rebaking
+  to remove their shadows from the tabletop.
+  The XRI Starter Assets rig retains tracking and controller interaction.
+  Locomotion is disabled for the seated conversation task.
+  XR Device Simulator is EditorOnly and is omitted from player builds.
+  LLM, speech services, tutor avatar and experimental conditions are not implemented.
+
+Quality acceptance:
+  Editor screenshots are visual checks only. Final lens clarity, refresh rate,
+  comfort, tracking origin and physical chair alignment require PICO 4 Ultra tests.
+  90 Hz is a configuration target, not a measured performance result.
+
+Current lighting status (2026-10-16):
+  Final production CPU bake with Open Image Denoise completed in 296.7 seconds,
+  without UV overlap warnings. Indirect illumination denoised; direct edges retained.
+  One 1024 x 1024 directional lightmap set (color + direction, ETC2 RGBA8),
+  125 baked light probes, and one baked 128-face-resolution reflection probe.
+  Warm sunlight and area daylight are fully Baked. Zero realtime lights;
+  URP realtime shadows/additional lights/depth texture/opaque texture/HDR disabled.
+  Original 4K wood and 1K linen materials retained. SRP Batcher and 4x MSAA retained.
+  Continuous Floor Lighting Surface is a bake-only plane, hidden as ShadowsOnly
+  afterward. FloorLightmapBinding transfers its lightmap index/atlas transform to
+  the detailed plank floor. Keep both out of Static Batching so Unity does not
+  rewrite only one mesh's UV2 during player builds. SRP Batching remains enabled.
+  Furniture main surfaces have repacked UV2; small parts receive baked probes.
+  Large plain architectural surfaces use clean six-face meshes for reliable UVs.
+  Bake completion/report: RoomLightingBakeReport.json. Guide: Tools/LIGHTING_WORKFLOW.txt.
+  Scene reload and Play-mode floor binding verified, with zero runtime errors.
+  PICO device was not connected; headset frame time and lens quality are unmeasured.

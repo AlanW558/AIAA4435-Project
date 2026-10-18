@@ -1,0 +1,26 @@
+{
+  "project": "AIAA4435 Project",
+  "editor": "2022.3.62f3c1",
+  "target": "Android",
+  "configuration_validation": "passed",
+  "android_script_compilation": "passed",
+  "render_pipeline": "URP 14.0.12",
+  "graphics_api": "Vulkan",
+  "hdr": false,
+  "msaa": 4,
+  "stereo": "Multiview",
+  "target_refresh_hz": 90,
+  "input_backend": "Input System",
+  "scripting_backend": "IL2CPP",
+  "architecture": "ARM64",
+  "minimum_android_api": 29,
+  "ndk_version": "23.1.7779620",
+  "apk_build_tested": false,
+  "headset_tested": false,
+  "scene_content_created": false,
+  "local_dependencies_relative_to_packages": {
+    "pico": "../../PICO Unity Integration SDK-3.4.0-20260226",
+    "editor_mcp": "../../Tools/unity-mcp/MCPForUnity"
+  },
+  "verification_log": "Logs/FoundationValidation.log"
+}

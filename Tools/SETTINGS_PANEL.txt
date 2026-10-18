@@ -1,0 +1,77 @@
+四项设置交互面板 / Settings preview panel
+更新：2026-10-16
+
+场景：Assets/Project/Scenes/CloudConversationRoom.unity
+层级：10 Settings Panel — warm curved preview
+
+最终位置（按本次最新调整）
+- 面板背板中心到标准坐姿视点距离：0.75 m。
+- 相对面向导师的方向，绕用户向右约 74.81 度；比最初位置向右共增加 20 度。
+- 世界坐标约 (0.722, 1.250, -0.604)，标准坐姿视点 (0, 1.2, -0.8)。
+- 背板可见主体约 0.66 m 宽、0.50 m 高，半径 1.6 m 的轻微弧度。
+- 控件位于背板前方约 5 cm 的稳定平面，保证标准 XR 射线与滑块拖动坐标一致。
+- 面板固定在房间内，正常转头不会跟着视线移动。
+
+显示条件
+- 站立、靠近椅子、进入坐姿的转场中：面板隐藏且不能交互。
+- ConversationSeat.IsSeated 为 true 后才淡入。
+- 离座开始后立即停止接收交互，同时淡出。
+- 完全隐藏后回到总览页，保留本次运行中的演示值；重新 Play 会恢复默认值。
+
+页面
+- 总览：显示四项当前演示设置，点卡片进入详情。
+- Speech rate：0.70×–1.30× 连续滑块，默认 1.00×。
+- Reply length：Brief / Balanced / Detailed 三档滑块，默认 Balanced。
+- Tone：Professional / Friendly / Encouraging 三个选项，默认 Friendly。
+- Voice：Voice A / Voice B / Voice C 固定占位选项，默认 Voice A。
+- 详情页 Back 返回；Reset 只重置当前项；总览 Reset all 恢复全部默认值。
+
+操作
+- 先完成座椅入座，再转头向右查看。
+- 手柄射线指向卡片/按钮，按扳机点击。
+- 指向滑块，按住扳机并移动射线拖动，松开结束。
+- 编辑器支持鼠标点击/拖动（Game 窗口需聚焦并通过 XR Device Simulator 转向面板）。
+- A/X 入座、B/Y 离座仍由原座椅组件负责；面板不会替换这组按键。
+
+视觉
+- 半透明暖白色背板，无外框描边；文字和控件使用更实的暖白色。
+- 柔和外部光晕由轻量 unlit shader 模拟，不使用 Bloom 或新实时灯光。
+- 页面切换：0.12 秒淡出及位移，0.18 秒淡入及位移；动画期间不接受重复切换。
+- 按钮有悬停/按下反馈，滑块手柄有悬停缩放反馈，选项有选中标记。
+- 界面文字当前为英文。
+
+实现边界
+- 所有值仅保存在 SettingsPanelDemo.PreviewValues 中，服务于界面演示。
+- 没有连接 LLM、语音、导师行为或真实语速/回复长度变量。
+- Voice 不播放真实语音；当前三个 profile 为占位选项。
+- 后续接入真实变量前，需先与组员确认量纲、选项和 Selective 决策规则。
+
+文件
+- Assets/Project/Scripts/UI/SettingsPanelDemo.cs：本地演示状态、页面动画和坐姿显示条件。
+- PanelControlFeedback.cs：悬停/按下/选择的视觉反馈。
+- DesktopPanelRaycaster.cs：桌面鼠标射线，避免重复处理 XR 指针。
+- Assets/Project/Shaders/WarmPanel.shader：半透明背景及柔光。
+- Assets/Editor/SettingsPanelSetup.cs：场景安装工具，已有面板时保留设置。
+- 11 XR UI Event System：XRUIInputModule；每个 Canvas 同时支持 XR 射线与桌面鼠标。
+- 备份：SetupBackups/SettingsPanel_20261016/CloudConversationRoom.unity。
+
+编辑器验证
+- 脚本编译、运行无新增错误；原有 1 组烘焙光照保留。
+- 站立时 visibility=0，XR 射线命中数=0；入座转场仍不可见/不可交互，完成入座后 visibility=1。
+- TrackedDeviceGraphicRaycaster 正确命中首页卡片，点击后进入详情。
+- 使用指针按下/拖动/释放事件拖动语速滑块至 1.24×，文字与首页摘要同步。
+- 语速滑块边界检查为 0.70 / 1.00 / 1.30；回复长度拖动得到 0 / 1 / 2 三档。
+- 单页重置不影响其他项；返回总览保留值；Reset all 恢复全部默认值。
+- 语气与声音按钮更新对应本地值、摘要和唯一选中标记。
+- 页面动画期间重复切换被拒绝；离座能中断页面动画、隐藏面板并关闭射线点击。
+- XR UI Press 动作已启用，绑定模拟器左右控制器 triggerButton。
+- 通过 Input System 注入鼠标按下/释放，XRUIInputModule 正确处理桌面点击并从首页打开语速页。
+- 尚未在 Pico 4 Ultra 上验证实际扳机拖动、双眼文字清晰度、舒适度及帧率。
+
+预览（最终位置）
+Captures/09_Settings_Overview.png
+Captures/10_Settings_Forward_View.png
+Captures/11_Settings_Speech_Rate.png
+Captures/12_Settings_Reply_Length.png
+Captures/13_Settings_Tone.png
+Captures/14_Settings_Voice.png

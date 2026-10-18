@@ -1,0 +1,58 @@
+房间光照烘焙与 Pico 性能说明（2026-10-16）
+
+打开 Assets/Project/Scenes/CloudConversationRoom.unity。
+当前场景已完成正式烘焙，不需要打开后再烘焙。
+
+以后修改时：
+1. 修改固定桌椅、墙窗、太阳方向/强度或会影响反射光的材质后，需要重烘焙。
+2. 在 AIAA4435 > Room > Lighting 中使用 Bake Production Lighting。
+3. 整体重新 Build Cloud Conversation Room 后，先执行 Prepare Mobile Baked Lighting，
+   再执行 Bake Production Lighting。Prepare 会清除当前烘焙数据。
+4. Bake Diagnostic Lighting 仅用于快速预览；交付前请再执行 Production。
+5. 中止时使用 Cancel Bake And Restore Floor；中止的结果不能作为正式结果。
+6. 完成后可执行 AIAA4435 > Room > Capture Room Previews 更新六张预览图。
+
+使用专用菜单是为了自动处理地板：
+连续平面负责烘焙，原有六种色调、板缝和高分辨率木纹的地板负责显示。
+FloorLightmapBinding 将光照贴图及坐标传给显示地板。请保留该组件及引用，
+不要给这两个地板对象启用 Batching Static；SRP Batcher 仍然可用。
+烘焙时会暂时隐藏细节地板，完成后自动恢复，并重新生成反射探针。
+
+正式参数：
+Progressive CPU；16 texels/m；地板 scale 2.5；近处家具主要表面 scale 4；
+墙/天花板 scale 0.65；1024 atlas；padding 4；Directional；
+Direct 64 / Indirect 256 / Environment 128 samples；2–3 bounces；
+间接光使用 CPU Open Image Denoise，配合 Gaussian filtering；
+直接光保留 Gaussian filtering，保留窗框斜影边缘；小范围间接 AO 0.18 m。
+当前 Intel Mac 已通过 Unity API 确认支持 Open Image Denoise，不支持 OptiX。
+太阳为暖色 #FFE0AC、强度 1.45；窗边柔和补光完全烘焙。
+
+此次输出：
+1 组 1024 x 1024 颜色/方向光照贴图；ETC2 RGBA8；含完整 mip 时两张贴图
+理论压缩数据量合计约 2.67 MiB，不含反射探针、云海、材质纹理及引擎开销。
+125 个光照探针覆盖座位附近，供细构件、手柄及后续动态对象采样。
+首次正式烘焙约 312 秒；最终降噪版本的耗时以 RoomLightingBakeReport.json 为准。
+
+运行性能取舍：
+固定场景的阳光、窗框和桌椅投影已预计算。零实时灯光，关闭实时阴影、
+附加灯、HDR、Camera Depth/Opaque Texture，保留 4x MSAA、SRP Batcher、
+4K 木纹、1K 织物及纹理 mipmap。云海仍使用预生成天空立方体纹理。
+本次没有降低材质原图清晰度来换取性能。
+此模式不支持太阳移动或固定桌椅在运行时移动后实时更新影子。
+后续导师角色可先使用光照探针；若需要人物实时投影，应单独设计并实机测量。
+
+验证：
+完整烘焙完成；无 UV overlap 警告；实际 Unity 坐姿、全景和近景预览已检查。
+场景重新加载及 Play 模式可正确恢复地板光照；坐姿参考高度 1.2 m。
+未检测到 ADB 设备，因此没有 Pico 4 Ultra 实测帧率，也未安装 APK。
+建议后续实机记录 CPU/GPU frame time、掉帧与热稳定性，并检查左右眼、
+近处木纹/板缝、窗框阴影、转头时纹理稳定性和实际坐姿高度。
+90 Hz 的帧预算约 11.1 ms；项目中的 90 Hz 只是配置目标。
+
+实现依据：
+Unity 2022.3 UV overlap guidance:
+https://docs.unity3d.com/2022.3/Documentation/Manual/ProgressiveLightmapper-UVOverlap.html
+Android Developers — Lighting for mobile games with Unity:
+https://developer.android.com/games/optimize/lighting-for-mobile-games-with-unity
+PICO Project Validation:
+https://developer.picoxr.com/document/unity/project-validation/

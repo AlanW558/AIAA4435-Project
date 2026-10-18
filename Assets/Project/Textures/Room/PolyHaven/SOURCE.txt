@@ -1,0 +1,7 @@
+Oak Veneer 01 — Jenelle van Heerden / Poly Haven
+https://polyhaven.com/a/oak_veneer_01
+CC0: https://polyhaven.com/license
+Downloaded 2026-10-16. 4K JPEG diffuse and OpenGL normal channels.
+Original download MD5s verified against Poly Haven's files API.
+Diffuse: d4c13847045d1a10475a23b0787bf384
+Normal: 03b22c26ed6dc71c46ba5f7a19ccc80a

@@ -1,0 +1,67 @@
+座椅交互 / Chair interaction
+更新：2026-10-16
+
+场景：Assets/Project/Scenes/CloudConversationRoom.unity
+层级：09 Chair Interaction
+
+操作
+- 初始站在用户椅子后方，面朝桌子。
+- 左手摇杆：慢速移动（1.15 m/s）；右手摇杆：30 度分段转向。
+- 靠近用户椅子约 1.35 m 并看向椅子，出现 YOUR SEAT 浮标和暖色地面光圈。
+- A（右手）或 X（左手）：入座。
+- B（右手）或 Y（左手）：离座。
+- 编辑器 Play 模式：聚焦 Game 窗口，模拟器默认身体模式下 WASD 移动；Enter 入座，Backspace 离座。
+  若切换过模拟器控制目标，可用其界面切回身体模式。Enter/Backspace 只在编辑器编译。
+- 提示文字当前为英文；没有导入额外字体资源。
+
+行为
+- 入座仅对用户椅子生效，导师椅子没有交互。
+- 提示出现/消失使用透明度和轻微缩放动画，并有轻微浮动/光圈呼吸。
+- 每次转场：0.28 秒淡出 → 0.12 秒黑场 → 0.28 秒淡入。
+- 位移和朝向调整在全黑时完成。摄像机的追踪姿态不被逐帧覆盖。
+- 入座视点：用户座位锚点上方 1.2 m，面向导师。
+- 坐着时禁用摇杆移动、转向等 locomotion providers，仍保留真实头部追踪。
+- 离座回到椅子后方 1.55 m；检查胶囊体空间，并在需要时尝试左右备选落点。
+- 所有离座位置被挡住时保留坐姿并显示 EXIT BLOCKED。
+- 转场和冷却期间拒绝重复输入；关闭组件时恢复移动并清除黑场。
+- 这是虚拟坐姿切换，不包含人体坐下/起立动画或真实椅子位置配准。
+
+后续接入
+- ConversationSeat.State / IsSeated / IsTransitioning：查询状态。
+- ConversationSeat.TrySit() / TryLeave()：使用统一校验和转场入口。
+- onSeated / onStanding：在 Inspector 中连接后续面板、导师动画或研究事件记录。
+- 不依赖 LLM、语音识别或人物模型。
+- 在 09 Chair Interaction 的 ConversationSeat 中可调整距离、视点高度和过渡时长。
+- AIAA4435 > Interaction > Install Chair Interaction：用于缺失组件时安装；已存在时保留配置。
+  此菜单不会重建房间或重新烘焙。不要为重装座椅运行整个房间的 Build 菜单。
+
+实现
+- Assets/Project/Scripts/Interaction/ConversationSeat.cs：状态、输入、移动锁定、落点校验。
+- SeatInteractionHint.cs：浮标、文字和光圈动画。
+- SeatViewFade.cs + Assets/Project/Shaders/SeatFade.shader：支持 XR 实例化的遮罩。
+- 遮罩排序 32767，高于 XRI 射线 SortingGroup 的 30005，确保黑场覆盖射线。
+- Assets/Project/Shaders/InteractionLine.shader：轻量不受光照的地面光圈。
+- 所有新增物体不参与 GI；保留已有 lightmap 和场景材质，不新增实时灯光或 Bloom。
+- 场景修改前备份：SetupBackups/SeatInteraction_20261016/CloudConversationRoom.unity
+
+本次验证（Unity 2022.3.62f3c1 编辑器 / XR Device Simulator）
+PASS：脚本编译无错误；新增 shader 编译未报告错误。
+PASS：远距离入座拒绝；近距离看向椅子允许；背对椅子拒绝。
+PASS：提示淡入，靠近后 CanvasGroup alpha = 1。
+PASS：入座坐标 (0, 1.2, -0.8)，0 个启用的 locomotion providers，CharacterController 关闭。
+PASS：转场中重复入座、离座请求拒绝。
+PASS：Enter / Backspace 通过 Input System 触发完整入座/离座。
+PASS：离座坐标 (0, 1.65, -2.35)，恢复原来 2 个移动/转向 providers 和 CharacterController。
+PASS：临时阻挡首选和两侧备选出口时离座拒绝；移除障碍后离座成功。
+PASS：坐姿下模拟头部位置从 z=-0.8 移动至 z=-0.23，状态仍为 Seated，未强制拉回头部。
+PASS：坐姿下关闭组件会恢复站立移动并清除黑场。
+PASS：真实转场的全黑帧读取 320x240 像素，最大 RGB = 0；转场后 alpha = 0。
+PASS：原有 1 组烘焙 lightmap 保留。
+
+尚未验证：Pico 4 Ultra 真机按键映射、双眼遮罩、实际帧率及佩戴舒适度；本次未构建/安装 APK。
+后续真机验证重点：靠近范围、1.2 m 坐姿视点、摇杆移动速度、转场舒适度、物理转头后可见范围。
+
+预览
+- Captures/07_Seat_Approach.png：靠近提示（稍向下看）。
+- Captures/08_Seat_Seated.png：入座后的视点与右侧离座提示。
+- Captures/SeatFadeCheck.txt：最终黑场像素检查结果。

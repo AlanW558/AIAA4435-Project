@@ -1,0 +1,44 @@
+Pico 4 Ultra 构建与安装
+更新：2026-10-18
+
+构建结果
+- APK：Builds/Pico/AIAA4435Project.apk（约 85 MiB）。
+- 应用名称：AIAA4435 Project。
+- 包名：com.iai.aiaa4435.project；版本 0.1 / versionCode 1。
+- 场景：Assets/Project/Scenes/CloudConversationRoom.unity。
+- Unity 2022.3.62f3c1，Android ARM64 / IL2CPP / Vulkan / PICO Multiview。
+- minSdk 29，targetSdk 34。
+- 构建成功，0 errors；报告记录 135 warnings，主要来自 SDK 的过时 API、未使用字段、shader 和原生插件兼容性检查。
+- APK SHA-256：9effb64a618e24312d2d8a00c62ae8e5b226cc6986e2d598b0faa0c5fad9c559。
+- BuildStatus.json 的 bytes 是 Unity 构建报告总大小，不等同于压缩后的 APK 文件大小。
+
+本次设备部署
+- 连接的头显报告 manufacturer=Pico，model=A9210，Android API 34。
+- adb install -r 返回 Success。
+- 启动 com.unity3d.player.UnityPlayerActivity 返回 Status: ok。
+- 首次启动已进入 PICO XR/Vulkan 初始化，设备创建了双眼 swapchain。
+- 首次启动后，前台切换到 com.pvr.seethrough.setting/.MainActivity，项目进程仍存在但 Activity 被暂停。
+- 用户完成系统设置后，已重新启动并确认 UnityPlayerActivity 位于前台且获得焦点，进程仍在运行；XR 会话恢复到 FOCUSED。
+- 14:33:41–14:33:44 的近期 PxrMetric 采样报告 FPS=90/90，GPU 帧时间 6.25–6.27 ms。此为短时采样，尚未完成持续负载或全交互性能测试。
+- 用户于部署后反馈已检查所有交互功能，目前没有问题；未额外声称已完成持续负载测试。
+- 启动日志包含 SDK 不支持部分 xrTriangleMesh*FB 扩展的记录；后续 XR 初始化继续执行。
+  记录中未发现 C# 异常或进程崩溃，但不能据此宣称所有真机交互或性能均通过。
+- 日志：Builds/Pico/DeviceStartup.log；构建详情：Builds/Pico/BuildStatus.json。
+
+以后重新构建
+1. 打开 CloudConversationRoom 场景并退出 Play 模式。
+2. Unity 菜单 AIAA4435 > Build > Build Pico APK。
+3. 保持 Unity 窗口在前台，让排队构建开始。
+4. 等待 Builds/Pico/BuildStatus.json 的 state=Succeeded。
+5. 通过 adb install -r 安装新 APK，再启动应用。
+   不要在构建尚未成功时安装目录中旧的 APK。
+
+ADB 工具
+/Applications/Unity/Hub/Editor/2022.3.62f3c1/PlaybackEngines/AndroidPlayer/SDK/platform-tools/adb
+
+操作
+- 左摇杆移动，右摇杆分段转向。
+- 靠近并看向用户座椅，A/X 入座；B/Y 离座。
+- 面板只有完成入座后才出现；向右转头，用扳机点击或按住拖动滑块。
+- 四项设置当前都是本地演示值，不影响真实语音或 LLM。
+- 已收到用户对当前全部交互功能正常的确认；后续新增功能仍需真机复测。

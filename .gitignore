@@ -1,0 +1,36 @@
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/SetupBackups/
+/.vs/
+/.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+.DS_Store
+
+# Local editor preferences and generated IDE files
+/.vscode/
+*.slnx
+*.pidb
+*.userprefs
+*.booproj
+*.unityproj
+
+# Credentials and local environment configuration
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.p12
+*.pfx
+
+# Local profiler captures and memory dumps
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
