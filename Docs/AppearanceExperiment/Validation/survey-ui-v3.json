@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "evidence_class": "isolated_local_browser_engineering_debug_only",
+  "checks": [
+    "Phase is required without default; session generated; declined local consent cannot download answers.",
+    "Pre/block/exit debug downloads pass the real importer and preserve one session; all five exit items can be skipped.",
+    "Next participant clears identity and answers; same code gets a fresh session; explicit config reload restores the exact prior ID.",
+    "Legacy launch links remain compatible; next participant removes URL identity so refresh cannot resurrect the previous person.",
+    "Phone-width page has no horizontal overflow and no JavaScript errors."
+  ],
+  "participant_responses_retained": 0,
+  "external_submissions": 0
+}

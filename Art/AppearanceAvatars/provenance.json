@@ -1,0 +1,139 @@
+{
+  "geometry_revision": "blender-landmark-neck-fit-v3",
+  "texture_revision": "blender-bare-skin-cleanup-v2",
+  "blender_version": "5.2.1 LTS",
+  "origin": "Image-generated design references, local Hunyuan3D-2 reconstruction, then Blender mesh/texture correction. DeepSeek interprets runtime requests only.",
+  "scope": "Course prototype; no official character model, scan, endorsement, user likeness acceptance, or headset performance acceptance is claimed.",
+  "files": [
+    {
+      "file": "Art/AppearanceAvatars/AppearanceAvatars.blend",
+      "sha256": "c9dfdd81de9d18b20728549ca122cd222cfdfce78f63e52dc659d95d824f2a60",
+      "bytes": 53093736
+    },
+    {
+      "file": "Art/AppearanceAvatars/references/liang-reference-v1.png",
+      "sha256": "ad188f745c4c95e46ca43a1dae485dc1271e8f69b6b4ab5e515f7833dc48d8cb",
+      "bytes": 1675371
+    },
+    {
+      "file": "Art/AppearanceAvatars/references/liang-sport-reference-v1.png",
+      "sha256": "503c114a0e69098c6dab768803b0abb0b6e059e8d91974766e3a4d1ad174e6de",
+      "bytes": 1756266
+    },
+    {
+      "file": "Art/AppearanceAvatars/references/liang-bare-reference-v1.png",
+      "sha256": "80ae596aa435c784fcb2ea53de672a01ae44e89af71af311f81860cb54277d4c",
+      "bytes": 1768220
+    },
+    {
+      "file": "Art/AppearanceAvatars/references/nailong-reference-v1.png",
+      "sha256": "607f514a73298ff5bd8dd0aead34980a2988ced50dba42718709bf028c788bde",
+      "bytes": 1517724
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/00-liang-suit.png",
+      "sha256": "6a62d65e2e4f24b35784e64265d39b137e8ce4aedd5fa4b551e8cf449ad53f6d",
+      "bytes": 272188
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/01-liang-suit.png",
+      "sha256": "0726f034b91ee108f436e1d17882f16093b26f0cd1bdec395983c3053a6db5c8",
+      "bytes": 294665
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/02-liang-sport.png",
+      "sha256": "9c11492f67f302aded0314346ec355b9406a62afcc63ef2d1e174429aeae612f",
+      "bytes": 278436
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/03-liang-none.png",
+      "sha256": "cb86d9931950752fc9b134848aa0fcf55e3caa39aef7e3aa0829fb4a67db5fc0",
+      "bytes": 299659
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/04-nailong-none.png",
+      "sha256": "f81d87786d3501c8a2f1c1b9abbd1b643eb9acf6df62f7ced971d6f150c0a540",
+      "bytes": 295238
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/05-nailong-none.png",
+      "sha256": "d13e41386ab75dda3a69c7f31cb2b35efa38a1c5a169fcbb913dab5a3a899596",
+      "bytes": 227980
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/06-liang-suit.png",
+      "sha256": "6a62d65e2e4f24b35784e64265d39b137e8ce4aedd5fa4b551e8cf449ad53f6d",
+      "bytes": 272188
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/07-liang-default-face-closeup.png",
+      "sha256": "7ec7f44980d0e72727df0bc2bdd2eae27b990001b08816e8c233dc89f2bb06ae",
+      "bytes": 651043
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/08-liang-default-three-quarter.png",
+      "sha256": "40e10ce06a4d36de0ca1ab9ca3672b1f816d02056fa9dc224ef8d5ab070b27d9",
+      "bytes": 277353
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/09-nailong-default-front.png",
+      "sha256": "923ae7a56460be683ab5b417f80c70a8ebed405dfe7794120ecbed15625bd31c",
+      "bytes": 355420
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/10-nailong-default-side.png",
+      "sha256": "31fd2a4eb604b08d25f1c4a6705b12f8e0539938697d275f53fe3c4f3885e935",
+      "bytes": 267620
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/11-liang-hat-three-quarter.png",
+      "sha256": "e3240d9e5de35a6e76b22019cbea0046f37c275a0c00db8748bd8dfb8ef3a030",
+      "bytes": 260613
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/12-nailong-hat-three-quarter.png",
+      "sha256": "314b957ca77ad775bf95731bc6b46f7670a6627ec8b7de15260b538e69edac17",
+      "bytes": 255770
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/13-nailong-glasses-face-closeup.png",
+      "sha256": "fda20019b64e854f33f449d91214f720844f7b91a8323956c480d1f02abd703b",
+      "bytes": 355642
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/14-liang-bare-three-quarter.png",
+      "sha256": "37654653a54762d0b064e7b1e19c332a772ee804e4f582170a6a9009a824390c",
+      "bytes": 319586
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/15-liang-bare-neck-side.png",
+      "sha256": "20311475d793fd09130f7742f41ce30e9558ef0209b344d0610c5aef4a89446f",
+      "bytes": 450202
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/checks.json",
+      "sha256": "1668ab88b94d2f6ae890c1dbebc6b4ece26ec24bed1906d9c37f7fcc32b025c8",
+      "bytes": 18838
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/visual-review.json",
+      "sha256": "a6bb734efd9e46c6a09013960e2ae1f1f3fc94b08df2f2291d669019d0ab7fc9",
+      "bytes": 4484
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/production-resource-install.json",
+      "sha256": "1c249ef8ae9d463349bf10383a44f02175651e97db29402896db33bfb27c6d1c",
+      "bytes": 1826
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Validation/avatar-v3/delivery-verification.json",
+      "sha256": "b71d6fb68690daf1967a3c99243acfb9beb527b3b8c857154f0866d5f24ff068",
+      "bytes": 2656
+    },
+    {
+      "file": "Docs/AppearanceExperiment/Demos/AppearanceRoom-Avatars-60s-en.mp4",
+      "sha256": "b0a950b4d20b1672cffd4825145eeea9b1ebe56177c69067199088ed9544646c",
+      "bytes": 2915333
+    }
+  ]
+}

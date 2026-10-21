@@ -1,0 +1,535 @@
+[
+  {
+    "task_id": "A_T1",
+    "task_set": "A",
+    "request_class": "T1",
+    "model_visible": {
+      "initial_query": "把外衣改成橙色，帽子和大小保持不变。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "blue",
+        "accessory": "hat",
+        "scale": 1.0
+      },
+      "visible_history": [],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "jacket_color": [
+          "orange"
+        ]
+      },
+      "preserve_fields": [
+        "accessory",
+        "scale"
+      ],
+      "participant_goal_text": "外衣是橙色；帽子和大小维持原样。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "B_T1",
+    "task_set": "B",
+    "request_class": "T1",
+    "model_visible": {
+      "initial_query": "平时保留帽子，但这次换成眼镜，颜色和大小不变。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "green",
+        "accessory": "hat",
+        "scale": 0.95
+      },
+      "visible_history": [],
+      "soft_preferences": [
+        "通常保留帽子。"
+      ]
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "accessory": [
+          "glasses"
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "scale"
+      ],
+      "participant_goal_text": "用眼镜替换帽子，其他不变。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "C_T1",
+    "task_set": "C",
+    "request_class": "T1",
+    "model_visible": {
+      "initial_query": "把大小比例设成 1.10，外衣颜色和眼镜都不要改。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "purple",
+        "accessory": "glasses",
+        "scale": 0.9
+      },
+      "visible_history": [],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "scale": [
+          1.1
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "accessory"
+      ],
+      "participant_goal_text": "比例 1.10；紫色外衣和眼镜不变。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "D_T1",
+    "task_set": "D",
+    "request_class": "T1",
+    "model_visible": {
+      "initial_query": "虽然平时用紫色，这次把外衣换成灰色，其他保持。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "purple",
+        "accessory": "none",
+        "scale": 1.05
+      },
+      "visible_history": [],
+      "soft_preferences": [
+        "通常用紫色外衣。"
+      ]
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "jacket_color": [
+          "gray"
+        ]
+      },
+      "preserve_fields": [
+        "accessory",
+        "scale"
+      ],
+      "participant_goal_text": "外衣灰色，配饰和比例不变。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "A_T2",
+    "task_set": "A",
+    "request_class": "T2",
+    "model_visible": {
+      "initial_query": "让你稍微高一点点，其他别变。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "green",
+        "accessory": "glasses",
+        "scale": 1.0
+      },
+      "visible_history": [],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "scale": [
+          1.05,
+          1.1
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "accessory"
+      ],
+      "participant_goal_text": "比例在 1.05 或 1.10 都可接受，其他不变。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "B_T2",
+    "task_set": "B",
+    "request_class": "T2",
+    "model_visible": {
+      "initial_query": "让你稍微矮一点点，其他别变。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "orange",
+        "accessory": "none",
+        "scale": 1.0
+      },
+      "visible_history": [],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "scale": [
+          0.9,
+          0.95
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "accessory"
+      ],
+      "participant_goal_text": "比例 0.90 或 0.95 都可接受，其他不变。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "C_T2",
+    "task_set": "C",
+    "request_class": "T2",
+    "model_visible": {
+      "initial_query": "整体再大一点点就好，外衣和配饰照旧。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "red",
+        "accessory": "hat",
+        "scale": 0.9
+      },
+      "visible_history": [],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "scale": [
+          0.95,
+          1.0
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "accessory"
+      ],
+      "participant_goal_text": "比例 0.95 或 1.00 都可接受，其他不变。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "D_T2",
+    "task_set": "D",
+    "request_class": "T2",
+    "model_visible": {
+      "initial_query": "整体小一点点，颜色和配饰不用改。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "gray",
+        "accessory": "glasses",
+        "scale": 1.1
+      },
+      "visible_history": [],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "scale": [
+          1.0,
+          1.05
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "accessory"
+      ],
+      "participant_goal_text": "比例 1.00 或 1.05 都可接受，其他不变。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "A_T3",
+    "task_set": "A",
+    "request_class": "T3",
+    "model_visible": {
+      "initial_query": "让你看起来清爽一点。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "orange",
+        "accessory": "hat",
+        "scale": 1.0
+      },
+      "visible_history": [],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "accessory": [
+          "none"
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "scale"
+      ],
+      "participant_goal_text": "你想摘掉帽子；仍是橙色，大小不变。被问到时说明想摘帽子。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "B_T3",
+    "task_set": "B",
+    "request_class": "T3",
+    "model_visible": {
+      "initial_query": "让你更显眼一点。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "gray",
+        "accessory": "none",
+        "scale": 0.95
+      },
+      "visible_history": [],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "jacket_color": [
+          "orange"
+        ]
+      },
+      "preserve_fields": [
+        "accessory",
+        "scale"
+      ],
+      "participant_goal_text": "你想要橙色外衣，不增大角色，也不增加配饰。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "C_T3",
+    "task_set": "C",
+    "request_class": "T3",
+    "model_visible": {
+      "initial_query": "让你看起来低调一些。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "red",
+        "accessory": "glasses",
+        "scale": 1.1
+      },
+      "visible_history": [],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "scale": [
+          1.0
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "accessory"
+      ],
+      "participant_goal_text": "你想把比例降到 1.00，保持红衣和眼镜。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "D_T3",
+    "task_set": "D",
+    "request_class": "T3",
+    "model_visible": {
+      "initial_query": "让外形简洁一些。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "blue",
+        "accessory": "glasses",
+        "scale": 1.0
+      },
+      "visible_history": [],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "accessory": [
+          "none"
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "scale"
+      ],
+      "participant_goal_text": "你想去掉眼镜，蓝色外衣和大小不变。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "A_T4",
+    "task_set": "A",
+    "request_class": "T4",
+    "model_visible": {
+      "initial_query": "换回之前那个颜色。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "green",
+        "accessory": "none",
+        "scale": 1.0
+      },
+      "visible_history": [
+        {
+          "jacket_color": "blue",
+          "accessory": "none",
+          "scale": 1.0
+        },
+        {
+          "jacket_color": "purple",
+          "accessory": "none",
+          "scale": 1.0
+        },
+        {
+          "jacket_color": "green",
+          "accessory": "none",
+          "scale": 1.0
+        }
+      ],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "jacket_color": [
+          "blue"
+        ]
+      },
+      "preserve_fields": [
+        "accessory",
+        "scale"
+      ],
+      "participant_goal_text": "想恢复最早出现的蓝色，不是后来出现的紫色。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "B_T4",
+    "task_set": "B",
+    "request_class": "T4",
+    "model_visible": {
+      "initial_query": "这次换个轻便的样子。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "purple",
+        "accessory": "hat",
+        "scale": 1.0
+      },
+      "visible_history": [],
+      "soft_preferences": [
+        "通常保留帽子，之后的修改也维持这个偏好。"
+      ]
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "accessory": [
+          "none"
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "scale"
+      ],
+      "participant_goal_text": "这一次希望摘帽子，其他不变；此前通常戴帽子。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "C_T4",
+    "task_set": "C",
+    "request_class": "T4",
+    "model_visible": {
+      "initial_query": "用回之前那个配饰。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "orange",
+        "accessory": "none",
+        "scale": 0.95
+      },
+      "visible_history": [
+        {
+          "jacket_color": "orange",
+          "accessory": "hat",
+          "scale": 0.95
+        },
+        {
+          "jacket_color": "orange",
+          "accessory": "glasses",
+          "scale": 0.95
+        },
+        {
+          "jacket_color": "orange",
+          "accessory": "none",
+          "scale": 0.95
+        }
+      ],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "accessory": [
+          "hat"
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "scale"
+      ],
+      "participant_goal_text": "想恢复帽子，不是眼镜；其他不变。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  },
+  {
+    "task_id": "D_T4",
+    "task_set": "D",
+    "request_class": "T4",
+    "model_visible": {
+      "initial_query": "恢复上一步的大小，其他别动。",
+      "state": {
+        "revision": 0,
+        "jacket_color": "gray",
+        "accessory": "hat",
+        "scale": 1.1
+      },
+      "visible_history": [
+        {
+          "jacket_color": "gray",
+          "accessory": "hat",
+          "scale": 1.0
+        },
+        {
+          "jacket_color": "gray",
+          "accessory": "hat",
+          "scale": 1.1
+        }
+      ],
+      "soft_preferences": []
+    },
+    "evaluator_only": {
+      "allowed_values": {
+        "scale": [
+          1.0
+        ]
+      },
+      "preserve_fields": [
+        "jacket_color",
+        "accessory"
+      ],
+      "participant_goal_text": "上一步唯一的比例是 1.00，其他不变。",
+      "screenshot_status": "not_generated"
+    },
+    "status": "authored_draft_not_observed_data"
+  }
+]

@@ -1,0 +1,65 @@
+{
+  "verified_utc": "2026-10-20T20:48:14.031902+00:00",
+  "passed": true,
+  "scope": "Engineering delivery; user likeness and PICO headset execution/performance acceptance are not established.",
+  "resource_revision": {
+    "geometry": "blender-landmark-neck-fit-v3",
+    "texture": "blender-bare-skin-cleanup-v2"
+  },
+  "apk": {
+    "path": "Builds/Pico/AppearanceVR.apk",
+    "sha256": "74305dce9b618bf9dec37f9539bc95d9fa26ccc484f0d05ee1b8649f8c553bca",
+    "bytes": 135238036,
+    "result": "Succeeded",
+    "errors": 0,
+    "warnings": 11,
+    "runtime_checks": 23,
+    "signature_scheme": "v2",
+    "zip_verified": true,
+    "new_warning_first_lines": [],
+    "evidence": "StudyData/avatar-v3/builds/android"
+  },
+  "linux": {
+    "remote_player": "/home/enjixiong/academics/AIAA4435/AIAA4435-Project/Builds/AppearanceDemo/AppearanceDemo.x86_64",
+    "build_sha256": "986f96b202e64f1bbb9cf8ddc9a2892b01afe8c7e4086a5aae44db2ab9469de7",
+    "result": "Succeeded",
+    "report_errors": 1,
+    "report_warnings": 9,
+    "retained_diagnostic": "PICO SpatialAudio sample SuperSystems/Wireframe-Transparent-Culled has an uninitialized glcore stereo variable; SDK was not modified.",
+    "runtime_error_lines": [],
+    "evidence": "StudyData/avatar-v3/builds/linux"
+  },
+  "video": {
+    "path": "Builds/Demos/AppearanceRoom-Avatars-60s-en.mp4",
+    "sha256": "b0a950b4d20b1672cffd4825145eeea9b1ebe56177c69067199088ed9544646c",
+    "bytes": 2915333,
+    "seconds": 60.0,
+    "frames": 1800,
+    "fps": "30/1",
+    "size": [
+      1920,
+      1080
+    ],
+    "language": "en",
+    "real_events": 7,
+    "render_captures": 4,
+    "visually_reviewed_captioned_keyframes": 8,
+    "source_hashes_verified_locally": 28,
+    "desktop_not_headset": true,
+    "evidence": "StudyData/avatar-v3/desktop-demo/take-01"
+  },
+  "legacy_preserved": {
+    "Builds/Pico/Archive/AppearanceVR-before-avatars-2aeb202f2653.apk": "2aeb202f2653f3d803c7a16ffb0e745e199bc43764015b662a218440f50fea6a",
+    "Builds/Demos/AppearanceRoom-60s-debug.mp4": "20ece4e2d352c659836cea7358d8177e41a92e62c583e9e48246f34d812c6f05"
+  },
+  "resources_unchanged": true,
+  "temporary_build_settings_restored": true,
+  "local_transfer_hashes_verified": true,
+  "headset_connected_or_installed": false,
+  "limitations": [
+    "Small reconstructed neck/material tonal boundaries remain recorded in the final visual review.",
+    "PICO performance, stereo rendering and headset controls still require actual device validation.",
+    "No claim of user likeness acceptance.",
+    "Android retained the same eleven warnings as the previous build; Linux retained one unused SDK sample shader diagnostic."
+  ]
+}

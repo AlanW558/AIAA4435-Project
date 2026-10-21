@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "evidence_class": "isolated_local_browser_engineering_debug_only",
+  "content_revision": "appearance-survey-v0.1-zh-CN.4-unified",
+  "checks": [
+    "No default phase or consent; decline stops progression; hidden old-survey code is cleared when linkage is withdrawn.",
+    "Six pages progress in order; back navigation preserves each round; one download imports as one participant and four correctly mapped rounds, with missing values preserved.",
+    "All five final questions can be skipped; all six records preserve the same identity and original field names.",
+    "Withdrawing consent clears later-page answers and blocks response export.",
+    "Config loading restores only identity and clears answers; next participant clears all six pages, phase, identity and stale URL parameters.",
+    "Phone-width form has no horizontal overflow, JavaScript errors, network requests or answer storage."
+  ],
+  "participant_responses_retained": 0,
+  "external_submissions": 0
+}

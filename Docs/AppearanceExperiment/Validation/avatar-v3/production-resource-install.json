@@ -1,0 +1,21 @@
+{
+  "geometry_revision": "blender-landmark-neck-fit-v3",
+  "texture_revision": "blender-bare-skin-cleanup-v2",
+  "source_manifest_sha256": "427678255e83d2ed959a73ea8792160604c338de7871f5621b6813265708916d",
+  "resource_hashes": {
+    "Liang.fbx": "64ac66c6e6fd38df29010793eb13b80b09c0ecd4e63d19b1062b5556d9bbe3b1",
+    "Nailong.fbx": "db4b790ef974587f527791f16ffed144c505aa6f622f9e18d4db64a711f7ca67",
+    "Textures/Fixed_LiangNeck_none_Albedo.png": "a8c4afe4129df1f9e5c102ee20f93f4b412eef35d75ddddb7f77ba7c31fda625",
+    "Textures/Fixed_LiangNeck_sport_Albedo.png": "06eb64a29c459789f38a1251e8edbaecf56a70a495dc063750e1c28d048b122e",
+    "Textures/Fixed_LiangNeck_suit_Albedo.png": "4e515a8daa223024f86b34a469e8c5c200a191665b115c46672ddc0d5a307446",
+    "Textures/Fixed_Liang_DetailedHead_Albedo.png": "5aaa94121252edd6751f7ea8a26ccc00ff6aed3dee682cc072d608612236ecb1",
+    "Textures/Tint_LiangBare_Reference_Albedo.png": "14243498a166be83b3c05ef8dc16ce9b03fe96c7f60cfdfbe33611b9b46dd2e4",
+    "Textures/Tint_LiangBare_Reference_Mask.png": "afd2be27dcc63ae50d41d7fedddf005d9171a89507a30f917c446e1e1dd33324",
+    "Textures/Tint_LiangSport_Reference_Albedo.png": "9ea5f177d68cdace446728046824e93ab54f1acbfb1d74d8fb56167b3b1a9f61",
+    "Textures/Tint_LiangSport_Reference_Mask.png": "2066a4ef411fbfb32fd04ab1d1d90fd701b7d605c4c04dece4ca765c677dab93",
+    "Textures/Tint_LiangSuit_Reference_Albedo.png": "48dd870ca4599bc9ad8999b92b4e3ca5113a48cbc7ce8b3975106196c73ef3ae",
+    "Textures/Tint_LiangSuit_Reference_Mask.png": "f92b983a0963dcc9753c24ba0914a8c4221752c43dfd420f4ac4be1fa988d60c",
+    "Textures/Tint_Nailong_Reference_Albedo.png": "f6297a30986f6a94e58134df9205a237dc58db8c462a11f827f8d06ac3eb7c06",
+    "Textures/Tint_Nailong_Reference_Mask.png": "84e9e3b4dd8c4a1668b30dde86f0c814bec060d6fc1e43dfe9687d4b0766530f"
+  }
+}

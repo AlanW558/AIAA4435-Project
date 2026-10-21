@@ -1,0 +1,55 @@
+{
+  "phase": "debug",
+  "mode": "live",
+  "participant_id": "DEBUG01",
+  "study_session_id": "DEBUG01_20261018T105850",
+  "backend_session_id": "88a1e509344d4783bad94ca84a6bcb7b",
+  "log_path": "/home/enjixiong/academics/AIAA4435/AIAA4435-Project/StudyData/logs/debug/88a1e509344d4783bad94ca84a6bcb7b.jsonl",
+  "event_counts": {
+    "client_marker": 3,
+    "client_probe": 3,
+    "client_render_ack": 5,
+    "commit": 1,
+    "gate_decision": 1,
+    "model_call": 1,
+    "operation_completed": 4,
+    "proposal": 1,
+    "session_created": 1,
+    "trial_finished": 1,
+    "trial_reset": 1,
+    "undo": 1,
+    "user_request": 1
+  },
+  "commits": [
+    {
+      "accessory": "hat",
+      "jacket_color": "orange",
+      "scale": 1.0
+    }
+  ],
+  "undo_states": [
+    {
+      "accessory": "hat",
+      "jacket_color": "blue",
+      "scale": 1.0
+    }
+  ],
+  "probe_match": [
+    true,
+    true,
+    true
+  ],
+  "completion": [
+    {
+      "block": 0,
+      "elapsed_seconds": 71.51284790039062,
+      "kind": "completion",
+      "observed_build_sha256": "64eee5ae7e3238bb37dfd91102e051a28cdc33e4c23837b939b76d1105637f41",
+      "study_session_id": "DEBUG01_20261018T105850",
+      "task_id": "A_T1",
+      "trial_id": "debug",
+      "value": "participant_done",
+      "within_block": 0
+    }
+  ]
+}

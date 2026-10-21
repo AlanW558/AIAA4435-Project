@@ -34,3 +34,14 @@
 # Local profiler captures and memory dumps
 /[Mm]emoryCaptures/
 /[Rr]ecordings/
+
+# Experiment responses and machine-generated validation stay local.
+__pycache__/
+*.pyc
+/Backend/logs/
+/StudyData/
+/Tools/AppearanceExperiment/.runtime/
+
+# Private WJX exports may be supplied beside the public midterm documents.
+/Docs/AppearanceExperiment/Midterm/*_按序号_*.xlsx
+/Docs/AppearanceExperiment/Midterm/*_按文本_*.xlsx

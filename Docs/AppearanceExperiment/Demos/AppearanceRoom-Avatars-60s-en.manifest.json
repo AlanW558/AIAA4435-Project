@@ -1,0 +1,58 @@
+{
+  "programs": [],
+  "streams": [
+    {
+      "width": 1920,
+      "height": 1080,
+      "avg_frame_rate": "30/1",
+      "nb_frames": "1800"
+    }
+  ],
+  "format": {
+    "duration": "60.000000",
+    "size": "2915333"
+  },
+  "sha256": "b0a950b4d20b1672cffd4825145eeea9b1ebe56177c69067199088ed9544646c",
+  "capture_source": "Ubuntu Unity desktop window, fixed camera; not a headset recording",
+  "phase": "debug",
+  "capability_profile": "avatar-demo-v1",
+  "headset_recording": false,
+  "avatar_asset_revision": "reference-reconstruction-v3",
+  "geometry_revision": "blender-landmark-neck-fit-v3",
+  "texture_revision": "blender-bare-skin-cleanup-v2",
+  "subtitle_language": "en",
+  "subtitle_file": "StudyData/avatar-v3/desktop-demo/take-01/captions-en.ass",
+  "subtitle_sha256": "f6831b443237018960554769a25dce1f427c1555361dae414bf64ee8e90baf2b",
+  "raw_event_manifest": "StudyData/avatar-v3/desktop-demo/take-01/demo-events.json",
+  "event_manifest_sha256": "0ce9c5d4337fcbc1d0009106de93d79a4ca087c23b7ec5172c00148de451e868",
+  "source_hashes": {
+    "Backend/core.py": "f7c14f9cdaf6dbd8edea09f82befeb915c3c7a4c329788d4dfdbe90c73e2ffaf",
+    "Backend/model.py": "456e89e3756aaf8ad0e241af7d4034e4e1c8fca9a599385a6c12a20341ddce22",
+    "Backend/capabilities.py": "f77a80fcfe160ed6bfbdcc66aca45e8c211d855d5f2ace5dfe6d8331be70aa0c",
+    "Assets/Project/Scripts/AppearanceExperiment/AppearanceAvatar.cs": "773fe85770f0e012f39185cfc7f5a9b1af0cce8dc9be393844a0b8f1a2dd1264",
+    "Assets/Project/Scripts/AppearanceExperiment/AppearanceLegacyAvatar.cs": "889660c7b606fd71b6e60280f060fde55784c1b9dddd6e664e947609a67ca2a7",
+    "Assets/Project/Scripts/AppearanceExperiment/AppearanceExperimentClient.cs": "05f943d212839f05d32af06d36c535a3ba00c715491d7a5afea564ed6e1e25fb",
+    "Assets/Project/Resources/AvatarDemo/Liang.fbx": "64ac66c6e6fd38df29010793eb13b80b09c0ecd4e63d19b1062b5556d9bbe3b1",
+    "Assets/Project/Resources/AvatarDemo/Nailong.fbx": "db4b790ef974587f527791f16ffed144c505aa6f622f9e18d4db64a711f7ca67",
+    "Assets/Project/Resources/AvatarDemo/MaskedReferenceLit.shader": "f77a7c873bf003a96a285a981a0903a3042e44a25b1a27da26ab4b95ceb58731",
+    "Tools/AppearanceExperiment/record_desktop_demo.py": "dba9a4d51da33fd0f2f4510651bf584751de967d2374f5487fc3a44077f049ec",
+    "Tools/AppearanceExperiment/finish_avatar_video.py": "62e677422340cba6c8255eca979e863efce842e9a6b79fa14a954a7f16fa4fa8",
+    "Tools/AppearanceExperiment/assemble_reference_avatars.py": "e982c496750b0d807431650e89a2febacb5c68267f2759bfc6f2dd58080e537f",
+    "Tools/AppearanceExperiment/fit_landmark_head_candidate.py": "ca37ac1fad4acd3d42a476b734c8f68617e1d4aeda2c4fccfc9f48b9cfed0647",
+    "Tools/AppearanceExperiment/repair_neck_candidate.py": "f062a0aaa2e70890cdfee336b361ceb2374e630ba846d1041c78e412d76eabe5",
+    "Tools/AppearanceExperiment/repair_bare_texture.py": "6512926eefca051d672cb5e1b482eb82d93ae75ca1057c70200d86a0e3bfdc07",
+    "Assets/Project/Resources/AvatarDemo/Textures/Tint_LiangBare_Reference_Albedo.png": "14243498a166be83b3c05ef8dc16ce9b03fe96c7f60cfdfbe33611b9b46dd2e4",
+    "Assets/Project/Resources/AvatarDemo/Textures/Tint_LiangBare_Reference_Mask.png": "afd2be27dcc63ae50d41d7fedddf005d9171a89507a30f917c446e1e1dd33324",
+    "Assets/Project/Resources/AvatarDemo/Textures/Tint_LiangSport_Reference_Albedo.png": "9ea5f177d68cdace446728046824e93ab54f1acbfb1d74d8fb56167b3b1a9f61",
+    "Assets/Project/Resources/AvatarDemo/Textures/Tint_LiangSport_Reference_Mask.png": "2066a4ef411fbfb32fd04ab1d1d90fd701b7d605c4c04dece4ca765c677dab93",
+    "Assets/Project/Resources/AvatarDemo/Textures/Tint_LiangSuit_Reference_Albedo.png": "48dd870ca4599bc9ad8999b92b4e3ca5113a48cbc7ce8b3975106196c73ef3ae",
+    "Assets/Project/Resources/AvatarDemo/Textures/Tint_LiangSuit_Reference_Mask.png": "f92b983a0963dcc9753c24ba0914a8c4221752c43dfd420f4ac4be1fa988d60c",
+    "Assets/Project/Resources/AvatarDemo/Textures/Tint_Nailong_Reference_Albedo.png": "f6297a30986f6a94e58134df9205a237dc58db8c462a11f827f8d06ac3eb7c06",
+    "Assets/Project/Resources/AvatarDemo/Textures/Tint_Nailong_Reference_Mask.png": "84e9e3b4dd8c4a1668b30dde86f0c814bec060d6fc1e43dfe9687d4b0766530f",
+    "Assets/Project/Resources/AvatarDemo/Textures/Fixed_Liang_DetailedHead_Albedo.png": "5aaa94121252edd6751f7ea8a26ccc00ff6aed3dee682cc072d608612236ecb1",
+    "Assets/Project/Resources/AvatarDemo/Textures/Fixed_LiangNeck_none_Albedo.png": "a8c4afe4129df1f9e5c102ee20f93f4b412eef35d75ddddb7f77ba7c31fda625",
+    "Assets/Project/Resources/AvatarDemo/Textures/Fixed_LiangNeck_sport_Albedo.png": "06eb64a29c459789f38a1251e8edbaecf56a70a495dc063750e1c28d048b122e",
+    "Assets/Project/Resources/AvatarDemo/Textures/Fixed_LiangNeck_suit_Albedo.png": "4e515a8daa223024f86b34a469e8c5c200a191665b115c46672ddc0d5a307446",
+    "StudyData/avatar-v3/unity-blender-staging/AvatarDemo/assembly.json": "427678255e83d2ed959a73ea8792160604c338de7871f5621b6813265708916d"
+  }
+}

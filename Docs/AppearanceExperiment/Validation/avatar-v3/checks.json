@@ -1,0 +1,608 @@
+{
+    "passed": true,
+    "profile": "avatar-demo-v1",
+    "unityVersion": "2022.3.62f3c1",
+    "lighting": {
+        "scope": "Preview geometry review; independent of the production room.",
+        "ambientProbeMode": "CustomProvided",
+        "ambientProbeMethod": "SphericalHarmonicsL2.AddAmbientLight",
+        "ambientLinear": {
+            "r": 0.30000001192092898,
+            "g": 0.30000001192092898,
+            "b": 0.30000001192092898,
+            "a": 1.0
+        },
+        "directionalLights": [
+            {
+                "intensity": 1.149999976158142,
+                "rotationEuler": {
+                    "x": 25.0,
+                    "y": -30.0,
+                    "z": 0.0
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 1.0,
+                    "b": 1.0,
+                    "a": 1.0
+                }
+            },
+            {
+                "intensity": 0.5,
+                "rotationEuler": {
+                    "x": 15.0,
+                    "y": 45.0,
+                    "z": 0.0
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 1.0,
+                    "b": 1.0,
+                    "a": 1.0
+                }
+            },
+            {
+                "intensity": 0.5,
+                "rotationEuler": {
+                    "x": 15.0,
+                    "y": 160.0,
+                    "z": 0.0
+                },
+                "color": {
+                    "r": 1.0,
+                    "g": 1.0,
+                    "b": 1.0,
+                    "a": 1.0
+                }
+            }
+        ]
+    },
+    "states": [
+        {
+            "image": "00-liang-suit.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "blue",
+                "accessory": "glasses",
+                "avatar_id": "liang",
+                "outfit": "suit",
+                "scale": 1.0
+            },
+            "activeRenderers": 6,
+            "activeTriangles": 177450,
+            "boundsMin": {
+                "x": -0.36929020285606387,
+                "y": 0.0,
+                "z": -0.189065083861351
+            },
+            "boundsMax": {
+                "x": 0.36929020285606387,
+                "y": 1.850000262260437,
+                "z": 0.18906499445438386
+            },
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 1.149999976158142,
+                "z": -5.0
+            },
+            "cameraForward": {
+                "x": 0.0,
+                "y": -0.029986506327986718,
+                "z": 0.9995502829551697
+            },
+            "orthographicSize": 1.2000000476837159
+        },
+        {
+            "image": "01-liang-suit.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "purple",
+                "accessory": "hat",
+                "avatar_id": "liang",
+                "outfit": "suit",
+                "scale": 1.100000023841858
+            },
+            "activeRenderers": 3,
+            "activeTriangles": 175882,
+            "boundsMin": {
+                "x": -0.4062192440032959,
+                "y": 0.0,
+                "z": -0.20797160267829896
+            },
+            "boundsMax": {
+                "x": 0.4062192440032959,
+                "y": 2.0507917404174806,
+                "z": 0.2079714834690094
+            },
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 1.149999976158142,
+                "z": -5.0
+            },
+            "cameraForward": {
+                "x": 0.0,
+                "y": -0.029986506327986718,
+                "z": 0.9995502829551697
+            },
+            "orthographicSize": 1.2000000476837159
+        },
+        {
+            "image": "02-liang-sport.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "red",
+                "accessory": "none",
+                "avatar_id": "liang",
+                "outfit": "sport",
+                "scale": 1.0
+            },
+            "activeRenderers": 1,
+            "activeTriangles": 173938,
+            "boundsMin": {
+                "x": -0.387564480304718,
+                "y": 0.0,
+                "z": -0.22629892826080323
+            },
+            "boundsMax": {
+                "x": 0.387564480304718,
+                "y": 1.850000262260437,
+                "z": 0.22629880905151368
+            },
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 1.149999976158142,
+                "z": -5.0
+            },
+            "cameraForward": {
+                "x": 0.0,
+                "y": -0.029986506327986718,
+                "z": 0.9995502829551697
+            },
+            "orthographicSize": 1.2000000476837159
+        },
+        {
+            "image": "03-liang-none.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "gray",
+                "accessory": "none",
+                "avatar_id": "liang",
+                "outfit": "none",
+                "scale": 1.0
+            },
+            "activeRenderers": 1,
+            "activeTriangles": 173008,
+            "boundsMin": {
+                "x": -0.3889876902103424,
+                "y": 0.0,
+                "z": -0.22478848695755006
+            },
+            "boundsMax": {
+                "x": 0.3889876902103424,
+                "y": 1.850000262260437,
+                "z": 0.22478824853897096
+            },
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 1.149999976158142,
+                "z": -5.0
+            },
+            "cameraForward": {
+                "x": 0.0,
+                "y": -0.029986506327986718,
+                "z": 0.9995502829551697
+            },
+            "orthographicSize": 1.2000000476837159
+        },
+        {
+            "image": "04-nailong-none.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "yellow",
+                "accessory": "none",
+                "avatar_id": "nailong",
+                "outfit": "none",
+                "scale": 1.0
+            },
+            "activeRenderers": 1,
+            "activeTriangles": 54999,
+            "boundsMin": {
+                "x": -0.5109491348266602,
+                "y": 0.00004684925079345703,
+                "z": -0.5791879296302795
+            },
+            "boundsMax": {
+                "x": 0.5109491348266602,
+                "y": 1.840013027191162,
+                "z": 0.57918781042099
+            },
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 1.149999976158142,
+                "z": -5.0
+            },
+            "cameraForward": {
+                "x": 0.0,
+                "y": -0.029986506327986718,
+                "z": 0.9995502829551697
+            },
+            "orthographicSize": 1.2000000476837159
+        },
+        {
+            "image": "05-nailong-none.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "green",
+                "accessory": "hat",
+                "avatar_id": "nailong",
+                "outfit": "none",
+                "scale": 0.8500000238418579
+            },
+            "activeRenderers": 3,
+            "activeTriangles": 56291,
+            "boundsMin": {
+                "x": -0.4343067705631256,
+                "y": 0.00003981590270996094,
+                "z": -0.4923097491264343
+            },
+            "boundsMax": {
+                "x": 0.4343067705631256,
+                "y": 1.5854134559631348,
+                "z": 0.4923096299171448
+            },
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 1.149999976158142,
+                "z": -5.0
+            },
+            "cameraForward": {
+                "x": 0.0,
+                "y": -0.029986506327986718,
+                "z": 0.9995502829551697
+            },
+            "orthographicSize": 1.2000000476837159
+        },
+        {
+            "image": "06-liang-suit.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "blue",
+                "accessory": "glasses",
+                "avatar_id": "liang",
+                "outfit": "suit",
+                "scale": 1.0
+            },
+            "activeRenderers": 6,
+            "activeTriangles": 177450,
+            "boundsMin": {
+                "x": -0.36929020285606387,
+                "y": 0.0,
+                "z": -0.189065083861351
+            },
+            "boundsMax": {
+                "x": 0.36929020285606387,
+                "y": 1.850000262260437,
+                "z": 0.18906499445438386
+            },
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 1.149999976158142,
+                "z": -5.0
+            },
+            "cameraForward": {
+                "x": 0.0,
+                "y": -0.029986506327986718,
+                "z": 0.9995502829551697
+            },
+            "orthographicSize": 1.2000000476837159
+        }
+    ],
+    "detailViews": [
+        {
+            "image": "07-liang-default-face-closeup.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "blue",
+                "accessory": "glasses",
+                "avatar_id": "liang",
+                "outfit": "suit",
+                "scale": 1.0
+            },
+            "activeRenderers": 6,
+            "activeTriangles": 177450,
+            "boundsMin": {
+                "x": -0.36929020285606387,
+                "y": 0.0,
+                "z": -0.189065083861351
+            },
+            "boundsMax": {
+                "x": 0.36929020285606387,
+                "y": 1.850000262260437,
+                "z": 0.18906499445438386
+            },
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 1.535500168800354,
+                "z": -5.0
+            },
+            "cameraForward": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "orthographicSize": 0.37925004959106448
+        },
+        {
+            "image": "08-liang-default-three-quarter.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "blue",
+                "accessory": "glasses",
+                "avatar_id": "liang",
+                "outfit": "suit",
+                "scale": 1.0
+            },
+            "activeRenderers": 6,
+            "activeTriangles": 177450,
+            "boundsMin": {
+                "x": -0.36929020285606387,
+                "y": 0.0,
+                "z": -0.189065083861351
+            },
+            "boundsMax": {
+                "x": 0.36929020285606387,
+                "y": 1.850000262260437,
+                "z": 0.18906499445438386
+            },
+            "cameraPosition": {
+                "x": -3.535533905029297,
+                "y": 0.9250001311302185,
+                "z": -3.535533905029297
+            },
+            "cameraForward": {
+                "x": 0.7071068286895752,
+                "y": 0.0,
+                "z": 0.7071067094802856
+            },
+            "orthographicSize": 1.063750147819519
+        },
+        {
+            "image": "09-nailong-default-front.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "yellow",
+                "accessory": "none",
+                "avatar_id": "nailong",
+                "outfit": "none",
+                "scale": 1.0
+            },
+            "activeRenderers": 1,
+            "activeTriangles": 54999,
+            "boundsMin": {
+                "x": -0.5109491348266602,
+                "y": 0.00004684925079345703,
+                "z": -0.5791879296302795
+            },
+            "boundsMax": {
+                "x": 0.5109491348266602,
+                "y": 1.840013027191162,
+                "z": 0.57918781042099
+            },
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 0.9200299382209778,
+                "z": -5.0
+            },
+            "cameraForward": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "orthographicSize": 1.0579805374145508
+        },
+        {
+            "image": "10-nailong-default-side.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "yellow",
+                "accessory": "none",
+                "avatar_id": "nailong",
+                "outfit": "none",
+                "scale": 1.0
+            },
+            "activeRenderers": 1,
+            "activeTriangles": 54999,
+            "boundsMin": {
+                "x": -0.5109491348266602,
+                "y": 0.00004684925079345703,
+                "z": -0.5791879296302795
+            },
+            "boundsMax": {
+                "x": 0.5109491348266602,
+                "y": 1.840013027191162,
+                "z": 0.57918781042099
+            },
+            "cameraPosition": {
+                "x": 5.0,
+                "y": 0.9200299382209778,
+                "z": -5.960464477539063e-8
+            },
+            "cameraForward": {
+                "x": -1.0000001192092896,
+                "y": 0.0,
+                "z": -1.1920928955078126e-7
+            },
+            "orthographicSize": 1.0579805374145508
+        },
+        {
+            "image": "11-liang-hat-three-quarter.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "purple",
+                "accessory": "hat",
+                "avatar_id": "liang",
+                "outfit": "suit",
+                "scale": 1.100000023841858
+            },
+            "activeRenderers": 3,
+            "activeTriangles": 175882,
+            "boundsMin": {
+                "x": -0.4062192440032959,
+                "y": 0.0,
+                "z": -0.20797160267829896
+            },
+            "boundsMax": {
+                "x": 0.4062192440032959,
+                "y": 2.0507917404174806,
+                "z": 0.2079714834690094
+            },
+            "cameraPosition": {
+                "x": -3.535533905029297,
+                "y": 1.0253958702087403,
+                "z": -3.535533905029297
+            },
+            "cameraForward": {
+                "x": 0.7071068286895752,
+                "y": 0.0,
+                "z": 0.7071067094802856
+            },
+            "orthographicSize": 1.1792051792144776
+        },
+        {
+            "image": "12-nailong-hat-three-quarter.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "green",
+                "accessory": "hat",
+                "avatar_id": "nailong",
+                "outfit": "none",
+                "scale": 0.8500000238418579
+            },
+            "activeRenderers": 3,
+            "activeTriangles": 56291,
+            "boundsMin": {
+                "x": -0.4343067705631256,
+                "y": 0.00003981590270996094,
+                "z": -0.4923097491264343
+            },
+            "boundsMax": {
+                "x": 0.4343067705631256,
+                "y": 1.5854134559631348,
+                "z": 0.4923096299171448
+            },
+            "cameraPosition": {
+                "x": -3.535533905029297,
+                "y": 0.7927266359329224,
+                "z": -3.535533905029297
+            },
+            "cameraForward": {
+                "x": 0.7071068286895752,
+                "y": 0.0,
+                "z": 0.7071067094802856
+            },
+            "orthographicSize": 1.004665732383728
+        },
+        {
+            "image": "13-nailong-glasses-face-closeup.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "yellow",
+                "accessory": "glasses",
+                "avatar_id": "nailong",
+                "outfit": "none",
+                "scale": 1.0
+            },
+            "activeRenderers": 6,
+            "activeTriangles": 57859,
+            "boundsMin": {
+                "x": -0.5109491348266602,
+                "y": 0.00004684925079345703,
+                "z": -0.5791879296302795
+            },
+            "boundsMax": {
+                "x": 0.5109491348266602,
+                "y": 1.840013027191162,
+                "z": 0.57918781042099
+            },
+            "cameraPosition": {
+                "x": 0.0,
+                "y": 1.6560163497924805,
+                "z": -5.0
+            },
+            "cameraForward": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 1.0
+            },
+            "orthographicSize": 0.37719306349754336
+        },
+        {
+            "image": "14-liang-bare-three-quarter.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "gray",
+                "accessory": "none",
+                "avatar_id": "liang",
+                "outfit": "none",
+                "scale": 1.0
+            },
+            "activeRenderers": 1,
+            "activeTriangles": 173008,
+            "boundsMin": {
+                "x": -0.3889876902103424,
+                "y": 0.0,
+                "z": -0.22478848695755006
+            },
+            "boundsMax": {
+                "x": 0.3889876902103424,
+                "y": 1.850000262260437,
+                "z": 0.22478824853897096
+            },
+            "cameraPosition": {
+                "x": -3.535533905029297,
+                "y": 0.9250001311302185,
+                "z": -3.535533905029297
+            },
+            "cameraForward": {
+                "x": 0.7071068286895752,
+                "y": 0.0,
+                "z": 0.7071067094802856
+            },
+            "orthographicSize": 1.063750147819519
+        },
+        {
+            "image": "15-liang-bare-neck-side.png",
+            "observed": {
+                "revision": 0,
+                "jacket_color": "gray",
+                "accessory": "none",
+                "avatar_id": "liang",
+                "outfit": "none",
+                "scale": 1.0
+            },
+            "activeRenderers": 1,
+            "activeTriangles": 173008,
+            "boundsMin": {
+                "x": -0.3889876902103424,
+                "y": 0.0,
+                "z": -0.22478848695755006
+            },
+            "boundsMax": {
+                "x": 0.3889876902103424,
+                "y": 1.850000262260437,
+                "z": 0.22478824853897096
+            },
+            "cameraPosition": {
+                "x": 5.0,
+                "y": 1.535500168800354,
+                "z": -1.1920928955078126e-7
+            },
+            "cameraForward": {
+                "x": -1.0000001192092896,
+                "y": 0.0,
+                "z": -1.1920928955078126e-7
+            },
+            "orthographicSize": 0.4000000059604645
+        }
+    ]
+}

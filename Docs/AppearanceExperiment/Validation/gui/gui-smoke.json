@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "date": "2026-10-18",
+  "evidence_class": "engineering_gui_debug_not_participant_data",
+  "input_method": "X11 XTest mouse and keyboard events delivered to the selected AppearanceLab process window",
+  "environment": {
+    "display": ":89",
+    "server": "Temporary user-space Xvfb unpacked from Ubuntu's xvfb package",
+    "renderer": "Software OpenGL (-force-glcore, LIBGL_ALWAYS_SOFTWARE=1)",
+    "window_size": [1440, 900],
+    "normal_desktop": "DISPLAY :1 was locked; no clicks, keypresses, password entry or unlock attempt were sent there."
+  },
+  "backend": {
+    "mode": "live",
+    "participant_id": "DEBUG01",
+    "phase": "debug",
+    "condition": "S",
+    "task_id": "A_T1",
+    "session_id": "88a1e509344d4783bad94ca84a6bcb7b",
+    "study_session_id": "DEBUG01_20261018T105850",
+    "observed_build_sha256": "64eee5ae7e3238bb37dfd91102e051a28cdc33e4c23837b939b76d1105637f41"
+  },
+  "checks": [
+    {"check": "Clicked Start manual session; task reset and private goal displayed", "passed": true, "screenshot": "03-started.png"},
+    {"check": "Pressed F1; researcher controls hidden while task controls remain", "passed": true, "screenshot": "03-started.png"},
+    {"check": "Clicked Send request; DeepSeek-driven orange jacket displayed with hat and 1.00 scale preserved", "passed": true, "screenshot": "04-orange.png"},
+    {"check": "Typed ASCII in repair field, then cleared with Ctrl+A and Backspace; no repair request submitted", "passed": true, "screenshot": "05-keyboard.png"},
+    {"check": "Selected Color and clicked Undo; blue jacket displayed with hat and scale preserved", "passed": true, "screenshot": "06-undo-blue.png"},
+    {"check": "Clicked Finish this task; completion screen and Next task button appeared", "passed": true, "screenshot": "07-finished.png"},
+    {"check": "Actual JSONL contains one commit, one undo, one finished event and three renderer probes, all probes match server state", "passed": true, "source": "backend-evidence.json"}
+  ],
+  "limits": [
+    "This exercises Unity's actual GUI callbacks; it is not a Codex built-in-browser test.",
+    "The virtual-display software renderer is not a headset or desktop GPU performance benchmark.",
+    "Assigned 16-task navigation and post-block questionnaire handoff were not exercised by this GUI pass.",
+    "The deliberately undone debug task is not a participant success result; no formal responses were generated.",
+    "Four-policy, accessory and scale execution are covered by the separate Unity/API smoke report, not by this GUI sequence."
+  ]
+}

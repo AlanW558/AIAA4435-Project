@@ -1,0 +1,994 @@
+{
+  "generated_at": "2026-10-21T14:37:03.443555+08:00",
+  "source": {
+    "filename": "389439995_按序号_虚拟角色外形修改研究（全流程）_15_15.xlsx",
+    "sha256": "762e71a85753ee038ee9e13a7399cd7c0d8a3526105425f67793303196d57b6c",
+    "questionnaire_id": "389439995",
+    "sheet": "Sheet1",
+    "columns": 38,
+    "formula_count": 0,
+    "acquisition": "User-supplied WJX export from paper transcription; not a fresh direct website download."
+  },
+  "order": [
+    "N",
+    "E",
+    "A",
+    "S"
+  ],
+  "order_source": "用户于2026-10-21明确确认所有参与者按 N→E→A→S 体验；不是冻结表中的平衡顺序。",
+  "qualitative_source": "researcher-summary",
+  "research_context": {
+    "confirmation_date": "2026-10-21",
+    "confirmation_source": "Researcher statements in the current development conversation; not independently observed by the analysis script.",
+    "questionnaire_id": "389439995",
+    "source_sha256": "762e71a85753ee038ee9e13a7399cd7c0d8a3526105425f67793303196d57b6c",
+    "actual_order": [
+      "N",
+      "E",
+      "A",
+      "S"
+    ],
+    "same_order_for_every_participant": true,
+    "experience_device": "PICO headset",
+    "avatar_version_description": "New blue-suit human and Nailong avatars",
+    "data_collection": "Paper questionnaire answers entered into WJX by the researcher",
+    "q29_provenance": "Researcher summaries of paper answers; not verbatim quotations",
+    "export_acquisition": "User supplied the local XLSX after a live browser export was blocked by the desktop lock screen; no fresh website download is claimed.",
+    "apk_fingerprint_linked_to_participant_records": false,
+    "trial_logs_linked_to_participant_records": false,
+    "paper_originals_independently_checked": false,
+    "planned_counterbalanced_schedule_used_for_this_analysis": false,
+    "old_simulated_survey_included": false
+  },
+  "total_records": 15,
+  "included_n": 15,
+  "exclusions": {},
+  "questions": {
+    "1": "1. 研究者提供的参与者编号",
+    "2": "2. 本次实验类型",
+    "3": "3. 我已阅读研究说明，有机会向研究者提问，并同意参加本次研究。",
+    "4": "4. 在今天之前，你大约使用过多少次虚拟现实头显？",
+    "5": "5. 在今天之前，你是否试用过这套修改虚拟角色外形的原型？",
+    "6": "6. 如果你之前填写的课程问卷有匿名编号，你是否同意我们用这个编号，将那份回答与本次实验记录对应起来？",
+    "7": "7. 旧问卷的匿名编号",
+    "8": "8. 系统的提问打断了我完成任务的过程。",
+    "9": "9. 我能控制哪些外形特征会被修改。",
+    "10": "10. 完成这些修改需要我投入很多精力。",
+    "11": "11. 我对这一轮修改外形的体验感到满意。",
+    "12": "12. 关于这一轮体验，你还有什么想补充的吗?",
+    "13": "13. 系统的提问打断了我完成任务的过程。",
+    "14": "14. 我能控制哪些外形特征会被修改。",
+    "15": "15. 完成这些修改需要我投入很多精力。",
+    "16": "16. 我对这一轮修改外形的体验感到满意。",
+    "17": "17. 关于这一轮体验，你还有什么想补充的吗?",
+    "18": "18. 系统的提问打断了我完成任务的过程。",
+    "19": "19. 我能控制哪些外形特征会被修改。",
+    "20": "20. 完成这些修改需要我投入很多精力。",
+    "21": "21. 我对这一轮修改外形的体验感到满意。",
+    "22": "22. 关于这一轮体验，你还有什么想补充的吗?",
+    "23": "23. 系统的提问打断了我完成任务的过程。",
+    "24": "24. 我能控制哪些外形特征会被修改。",
+    "25": "25. 完成这些修改需要我投入很多精力。",
+    "26": "26. 我对这一轮修改外形的体验感到满意。",
+    "27": "27. 关于这一轮体验，你还有什么想补充的吗?",
+    "28": "28. 如果以后还要做类似的外形修改，你更愿意使用哪一轮的系统?",
+    "29": "29. 你为什么这样选择?",
+    "30": "30. 有没有哪次提问帮你完成了修改?如果有，它帮在什么地方?",
+    "31": "31. 有没有哪次提问让你觉得没必要，或者不知道怎么回答?如果有，请描述一下。",
+    "32": "32. 对于修改外形、检查结果或撤销操作，你还有什么改进建议?"
+  },
+  "descriptive": {
+    "N": {
+      "interruption": {
+        "question": 8,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          10,
+          5,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean": 2.3333333333333335,
+        "sd": 0.4879500364742666,
+        "median": 2.0,
+        "q1": 2.0,
+        "q3": 3.0,
+        "low": 15,
+        "neutral": 0,
+        "high": 0,
+        "zero_variance": false
+      },
+      "control": {
+        "question": 9,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          0,
+          10,
+          5,
+          0,
+          0
+        ],
+        "mean": 4.333333333333333,
+        "sd": 0.4879500364742665,
+        "median": 4.0,
+        "q1": 4.0,
+        "q3": 5.0,
+        "low": 0,
+        "neutral": 10,
+        "high": 5,
+        "zero_variance": false
+      },
+      "effort": {
+        "question": 10,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          11,
+          4,
+          0,
+          0,
+          0
+        ],
+        "mean": 3.2666666666666666,
+        "sd": 0.45773770821706344,
+        "median": 3.0,
+        "q1": 3.0,
+        "q3": 3.5,
+        "low": 11,
+        "neutral": 4,
+        "high": 0,
+        "zero_variance": false
+      },
+      "satisfaction": {
+        "question": 11,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          0,
+          12,
+          3,
+          0,
+          0
+        ],
+        "mean": 4.2,
+        "sd": 0.4140393356054125,
+        "median": 4.0,
+        "q1": 4.0,
+        "q3": 4.0,
+        "low": 0,
+        "neutral": 12,
+        "high": 3,
+        "zero_variance": false
+      }
+    },
+    "E": {
+      "interruption": {
+        "question": 13,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          15,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean": 1.0,
+        "sd": 0.0,
+        "median": 1.0,
+        "q1": 1.0,
+        "q3": 1.0,
+        "low": 15,
+        "neutral": 0,
+        "high": 0,
+        "zero_variance": true
+      },
+      "control": {
+        "question": 14,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          0,
+          11,
+          4,
+          0,
+          0
+        ],
+        "mean": 4.266666666666667,
+        "sd": 0.4577377082170635,
+        "median": 4.0,
+        "q1": 4.0,
+        "q3": 4.5,
+        "low": 0,
+        "neutral": 11,
+        "high": 4,
+        "zero_variance": false
+      },
+      "effort": {
+        "question": 15,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          10,
+          5,
+          0,
+          0,
+          0
+        ],
+        "mean": 3.3333333333333335,
+        "sd": 0.4879500364742666,
+        "median": 3.0,
+        "q1": 3.0,
+        "q3": 4.0,
+        "low": 10,
+        "neutral": 5,
+        "high": 0,
+        "zero_variance": false
+      },
+      "satisfaction": {
+        "question": 16,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          0,
+          9,
+          6,
+          0,
+          0
+        ],
+        "mean": 4.4,
+        "sd": 0.5070925528371099,
+        "median": 4.0,
+        "q1": 4.0,
+        "q3": 5.0,
+        "low": 0,
+        "neutral": 9,
+        "high": 6,
+        "zero_variance": false
+      }
+    },
+    "A": {
+      "interruption": {
+        "question": 18,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        "mean": 4.0,
+        "sd": 0.0,
+        "median": 4.0,
+        "q1": 4.0,
+        "q3": 4.0,
+        "low": 0,
+        "neutral": 15,
+        "high": 0,
+        "zero_variance": true
+      },
+      "control": {
+        "question": 19,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          0,
+          5,
+          10,
+          0,
+          0
+        ],
+        "mean": 4.666666666666667,
+        "sd": 0.4879500364742666,
+        "median": 5.0,
+        "q1": 4.0,
+        "q3": 5.0,
+        "low": 0,
+        "neutral": 5,
+        "high": 10,
+        "zero_variance": false
+      },
+      "effort": {
+        "question": 20,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          0,
+          15,
+          0,
+          0,
+          0
+        ],
+        "mean": 4.0,
+        "sd": 0.0,
+        "median": 4.0,
+        "q1": 4.0,
+        "q3": 4.0,
+        "low": 0,
+        "neutral": 15,
+        "high": 0,
+        "zero_variance": true
+      },
+      "satisfaction": {
+        "question": 21,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          0,
+          14,
+          1,
+          0,
+          0
+        ],
+        "mean": 4.066666666666666,
+        "sd": 0.2581988897471611,
+        "median": 4.0,
+        "q1": 4.0,
+        "q3": 4.0,
+        "low": 0,
+        "neutral": 14,
+        "high": 1,
+        "zero_variance": false
+      }
+    },
+    "S": {
+      "interruption": {
+        "question": 23,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          8,
+          7,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mean": 2.466666666666667,
+        "sd": 0.5163977794943223,
+        "median": 2.0,
+        "q1": 2.0,
+        "q3": 3.0,
+        "low": 15,
+        "neutral": 0,
+        "high": 0,
+        "zero_variance": false
+      },
+      "control": {
+        "question": 24,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          0,
+          3,
+          12,
+          0,
+          0
+        ],
+        "mean": 4.8,
+        "sd": 0.4140393356054125,
+        "median": 5.0,
+        "q1": 5.0,
+        "q3": 5.0,
+        "low": 0,
+        "neutral": 3,
+        "high": 12,
+        "zero_variance": false
+      },
+      "effort": {
+        "question": 25,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          11,
+          4,
+          0,
+          0,
+          0
+        ],
+        "mean": 3.2666666666666666,
+        "sd": 0.4577377082170635,
+        "median": 3.0,
+        "q1": 3.0,
+        "q3": 3.5,
+        "low": 11,
+        "neutral": 4,
+        "high": 0,
+        "zero_variance": false
+      },
+      "satisfaction": {
+        "question": 26,
+        "n": 15,
+        "missing": 0,
+        "counts": [
+          0,
+          0,
+          0,
+          7,
+          8,
+          0,
+          0
+        ],
+        "mean": 4.533333333333333,
+        "sd": 0.5163977794943223,
+        "median": 5.0,
+        "q1": 4.0,
+        "q3": 5.0,
+        "low": 0,
+        "neutral": 7,
+        "high": 8,
+        "zero_variance": false
+      }
+    }
+  },
+  "pairwise": [
+    {
+      "metric": "interruption",
+      "comparison": "S-N",
+      "n": 15,
+      "better": 2,
+      "worse": 4,
+      "ties": 9,
+      "non_tied_n": 6,
+      "mean_difference": 0.13333333333333333,
+      "median_difference": 0.0,
+      "mean_difference_ci95": [
+        -0.2,
+        0.4666666666666667
+      ],
+      "sign_effect": -0.3333333333333333,
+      "sign_effect_ci95": [
+        -0.9134562634142209,
+        0.5544438089929009
+      ],
+      "p_exact": 0.6875,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "interruption",
+      "comparison": "S-E",
+      "n": 15,
+      "better": 0,
+      "worse": 15,
+      "ties": 0,
+      "non_tied_n": 15,
+      "mean_difference": 1.4666666666666666,
+      "median_difference": 1.0,
+      "mean_difference_ci95": [
+        1.2,
+        1.7333333333333334
+      ],
+      "sign_effect": -1.0,
+      "sign_effect_ci95": [
+        -1.0,
+        -0.5639612781783223
+      ],
+      "p_exact": 6.103515625e-05,
+      "p_holm": 0.000732421875
+    },
+    {
+      "metric": "interruption",
+      "comparison": "S-A",
+      "n": 15,
+      "better": 15,
+      "worse": 0,
+      "ties": 0,
+      "non_tied_n": 15,
+      "mean_difference": -1.5333333333333334,
+      "median_difference": -2.0,
+      "mean_difference_ci95": [
+        -1.8,
+        -1.2666666666666666
+      ],
+      "sign_effect": 1.0,
+      "sign_effect_ci95": [
+        0.5639612781783223,
+        1.0
+      ],
+      "p_exact": 6.103515625e-05,
+      "p_holm": 0.000732421875
+    },
+    {
+      "metric": "control",
+      "comparison": "S-N",
+      "n": 15,
+      "better": 8,
+      "worse": 1,
+      "ties": 6,
+      "non_tied_n": 9,
+      "mean_difference": 0.4666666666666667,
+      "median_difference": 1.0,
+      "mean_difference_ci95": [
+        0.13333333333333333,
+        0.7333333333333333
+      ],
+      "sign_effect": 0.7777777777777778,
+      "sign_effect_ci95": [
+        0.035006970166011175,
+        0.9943817265068005
+      ],
+      "p_exact": 0.0390625,
+      "p_holm": 0.2734375
+    },
+    {
+      "metric": "control",
+      "comparison": "S-E",
+      "n": 15,
+      "better": 8,
+      "worse": 0,
+      "ties": 7,
+      "non_tied_n": 8,
+      "mean_difference": 0.5333333333333333,
+      "median_difference": 1.0,
+      "mean_difference_ci95": [
+        0.26666666666666666,
+        0.8
+      ],
+      "sign_effect": 1.0,
+      "sign_effect_ci95": [
+        0.26116670489436156,
+        1.0
+      ],
+      "p_exact": 0.0078125,
+      "p_holm": 0.0703125
+    },
+    {
+      "metric": "control",
+      "comparison": "S-A",
+      "n": 15,
+      "better": 2,
+      "worse": 0,
+      "ties": 13,
+      "non_tied_n": 2,
+      "mean_difference": 0.13333333333333333,
+      "median_difference": 0.0,
+      "mean_difference_ci95": [
+        0.0,
+        0.3333333333333333
+      ],
+      "sign_effect": 1.0,
+      "sign_effect_ci95": [
+        -0.683772233983214,
+        1.0
+      ],
+      "p_exact": 0.5,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "effort",
+      "comparison": "S-N",
+      "n": 15,
+      "better": 4,
+      "worse": 4,
+      "ties": 7,
+      "non_tied_n": 8,
+      "mean_difference": 0.0,
+      "median_difference": 0.0,
+      "mean_difference_ci95": [
+        -0.4,
+        0.3333333333333333
+      ],
+      "sign_effect": 0.0,
+      "sign_effect_ci95": [
+        -0.6859744590258839,
+        0.685974459025884
+      ],
+      "p_exact": 1.0,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "effort",
+      "comparison": "S-E",
+      "n": 15,
+      "better": 5,
+      "worse": 4,
+      "ties": 6,
+      "non_tied_n": 9,
+      "mean_difference": -0.06666666666666667,
+      "median_difference": 0.0,
+      "mean_difference_ci95": [
+        -0.4666666666666667,
+        0.3333333333333333
+      ],
+      "sign_effect": 0.1111111111111111,
+      "sign_effect_ci95": [
+        -0.5759829864428083,
+        0.726008675469672
+      ],
+      "p_exact": 1.0,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "effort",
+      "comparison": "S-A",
+      "n": 15,
+      "better": 11,
+      "worse": 0,
+      "ties": 4,
+      "non_tied_n": 11,
+      "mean_difference": -0.7333333333333333,
+      "median_difference": -1.0,
+      "mean_difference_ci95": [
+        -0.9333333333333333,
+        -0.4666666666666667
+      ],
+      "sign_effect": 1.0,
+      "sign_effect_ci95": [
+        0.4301716941636913,
+        1.0
+      ],
+      "p_exact": 0.0009765625,
+      "p_holm": 0.009765625
+    },
+    {
+      "metric": "satisfaction",
+      "comparison": "S-N",
+      "n": 15,
+      "better": 6,
+      "worse": 1,
+      "ties": 8,
+      "non_tied_n": 7,
+      "mean_difference": 0.3333333333333333,
+      "median_difference": 0.0,
+      "mean_difference_ci95": [
+        0.0,
+        0.6
+      ],
+      "sign_effect": 0.7142857142857143,
+      "sign_effect_ci95": [
+        -0.15744639408639627,
+        0.9927794062761983
+      ],
+      "p_exact": 0.125,
+      "p_holm": 0.75
+    },
+    {
+      "metric": "satisfaction",
+      "comparison": "S-E",
+      "n": 15,
+      "better": 7,
+      "worse": 5,
+      "ties": 3,
+      "non_tied_n": 12,
+      "mean_difference": 0.13333333333333333,
+      "median_difference": 0.0,
+      "mean_difference_ci95": [
+        -0.3333333333333333,
+        0.5333333333333333
+      ],
+      "sign_effect": 0.16666666666666666,
+      "sign_effect_ci95": [
+        -0.44666062863578837,
+        0.6966955403831305
+      ],
+      "p_exact": 0.7744140625,
+      "p_holm": 1.0
+    },
+    {
+      "metric": "satisfaction",
+      "comparison": "S-A",
+      "n": 15,
+      "better": 7,
+      "worse": 0,
+      "ties": 8,
+      "non_tied_n": 7,
+      "mean_difference": 0.4666666666666667,
+      "median_difference": 0.0,
+      "mean_difference_ci95": [
+        0.2,
+        0.7333333333333333
+      ],
+      "sign_effect": 1.0,
+      "sign_effect_ci95": [
+        0.18076720554990278,
+        1.0
+      ],
+      "p_exact": 0.015625,
+      "p_holm": 0.125
+    }
+  ],
+  "friedman": {
+    "interruption": {
+      "n": 15,
+      "statistic": 43.17021276595743,
+      "df": 3,
+      "kendall_w": 0.9593380614657206,
+      "permutation_p": 1e-05,
+      "extreme_permutations": 0,
+      "permutations": 99999,
+      "seed": 20261022,
+      "tie_correction": 0.94,
+      "scipy_statistic_matches": true,
+      "kendall_w_bootstrap_ci95": [
+        0.9379629629629626,
+        0.9854014598540146
+      ],
+      "p_holm": 4e-05
+    },
+    "control": {
+      "n": 15,
+      "statistic": 12.488372093023251,
+      "df": 3,
+      "kendall_w": 0.27751937984496117,
+      "permutation_p": 0.00454,
+      "extreme_permutations": 453,
+      "permutations": 99999,
+      "seed": 20261023,
+      "tie_correction": 0.5733333333333333,
+      "scipy_statistic_matches": true,
+      "kendall_w_bootstrap_ci95": [
+        0.11238095238095303,
+        0.5895600191296013
+      ],
+      "p_holm": 0.00908
+    },
+    "effort": {
+      "n": 15,
+      "statistic": 19.846153846153832,
+      "df": 3,
+      "kendall_w": 0.44102564102564074,
+      "permutation_p": 3e-05,
+      "extreme_permutations": 2,
+      "permutations": 99999,
+      "seed": 20261024,
+      "tie_correction": 0.6933333333333334,
+      "scipy_statistic_matches": true,
+      "kendall_w_bootstrap_ci95": [
+        0.3333333333333333,
+        0.6560000000000001
+      ],
+      "p_holm": 9e-05
+    },
+    "satisfaction": {
+      "n": 15,
+      "statistic": 8.700000000000028,
+      "df": 3,
+      "kendall_w": 0.19333333333333394,
+      "permutation_p": 0.03833,
+      "extreme_permutations": 3832,
+      "permutations": 99999,
+      "seed": 20261025,
+      "tie_correction": 0.5333333333333333,
+      "scipy_statistic_matches": true,
+      "kendall_w_bootstrap_ci95": [
+        0.1206349206349203,
+        0.4564102564102567
+      ],
+      "p_holm": 0.03833
+    }
+  },
+  "versions": {
+    "numpy": "2.2.6",
+    "openpyxl": "3.1.5",
+    "scipy": "1.14.1",
+    "matplotlib": "3.9.2"
+  },
+  "methods": {
+    "seed": 20261021,
+    "bootstrap_replicates": 20000,
+    "bootstrap_unit": "participant, preserving all four conditions",
+    "bootstrap_interval": "percentile 95%; unadjusted; mean score differences are descriptive ordinal-scale summaries",
+    "pairwise_test": "two-sided exact binomial sign test on non-tied paired differences",
+    "pairwise_family": "all 12 S-vs-N/E/A by four items; Holm adjusted",
+    "omnibus_family": "four exploratory Friedman participant-wise label permutation tests; Holm adjusted",
+    "causal_identification": false,
+    "fixed_order_confounding": true,
+    "preference_ci": "Wilson 95%, denominator all included participants"
+  },
+  "categorical_counts": {
+    "2": {
+      "3": 15
+    },
+    "3": {
+      "1": 15
+    },
+    "4": {
+      "1": 3,
+      "2": 10,
+      "3": 2
+    },
+    "5": {
+      "missing": 15
+    },
+    "6": {
+      "missing": 15
+    },
+    "28": {
+      "2": 5,
+      "4": 7,
+      "5": 2,
+      "1": 1
+    }
+  },
+  "preferences": {
+    "N": {
+      "n": 1,
+      "percent": 6.666666666666667,
+      "ci95": [
+        0.011866895493268553,
+        0.2981652987378003
+      ]
+    },
+    "E": {
+      "n": 5,
+      "percent": 33.333333333333336,
+      "ci95": [
+        0.1517632443971473,
+        0.5828645226148023
+      ]
+    },
+    "A": {
+      "n": 0,
+      "percent": 0.0,
+      "ci95": [
+        0.0,
+        0.20388330103584862
+      ]
+    },
+    "S": {
+      "n": 7,
+      "percent": 46.666666666666664,
+      "ci95": [
+        0.24809535365737387,
+        0.698830199745016
+      ]
+    },
+    "no_preference": {
+      "n": 2,
+      "percent": 13.333333333333334,
+      "ci95": [
+        0.03736125910306537,
+        0.37881982832322364
+      ]
+    },
+    "none": {
+      "n": 0,
+      "percent": 0.0,
+      "ci95": [
+        0.0,
+        0.20388330103584862
+      ]
+    },
+    "cannot_judge": {
+      "n": 0,
+      "percent": 0.0,
+      "ci95": [
+        0.0,
+        0.20388330103584862
+      ]
+    },
+    "missing": {
+      "n": 0,
+      "percent": 0.0,
+      "ci95": [
+        0.0,
+        0.20388330103584862
+      ]
+    }
+  },
+  "qualitative": {
+    "rules": {
+      "execute_then_repair": [
+        "先按指令执行"
+      ],
+      "selective_feels_easier": [
+        "省心"
+      ],
+      "native_selective_not_distinct": [
+        "区别不明显"
+      ],
+      "prefers_native_spontaneity": [
+        "原味AI"
+      ],
+      "limited_vr_relevance": [
+        "不太会用到VR"
+      ],
+      "novelty_overwhelms_comparison": [
+        "新鲜"
+      ]
+    },
+    "counts": {
+      "execute_then_repair": 5,
+      "selective_feels_easier": 7,
+      "native_selective_not_distinct": 1,
+      "limited_vr_relevance": 1,
+      "prefers_native_spontaneity": 1,
+      "novelty_overwhelms_comparison": 1
+    },
+    "unclassified_nonempty": 0,
+    "preference_counts": {
+      "execute_then_repair": {
+        "E": 5
+      },
+      "selective_feels_easier": {
+        "S": 7
+      },
+      "native_selective_not_distinct": {
+        "S": 1
+      },
+      "limited_vr_relevance": {
+        "no_preference": 1
+      },
+      "prefers_native_spontaneity": {
+        "N": 1
+      },
+      "novelty_overwhelms_comparison": {
+        "no_preference": 1
+      }
+    },
+    "unit": "participant; each theme counted at most once per participant; multiple labels allowed",
+    "verbatim_quotes_used": false
+  },
+  "quality": {
+    "unique_participant_ids": 15,
+    "missing_participant_ids": 0,
+    "duplicate_participant_ids": 0,
+    "canonical_ids": 15,
+    "total_rating_cells": 240,
+    "valid_rating_cells": 240,
+    "missing_rating_cells": 0,
+    "option8_cells": 0,
+    "complete_four_round_participants": 15,
+    "identical_rating_vector_groups": 2,
+    "participants_in_identical_rating_vector_groups": 4,
+    "duplicate_score_vectors_excluded": false,
+    "open_answer_nonempty": {
+      "12": 0,
+      "17": 0,
+      "22": 0,
+      "27": 0,
+      "29": 15,
+      "30": 0,
+      "31": 0,
+      "32": 0
+    },
+    "q29_distinct_summary_texts": 6,
+    "zero_variance_rating_questions": [
+      13,
+      18,
+      20
+    ],
+    "recorded_entry_time_min": "2026/10/21 13:46:16",
+    "recorded_entry_time_max": "2026/10/21 13:57:06",
+    "distinct_recorded_ips": 1,
+    "source_counts": {
+      "链接": 15
+    },
+    "timestamps_are_transcription_metadata": true,
+    "paper_originals_independently_verified": false
+  }
+}

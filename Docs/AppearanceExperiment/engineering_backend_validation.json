@@ -1,0 +1,669 @@
+{
+  "created_utc": "2026-10-18T10:48:54.350860+00:00",
+  "scope": "engineering debug only; no participants and no renderer/VR validation",
+  "health": {
+    "ok": true,
+    "mode": "live",
+    "model": "deepseek-v4-flash",
+    "policy_version": "appearance-backend-v0.1",
+    "durability": "JSONL audit logs; active sessions are memory-only"
+  },
+  "provider_attempt_budget": 6,
+  "public_task_resets": [
+    {
+      "task_id": "A_T1",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 1,
+        "jacket_color": "blue",
+        "accessory": "hat",
+        "scale": 1.0
+      }
+    },
+    {
+      "task_id": "B_T1",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 2,
+        "jacket_color": "green",
+        "accessory": "hat",
+        "scale": 0.95
+      }
+    },
+    {
+      "task_id": "C_T1",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 3,
+        "jacket_color": "purple",
+        "accessory": "glasses",
+        "scale": 0.9
+      }
+    },
+    {
+      "task_id": "D_T1",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 4,
+        "jacket_color": "purple",
+        "accessory": "none",
+        "scale": 1.05
+      }
+    },
+    {
+      "task_id": "A_T2",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 5,
+        "jacket_color": "green",
+        "accessory": "glasses",
+        "scale": 1.0
+      }
+    },
+    {
+      "task_id": "B_T2",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 6,
+        "jacket_color": "orange",
+        "accessory": "none",
+        "scale": 1.0
+      }
+    },
+    {
+      "task_id": "C_T2",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 7,
+        "jacket_color": "red",
+        "accessory": "hat",
+        "scale": 0.9
+      }
+    },
+    {
+      "task_id": "D_T2",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 8,
+        "jacket_color": "gray",
+        "accessory": "glasses",
+        "scale": 1.1
+      }
+    },
+    {
+      "task_id": "A_T3",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 9,
+        "jacket_color": "orange",
+        "accessory": "hat",
+        "scale": 1.0
+      }
+    },
+    {
+      "task_id": "B_T3",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 10,
+        "jacket_color": "gray",
+        "accessory": "none",
+        "scale": 0.95
+      }
+    },
+    {
+      "task_id": "C_T3",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 11,
+        "jacket_color": "red",
+        "accessory": "glasses",
+        "scale": 1.1
+      }
+    },
+    {
+      "task_id": "D_T3",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 12,
+        "jacket_color": "blue",
+        "accessory": "glasses",
+        "scale": 1.0
+      }
+    },
+    {
+      "task_id": "A_T4",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 13,
+        "jacket_color": "green",
+        "accessory": "none",
+        "scale": 1.0
+      }
+    },
+    {
+      "task_id": "B_T4",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 14,
+        "jacket_color": "purple",
+        "accessory": "hat",
+        "scale": 1.0
+      }
+    },
+    {
+      "task_id": "C_T4",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 15,
+        "jacket_color": "orange",
+        "accessory": "none",
+        "scale": 0.95
+      }
+    },
+    {
+      "task_id": "D_T4",
+      "status": 200,
+      "passed": true,
+      "state": {
+        "revision": 16,
+        "jacket_color": "gray",
+        "accessory": "hat",
+        "scale": 1.1
+      }
+    }
+  ],
+  "cases": [
+    {
+      "label": "clear_execute",
+      "condition": "E",
+      "task_id": "A_T1",
+      "session_id": "98702ce271b34e089b7e0aef15479ada",
+      "request_http_status": 200,
+      "initial_decision": "ACT",
+      "state_after_request": {
+        "revision": 2,
+        "jacket_color": "orange",
+        "accessory": "hat",
+        "scale": 1.0
+      },
+      "model_calls": [
+        {
+          "attempt": 1,
+          "duration_seconds": 1.0199714620030136,
+          "requested_model": "deepseek-v4-flash",
+          "response_model": "deepseek-flash",
+          "role": "proposer",
+          "status": "ok",
+          "system_prompt_sha256": "b895d8a9dfdc7ed2cb90d70c2578f58d6e2ae8806cee566ce4781089184656d4",
+          "usage": {
+            "completion_tokens": 87,
+            "prompt_cache_hit_tokens": 256,
+            "prompt_cache_miss_tokens": 231,
+            "prompt_tokens": 487,
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "total_tokens": 574
+          }
+        }
+      ],
+      "proposal": {
+        "candidates": [
+          {
+            "evidence": "把外衣改成橙色，帽子和大小保持不变",
+            "id": "c1",
+            "patch": {
+              "jacket_color": "orange"
+            }
+          }
+        ],
+        "default_id": "c1",
+        "explicit_override": false,
+        "possible_soft_preference_overrides": [],
+        "reason": "User explicitly requests changing the jacket color to orange while keeping hat and scale unchanged.",
+        "supported": true,
+        "unresolved_references": []
+      },
+      "gate": {
+        "decision": "ACT",
+        "reason": "ALWAYS_EXECUTE",
+        "question": null
+      },
+      "undo": {
+        "field": "jacket_color",
+        "http_status": 200,
+        "restored_field": true,
+        "preserved_other_fields": true,
+        "state": {
+          "revision": 3,
+          "jacket_color": "blue",
+          "accessory": "hat",
+          "scale": 1.0
+        }
+      },
+      "finish_http_status": 200,
+      "passed_transport_and_state": true
+    },
+    {
+      "label": "clear_confirm",
+      "condition": "A",
+      "task_id": "A_T1",
+      "session_id": "a2610ee007fd4be58398e4fd9b571883",
+      "request_http_status": 200,
+      "initial_decision": "ASK",
+      "state_after_request": {
+        "revision": 2,
+        "jacket_color": "blue",
+        "accessory": "hat",
+        "scale": 1.0
+      },
+      "model_calls": [
+        {
+          "attempt": 1,
+          "duration_seconds": 0.8511954059977143,
+          "requested_model": "deepseek-v4-flash",
+          "response_model": "deepseek-flash",
+          "role": "proposer",
+          "status": "ok",
+          "system_prompt_sha256": "b895d8a9dfdc7ed2cb90d70c2578f58d6e2ae8806cee566ce4781089184656d4",
+          "usage": {
+            "completion_tokens": 88,
+            "prompt_cache_hit_tokens": 256,
+            "prompt_cache_miss_tokens": 231,
+            "prompt_tokens": 487,
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "total_tokens": 575
+          }
+        }
+      ],
+      "proposal": {
+        "candidates": [
+          {
+            "evidence": "把外衣改成橙色，帽子和大小保持不变",
+            "id": "c1",
+            "patch": {
+              "jacket_color": "orange"
+            }
+          }
+        ],
+        "default_id": "c1",
+        "explicit_override": false,
+        "possible_soft_preference_overrides": [],
+        "reason": "User explicitly requests changing the jacket color to orange while keeping the hat and scale unchanged.",
+        "supported": true,
+        "unresolved_references": []
+      },
+      "gate": {
+        "decision": "ASK",
+        "reason": "ALWAYS_ASK",
+        "question": {
+          "options": [
+            {
+              "id": "c1",
+              "label": "外衣改为橙色"
+            },
+            {
+              "id": "other",
+              "label": "其他／都不是（请补充）"
+            },
+            {
+              "id": "cancel",
+              "label": "取消，保持当前外形"
+            }
+          ],
+          "text": "请确认是否执行这项修改："
+        }
+      },
+      "answer_http_status": 200,
+      "state_after_answer": {
+        "revision": 3,
+        "jacket_color": "orange",
+        "accessory": "hat",
+        "scale": 1.0
+      },
+      "undo": {
+        "field": "jacket_color",
+        "http_status": 200,
+        "restored_field": true,
+        "preserved_other_fields": true,
+        "state": {
+          "revision": 4,
+          "jacket_color": "blue",
+          "accessory": "hat",
+          "scale": 1.0
+        }
+      },
+      "finish_http_status": 200,
+      "passed_transport_and_state": true
+    },
+    {
+      "label": "clear_native",
+      "condition": "N",
+      "task_id": "A_T1",
+      "session_id": "4bee928656df4d4e98f7d16698f5bc67",
+      "request_http_status": 200,
+      "initial_decision": "ACT",
+      "state_after_request": {
+        "revision": 2,
+        "jacket_color": "orange",
+        "accessory": "hat",
+        "scale": 1.0
+      },
+      "model_calls": [
+        {
+          "attempt": 1,
+          "duration_seconds": 0.8376210409987834,
+          "requested_model": "deepseek-v4-flash",
+          "response_model": "deepseek-flash",
+          "role": "proposer",
+          "status": "ok",
+          "system_prompt_sha256": "b895d8a9dfdc7ed2cb90d70c2578f58d6e2ae8806cee566ce4781089184656d4",
+          "usage": {
+            "completion_tokens": 87,
+            "prompt_cache_hit_tokens": 256,
+            "prompt_cache_miss_tokens": 231,
+            "prompt_tokens": 487,
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "total_tokens": 574
+          }
+        },
+        {
+          "attempt": 1,
+          "duration_seconds": 0.8821789249996073,
+          "requested_model": "deepseek-v4-flash",
+          "response_model": "deepseek-flash",
+          "role": "native_gate",
+          "status": "ok",
+          "system_prompt_sha256": "ba56868c9e938766aa6788a274b781f0fd2be7a19ca22cb8deed6693b69c346c",
+          "usage": {
+            "completion_tokens": 49,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 388,
+            "prompt_tokens": 388,
+            "prompt_tokens_details": {
+              "cached_tokens": 0
+            },
+            "total_tokens": 437
+          }
+        }
+      ],
+      "proposal": {
+        "candidates": [
+          {
+            "evidence": "把外衣改成橙色，帽子和大小保持不变",
+            "id": "c1",
+            "patch": {
+              "jacket_color": "orange"
+            }
+          }
+        ],
+        "default_id": "c1",
+        "explicit_override": false,
+        "possible_soft_preference_overrides": [],
+        "reason": "User explicitly requests changing the jacket color to orange while keeping hat and scale unchanged.",
+        "supported": true,
+        "unresolved_references": []
+      },
+      "gate": {
+        "decision": "ACT",
+        "reason": "The request is explicit and unambiguous: change jacket color to orange while keeping hat and scale unchanged. The default candidate c1 exactly matches this, is supported, and has no unresolved references or soft preference conflicts.",
+        "question": null
+      },
+      "undo": {
+        "field": "jacket_color",
+        "http_status": 200,
+        "restored_field": true,
+        "preserved_other_fields": true,
+        "state": {
+          "revision": 3,
+          "jacket_color": "blue",
+          "accessory": "hat",
+          "scale": 1.0
+        }
+      },
+      "finish_http_status": 200,
+      "passed_transport_and_state": true
+    },
+    {
+      "label": "historical_reference",
+      "condition": "S",
+      "task_id": "A_T4",
+      "session_id": "8d94ae1acef4428ba9faca8ab5e57f47",
+      "request_http_status": 200,
+      "initial_decision": "ASK",
+      "state_after_request": {
+        "revision": 2,
+        "jacket_color": "green",
+        "accessory": "none",
+        "scale": 1.0
+      },
+      "model_calls": [
+        {
+          "attempt": 1,
+          "duration_seconds": 1.09820473900254,
+          "requested_model": "deepseek-v4-flash",
+          "response_model": "deepseek-flash",
+          "role": "proposer",
+          "status": "ok",
+          "system_prompt_sha256": "b895d8a9dfdc7ed2cb90d70c2578f58d6e2ae8806cee566ce4781089184656d4",
+          "usage": {
+            "completion_tokens": 143,
+            "prompt_cache_hit_tokens": 384,
+            "prompt_cache_miss_tokens": 158,
+            "prompt_tokens": 542,
+            "prompt_tokens_details": {
+              "cached_tokens": 384
+            },
+            "total_tokens": 685
+          }
+        }
+      ],
+      "proposal": {
+        "candidates": [
+          {
+            "evidence": "Most recent prior color before current green was purple.",
+            "id": "c1",
+            "patch": {
+              "jacket_color": "purple"
+            }
+          },
+          {
+            "evidence": "Earlier prior color in history was blue.",
+            "id": "c2",
+            "patch": {
+              "jacket_color": "blue"
+            }
+          }
+        ],
+        "default_id": "c1",
+        "explicit_override": false,
+        "possible_soft_preference_overrides": [],
+        "reason": "The user asks to switch back to a previous color, but the history contains multiple prior jacket colors (blue and purple), so the referent is ambiguous.",
+        "supported": true,
+        "unresolved_references": [
+          "之前那个颜色 (the previous color) could refer to purple or blue"
+        ]
+      },
+      "gate": {
+        "decision": "ASK",
+        "reason": "R1_REFERENCE",
+        "question": {
+          "options": [
+            {
+              "id": "c2",
+              "label": "外衣改为蓝色"
+            },
+            {
+              "id": "c1",
+              "label": "外衣改为紫色"
+            },
+            {
+              "id": "other",
+              "label": "其他／都不是（请补充）"
+            },
+            {
+              "id": "cancel",
+              "label": "取消，保持当前外形"
+            }
+          ],
+          "text": "你希望进行哪项修改？"
+        }
+      },
+      "answer_http_status": 200,
+      "state_after_answer": {
+        "revision": 3,
+        "jacket_color": "purple",
+        "accessory": "none",
+        "scale": 1.0
+      },
+      "undo": {
+        "field": "jacket_color",
+        "http_status": 200,
+        "restored_field": true,
+        "preserved_other_fields": true,
+        "state": {
+          "revision": 4,
+          "jacket_color": "green",
+          "accessory": "none",
+          "scale": 1.0
+        }
+      },
+      "finish_http_status": 200,
+      "passed_transport_and_state": true
+    },
+    {
+      "label": "soft_preference",
+      "condition": "S",
+      "task_id": "B_T4",
+      "session_id": "48756103cbe043028e45a7f02bfcaf18",
+      "request_http_status": 200,
+      "initial_decision": "ASK",
+      "state_after_request": {
+        "revision": 2,
+        "jacket_color": "purple",
+        "accessory": "hat",
+        "scale": 1.0
+      },
+      "model_calls": [
+        {
+          "attempt": 1,
+          "duration_seconds": 1.390376166000351,
+          "requested_model": "deepseek-v4-flash",
+          "response_model": "deepseek-flash",
+          "role": "proposer",
+          "status": "ok",
+          "system_prompt_sha256": "b895d8a9dfdc7ed2cb90d70c2578f58d6e2ae8806cee566ce4781089184656d4",
+          "usage": {
+            "completion_tokens": 165,
+            "prompt_cache_hit_tokens": 256,
+            "prompt_cache_miss_tokens": 241,
+            "prompt_tokens": 497,
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "total_tokens": 662
+          }
+        }
+      ],
+      "proposal": {
+        "candidates": [
+          {
+            "evidence": "“轻便的样子”与当前帽子配饰形成对比，移除帽子是最直接的轻便化解释",
+            "id": "c1",
+            "patch": {
+              "accessory": "none"
+            }
+          },
+          {
+            "evidence": "“轻便”也可解释为更小/更轻的视觉比例",
+            "id": "c2",
+            "patch": {
+              "scale": 0.9
+            }
+          }
+        ],
+        "default_id": "c1",
+        "explicit_override": false,
+        "possible_soft_preference_overrides": [
+          "通常保留帽子，之后的修改也维持这个偏好。"
+        ],
+        "reason": "用户要求“换个轻便的样子”，这是一个主观外观请求，没有指定具体字段；最合理的具体解释是移除帽子，因为帽子是当前配饰，移除后更显轻便。",
+        "supported": true,
+        "unresolved_references": []
+      },
+      "gate": {
+        "decision": "ASK",
+        "reason": "R2_SOFT_PREFERENCE",
+        "question": {
+          "options": [
+            {
+              "id": "c2",
+              "label": "比例改为0.90"
+            },
+            {
+              "id": "c1",
+              "label": "配饰改为无配饰"
+            },
+            {
+              "id": "other",
+              "label": "其他／都不是（请补充）"
+            },
+            {
+              "id": "cancel",
+              "label": "取消，保持当前外形"
+            }
+          ],
+          "text": "你希望进行哪项修改？"
+        }
+      },
+      "answer_http_status": 200,
+      "state_after_answer": {
+        "revision": 3,
+        "jacket_color": "purple",
+        "accessory": "none",
+        "scale": 1.0
+      },
+      "undo": {
+        "field": "accessory",
+        "http_status": 200,
+        "restored_field": true,
+        "preserved_other_fields": true,
+        "state": {
+          "revision": 4,
+          "jacket_color": "purple",
+          "accessory": "hat",
+          "scale": 1.0
+        }
+      },
+      "finish_http_status": 200,
+      "passed_transport_and_state": true
+    }
+  ],
+  "provider_attempts": 6,
+  "all_requested_cases_completed": true,
+  "all_16_public_contexts_reset": true,
+  "limits": [
+    "Backend API/state verification only; no renderer or headset verification.",
+    "R1/R2 proposal observations are model-dependent and are preserved even if a rule does not trigger.",
+    "No participant data, formal efficacy results or calibration claims are implied."
+  ]
+}

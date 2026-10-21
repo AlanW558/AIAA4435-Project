@@ -1,0 +1,37 @@
+[
+  {
+    "page": 1,
+    "gap_to_footer_px": 303,
+    "overflow": false
+  },
+  {
+    "page": 2,
+    "gap_to_footer_px": 188,
+    "overflow": false
+  },
+  {
+    "page": 3,
+    "gap_to_footer_px": 165,
+    "overflow": false
+  },
+  {
+    "page": 4,
+    "gap_to_footer_px": 123,
+    "overflow": false
+  },
+  {
+    "page": 5,
+    "gap_to_footer_px": 187,
+    "overflow": false
+  },
+  {
+    "page": 6,
+    "gap_to_footer_px": 217,
+    "overflow": false
+  },
+  {
+    "page": 7,
+    "gap_to_footer_px": 146,
+    "overflow": false
+  }
+]

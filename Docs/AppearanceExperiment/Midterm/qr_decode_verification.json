@@ -1,0 +1,15 @@
+{
+  "file": "AIAA4435-Project/Docs/AppearanceExperiment/Study/survey/wjx_389439995_qr.png",
+  "sha256": "cbac65de017acb2af5f3c25dddad0aba8bfef715a365b798b4af53c29f9cecfc",
+  "decoder": "zxing-cpp 3.1.1",
+  "decoded_url": "https://v.wjx.cn/vm/QZCoEdh.aspx",
+  "matches_published_url": true,
+  "method": "本地独立二维码解码，未提交答卷",
+  "dimensions": [
+    1024,
+    1024
+  ],
+  "embedded_pdf_page": 7,
+  "embedded_pdf_decoded_url": "https://v.wjx.cn/vm/QZCoEdh.aspx",
+  "embedded_pdf_matches_published_url": true
+}

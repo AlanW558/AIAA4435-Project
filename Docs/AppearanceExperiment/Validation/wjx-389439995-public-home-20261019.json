@@ -1,0 +1,80 @@
+{
+  "all_text_answers_empty": true,
+  "page_count": 6,
+  "page_question_ids": [
+    {
+      "page": "fieldset1",
+      "questions": [
+        "div1",
+        "div2",
+        "div3",
+        "div4",
+        "div5",
+        "div6",
+        "div7"
+      ]
+    },
+    {
+      "page": "fieldset2",
+      "questions": [
+        "div8",
+        "div9",
+        "div10",
+        "div11",
+        "div12"
+      ]
+    },
+    {
+      "page": "fieldset3",
+      "questions": [
+        "div13",
+        "div14",
+        "div15",
+        "div16",
+        "div17"
+      ]
+    },
+    {
+      "page": "fieldset4",
+      "questions": [
+        "div18",
+        "div19",
+        "div20",
+        "div21",
+        "div22"
+      ]
+    },
+    {
+      "page": "fieldset5",
+      "questions": [
+        "div23",
+        "div24",
+        "div25",
+        "div26",
+        "div27"
+      ]
+    },
+    {
+      "page": "fieldset6",
+      "questions": [
+        "div28",
+        "div29",
+        "div30",
+        "div31",
+        "div32"
+      ]
+    }
+  ],
+  "question_count": 32,
+  "selected_options": 0,
+  "title": "虚拟角色外形修改研究（全流程）",
+  "required_questions": [
+    1,
+    2,
+    3
+  ],
+  "optional_question_count": 29,
+  "public_url": "https://v.wjx.cn/vm/QZCoEdh.aspx",
+  "answers_submitted_by_agent": 0,
+  "verification_scope": "只读公开首页及其已加载DOM；未填写、翻页或提交"
+}

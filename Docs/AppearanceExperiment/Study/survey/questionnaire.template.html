@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>虚拟角色外形修改研究问卷</title>
+<style>
+[hidden]{display:none!important}
+:root{font-family:system-ui,sans-serif;color:#192b3b;background:#f3f5f8;line-height:1.5}body{margin:0}main{max-width:850px;margin:24px auto;padding:24px;background:white;border-radius:16px}h1{font-size:1.6rem;margin:.5rem 0}h2{font-size:1.2rem}label{display:block;margin:.4rem 0}input[type=text],textarea,select{font:inherit;box-sizing:border-box;padding:10px;border:1px solid #899aaa;border-radius:6px;width:100%}textarea{min-height:85px}input[type=radio]{margin-right:8px;accent-color:#185f99}fieldset{border:0;border-top:1px solid #d8e1ea;margin:24px 0;padding:20px 0 0}legend{font-weight:650;padding:0 8px 0 0}button{font:inherit;padding:10px 14px;border:1px solid #185f99;border-radius:7px;background:#185f99;color:white;cursor:pointer}button.secondary{background:white;color:#185f99}button:disabled{opacity:.5;cursor:not-allowed}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.notice{background:#edf4fb;border-left:4px solid #185f99;padding:12px;margin:12px 0}.help{font-size:.9rem;color:#45576a;margin:4px 0 10px}.choice{padding:8px;background:#f4f7fa;border-radius:6px}.optional{font-size:.8rem;font-weight:400;color:#536274}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}#status{min-height:24px;font-weight:600}details{margin:16px 0}summary{cursor:pointer}a{color:#185f99}@media(max-width:600px){main{margin:0;border-radius:0;padding:18px}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main>
+<div class="notice">这是本地问卷。点击“下载回答”后，答案会保存为文件，不会上传。请按现场约定的方式把文件交给研究者。刷新或关闭页面前，请先下载要保留的回答。</div>
+<nav aria-label="选择问卷"><label for="formSelect">选择问卷</label><select id="formSelect"><option value="pre">实验开始前</option><option value="block">每轮结束后</option><option value="exit">全部结束后</option></select></nav>
+<h1 id="title"></h1><p id="description"></p>
+<details id="studyInfo"><summary>研究说明</summary><div id="information"></div></details>
+<form id="survey" novalidate>
+<div class="row"><label>研究者提供的参与者编号 <input id="participant" name="participant" type="text" autocomplete="off" maxlength="48" required placeholder="请填写研究者提供的编号"></label><label>本次实验类型 <select id="phase" name="phase" required><option value="">请选择实验类型</option><option value="debug">调试</option><option value="pilot">预实验</option><option value="formal">正式实验</option></select></label></div>
+<p class="help">请按研究者的安排选择实验类型。同一人的三份问卷和四轮体验使用相同的参与者编号与类型。</p>
+<details id="researcherTools"><summary>研究者：关联记录</summary><p class="help">关联编号会自动生成，无需参与者填写。先下载关联配置，用它启动互动界面；三份问卷保持同一个编号。重新打开页面时，可读取该配置继续填写。</p><label>自动生成的关联编号 <input id="session" type="text" readonly autocomplete="off"></label><button type="button" id="downloadSession" class="secondary">下载关联配置</button><label>读取已有的关联配置 <input id="loadSession" type="file" accept="application/json,.json"></label></details>
+<label id="blockLabel">刚完成的轮次 <select id="block"><option value="">请选择轮次</option><option value="1">第 1 轮</option><option value="2">第 2 轮</option><option value="3">第 3 轮</option><option value="4">第 4 轮</option></select></label>
+<div id="questions"></div><div class="actions"><button type="submit" id="save">下载回答</button><button type="button" class="secondary" id="clear">清空本表回答</button><button type="button" class="secondary" id="nextParticipant">换下一位</button></div><p id="status" role="status" aria-live="polite"></p>
+</form><p class="help">中文文案第 3 版。页面不加载外部脚本，不进行访问统计，也不自动保存回答。请保留下载的文件，直到研究者确认已收到。</p>
+</main>
+<script id="spec" type="application/json">__SPEC_JSON__</script>
+<script>
+'use strict';
+const spec=JSON.parse(document.getElementById('spec').textContent);
+const params=new URLSearchParams(location.search);
+const formSelect=document.getElementById('formSelect');
+const survey=document.getElementById('survey');
+const questionArea=document.getElementById('questions');
+const statusArea=document.getElementById('status');
+let started=Date.now();
+let savedCount=0;
+const participantInput=document.getElementById('participant');
+const phaseInput=document.getElementById('phase');
+const sessionInput=document.getElementById('session');
+let identity={participant_id:'',phase:'',study_session_id:''};
+function validParticipant(pid,phase){
+  const patterns={debug:/^(DEBUG|ENGINEERING)[A-Z0-9_-]{0,36}$/,pilot:/^PILOT0[12]$/,formal:/^(P00[1-9]|P01[0-9]|P020)$/};
+  return Boolean(patterns[phase]&&patterns[phase].test(pid));
+}
+function newSessionId(pid,phase){
+  const bytes=crypto.getRandomValues(new Uint8Array(8));
+  return phase+'_'+pid+'_'+Date.now().toString(36)+'_'+Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+}
+function downloadObject(value,name){
+  const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)+'\n'],{type:'application/json'}));
+  const a=node('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function hasAnswers(){return Array.from(questionArea.querySelectorAll('input,textarea')).some(e=>e.type==='radio'?e.checked:Boolean(e.value));}
+function setIdentity(pid,phase,sid=''){
+  participantInput.value=pid;phaseInput.value=phase;
+  identity={participant_id:pid,phase,study_session_id:validParticipant(pid,phase)?sid||newSessionId(pid,phase):''};
+  sessionInput.value=identity.study_session_id;
+}
+function identityChanged(){
+  const pid=participantInput.value.trim().toUpperCase(),phase=phaseInput.value;
+  if(pid===identity.participant_id&&phase===identity.phase)return;
+  if(hasAnswers()&&!confirm('更换编号或实验类型会清空本表回答，并生成新的关联编号。确定更换吗？')){
+    participantInput.value=identity.participant_id;phaseInput.value=identity.phase;return;
+  }
+  setIdentity(pid,phase);document.getElementById('block').value='';render();
+}
+function checkIdentity(){
+  identityChanged();
+  if(!phaseInput.value){statusArea.textContent='请选择本次实验类型。';return false;}
+  if(!validParticipant(identity.participant_id,identity.phase)){
+    statusArea.textContent='请核对编号与实验类型：调试用 DEBUG 开头的编号，预实验用 PILOT01 或 PILOT02，正式实验使用已分配的 P001 至 P020 槽位，无需填满。';return false;
+  }
+  return Boolean(identity.study_session_id);
+}
+function node(tag,text,cls){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;}
+function selected(id){const e=survey.querySelector(`input[name="${id}"]:checked`);return e?e.value:null;}
+function currentForm(){return spec.forms.find(f=>f.id===formSelect.value);}
+function refreshConditional(){
+  for(const q of currentForm().questions){
+    const box=document.getElementById('q_'+q.id);
+    const passes=!q.show_if||selected(q.show_if.field)===q.show_if.equals;
+    const consentOK=currentForm().id!=='pre'||q.id==='consent'||selected('consent')==='agree';
+    box.hidden=!(passes&&consentOK);
+    box.querySelectorAll('input,textarea,button').forEach(e=>e.disabled=box.hidden);
+  }
+  if(currentForm().id==='pre'&&selected('consent')==='decline'){
+    statusArea.textContent='你可以结束填写，本次回答没有保存。';
+    document.getElementById('save').disabled=true;
+  }else{statusArea.textContent='';document.getElementById('save').disabled=false;}
+}
+function render(){
+  const f=currentForm();questionArea.replaceChildren();
+  document.getElementById('title').textContent=f.title;
+  document.getElementById('description').textContent=f.description;
+  document.getElementById('studyInfo').open=f.id==='pre';
+  document.getElementById('blockLabel').hidden=f.id!=='block';
+  document.getElementById('block').required=f.id==='block';
+  for(const q of f.questions){
+    const box=node('fieldset');box.id='q_'+q.id;
+    const legend=node('legend',q.title);box.appendChild(legend);
+    if(!q.required)legend.appendChild(node('span','（选填）','optional'));
+    if(q.help)box.appendChild(node('p',q.help,'help'));
+    if(q.options){
+      q.options.forEach((o,i)=>{const label=node('label',undefined,'choice');const input=node('input');input.type='radio';input.name=q.id;input.id=q.id+'_'+i;input.value=String(o.value);input.required=q.required;label.append(input,document.createTextNode(o.label));box.appendChild(label);});
+      if(!q.required){const clear=node('button','清除选择','secondary');clear.type='button';clear.addEventListener('click',()=>{box.querySelectorAll('input').forEach(i=>i.checked=false);refreshConditional();});box.appendChild(clear);}
+    }else{
+      const input=node(q.type==='long_text'?'textarea':'input');if(input.tagName==='INPUT')input.type='text';input.name=q.id;input.id=q.id;input.maxLength=q.max_length||1000;input.required=q.required;input.autocomplete='off';input.setAttribute('aria-label',q.title);box.appendChild(input);
+    }
+    questionArea.appendChild(box);
+  }
+  started=Date.now();savedCount=0;refreshConditional();
+}
+questionArea.addEventListener('change',refreshConditional);
+for(const p of spec.study_information)document.getElementById('information').appendChild(node('p',p));
+if(['pre','block','exit'].includes(params.get('form')))formSelect.value=params.get('form');
+const initialPid=(params.get('participant')||'').trim().toUpperCase();
+const initialPhase=params.get('phase')||(initialPid.startsWith('PILOT')?'pilot':initialPid.startsWith('P')?'formal':/^(DEBUG|ENGINEERING)/.test(initialPid)?'debug':'');
+const suppliedSession=params.get('session')||'';
+setIdentity(initialPid,initialPhase,/^[A-Za-z0-9_-]{3,80}$/.test(suppliedSession)?suppliedSession:'');
+participantInput.addEventListener('change',identityChanged);phaseInput.addEventListener('change',identityChanged);
+if(['1','2','3','4'].includes(params.get('block')))document.getElementById('block').value=params.get('block');
+formSelect.addEventListener('change',()=>{if(!confirm('切换问卷会清空当前未下载的题目回答。确定切换吗？')){formSelect.value=questionArea.dataset.form||'pre';return;}render();questionArea.dataset.form=formSelect.value;});
+document.getElementById('clear').addEventListener('click',()=>{if(confirm('确定清空本表回答吗？参与者编号、实验类型和关联编号会保留。'))render();});
+document.getElementById('nextParticipant').addEventListener('click',()=>{
+  if(!confirm('确定换下一位吗？当前未下载的回答、编号和轮次都会清空。'))return;
+  const cleanUrl=new URL(location.href);for(const key of ['participant','phase','session','block','form'])cleanUrl.searchParams.delete(key);
+  history.replaceState(null,'',cleanUrl.href);
+  setIdentity('','');formSelect.value='pre';document.getElementById('block').value='';document.getElementById('loadSession').value='';document.getElementById('researcherTools').open=false;render();questionArea.dataset.form='pre';
+});
+document.getElementById('downloadSession').addEventListener('click',()=>{
+  if(!checkIdentity())return;
+  downloadObject({schema_version:'appearance-session-v1',...identity},identity.study_session_id+'_session.json');
+  statusArea.textContent='已请求下载关联配置。它不包含问卷答案，请交给研究者用于关联互动日志。';
+});
+document.getElementById('loadSession').addEventListener('change',async event=>{
+  const file=event.target.files[0];if(!file)return;
+  try{
+    if(file.size>4096)throw new Error();
+    const data=JSON.parse(await file.text());
+    if(data.schema_version!=='appearance-session-v1'||!validParticipant(data.participant_id,data.phase)||typeof data.study_session_id!=='string'||!/^[A-Za-z0-9_-]{3,80}$/.test(data.study_session_id))throw new Error();
+    if(hasAnswers()&&!confirm('读取配置会清空本表回答，确定继续吗？'))return;
+    setIdentity(data.participant_id,data.phase,data.study_session_id);document.getElementById('block').value='';render();statusArea.textContent='已读取关联配置，请核对参与者和实验类型。';
+  }catch(error){statusArea.textContent='无法读取。请选择本页面下载的关联配置，不要选择回答文件。';}
+  finally{event.target.value='';}
+});
+survey.addEventListener('submit',event=>{
+ event.preventDefault();const f=currentForm();
+ if(!checkIdentity())return;
+ const pid=identity.participant_id,session=identity.study_session_id;
+ if(f.id==='pre'&&selected('consent')!=='agree'){statusArea.textContent='请先决定是否同意参加。如果不同意，可以直接关闭问卷，无需保存。';return;}
+ const block=f.id==='block'?Number(document.getElementById('block').value):null;
+ if(f.id==='block'&&![1,2,3,4].includes(block)){statusArea.textContent='请选择刚完成的轮次。';return;}
+ const answers={},answerStatus={};
+ for(const q of f.questions){
+   const box=document.getElementById('q_'+q.id);
+   if(box.hidden){answers[q.id]=null;answerStatus[q.id]='not_shown';continue;}
+   let value=q.options?selected(q.id):survey.elements.namedItem(q.id).value.trim();
+   if(value===''||value===null){answers[q.id]=null;answerStatus[q.id]='skipped';continue;}
+   if(q.type==='rating'&&/^[1-7]$/.test(value))value=Number(value);
+   answers[q.id]=value;answerStatus[q.id]=value==='cannot_judge'?'cannot_judge':'answered';
+ }
+ const record={schema_version:spec.schema_version,content_revision:spec.content_revision,language:spec.language,form_id:f.id,participant_id:pid,session_id:session,phase:identity.phase,block,recorded_at_utc:new Date().toISOString(),page_elapsed_ms:Date.now()-started,save_sequence:++savedCount,answers,answer_status:answerStatus};
+ const blob=new Blob([JSON.stringify(record,null,2)+'\n'],{type:'application/json'});const url=URL.createObjectURL(blob);const a=node('a');a.href=url;a.download=`${session}_${f.id}${block?'_'+block:''}_${Date.now()}.json`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ statusArea.textContent='已请求下载。请确认回答文件已保存，再告诉研究者。重复下载会生成新的修订文件，请交给研究者确认保留哪一份。';
+});
+render();questionArea.dataset.form=formSelect.value;
+</script></body></html>

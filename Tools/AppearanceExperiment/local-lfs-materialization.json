@@ -1,0 +1,379 @@
+{
+  "source": "Verified desktop checkout via desktop-ubuntu-ts",
+  "date": "2026-10-18",
+  "only_existing_lfs_pointers_replaced": true,
+  "files_verified": 74,
+  "bytes": 103912262,
+  "assets": [
+    {
+      "path": "Assets/Project/Materials/Interaction/HintRounded.png",
+      "sha256": "46d4cd5e37936141a82610c205544239e0da4eff9ff42622e38a12370a0fdb13",
+      "size": 1388
+    },
+    {
+      "path": "Assets/Project/Scenes/CloudConversationRoom/LightingData.asset",
+      "sha256": "472dd65145c62f9590f98da89010850f7160a7a7dfafc4dce980e8701f7a93d2",
+      "size": 94748
+    },
+    {
+      "path": "Assets/Project/Scenes/CloudConversationRoom/Lightmap-0_comp_dir.png",
+      "sha256": "4831d21e2c105162cc0a43f8b332cbade5a9d0794e5da7e83b7abc4a06285df9",
+      "size": 225500
+    },
+    {
+      "path": "Assets/Project/Scenes/CloudConversationRoom/Lightmap-0_comp_light.exr",
+      "sha256": "bd1b46ba7201fb151082fb437d7c142abcfea00580b01a53fd1c1832e995c26a",
+      "size": 1103740
+    },
+    {
+      "path": "Assets/Project/Scenes/CloudConversationRoom/ReflectionProbe-0.png",
+      "sha256": "8f4a112ea7470c726be513d97c1a1850612db22f2f02c7649bb59dd6ed060222",
+      "size": 111358
+    },
+    {
+      "path": "Assets/Project/Scenes/CloudConversationRoom/ReflectionProbe-1.exr",
+      "sha256": "5cbeb5b3b0228a9cffef90c4ca843484b49f7a8afca8cfc76400bd7acd619630",
+      "size": 88232
+    },
+    {
+      "path": "Assets/Project/Textures/Room/CloudSeaSky.asset",
+      "sha256": "c6f3f614c968a1885400ffa3a7bd2ca5f471624790fb81816f5d83f13ad68c5c",
+      "size": 67110073
+    },
+    {
+      "path": "Assets/Project/Textures/Room/Linen_Albedo_1K.png",
+      "sha256": "f1bd930e33bd659972d5e8f43105e15d8002619f6934b71aa1aea7d95dd500d0",
+      "size": 1167729
+    },
+    {
+      "path": "Assets/Project/Textures/Room/Linen_Normal_1K.png",
+      "sha256": "0bd836ce12ae5f868e2727481a4c0d68c4913bb3780d9f83bdc4de6876f50238",
+      "size": 41654
+    },
+    {
+      "path": "Assets/Project/Textures/Room/Oak_Albedo_4K.png",
+      "sha256": "ce4848bf005b0b2a48ee4fe83c22c5034c5d7e450317373159fa7665747e347b",
+      "size": 3529291
+    },
+    {
+      "path": "Assets/Project/Textures/Room/Oak_Mask_4K.png",
+      "sha256": "fdcd385efca4edacbd10c8eac06569ff9fee041a0593246e7380be8f0f0f89d7",
+      "size": 605468
+    },
+    {
+      "path": "Assets/Project/Textures/Room/Oak_Normal_4K.png",
+      "sha256": "61a5f43c697999e82e9ebfc7d6aa231175f438513e83b4d5d651fb0ca4f186c3",
+      "size": 2906246
+    },
+    {
+      "path": "Assets/Project/Textures/Room/PolyHaven/oak_veneer_01_diff_4k.jpg",
+      "sha256": "7e8c64811e580ef6664c20524606359c739e6fe030eff5c2c06c3482ecc8b1cf",
+      "size": 12587069
+    },
+    {
+      "path": "Assets/Project/Textures/Room/PolyHaven/oak_veneer_01_nor_gl_4k.jpg",
+      "sha256": "e9bb26f63682773895ce3f0dfd9a43554a719c4caae65b6bcf41712ecfaf3d26",
+      "size": 11584844
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/Models/BlinkVisual.fbx",
+      "sha256": "6ef0d1bff5ac57e9e07fd06a17f427004f0a0fa637dcd1eb1294e1047fbbfada",
+      "size": 34416
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/Models/Pinch_Pointer_LOD0.fbx",
+      "sha256": "0901b06d0d7c847adcec991922ba1bdcf124656c4d39eb678224d43367cef4c8",
+      "size": 36156
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/Models/Primitive_Cylinder.fbx",
+      "sha256": "20915d8a19b7a3449bc67d0a013e7ac745fd0aeb4a0c8d602cdfa9389853e33a",
+      "size": 24656
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/Models/Primitive_Wedge.fbx",
+      "sha256": "524ea23f5c92790b604b0cacd1ae4bffabf2711ed69c9accedd52d619e87dac2",
+      "size": 21728
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/Models/Reticle_Torus.fbx",
+      "sha256": "48b086a822980ec261f87c76baa42f0b2440747d3f85d62e9486abe6280ee2b5",
+      "size": 33056
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/Models/UniversalController.fbx",
+      "sha256": "348e210fda42df410db93a66ee4c0602706ba3d3ea01df78e393171bb1567beb",
+      "size": 317024
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/Textures/DefaultMaterial_AO.png",
+      "sha256": "b2339b3e506470ef40d4c3d6a617bc4f1d3be0cc6910a2c9eecbfb8088b94824",
+      "size": 891404
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/TunnelingVignette/TunnelingVignetteHemisphere.fbx",
+      "sha256": "2b309d5a6d6887a72f1c3ab555b89c71cf32812a36fb99d5c21af128939b2445",
+      "size": 55932
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Audio/Button Pop.wav",
+      "sha256": "4a1b9aa5525b2c782068ef44fb1722d6b3b1f834d1dd350b173967152fb9f0c0",
+      "size": 51580
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Models/Primitive_Blaster.fbx",
+      "sha256": "a7cc9f5a1caaa1d76d55dc5791e68cc497084b9880fafa21b955a3d39b1194e1",
+      "size": 102160
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Models/Primitive_Blaster_Long.fbx",
+      "sha256": "1e6cdfde636489e46cbb1ff7ba717880c4a93b7b4191ca312341ce23af5036c3",
+      "size": 108668
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Models/Primitive_Cylinder.fbx",
+      "sha256": "5f6c584af74d4586e280be697f3b94267717455806e2c5789b6a57e114442847",
+      "size": 23232
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Models/Primitive_Pyramid.fbx",
+      "sha256": "8bbafbfad94a491cfe517742aecb6c7dec21d80c4973a111be3f69b475b54e6f",
+      "size": 21632
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Models/Primitive_Tapered_Cylinder.fbx",
+      "sha256": "93f231a7c73b0a20f1c6efaa7f109d2dba60c57db5c42508c9c1b3c4fe69fc83",
+      "size": 26380
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Models/Primitive_Torus.fbx",
+      "sha256": "48b086a822980ec261f87c76baa42f0b2440747d3f85d62e9486abe6280ee2b5",
+      "size": 33056
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Models/Primitive_Torus_Cut.fbx",
+      "sha256": "95220e5b4e7f5720dd64e49f68148ef289a8329cd716d65093f7ab28d8a93b28",
+      "size": 27856
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Models/PushButton.fbx",
+      "sha256": "cb32c83c2657b4b764ce4e1180b4eb3b4b58646215f044c013a5c361484bc1d8",
+      "size": 47120
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Sprites/Asset.png",
+      "sha256": "9b12c875f2a3cb5e1745e347468e047608560538dc0dff4f8e81eb10f396c695",
+      "size": 1419
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Sprites/Checkmark.png",
+      "sha256": "2b7a63d7530d1de2239fb11066796d7d0a942c261e5c886f5fc5684e984577d5",
+      "size": 690
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Sprites/Circle_60x60 Outline 4.png",
+      "sha256": "8c9604d852305595e1c82f12451f64ebc6a2c9d8f7a7add09094bab9e7428d21",
+      "size": 4796
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Sprites/Circle_60x60_Horizontal.png",
+      "sha256": "61686007644e039f9f2b02c3cc47617f4712c4958f580c98c773d2a7d1d21b42",
+      "size": 3286
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Sprites/Forward.png",
+      "sha256": "1f92a6985149af65bdf4ec5e829e45d6910e327d5467b716a1348f24f246295c",
+      "size": 589
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Sprites/LegibilityMask.png",
+      "sha256": "95530547506c0c8a54b84ba131a4eb384c257fb9cb555a087fa3445af42f3050",
+      "size": 532145
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Sprites/Round Radius 4 Outline.png",
+      "sha256": "8395c288c3a9b7c50d9136ab66027ef49a3c0f2b83994869ff85c535d5757960",
+      "size": 908
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/Starter Assets/DemoSceneAssets/Sprites/Round Radius 4.png",
+      "sha256": "70fdb0c8ad92e3c89cae3126fb2a8b5252d575945431770ded309f186d99938b",
+      "size": 829
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/ControllerDevice/ControllerLeft.png",
+      "sha256": "79d00128f31818a7a1213100d500d91e36e363c1fb49b6f08b4eb0709d6dca8e",
+      "size": 25129
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/ControllerDevice/ControllerOverlayLinesLeft.png",
+      "sha256": "c0527b4f6c8df5f45ebcaf313f2e3d6fcde7951bd99d12df4cd03e3b70e2f200",
+      "size": 10158
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/ControllerDevice/ControllerOverlayLinesRight.png",
+      "sha256": "0edeb277d5b7e94b8a597ddfbdda2e5b71172b86020846e24e15ae46c859e68a",
+      "size": 10696
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/ControllerDevice/ControllerRight.png",
+      "sha256": "29f8ffba3736a2d61c599f8e9703af8b2104216305ea2431e44dad2926c81c20",
+      "size": 25056
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/ControllerDevice/xr_ctlr.png",
+      "sha256": "eaad62a8149dc77b8c3ec9fbdb7c84117004b3f340247e68bacd190a08f4fbf3",
+      "size": 17982
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/General/btn_bgbottom.png",
+      "sha256": "755f08b896235c2d53ac2729da896c253cf3f147dcab154ea21ec2792af421ad",
+      "size": 569
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/General/CloseWindow.png",
+      "sha256": "1c80c4cbc8f0121be5d5873c40753ce07f06d155d2e09fca91278fb0a14de645",
+      "size": 7147
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/General/CycleXRDevices.png",
+      "sha256": "7fbd32c3ecc30c0d2fe5472fc9e30949b3019dd64e620ef0b9da09dd1b814d0c",
+      "size": 7983
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/General/DeviceSimUI_bg.png",
+      "sha256": "a80162589cfec10782e719b9e7bce6ba8ef53f9a89aff7d565a5f9059bd840a2",
+      "size": 1945
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/General/Gripper.png",
+      "sha256": "78f4090624e61dd778b99327d5b2037aa48ac099c8335f4689b341704aaa9e5b",
+      "size": 3154
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/General/KeyboardIcon.png",
+      "sha256": "7536939b48027a0cbaaa5c6f5817c63738c95fa02f062c4dc17d0f8ae171be3c",
+      "size": 5866
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/General/Locked.png",
+      "sha256": "92408e4ef1bb3696169216fa6351a37ae4f61de5829b6440350dc54ff0fb099f",
+      "size": 5673
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/General/Look.png",
+      "sha256": "feb8cd575af71167f58e5c4ef44eac0cf5a0f44317f736095cf944e2bfb1fafe",
+      "size": 6733
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/General/OpenWindow.png",
+      "sha256": "943b1d2156c17918e1694322a3ea5eedc84acd81efe2915345ad2ce7c00a93c2",
+      "size": 5680
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/General/Unlocked.png",
+      "sha256": "19cc1a266418a9552348459d43148df776d382c6ff38ae2d3cc5c8a03416bb59",
+      "size": 4359
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Hands/hand.png",
+      "sha256": "8c544932e641e84ea22470ea49fa25851d4f1d3a12db786eb7380a16d4b22709",
+      "size": 11255
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Hands/Hand_Default.png",
+      "sha256": "722e0ba3e9cf7729152874779fe5b706bfa445aa06105abb0790c6f67952535c",
+      "size": 9881
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Hands/Hand_Fist.png",
+      "sha256": "9783290d04a0fa048dee44fa9e59509fdff020bf44968f546e608bdf07b358ac",
+      "size": 12933
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Hands/Hand_Grab.png",
+      "sha256": "d2c1333963ecbe3bba0387ab456c6f4dc598c461bb68b60cda6e6fac960fa2d6",
+      "size": 15126
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Hands/Hand_Open.png",
+      "sha256": "4f6a75dbce8b6a40a6d80dbc9869d4c62aa3c352103d80559908105b4cde5f1b",
+      "size": 9927
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Hands/Hand_Pinch.png",
+      "sha256": "e96700d9bef361643de9cc6e1b0adadce57d48403df9140f2206b0dbee7cdfc1",
+      "size": 12073
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Hands/Hand_Poke.png",
+      "sha256": "690a3ceacf0f982789674fbf5485e69df4b07754793b2f990e2aee6369841ef4",
+      "size": 7376
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Hands/Hand_Thumb.png",
+      "sha256": "d0d69f35511d5fd0a54123080f99fbd9aa6060315ed3e063af5f5f230563c7fc",
+      "size": 6530
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/HeadDevice/HMD.png",
+      "sha256": "b7b21228ea261ab082789baf67a7a41436abd72ac4965a6f9abb2eb4ab04d13c",
+      "size": 9918
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/HeadDevice/HMDOverlay.png",
+      "sha256": "bd5e682bbc4a4f3bbe3b1ed8ad164a2421585a57dda6589f9e2c0a51af91efdf",
+      "size": 14953
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/HeadDevice/HMD_d.png",
+      "sha256": "e0e515dbfba75cfd610d4330f7118342cea3b096a027a073da521e84e1975313",
+      "size": 11463
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/HeadDevice/Movement.png",
+      "sha256": "174553c9e368846e7569f5e2f5a75c57b2904ad6af6cc1ac2df3b54cd77fd837",
+      "size": 8801
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/HeadDevice/MoveRotateTool.png",
+      "sha256": "65a9676918ef7c04cb741ad71ae4d4023c42ea9b09a95109676856a7886f721d",
+      "size": 15421
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/HeadDevice/XR.png",
+      "sha256": "71fb6bb98ea3d0999a06ab1f5c2740af35cd5b3844339ff70f81d5778de418aa",
+      "size": 8084
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/HeadDevice/xr_hmd.png",
+      "sha256": "610987a545b7f6a1a019be60e3e13e031a4773ce9a596b961a484e98c282702d",
+      "size": 13063
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Mouse/Cursor.png",
+      "sha256": "9a62296ddf332a7b61bdad087a94ab1aa94c5ace006fdaf856ac5e81061286dc",
+      "size": 7340
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Mouse/Mouse.png",
+      "sha256": "ab29e387f72f5cb23da9dcf15ce6b59182f178686b2034b5f8eb5f06cde29555",
+      "size": 8314
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Mouse/MouseMoveAround.png",
+      "sha256": "86f1f9d709374f6a89c8fe64b8dc59981c35925dae25663224897b0bd4a9c7f5",
+      "size": 10824
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Mouse/MouseR.png",
+      "sha256": "2c871b07c0d15df590f79c8fbcc35c1623cbe4c58739e1c73cf9ea3dfd968dd2",
+      "size": 13952
+    },
+    {
+      "path": "Assets/Samples/XR Interaction Toolkit/3.0.8/XR Device Simulator/UI/Mouse/MouseR_d.png",
+      "sha256": "18e1353bdd32a7d82049a768fa30d4d82818eabc79c343c16a2fbc5b9e778ea8",
+      "size": 8840
+    }
+  ]
+}

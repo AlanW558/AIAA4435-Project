@@ -1,0 +1,42 @@
+{
+  "questionnaire_id": "389439995",
+  "public_url": "https://v.wjx.cn/vm/QZCoEdh.aspx",
+  "questionnaire_revision": "appearance-survey-v0.1-zh-CN.4-unified",
+  "question_count": 32,
+  "page_count": 6,
+  "required_question_numbers": [
+    1,
+    2,
+    3
+  ],
+  "pdf_expected_pages": 7,
+  "source_sha256": {
+    "Study/survey/questionnaire_unified.json": "b21a4c18a55f578cf1afcff23f29a44f251e3a54bf6bb0e725bab05a4a4914cc",
+    "Study/survey/publication_status.json": "0a6a3f20149153805576f782b18f6f1aed96d8db440e47826ae9ad91010caa88",
+    "Midterm/design_narrative.md": "7e62af0dccb64961f87f91f87f142656c6854eb9cd686771cd3e6555ad9e0418",
+    "Midterm/design_brief_content.html": "c6a118e14f621d9dd8af12ea37d873af53f8b7d745b28d6597f5675e874cadbb"
+  },
+  "pdf_render_status": "passed",
+  "pdf_pages": 7,
+  "pdf_visual_review": "all_7_pages_reviewed",
+  "pdf_chinese_text_extraction": "passed",
+  "pdf_embedded_fonts": [
+    "DroidSansFallback",
+    "Arimo"
+  ],
+  "question_text_options_help_required_checks": 32,
+  "local_markdown_links": "checked_all_exist",
+  "png_qr_decode": "passed",
+  "pdf_qr_decode": "passed",
+  "no_synthetic_participant_responses": true,
+  "artifacts": {
+    "问卷设计说明_中期汇报.pdf": {
+      "bytes": 153195,
+      "sha256": "8c95ca1bee510e07c1a64012d55748d996abbf5175d8bb394841dab109a06679"
+    },
+    "问卷完整设计与题目.md": {
+      "bytes": 43075,
+      "sha256": "1a15dd0d98a1d7bb8186917f44ce5554560f3ad6c5e60d892655411ebbda089f"
+    }
+  }
+}
