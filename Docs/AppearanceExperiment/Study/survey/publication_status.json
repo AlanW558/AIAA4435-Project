@@ -1,0 +1,121 @@
+{
+  "questionnaire_id": "389439995",
+  "title": "虚拟角色外形修改研究（全流程）",
+  "publication_status": "published",
+  "publication_status_zh": "已发布，正在运行",
+  "public_url": "https://v.wjx.cn/vm/QZCoEdh.aspx",
+  "published_at": null,
+  "publication_time_observed": "2026-10-19 20:59",
+  "publication_time_note": "发布操作后问卷星管理列表显示10月19日20:59；平台未显示秒级发布时间，故published_at不伪造精确值。",
+  "verified_at": "2026-10-19T21:02:40+08:00",
+  "timezone": "Asia/Singapore",
+  "qr_code_file": "/home/enjixiong/academics/AIAA4435/AIAA4435-Project/Docs/AppearanceExperiment/Study/survey/wjx_389439995_qr.png",
+  "qr_code_file_relative": "Docs/AppearanceExperiment/Study/survey/wjx_389439995_qr.png",
+  "qr_code_sha256": "cbac65de017acb2af5f3c25dddad0aba8bfef715a365b798b4af53c29f9cecfc",
+  "qr_code_source": {
+    "provider": "问卷星",
+    "page_url": "https://www.wjx.cn/newwjx/design/sendqstart.aspx?activityid=389439995",
+    "download_control": "1024*1024",
+    "target_parameter": "https://v.wjx.cn/vm/QZCoEdh.aspx",
+    "original_file": "Docs/AppearanceExperiment/Validation/wjx-389439995-qr-original-20261019.jpg",
+    "format_note": "平台下载文件为1024×1024 JPEG；保持像素和尺寸转换为PNG，未重新生成二维码。"
+  },
+  "verification": {
+    "method": "Codex Desktop原生内置浏览器、正常网页按钮及只读DOM核对",
+    "target_confirmed_before_publish": true,
+    "management_list_status": "已发布",
+    "design_wizard_status": "此问卷正在运行，您可以开始发放问卷",
+    "public_home_opened": true,
+    "public_home_title": "虚拟角色外形修改研究（全流程）",
+    "question_count": 32,
+    "page_count": 6,
+    "page_question_ranges": [
+      "Q1–Q7",
+      "Q8–Q12",
+      "Q13–Q17",
+      "Q18–Q22",
+      "Q23–Q27",
+      "Q28–Q32"
+    ],
+    "required_questions": [
+      1,
+      2,
+      3
+    ],
+    "optional_question_count": 29,
+    "all_text_answers_empty": true,
+    "selected_option_count": 0,
+    "question_content_modified_in_publication_turn": false,
+    "public_home_dom_evidence": "Docs/AppearanceExperiment/Validation/wjx-389439995-public-home-20261019.json",
+    "prior_content_audit": "Docs/AppearanceExperiment/Validation/wjx-desktop-reload-audit.json",
+    "qr_file_format": "PNG",
+    "qr_dimensions": [
+      1024,
+      1024
+    ],
+    "github_pushed": false
+  },
+  "observed_answer_count": 0,
+  "answers_submitted_by_agent": 0,
+  "other_questionnaires_observed": [
+    {
+      "questionnaire_id": "384478976",
+      "status": "已发布",
+      "answer_count": 22,
+      "modified_by_agent_this_turn": false
+    },
+    {
+      "questionnaire_id": "389455149",
+      "status": "未发布",
+      "answer_count": 0,
+      "modified_by_agent_this_turn": false
+    },
+    {
+      "questionnaire_id": "389455386",
+      "status": "未发布",
+      "answer_count": 0,
+      "modified_by_agent_this_turn": false
+    }
+  ],
+  "remaining_unverified_boundaries": [
+    "未提交任何测试或正式答卷；同设备连续真实提交未验证。",
+    "拒绝参加路径的服务端保存行为未验证；此前预览仍出现提交控件，不能承诺拒绝记录零保存。",
+    "此前预览发现撤回旧问卷关联同意后Q7隐藏但DOM值保留；隐藏字段入库、导出是否排除未验证。分析必须以参加同意及关联许可为准。",
+    "当前设置界面没有独立的问卷星账号一次限答控件，该项目未独立验证。",
+    "真实导出列名、数据入库和真实手机扫码流程未验证；本次公开入口在已登录的内置浏览器中打开，未另做登出或外部设备访问测试。"
+  ],
+  "screenshot_evidence_paths": {
+    "before_publication": "Docs/AppearanceExperiment/Validation/wjx-389439995-prepublication-20261019.jpg",
+    "link_and_qr": "Docs/AppearanceExperiment/Validation/wjx-389439995-publication-link-20261019.jpg",
+    "public_home": "Docs/AppearanceExperiment/Validation/wjx-389439995-public-home-20261019.jpg",
+    "published_list": "Docs/AppearanceExperiment/Validation/wjx-389439995-published-list-20261019.jpg",
+    "running_status": "Docs/AppearanceExperiment/Validation/wjx-389439995-published-summary-20261019.jpg"
+  },
+  "history": [
+    {
+      "date": "2026-10-18",
+      "status": "未发布",
+      "observed_answer_count": 0,
+      "record": "desktop_completion.md",
+      "note": "32题六页草稿保存、重载和非提交预览核验完成。"
+    },
+    {
+      "date": "2026-10-19",
+      "status": "已发布",
+      "observed_answer_count": 0,
+      "record": "publication_status.md",
+      "note": "用户明确授权发布，覆盖此前保持草稿限制；只发布389439995。"
+    }
+  ],
+  "followup_verification": {
+    "verified_at": "2026-10-19T21:11:08+08:00",
+    "method": "独立本地解码官方PNG和最终PDF页面中的二维码",
+    "decoder": "zxing-cpp 3.1.1",
+    "decoded_url": "https://v.wjx.cn/vm/QZCoEdh.aspx",
+    "png_matches_published_url": true,
+    "pdf_matches_published_url": true,
+    "record": "Docs/AppearanceExperiment/Midterm/qr_decode_verification.json",
+    "answers_submitted": 0,
+    "actual_phone_scan_tested": false
+  }
+}

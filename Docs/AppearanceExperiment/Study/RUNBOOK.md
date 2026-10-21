@@ -4,7 +4,7 @@
 
 先在台式机桌面运行角色场景、DeepSeek 四策略、澄清选项、局部/整体撤销与日志，再接 Pico。桌面可完成完整交互与数据通路检查，不必等待头显。正式 VR 采集前另验收双眼显示、6DoF、控制器、文字可读性、角色颜色/配饰/比例与记录一致；桌面通过不写成 Pico 已通过。
 
-模型与 API 密钥仅在后端。私有目标卡和评分字段仅在参与者显示/本地 evaluator；请求模块只发送 `public_task_resets.json` 中公开数据。检查模型日志没有目标答案或任务类别。正式图像卡仍需由实际 Unity renderer 生成，并与角色实际比例、颜色、配饰一致。
+模型与 API 密钥仅在后端。私有目标卡和评分字段仅在参与者显示/本地 evaluator；请求模块只发送 `public_task_resets.json` 中公开数据。检查模型日志没有目标答案或任务类别。正式图像卡已通过共享 Unity renderer 生成于 `StudyData/pico/materials/`，使用前仍需核对打印可读性。生成与独立练习见 `../Pico/PRACTICE.md`；PICO 工程验证见 `../Pico/progress.md`。
 
 ## 人员与编号
 
@@ -26,7 +26,7 @@
 5. 四条件用相同候选、问题界面、选项顺序规则、外形 renderer、等待反馈与恢复入口。初始政策询问最多一次；后续修复/撤销合计最多两次。初始提交后的状态和截图在修复前保存。
 6. 参与者完成或达到冻结的 120 秒上限时发 `completion` marker：`value=participant_done|timeout`，`elapsed_seconds` 为本机单调计时器的真实任务时长。系统等待包含在总时长中，不凭估计扣除。
 7. 完成后检查三个固定中性 tutor 文本回合中角色属性是否保持。每次发真实 renderer 的 `probe`：`probe_index=1,2,3`、`revision`、`state`；分别计时后可带 `duration_ms`。探针不再改外形。完成时间与探针时间分开。
-8. 正式模式完成每项修改后由研究者按F8进入下一项；每四项先暂停。一个 block 四项任务结束，填写 `?form=block&participant=P001&session=<study_session_id>&block=1`。四个 block 使用同一表、同一量尺；总共最多四次填写。下载 JSON 后确认实际文件已保存。
+8. 正式模式完成每项修改后由研究者推进：PICO 使用外部控制台“下一试次”，桌面使用 F8；每四项先暂停，PICO 问卷完成后点击“问卷完成，恢复”。一个 block 四项任务结束，填写 `?form=block&participant=P001&session=<study_session_id>&block=1`。四个 block 使用同一表、同一量尺；总共最多四次填写。下载 JSON 后确认实际文件已保存。
 9. 四个 block 后填写 `?form=exit&participant=P001&session=<study_session_id>`。自选短答/访谈围绕具体有帮助和无帮助的事件，不引导参与者称赞某策略。现场确认所有实际日志和问卷文件已转存到私有数据目录。
 
 若掉线、模型失败、无法实现、候选遗漏或用户退出，保留事件与剩余空值，不用模拟输出补齐。服务重启后内存中的会话不能恢复；保留原日志，另记中止/恢复过程，不能让重复试次悄悄变成新样本。
@@ -56,15 +56,15 @@
 ```bash
 # 默认只取 live/formal；debug、mock、pilot 不进入正式结果。
 python3 Tools/AppearanceExperiment/export_study.py \
-  --logs Backend/logs --out-dir /path/to/private/export-01
+  --logs StudyData/logs --out-dir /path/to/private/export-01
 
 # 单独导出真实预实验，文件名前缀 pilot_。
 python3 Tools/AppearanceExperiment/export_study.py \
-  --logs Backend/logs --phase pilot --out-dir /path/to/private/pilot-export-01
+  --logs StudyData/logs --phase pilot --out-dir /path/to/private/pilot-export-01
 
 # 明确选择工程调试；输出名 engineering_debug_trial_results.csv。
 python3 Tools/AppearanceExperiment/export_study.py \
-  --logs Backend/logs --phase debug --out-dir /path/to/private/debug-export-01
+  --logs StudyData/logs --phase debug --out-dir /path/to/private/debug-export-01
 
 # 实际问卷下载 JSON → CSV；同一 study_session/form/block 重复会拒绝。
 python3 Docs/AppearanceExperiment/Study/survey/import_responses.py \
@@ -84,8 +84,8 @@ python3 Docs/AppearanceExperiment/Study/analyze_trials.py \
 
 ## 当前尚需在采集前解决
 
-- Pico 真机链路与对照一致性；桌面开发继续进行，不等于 VR 已验收。
-- 实际目标卡截图；单独的练习/预实验题，不混用正式题。
+- PICO E/A/N/S debug 工程链路已实测；仍需真人 pilot、长时间佩戴与完整正式流程现场验收。
+- 16 张实际目标卡和独立练习已提供；正式使用前检查打印呈现，不把练习混入正式试次。
 - 记录真实构建 SHA、三探针时长、模型别名/返回版本及冻结时点。
-- 将本地 HTML 的 JSON 下载纳入现场收集，或完成在线问卷草稿发布设置；本地页面不是已发布问卷星链接。
+- 问卷星已发布（见 survey/publication_status.json）；仍需核对现场编号关联、问卷下载和归档。
 - 观察实际 API 的候选遗漏与无效询问；不只演示对 Selective 有利的例子。

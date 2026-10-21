@@ -1,0 +1,128 @@
+{
+  "reviewedUtc": "2026-10-20T20:32:11.454272+00:00",
+  "automatic_checks_passed": true,
+  "visual_acceptance_passed": true,
+  "visual_acceptance_scope": "Parent engineering review authorized build/recording after the bounded flank fix; this is not user acceptance of resemblance.",
+  "user_similarity_acceptance": "not established",
+  "geometry_revision": "blender-landmark-neck-fit-v3",
+  "texture_revision": "blender-bare-skin-cleanup-v2",
+  "unity_exit_code": 0,
+  "summary": "The conspicuous blue/purple flank ring in image14 now reads as skin/shadow. Parent reviewed the actual image and approved the build/recording sequence. Existing small reconstruction texture boundaries remain documented and were not expanded into new scope.",
+  "evidence": {
+    "state_count": 7,
+    "detail_view_count": 9,
+    "png_count": 16,
+    "max_active_triangles": 177450,
+    "default_return_png_identical": true,
+    "images_byte_identical_to_previous_round": [
+      "00-liang-suit.png",
+      "01-liang-suit.png",
+      "02-liang-sport.png",
+      "04-nailong-none.png",
+      "05-nailong-none.png",
+      "06-liang-suit.png",
+      "07-liang-default-face-closeup.png",
+      "08-liang-default-three-quarter.png",
+      "09-nailong-default-front.png",
+      "10-nailong-default-side.png",
+      "11-liang-hat-three-quarter.png",
+      "12-nailong-hat-three-quarter.png",
+      "13-nailong-glasses-face-closeup.png",
+      "15-liang-bare-neck-side.png"
+    ],
+    "all_five_observation_fields_checked": true,
+    "height_ground_and_frozen_study_restore": "passed",
+    "install_manifest_resources_verified": 14,
+    "resource_hashes_unchanged_during_run": true,
+    "checker_hash_unchanged_during_run": true,
+    "install_manifest_hash_unchanged_during_run": true
+  },
+  "lighting": {
+    "scope": "Preview geometry review; independent of the production room.",
+    "ambientProbeMode": "CustomProvided",
+    "ambientProbeMethod": "SphericalHarmonicsL2.AddAmbientLight",
+    "ambientLinear": {
+      "r": 0.30000001192092896,
+      "g": 0.30000001192092896,
+      "b": 0.30000001192092896,
+      "a": 1.0
+    },
+    "directionalLights": [
+      {
+        "intensity": 1.149999976158142,
+        "rotationEuler": {
+          "x": 25.0,
+          "y": -30.0,
+          "z": 0.0
+        },
+        "color": {
+          "r": 1.0,
+          "g": 1.0,
+          "b": 1.0,
+          "a": 1.0
+        }
+      },
+      {
+        "intensity": 0.5,
+        "rotationEuler": {
+          "x": 15.0,
+          "y": 45.0,
+          "z": 0.0
+        },
+        "color": {
+          "r": 1.0,
+          "g": 1.0,
+          "b": 1.0,
+          "a": 1.0
+        }
+      },
+      {
+        "intensity": 0.5,
+        "rotationEuler": {
+          "x": 15.0,
+          "y": 160.0,
+          "z": 0.0
+        },
+        "color": {
+          "r": 1.0,
+          "g": 1.0,
+          "b": 1.0,
+          "a": 1.0
+        }
+      }
+    ]
+  },
+  "findings": [
+    {
+      "area": "Bare flank blue/purple contamination",
+      "status": "bounded repair accepted for delivery",
+      "images": [
+        "14-liang-bare-three-quarter.png",
+        "03-liang-none.png"
+      ],
+      "observation": "The prior prominent blue/purple region and ring now read as skin and shadow. A local tonal boundary is still visible and remains a reconstruction texture detail, not a claim of seamless skin."
+    },
+    {
+      "area": "Neck, face, glasses and hats",
+      "status": "previous accepted behavior retained",
+      "observation": "The existing neck silhouette and bridge/lens/hat-fit repairs remain. The short posterior shoulder crease, collar edge, hairline and thin tint fringes are retained known details; no new visual expansion was performed."
+    }
+  ],
+  "console": {
+    "graphics_api": "OpenGLCore4.5",
+    "gpu": "NVIDIA GeForce RTX5060Ti",
+    "shader_or_csharp_compile_errors_observed": false,
+    "missing_texture_or_runtime_exceptions_observed": false,
+    "other_logged_warnings": [
+      "Licensing token refresh unavailable",
+      "Unity TLS certificate verification errors",
+      "XR StopSubsystems warning during batch shutdown"
+    ]
+  },
+  "scope_limits": [
+    "No user likeness acceptance is implied.",
+    "PICO frame rate and headset stereo/6DoF remain unmeasured by this desktop check.",
+    "Recorded minor reconstruction boundaries remain; no fully seamless-model claim."
+  ],
+  "next_authorized_work": "Linux build, actual60-second desktop capture with English subtitles, then Android build."
+}

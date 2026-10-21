@@ -4,7 +4,13 @@ Interactive AI 课程项目：Pico 4 Ultra 上的云海会谈室原型。研究�
 
 ## 外形实验开发入口
 
-新增 Unity + DeepSeek 四策略外形实验、局部撤销、实验日志和22人研究材料。台式机运行与验证边界见 [外形实验说明](Docs/AppearanceExperiment/README.md)。这版增加独立桌面场景；下面保留原 Pico 会谈室说明。
+新增 Unity + DeepSeek 四策略外形实验、中文 XR 面板、澄清与撤销、实验日志及问卷材料。外形实验同时提供 PICO 场景和桌面录制场景，详见 [外形实验说明](Docs/AppearanceExperiment/README.md) 与 [开发交付说明](Docs/AppearanceExperiment/Pico/PR_DELIVERY.md)。下面保留原 Pico 会谈室说明。
+
+- [Blender 可编辑双形象与来源](Art/AppearanceAvatars/README.md)：写实肌肉蓝西装男性、三套服装、奶龙整体替换。
+- [实际 Unity 外观检查](Docs/AppearanceExperiment/Validation/avatar-v3/index.html)；[英文字幕桌面演示](Docs/AppearanceExperiment/Demos/AppearanceRoom-Avatars-60s-en.mp4)。
+- [15 份纸质问卷转录结果与完整分析](Docs/AppearanceExperiment/Results/2026-10-21/问卷结果与完整分析.md)：实际顺序均为 N→E→A→S，结果不等同于原平衡顺序方案的验证。
+
+原始问卷、参与者逐条记录、模型权重、临时重建文件和 APK 不进入公开源码库。新的双形象通过 debug 专用 `avatar-demo-v1` 启用，冻结实验默认仍为 `study-v1`。
 
 ## 原 Pico 会谈室状态
 

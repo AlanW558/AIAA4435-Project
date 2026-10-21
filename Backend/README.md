@@ -16,6 +16,8 @@ python3 Backend/server.py --mode live --host 127.0.0.1 --port 8765
 
 Required environment: `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL`. Optional `DEEPSEEK_BASE_URL` defaults to `https://api.deepseek.com`; the adapter appends `/chat/completions`. The configured model must be supported by that account/provider. There is no silent downgrade to a mock model. `/health` reports `mode` and requested model; JSONL model-call records preserve actual returned model identifiers. A model alias is not an immutable snapshot.
 
+The authorized credential order is teacher first, personal backup only on documented DeepSeek HTTP 402 (insufficient balance). `start_backend.sh` loads the teacher key from `~/.config/aiaa4435/deepseek-teacher.key` when present, retaining the existing private environment's key as `DEEPSEEK_FALLBACK_API_KEY`. The adapter switches once per process after a 402; authentication errors, throttling, invalid JSON and connection errors never trigger account switching. Model-call logs record `credential_slot` and the switch reason without keys or key hashes. Restarting the backend tries the teacher account first again. Both keys stay outside the repository and APK. See [DeepSeek error codes](https://api-docs.deepseek.com/quick_start/error_codes/).
+
 For deterministic development without API charges:
 
 ```bash

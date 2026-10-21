@@ -1,0 +1,22 @@
+{
+  "validated_at": "2026-10-21T06:54:30.214227+00:00",
+  "status": "passed",
+  "source_sha256": "762e71a85753ee038ee9e13a7399cd7c0d8a3526105425f67793303196d57b6c",
+  "analysis_sha256": "24806733a97350e8d8b5306cbd64011b79b302672b95266db3532465c1592271",
+  "reader": "Python standard library ZIP/XML; independent of openpyxl and production analysis",
+  "checks": [
+    "32-question schema and 15 eligible distinct respondents",
+    "16 rating histograms, means, sample SDs and medians",
+    "12 paired direction counts and mean differences",
+    "12 exact sign-test p values by binomial coefficient summation",
+    "12 Holm-adjusted p values",
+    "All preference option counts",
+    "All eight open-question coverage counts",
+    "Exactly three adjusted contrasts below 0.05"
+  ],
+  "limitations": [
+    "Bootstrap intervals and Monte Carlo permutations are produced by the analysis script, not independently rerun here.",
+    "Q29 theme coding requires human review; this audit checks coverage only.",
+    "Paper originals and reported study context were not independently verified."
+  ]
+}

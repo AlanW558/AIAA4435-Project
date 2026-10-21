@@ -1,98 +1,232 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace IAI.Appearance
 {
-    // A deliberately fixed avatar: only the three experimental attributes vary.
+    // Frozen study renderer and debug-only mesh avatars share the same observation interface.
     public sealed class AppearanceAvatar : MonoBehaviour
     {
-        Material jacket;
-        Transform body;
-        GameObject hat, glasses;
-        static readonly string[] ColorNames={"blue","orange","green","gray","red","purple"};
-        static readonly string[] ColorHex={"#3B82F6","#F59E0B","#22C55E","#80858F","#EF4444","#8B5CF6"};
-        public string ObservedColor {
-            get { for(int i=0;i<ColorNames.Length;i++){Color c;ColorUtility.TryParseHtmlString(ColorHex[i],out c);if(Vector4.Distance(jacket.color,c)<.005f)return ColorNames[i];}return "unrecognized"; }
-        }
-        public string ObservedAccessory => hat.activeInHierarchy?(glasses.activeInHierarchy?"invalid_multiple":"hat"):(glasses.activeInHierarchy?"glasses":"none");
-        public float ObservedScale => body.localScale.x;
-
-        public static Material Material(string name, Color color)
-        {
-            var shader = Shader.Find("Universal Render Pipeline/Lit") ?? Shader.Find("Standard");
-            var result = new Material(shader) { name = name, color = color };
-            result.SetFloat("_Smoothness", .3f);
-            return result;
-        }
-
+        AppearanceLegacyAvatar legacy;
+        Transform demoRoot;
+        GameObject liang, nailong;
+        Transform liangHead, nailongHead;
+        bool demo;
+        readonly List<Material> owned = new List<Material>();
+        readonly Dictionary<Material, Material> converted = new Dictionary<Material, Material>();
+        readonly Dictionary<Transform, Quaternion> neutral = new Dictionary<Transform, Quaternion>();
+        string interaction = "idle";
+        float elapsed, gestureAge;
+        static readonly string[] Names = { "blue", "orange", "green", "gray", "red", "purple", "yellow" };
+        static readonly string[] Hex = { "#2358B8", "#EF8B22", "#319B6B", "#7B8793", "#CE3549", "#8954C1", "#F9C92B" };
+        public static Material Material(string name, Color color) => AppearanceLegacyAvatar.Material(name, color);
         public static GameObject Shape(string name, PrimitiveType kind, Transform parent, Vector3 pos, Vector3 size, Material mat)
-        {
-            var go = GameObject.CreatePrimitive(kind);
-            go.name = name;
-            go.transform.SetParent(parent, false);
-            go.transform.localPosition = pos;
-            go.transform.localScale = size;
-            go.GetComponent<Renderer>().sharedMaterial = mat;
-            var collider = go.GetComponent<Collider>();
-            if (collider) { if(Application.isPlaying) Destroy(collider); else DestroyImmediate(collider); }
-            return go;
-        }
+            => AppearanceLegacyAvatar.Shape(name, kind, parent, pos, size, mat);
 
         public void Create()
         {
-            body = new GameObject("Foot anchored avatar").transform;
-            body.SetParent(transform, false);
-            jacket = Material("Editable jacket", new Color(.23f,.51f,.96f));
-            var skin = Material("Warm ivory", new Color(.86f,.74f,.61f));
-            var dark = Material("Graphite", new Color(.065f,.1f,.14f));
-            var pale = Material("Warm white", new Color(.94f,.94f,.88f));
-            var metal = Material("Accessory brass", new Color(.85f,.63f,.28f));
-            Shape("Jacket torso", PrimitiveType.Capsule, body, new Vector3(0,1.12f,0), new Vector3(.62f,.40f,.38f), jacket);
-            for (int s=-1;s<=1;s+=2)
-            {
-                Shape("Trouser", PrimitiveType.Capsule, body, new Vector3(s*.155f,.43f,0), new Vector3(.22f,.32f,.24f), dark);
-                Shape("Shoe", PrimitiveType.Cube, body, new Vector3(s*.155f,.095f,-.07f), new Vector3(.23f,.17f,.37f), dark);
-                var arm=Shape("Jacket sleeve", PrimitiveType.Capsule, body, new Vector3(s*.39f,1.02f,0), new Vector3(.19f,.29f,.21f), jacket);
-                arm.transform.localRotation=Quaternion.Euler(0,0,s*10);
-                Shape("Hand", PrimitiveType.Sphere, body, new Vector3(s*.44f,.73f,0), new Vector3(.17f,.21f,.17f), skin);
-            }
-            Shape("Collar", PrimitiveType.Cube, body, new Vector3(0,1.42f,-.17f), new Vector3(.19f,.12f,.05f), pale);
-            for(int i=0;i<3;i++) Shape("Button", PrimitiveType.Sphere, body, new Vector3(0,1.23f-i*.12f,-.197f), Vector3.one*.028f, metal);
-            Shape("Neck", PrimitiveType.Cylinder, body, new Vector3(0,1.5f,0), new Vector3(.17f,.1f,.17f), skin);
-            Shape("Head", PrimitiveType.Sphere, body, new Vector3(0,1.72f,0), new Vector3(.43f,.49f,.40f), skin);
-            for(int s=-1;s<=1;s+=2)
-            {
-                Shape("Ear", PrimitiveType.Sphere, body, new Vector3(s*.215f,1.72f,0), new Vector3(.075f,.12f,.09f), skin);
-                Shape("Eye", PrimitiveType.Sphere, body, new Vector3(s*.08f,1.75f,-.187f), Vector3.one*.038f, dark);
-            }
-            Shape("Nose", PrimitiveType.Sphere, body, new Vector3(0,1.68f,-.2f), new Vector3(.065f,.08f,.065f), skin);
-            Shape("Smile", PrimitiveType.Capsule, body, new Vector3(0,1.61f,-.172f), new Vector3(.025f,.04f,.025f), dark).transform.localRotation=Quaternion.Euler(0,0,90);
-            hat = new GameObject("Hat"); hat.transform.SetParent(body,false);
-            Shape("Hat brim", PrimitiveType.Cylinder, hat.transform, new Vector3(0,1.94f,0), new Vector3(.62f,.025f,.54f), dark);
-            Shape("Hat crown", PrimitiveType.Cylinder, hat.transform, new Vector3(0,2.04f,0), new Vector3(.40f,.10f,.37f), dark);
-            Shape("Hat band", PrimitiveType.Cylinder, hat.transform, new Vector3(0,1.98f,0), new Vector3(.41f,.025f,.38f), metal);
-            glasses = new GameObject("Glasses"); glasses.transform.SetParent(body,false);
-            for(int s=-1;s<=1;s+=2)
-            {
-                foreach(float y in new[]{1.695f,1.80f}) Shape("Frame horizontal",PrimitiveType.Cube,glasses.transform,new Vector3(s*.09f,y,-.21f),new Vector3(.14f,.018f,.024f),dark);
-                foreach(float x in new[]{s*.025f,s*.155f}) Shape("Frame vertical",PrimitiveType.Cube,glasses.transform,new Vector3(x,1.75f,-.21f),new Vector3(.018f,.12f,.024f),dark);
-                Shape("Temple",PrimitiveType.Cube,glasses.transform,new Vector3(s*.165f,1.76f,-.08f),new Vector3(.018f,.018f,.26f),dark);
-            }
-            Shape("Bridge",PrimitiveType.Cube,glasses.transform,new Vector3(0,1.75f,-.218f),new Vector3(.055f,.018f,.025f),dark);
-            Apply(new AppearanceState {jacket_color="blue",accessory="hat",scale=1});
+            if (legacy) return;
+            var node = new GameObject("Study v1 renderer");
+            node.transform.SetParent(transform, false);
+            legacy = node.AddComponent<AppearanceLegacyAvatar>();
+            legacy.Create();
         }
-
+        public void EnableDemo(bool enabled)
+        {
+            Create();
+            if (enabled && !demoRoot)
+            {
+                try
+                {
+                    demoRoot = new GameObject("Demo foot anchor").transform;
+                    demoRoot.SetParent(transform, false);
+                    liang = Load("Liang", demoRoot);
+                    nailong = Load("Nailong", demoRoot);
+                    liangHead = Find(liang, "head"); nailongHead = Find(nailong, "head");
+                    foreach (var t in demoRoot.GetComponentsInChildren<Transform>(true)) neutral[t] = t.localRotation;
+                }
+                catch
+                {
+                    if (demoRoot) { if (Application.isPlaying) Destroy(demoRoot.gameObject); else DestroyImmediate(demoRoot.gameObject); }
+                    demoRoot = null; liang = null; nailong = null; liangHead = nailongHead = null;
+                    ReleaseMaterials(); neutral.Clear();
+                    throw;
+                }
+            }
+            demo = enabled;
+            legacy.gameObject.SetActive(!demo);
+            if (demoRoot) demoRoot.gameObject.SetActive(demo);
+            if (demo) Apply(new AppearanceState { avatar_id = "liang", outfit = "suit", jacket_color = "blue", accessory = "glasses", scale = 1 });
+        }
+        GameObject Load(string name, Transform parent)
+        {
+            var source = Resources.Load<GameObject>("AvatarDemo/" + name);
+            if (!source) throw new InvalidOperationException("Missing mesh avatar: " + name);
+            var instance = Instantiate(source, parent, false);
+            instance.name = name;
+            // FBX imports face +Z; the shared room places the viewer toward -Z.
+            instance.transform.localRotation = Quaternion.Euler(0, 180, 0) * instance.transform.localRotation;
+            foreach (var r in instance.GetComponentsInChildren<Renderer>(true))
+            {
+                var materials = r.sharedMaterials;
+                for (int i = 0; i < materials.Length; i++)
+                {
+                    var original = materials[i];
+                    if (!original) throw new InvalidOperationException("Missing avatar material: " + r.name);
+                    if (!converted.TryGetValue(original, out var replacement))
+                    {
+                        if (original.name.EndsWith("_Reference", StringComparison.Ordinal))
+                        {
+                            bool nailongReference = original.name == "Tint_Nailong_Reference";
+                            if (!nailongReference && original.name != "Tint_LiangSuit_Reference" &&
+                                original.name != "Tint_LiangSport_Reference" && original.name != "Tint_LiangBare_Reference")
+                                throw new InvalidOperationException("Unknown reference avatar material: " + original.name);
+                            var maskPath = "AvatarDemo/Textures/" + original.name + "_Mask";
+                            var mask = Resources.Load<Texture2D>(maskPath);
+                            if (!mask) throw new InvalidOperationException("Missing avatar tint mask: " + maskPath);
+                            var texture = original.mainTexture;
+                            if (!texture) throw new InvalidOperationException("Missing reference avatar albedo: " + original.name);
+                            var shader = Resources.Load<Shader>("AvatarDemo/MaskedReferenceLit");
+                            if (!shader || !shader.isSupported)
+                                throw new InvalidOperationException("Missing or unsupported avatar shader: AvatarDemo/MaskedReferenceLit");
+                            ColorUtility.TryParseHtmlString(Hex[nailongReference ? 6 : 0], out var referenceColor);
+                            replacement = new Material(shader) { name = original.name, color = referenceColor, enableInstancing = true };
+                            replacement.SetColor("_ReferenceColor", referenceColor);
+                            replacement.SetTexture("_TintMask", mask);
+                            replacement.mainTexture = texture;
+                            replacement.mainTextureScale = original.mainTextureScale;
+                            replacement.mainTextureOffset = original.mainTextureOffset;
+                        }
+                        else
+                        {
+                            replacement = Material(original.name, original.color);
+                            if (original.name == "Belly_cream")
+                            {
+                                ColorUtility.TryParseHtmlString("#F4D99B", out var cream);
+                                replacement.color = cream;
+                            }
+                            if (original.name == "Warm_olive_extremities")
+                            {
+                                ColorUtility.TryParseHtmlString("#88732E", out var olive);
+                                replacement.color = olive;
+                            }
+                            var texture = original.mainTexture;
+                            if (texture) { replacement.mainTexture = texture; replacement.SetTexture("_BaseMap", texture); }
+                        }
+                        if (original.name.Contains("Cutout"))
+                        {
+                            replacement.SetFloat("_AlphaClip", 1);
+                            replacement.SetFloat("_Cutoff", .45f);
+                            replacement.SetFloat("_Cull", 0);
+                            replacement.EnableKeyword("_ALPHATEST_ON");
+                            replacement.SetOverrideTag("RenderType", "TransparentCutout");
+                            replacement.renderQueue = 2450;
+                        }
+                        replacement.SetFloat("_Smoothness", original.name.Contains("Eye") ? .68f : original.name.Contains("Metal") ? .65f : .24f);
+                        if (original.name.Contains("Metal")) replacement.SetFloat("_Metallic", .45f);
+                        converted.Add(original, replacement); owned.Add(replacement);
+                    }
+                    materials[i] = replacement;
+                }
+                r.sharedMaterials = materials;
+            }
+            return instance;
+        }
+        GameObject ActiveModel => liang && liang.activeSelf ? liang : nailong && nailong.activeSelf ? nailong : null;
+        static Transform Find(GameObject root, string name) => root.GetComponentsInChildren<Transform>(true).FirstOrDefault(t => t.name == name);
+        static bool IsActive(GameObject root, string name) { var t = Find(root, name); return t && t.gameObject.activeInHierarchy; }
+        static void Toggle(GameObject root, string name, bool value)
+        {
+            var t = Find(root, name);
+            if (!t) throw new InvalidOperationException("Missing avatar assembly: " + name);
+            t.gameObject.SetActive(value);
+        }
+        public string ObservedAvatar => !demo ? null : liang.activeSelf == nailong.activeSelf ? "invalid" : liang.activeSelf ? "liang" : "nailong";
+        public string ObservedOutfit
+        {
+            get
+            {
+                if (!demo) return null;
+                var active = ActiveModel;
+                if (!active) return "invalid";
+                var found = new[] { "suit", "sport", "none" }.Where(x => IsActive(active, "Outfit_" + x)).ToArray();
+                return found.Length == 1 ? found[0] : "invalid";
+            }
+        }
+        public string ObservedColor
+        {
+            get
+            {
+                if (!demo) return legacy.ObservedColor;
+                var active = ActiveModel;
+                if (!active) return "unrecognized";
+                var colors = active.GetComponentsInChildren<Renderer>().Where(r => r.enabled)
+                    .SelectMany(r => r.sharedMaterials).Where(m => m && m.name.StartsWith("Tint", StringComparison.Ordinal))
+                    .Select(m => m.color).ToArray();
+                if (colors.Length == 0) return "unrecognized";
+                for (int i = 0; i < Names.Length; i++)
+                {
+                    ColorUtility.TryParseHtmlString(Hex[i], out var expected);
+                    if (colors.All(c => Vector4.Distance(c, expected) < .005f)) return Names[i];
+                }
+                return "unrecognized";
+            }
+        }
+        public string ObservedAccessory => !demo ? legacy.ObservedAccessory :
+            !ActiveModel ? "invalid" : IsActive(ActiveModel, "Accessory_hat") ?
+            (IsActive(ActiveModel, "Accessory_glasses") ? "invalid_multiple" : "hat") :
+            IsActive(ActiveModel, "Accessory_glasses") ? "glasses" : "none";
+        public float ObservedScale => demo ? demoRoot.localScale.x : legacy.ObservedScale;
         public void Apply(AppearanceState state)
         {
-            string hex;
-            switch(state.jacket_color) {
-                case "orange": hex="#F59E0B";break; case "green":hex="#22C55E";break;
-                case "gray":hex="#80858F";break; case "red":hex="#EF4444";break;
-                case "purple":hex="#8B5CF6";break; default:hex="#3B82F6";break;
+            if (state == null) return;
+            Create();
+            if (!demo) { legacy.Apply(state); return; }
+            if (state.avatar_id != "liang" && state.avatar_id != "nailong") throw new ArgumentException("Unknown avatar.");
+            if (Array.IndexOf(new[] { "suit", "sport", "none" }, state.outfit) < 0 ||
+                (state.avatar_id == "nailong" && state.outfit != "none")) throw new ArgumentException("Unsupported outfit.");
+            int color = Array.IndexOf(Names, state.jacket_color);
+            if (color < 0) throw new ArgumentException("Unsupported color.");
+            liang.SetActive(state.avatar_id == "liang"); nailong.SetActive(state.avatar_id == "nailong");
+            var active = ActiveModel;
+            foreach (string outfit in new[] { "suit", "sport", "none" })
+            {
+                var group = Find(active, "Outfit_" + outfit);
+                if (group) group.gameObject.SetActive(outfit == state.outfit);
             }
-            Color color; ColorUtility.TryParseHtmlString(hex,out color); jacket.color=color;
-            hat.SetActive(state.accessory=="hat"); glasses.SetActive(state.accessory=="glasses");
-            body.localScale=Vector3.one*state.scale;
-
+            Toggle(active, "Accessory_hat", state.accessory == "hat");
+            Toggle(active, "Accessory_glasses", state.accessory == "glasses");
+            ColorUtility.TryParseHtmlString(Hex[color], out var tint);
+            foreach (var m in active.GetComponentsInChildren<Renderer>(true).SelectMany(r => r.sharedMaterials).Distinct())
+                if (m && m.name.StartsWith("Tint", StringComparison.Ordinal)) m.color = tint;
+            demoRoot.localScale = Vector3.one * state.scale;
         }
+        public void SetInteraction(string mode)
+        {
+            Create();
+            if (!demo) { legacy.SetInteraction(mode); return; }
+            if (interaction == mode) return;
+            interaction = mode; gestureAge = 0;
+        }
+        void LateUpdate()
+        {
+            if (!demo || !ActiveModel) return;
+            float dt = Mathf.Min(Time.unscaledDeltaTime, .1f);
+            elapsed += dt; gestureAge += dt;
+            float gesture = Mathf.Sin(Mathf.Clamp01(gestureAge / 1.4f) * Mathf.PI);
+            var head = liang.activeSelf ? liangHead : nailongHead;
+            if (head && neutral.TryGetValue(head, out var rest))
+                head.localRotation = rest * Quaternion.Euler(
+                    interaction == "done" ? Mathf.Sin(gestureAge * 6) * gesture * 3 : Mathf.Sin(elapsed * .65f) * .7f,
+                    Mathf.Sin(elapsed * .4f) * 1.6f, interaction == "ask" ? gesture * 3 : 0);
+        }
+        void ReleaseMaterials()
+        {
+            foreach (var m in owned)
+                if (m) { if (Application.isPlaying) Destroy(m); else DestroyImmediate(m); }
+            owned.Clear(); converted.Clear();
+        }
+        void OnDestroy() => ReleaseMaterials();
     }
 }

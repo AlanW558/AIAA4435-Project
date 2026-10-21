@@ -1,0 +1,18 @@
+{
+  "confirmation_date": "2026-10-21",
+  "confirmation_source": "Researcher statements in the current development conversation; not independently observed by the analysis script.",
+  "questionnaire_id": "389439995",
+  "source_sha256": "762e71a85753ee038ee9e13a7399cd7c0d8a3526105425f67793303196d57b6c",
+  "actual_order": ["N", "E", "A", "S"],
+  "same_order_for_every_participant": true,
+  "experience_device": "PICO headset",
+  "avatar_version_description": "New blue-suit human and Nailong avatars",
+  "data_collection": "Paper questionnaire answers entered into WJX by the researcher",
+  "q29_provenance": "Researcher summaries of paper answers; not verbatim quotations",
+  "export_acquisition": "User supplied the local XLSX after a live browser export was blocked by the desktop lock screen; no fresh website download is claimed.",
+  "apk_fingerprint_linked_to_participant_records": false,
+  "trial_logs_linked_to_participant_records": false,
+  "paper_originals_independently_checked": false,
+  "planned_counterbalanced_schedule_used_for_this_analysis": false,
+  "old_simulated_survey_included": false
+}

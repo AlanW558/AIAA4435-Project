@@ -1,0 +1,271 @@
+{
+  "checked_date": "2026-10-18",
+  "timezone": "Asia/Singapore",
+  "activity_id": 389439995,
+  "content_revision": "appearance-survey-v0.1-zh-CN.4-unified",
+  "source": "Codex Desktop native in-app browser; rendered editor DOM after saved reload",
+  "pages": 6,
+  "question_count": 32,
+  "required": [
+    1,
+    2,
+    3
+  ],
+  "questions": [
+    {
+      "number": 1,
+      "page": 1,
+      "required": true,
+      "text": "*\n1. 研究者提供的参与者编号 （40字以内）"
+    },
+    {
+      "number": 2,
+      "page": 1,
+      "required": true,
+      "text": "*\n2. 本次实验类型\n请按研究者的安排选择。\n调试\n预实验\n正式实验"
+    },
+    {
+      "number": 3,
+      "page": 1,
+      "required": true,
+      "text": "*\n3. 我已阅读研究说明，有机会向研究者提问，并同意参加本次研究。\nA. 我同意参加。\nB. 我不同意参加。 (结束作答)\n此题设置了跳转逻辑"
+    },
+    {
+      "number": 4,
+      "page": 1,
+      "required": false,
+      "text": "4. 在今天之前，你大约使用过多少次虚拟现实头显？\nA. 从未用过\nB. 1 至 2 次\nC. 3 至 10 次\nD. 10 次以上\nE. 记不清／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 5,
+      "page": 1,
+      "required": false,
+      "text": "5. 在今天之前，你是否试用过这套修改虚拟角色外形的原型？\nA. 没有\nB. 有\nC. 不确定／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 6,
+      "page": 1,
+      "required": false,
+      "text": "6. 如果你之前填写的课程问卷有匿名编号，你是否同意我们用这个编号，将那份回答与本次实验记录对应起来？\n这项关联由你自愿选择。我们不会根据旧问卷的措辞猜测填写者的身份。\nA. 同意，我可以提供已有的匿名编号。\nB. 不同意。\nC. 我没有匿名编号／不确定。\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 7,
+      "page": 1,
+      "required": false,
+      "text": "7. 旧问卷的匿名编号（80字以内）\n请只填写已有的匿名编号。可以留空，不要填写姓名、邮箱或手机号。\n依赖于[3. 我已阅读..]第1个选项，[6. 如果你之..]第1个选项"
+    },
+    {
+      "number": 8,
+      "page": 2,
+      "required": false,
+      "text": "8. 系统的提问打断了我完成任务的过程。\n如果这一轮系统没有提问，请选 1（非常不同意）。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 9,
+      "page": 2,
+      "required": false,
+      "text": "9. 我能控制哪些外形特征会被修改。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 10,
+      "page": 2,
+      "required": false,
+      "text": "10. 完成这些修改需要我投入很多精力。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 11,
+      "page": 2,
+      "required": false,
+      "text": "11. 我对这一轮修改外形的体验感到满意。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 12,
+      "page": 2,
+      "required": false,
+      "text": "12. 关于这一轮体验，你还有什么想补充的吗? （1000字以内）\n可以留空。简单写几句即可，请不要填写个人信息。\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 13,
+      "page": 3,
+      "required": false,
+      "text": "13. 系统的提问打断了我完成任务的过程。\n如果这一轮系统没有提问，请选 1（非常不同意）。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 14,
+      "page": 3,
+      "required": false,
+      "text": "14. 我能控制哪些外形特征会被修改。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 15,
+      "page": 3,
+      "required": false,
+      "text": "15. 完成这些修改需要我投入很多精力。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 16,
+      "page": 3,
+      "required": false,
+      "text": "16. 我对这一轮修改外形的体验感到满意。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 17,
+      "page": 3,
+      "required": false,
+      "text": "17. 关于这一轮体验，你还有什么想补充的吗? （1000字以内）\n可以留空。简单写几句即可，请不要填写个人信息。\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 18,
+      "page": 4,
+      "required": false,
+      "text": "18. 系统的提问打断了我完成任务的过程。\n如果这一轮系统没有提问，请选 1（非常不同意）。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 19,
+      "page": 4,
+      "required": false,
+      "text": "19. 我能控制哪些外形特征会被修改。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 20,
+      "page": 4,
+      "required": false,
+      "text": "20. 完成这些修改需要我投入很多精力。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 21,
+      "page": 4,
+      "required": false,
+      "text": "21. 我对这一轮修改外形的体验感到满意。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 22,
+      "page": 4,
+      "required": false,
+      "text": "22. 关于这一轮体验，你还有什么想补充的吗? （1000字以内）\n可以留空。简单写几句即可，请不要填写个人信息。\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 23,
+      "page": 5,
+      "required": false,
+      "text": "23. 系统的提问打断了我完成任务的过程。\n如果这一轮系统没有提问，请选 1（非常不同意）。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 24,
+      "page": 5,
+      "required": false,
+      "text": "24. 我能控制哪些外形特征会被修改。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 25,
+      "page": 5,
+      "required": false,
+      "text": "25. 完成这些修改需要我投入很多精力。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 26,
+      "page": 5,
+      "required": false,
+      "text": "26. 我对这一轮修改外形的体验感到满意。\nA. 1:非常不同意\nB. 2:不同意\nC. 3:比较不同意\nD. 4:说不上同意或不同意\nE. 5:比较同意\nF. 6:同意\nG. 7:非常同意\nH. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 27,
+      "page": 5,
+      "required": false,
+      "text": "27. 关于这一轮体验，你还有什么想补充的吗? （1000字以内）\n可以留空。简单写几句即可，请不要填写个人信息。\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 28,
+      "page": 6,
+      "required": false,
+      "text": "28. 如果以后还要做类似的外形修改，你更愿意使用哪一轮的系统?\n请按本问卷的第 1 至第 4 轮回想。\nA. 第 1 轮\nB. 第 2 轮\nC. 第 3 轮\nD. 第 4 轮\nE. 没有特别偏好\nF. 这几轮的系统我都不想用\nG. 无法判断／不想回答\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 29,
+      "page": 6,
+      "required": false,
+      "text": "29. 你为什么这样选择? （1000字以内）\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 30,
+      "page": 6,
+      "required": false,
+      "text": "30. 有没有哪次提问帮你完成了修改?如果有，它帮在什么地方? （1000字以内）\n可以留空，也可以回答“没有”。\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 31,
+      "page": 6,
+      "required": false,
+      "text": "31. 有没有哪次提问让你觉得没必要，或者不知道怎么回答?如果有，请描述一下。 （1000字以内）\n可以留空，也可以回答“没有”。\n依赖于[3. 我已阅读..]第1个选项"
+    },
+    {
+      "number": 32,
+      "page": 6,
+      "required": false,
+      "text": "32. 对于修改外形、检查结果或撤销操作，你还有什么改进建议? （1000字以内）\n依赖于[3. 我已阅读..]第1个选项"
+    }
+  ],
+  "page_descriptions": [
+    {
+      "kind": "content",
+      "text": "开始前\n请先阅读研究说明，再决定是否参加。\n\n本问卷按实验顺序分为六页：开始前、四轮体验后的反馈，以及最后的回顾。参与者编号和实验类型只填一次。每轮体验结束后，回到本问卷继续填写，不用重新扫码。请保持页面打开，最后统一提交。除参与者编号、实验类型和参加同意外，其余问题都可以跳过。\n\n这是 AIAA4435 课程的一项研究，想了解大家如何修改虚拟角色的外形。你将完成四轮任务，并回答一些关于使用体验的问题。回答没有对错，请按实际情况和感受填写。\n\n参加研究完全自愿。你可以跳过体验问题，随时休息或结束实验。如果感到不适，包括佩戴头显引起的不适，请立即告诉研究者。\n\n我们会记录你提出的修改要求、操作选择、外形变化、用时、问卷回答，以及虚拟角色和界面的截图。本表单不录音，也不调用摄像头。请不要在指令或回答中填写个人信息或敏感信息。\n\n你的修改要求会交给外部人工智能服务 DeepSeek 处理。问卷回答与模型收到的指令分开保存。请只使用研究者给你的参与者编号，不要填写姓名或联系方式。\n\n研究者会说明谁能访问数据、数据存在哪里、保存多久，以及如何申请撤回。有疑问的话，请先询问，再决定是否参加。"
+    },
+    {
+      "kind": "content",
+      "text": "第 1 轮结束后\n请先完成第 1 轮体验，再填写本页。只根据这一轮作答，所有题目都可以跳过。填写后保留此页面，按研究者的安排继续。"
+    },
+    {
+      "kind": "content",
+      "text": "第 2 轮结束后\n请先完成第 2 轮体验，再填写本页。只根据这一轮作答，所有题目都可以跳过。填写后保留此页面，按研究者的安排继续。"
+    },
+    {
+      "kind": "content",
+      "text": "第 3 轮结束后\n请先完成第 3 轮体验，再填写本页。只根据这一轮作答，所有题目都可以跳过。填写后保留此页面，按研究者的安排继续。"
+    },
+    {
+      "kind": "content",
+      "text": "第 4 轮结束后\n请先完成第 4 轮体验，再填写本页。只根据这一轮作答，所有题目都可以跳过。填写后保留此页面，按研究者的安排继续。"
+    },
+    {
+      "kind": "content",
+      "text": "全部结束后\n请回顾刚完成的四轮任务。以下问题都可以跳过，填完后统一提交。"
+    }
+  ],
+  "q7_saved_logic": "Q3 option 1 AND Q6 option 1",
+  "final_management_status": [
+    "虚拟角色外形修改研究：全部结束后 调查 ID:389455386 未发布 答卷:0 10月18日 20:02",
+    "虚拟角色外形修改研究：每轮结束后 调查 ID:389455149 未发布 答卷:0 10月18日 19:59",
+    "虚拟角色外形修改研究（全流程） 调查 ID:389439995 未发布 答卷:0 10月18日 19:48",
+    "Adjusting an AI Through Conversation 调查  ID:384478976 已发布 答卷:22 9月12日 22:53"
+  ],
+  "preview_checks": {
+    "blank_start": true,
+    "consent_reveals_q4_q6": true,
+    "q7_requires_both_consents": true,
+    "q7_hidden_after_link_decline": true,
+    "q7_hidden_value_cleared": false,
+    "all_six_pages_in_order": true,
+    "optional_round_pages_skippable": true,
+    "previous_page_enabled_after_save_reload": true,
+    "previous_page_retains_current_participant": true,
+    "decline_next_skips_to_submit_area": true,
+    "submit_never_clicked": true,
+    "fresh_preview_text_blank": true,
+    "fresh_preview_checked_options": 0
+  },
+  "shared_device": {
+    "device_limit": false,
+    "ip_limit": false,
+    "wechat_limit": false,
+    "resume": false,
+    "preserve_previous_answer": false,
+    "response_quota_enabled": false,
+    "sso_required": false,
+    "independent_account_limit": "No independent control exposed in current settings UI; not separately verified"
+  },
+  "limitations": [
+    "No online answer submitted; live repeated submissions unverified.",
+    "Decline path ends at submit area; platform storage unverified.",
+    "Hidden old-code input retains prior text in preview DOM; server export behavior unverified."
+  ]
+}

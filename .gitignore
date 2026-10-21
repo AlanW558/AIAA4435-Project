@@ -41,3 +41,7 @@ __pycache__/
 /Backend/logs/
 /StudyData/
 /Tools/AppearanceExperiment/.runtime/
+
+# Private WJX exports may be supplied beside the public midterm documents.
+/Docs/AppearanceExperiment/Midterm/*_按序号_*.xlsx
+/Docs/AppearanceExperiment/Midterm/*_按文本_*.xlsx

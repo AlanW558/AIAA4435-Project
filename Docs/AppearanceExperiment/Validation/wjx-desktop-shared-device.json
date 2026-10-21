@@ -1,0 +1,51 @@
+[
+  {
+    "checked": false,
+    "disabled": false,
+    "id": "ctl02_ContentPlaceHolder1_cbComputerLimit",
+    "label": "作答设备控制",
+    "visible": true
+  },
+  {
+    "checked": false,
+    "disabled": true,
+    "id": "ctl02_ContentPlaceHolder1_cbIPLimit",
+    "label": "IP地址限制",
+    "visible": true
+  },
+  {
+    "checked": false,
+    "disabled": false,
+    "id": "ctl02_ContentPlaceHolder1_cbWeixinLimit",
+    "label": "微信作答控制",
+    "visible": true
+  },
+  {
+    "checked": false,
+    "disabled": true,
+    "id": "ctl02_ContentPlaceHolder1_cbAllowSaveJoin",
+    "label": "允许断点续答",
+    "visible": true
+  },
+  {
+    "checked": false,
+    "disabled": false,
+    "id": "ctl02_ContentPlaceHolder1_cbPreserveAnswer",
+    "label": "自动加载上次提交内容",
+    "visible": false
+  },
+  {
+    "checked": false,
+    "disabled": false,
+    "id": "ctl02_ContentPlaceHolder1_cbMaxPerson",
+    "label": "控制提交答卷总数",
+    "visible": true
+  },
+  {
+    "checked": false,
+    "disabled": false,
+    "id": "ctl02_ContentPlaceHolder1_cbNeedSSO",
+    "label": "访问问卷时需单点登录",
+    "visible": false
+  }
+]

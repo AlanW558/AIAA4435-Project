@@ -1,0 +1,1272 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>问卷结果解读与人数示例 · AIAA4435</title>
+<style>
+:root{--ink:#182f38;--muted:#526770;--accent:#086f70;--line:#dce5e8;--paper:#fff;--wash:#f3f7f7;--warn:#a55719;--warn-bg:#fff7ed;--nav-width:264px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:85px}body{margin:0;background:var(--wash);color:var(--ink);font:16px/1.85 -apple-system,BlinkMacSystemFont,"Noto Sans CJK SC","Microsoft YaHei",sans-serif}a{color:var(--accent);text-underline-offset:3px}a:hover{color:#004b4c}header{height:62px;position:sticky;top:0;z-index:10;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;gap:20px}header .brand{font-weight:750;letter-spacing:.02em;font-size:14px}header .notice{color:var(--warn);font-weight:650;font-size:13px}button{border:1px solid #b9cacc;border-radius:8px;background:white;padding:7px 14px;color:var(--ink);font:inherit;font-size:13px;cursor:pointer}button:hover{background:#edf4f3}.layout{max-width:1500px;margin:0 auto;display:grid;grid-template-columns:var(--nav-width) minmax(0,1fr);gap:30px;padding:28px 30px 80px}aside{position:sticky;top:84px;align-self:start;height:calc(100vh - 110px);overflow-y:auto;padding-right:14px;font-size:12.5px;line-height:1.55}aside p{font-size:11px;letter-spacing:.12em;color:var(--muted);font-weight:700;margin:0 0 14px}aside a{display:block;text-decoration:none;color:#50656d;padding:5px 8px;border-left:2px solid transparent;border-radius:0 5px 5px 0}aside a:hover,aside a.active{border-left-color:var(--accent);color:#005d5f;background:#e4f0ed}.nav-h2{font-weight:700;margin-top:10px}.nav-h3{font-size:12px;padding-left:16px!important}main{min-width:0;background:white;border:1px solid var(--line);border-radius:14px;padding:38px 50px 55px;box-shadow:0 8px 30px rgba(33,67,74,.035)}h1{font-size:clamp(26px,3vw,36px);line-height:1.35;letter-spacing:-.02em;margin:0 0 14px}h1+p{color:var(--muted);font-size:13px;margin:0 0 22px}h2{font-size:24px;line-height:1.5;margin:54px 0 20px;padding-top:25px;border-top:1px solid var(--line)}h3{font-size:20px;line-height:1.5;margin:30px 0 18px;color:#075f61}p{margin:13px 0}strong{font-weight:700}blockquote{margin:20px 0;padding:14px 18px;border-left:4px solid #dca15f;border-radius:0 9px 9px 0;background:var(--warn-bg);color:#74401a}blockquote p{margin:0}code{background:#edf3f3;border:1px solid #e1ebeb;border-radius:4px;padding:1px 4px;font: .86em/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.table-scroll{width:100%;overflow-x:auto;margin:20px 0;border:1px solid var(--line);border-radius:8px}table{border-collapse:collapse;width:100%;min-width:580px;font-size:13px;line-height:1.7}th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid #e6eeee}th{background:#eaf3f1;color:#245354;font-weight:700}tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#f9fbfb}th:not(:first-child),td:not(:first-child){font-variant-numeric:tabular-nums}.case-marker{display:inline-block;background:#e7f3ef;color:#086259;padding:3px 10px;border-radius:5px;font-size:11px;font-weight:700;letter-spacing:.04em;margin-top:35px}.case-marker+h3{margin-top:10px}li{padding-left:3px;margin:8px 0}ol{padding-left:23px}footer{border-top:1px solid var(--line);margin-top:35px;padding-top:15px;color:var(--muted);font-size:12px}.mobile-nav{display:none}.top-link{display:block;text-align:right;margin-top:24px;font-size:13px}.screen-note{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:0 0 26px}
+@media(min-width:1450px){main{padding-left:65px;padding-right:65px}}
+@media(max-width:1050px){:root{--nav-width:215px}.layout{padding:20px 18px 60px;gap:20px}main{padding:30px 26px}body{font-size:15px}}
+@media(max-width:780px){header{padding:0 16px;height:auto;min-height:60px;flex-wrap:wrap;gap:5px 15px;padding-top:9px;padding-bottom:9px}header .notice{font-size:11px}header button{display:none}.layout{display:block;padding:14px 10px 35px}aside{display:none}main{padding:24px 18px;border-radius:10px}.mobile-nav{display:block;background:#f1f7f5;border-radius:7px;padding:10px 12px;margin-bottom:24px}.mobile-nav summary{cursor:pointer;font-size:13px;font-weight:650}.mobile-nav a{display:block;font-size:13px;padding:4px 0;text-decoration:none}.table-scroll{margin-left:-3px;width:calc(100% + 6px)}h2{font-size:22px}h3{font-size:19px}table{font-size:12px}th,td{padding:9px}}
+@media print{html{scroll-behavior:auto}body{background:white;color:black;font-size:10.5pt;line-height:1.65}header,aside,.mobile-nav,.top-link,.screen-note{display:none}.layout{display:block;padding:0;max-width:none}main{border:0;box-shadow:none;padding:0}h1{font-size:24pt}h2{font-size:16pt;padding-top:12pt;margin-top:25pt;break-after:avoid}h3{font-size:13pt;break-after:avoid}.case-marker{break-after:avoid}table{min-width:0;font-size:8.5pt}th,td{padding:6pt}.table-scroll{overflow:visible;break-inside:auto}tr,blockquote{break-inside:avoid}thead{display:table-header-group}a{color:inherit}p{orphans:3;widows:3}@page{margin:16mm}}
+</style>
+</head>
+<body id="top">
+<header><span class="brand">AIAA4435 · 外形交互研究</span><span class="notice">全部人数与结果均为模拟示例 · 未新增真人数据</span><button onclick="window.print()">打印 / 保存</button></header>
+<div class="layout">
+<aside aria-label="文档目录"><p>阅读导航</p><a class="nav-h2" href="#section-2">1. 先把题号、轮次和策略对应正确</a><a class="nav-h3" href="#section-3">1.1 实际题号</a><a class="nav-h3" href="#section-4">1.2 轮次不是策略</a><a class="nav-h3" href="#section-5">1.3 人数和分母</a><a class="nav-h2" href="#section-6">2. 每类问题能支持到哪一层结论</a><a class="nav-h2" href="#section-7">3. 十一类回答模式：模拟分布怎样读</a><a class="nav-h3" href="#section-8">情境1：S获得较一致的正向支持</a><a class="nav-h3" href="#section-9">情境2：E快、少打断，但更容易首次做错</a><a class="nav-h3" href="#section-10">情境3：A稳，但打断偏多</a><a class="nav-h3" href="#section-11">情境4：S有效，但用户觉得费力</a><a class="nav-h3" href="#section-12">情境5：主观评价与客观表现不一致</a><a class="nav-h3" href="#section-13">情境6：N与S近似</a><a class="nav-h3" href="#section-14">情境7：四策略的体验和成功率都近似</a><a class="nav-h3" href="#section-15">情境8：用户分群，总体平均掩盖相反偏好</a><a class="nav-h3" href="#section-16">情境9：顺序、学习或疲劳影响回答</a><a class="nav-h3" href="#section-17">情境10：角色审美与交互策略混在一起</a><a class="nav-h3" href="#section-18">情境11：高分看似明显，但缺失使判断受限</a><a class="nav-h2" href="#section-19">4. 开始前和结束后的题，怎样参与解释</a><a class="nav-h3" href="#section-20">4.1 Q1至Q3决定能否正确纳入，不是效果分数</a><a class="nav-h3" href="#section-21">4.2 Q4、Q5提供背景，不证明人群需求</a><a class="nav-h3" href="#section-22">4.3 Q6、Q7必须满足三个条件才关联旧问卷</a><a class="nav-h3" href="#section-23">4.4 Q28至Q32的正确用法</a><a class="nav-h2" href="#section-24">5. 需要哪些日志，才可以把体验描述推进为性能结论</a><a class="nav-h2" href="#section-25">6. 按现有分析计划，怎样写出可靠而不过度的结论</a><a class="nav-h2" href="#section-26">7. 来源与本次核对范围</a></aside>
+<main>
+<details class="mobile-nav"><summary>目录与11类情境</summary><a class="nav-h2" href="#section-2">1. 先把题号、轮次和策略对应正确</a><a class="nav-h3" href="#section-3">1.1 实际题号</a><a class="nav-h3" href="#section-4">1.2 轮次不是策略</a><a class="nav-h3" href="#section-5">1.3 人数和分母</a><a class="nav-h2" href="#section-6">2. 每类问题能支持到哪一层结论</a><a class="nav-h2" href="#section-7">3. 十一类回答模式：模拟分布怎样读</a><a class="nav-h3" href="#section-8">情境1：S获得较一致的正向支持</a><a class="nav-h3" href="#section-9">情境2：E快、少打断，但更容易首次做错</a><a class="nav-h3" href="#section-10">情境3：A稳，但打断偏多</a><a class="nav-h3" href="#section-11">情境4：S有效，但用户觉得费力</a><a class="nav-h3" href="#section-12">情境5：主观评价与客观表现不一致</a><a class="nav-h3" href="#section-13">情境6：N与S近似</a><a class="nav-h3" href="#section-14">情境7：四策略的体验和成功率都近似</a><a class="nav-h3" href="#section-15">情境8：用户分群，总体平均掩盖相反偏好</a><a class="nav-h3" href="#section-16">情境9：顺序、学习或疲劳影响回答</a><a class="nav-h3" href="#section-17">情境10：角色审美与交互策略混在一起</a><a class="nav-h3" href="#section-18">情境11：高分看似明显，但缺失使判断受限</a><a class="nav-h2" href="#section-19">4. 开始前和结束后的题，怎样参与解释</a><a class="nav-h3" href="#section-20">4.1 Q1至Q3决定能否正确纳入，不是效果分数</a><a class="nav-h3" href="#section-21">4.2 Q4、Q5提供背景，不证明人群需求</a><a class="nav-h3" href="#section-22">4.3 Q6、Q7必须满足三个条件才关联旧问卷</a><a class="nav-h3" href="#section-23">4.4 Q28至Q32的正确用法</a><a class="nav-h2" href="#section-24">5. 需要哪些日志，才可以把体验描述推进为性能结论</a><a class="nav-h2" href="#section-25">6. 按现有分析计划，怎样写出可靠而不过度的结论</a><a class="nav-h2" href="#section-26">7. 来源与本次核对范围</a></details>
+<div class="screen-note">如何使用：先确认题号与策略映射，再按实际回答寻找相应情境。每个情境独立计算人数；不要把示例当成真实结果。</div>
+<h1 id="section-1">问卷结果解读与人数示例</h1>
+<p>适用版本：<code>appearance-survey-v0.1-zh-CN.4-unified</code>，六页、32题。整理日期：2026年10月20日。</p>
+<blockquote>
+<p><strong>本文全部分数、人数、成功次数、时长和偏好分布都是模拟教学例子，不是已经采集的真人结果。</strong> 各情境相互独立，不能拼成一份研究结果，也不能导入正式数据目录。本文不修改问卷、实验分配、冻结材料或旧回答。</p>
+</blockquote>
+<p>这份问卷能直接回答：参与者觉得哪种交互更打断、更可控、更费力、更满意，以及更愿意继续使用哪一轮的系统。要回答“更快、更准确、更稳定、少误改、少修复、成本更低”，必须结合真实任务日志和渲染证据。满意度高的人不一定完成得更准确；完成得更准确的人也不一定喜欢这一过程。</p>
+<p>下面先给出题号和读数规则，再列出11类可遇到的回答模式。除特别讨论缺失、退出或设计偏差的部分外，每个情境都假设 <strong>20名正式参与者完成四轮、每轮4项任务</strong>，相关评分题也有20份有效回答。这只是便于看懂人数的统一分母。项目中的22是原招募目标，2个预实验加20个正式是预留容量，均不代表已到场或已完成。</p>
+<h2 id="section-2">1. 先把题号、轮次和策略对应正确</h2>
+<h3 id="section-3">1.1 实际题号</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>第1轮</th>
+<th>第2轮</th>
+<th>第3轮</th>
+<th>第4轮</th>
+<th>原题与高分含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打断感</td>
+<td>Q8</td>
+<td>Q13</td>
+<td>Q18</td>
+<td>Q23</td>
+<td>“系统的提问打断了我完成任务的过程。”高分＝更感到打断</td>
+</tr>
+<tr>
+<td>控制感</td>
+<td>Q9</td>
+<td>Q14</td>
+<td>Q19</td>
+<td>Q24</td>
+<td>“我能控制哪些外形特征会被修改。”高分＝更有控制感</td>
+</tr>
+<tr>
+<td>投入努力</td>
+<td>Q10</td>
+<td>Q15</td>
+<td>Q20</td>
+<td>Q25</td>
+<td>“完成这些修改需要我投入很多精力。”高分＝更费精力</td>
+</tr>
+<tr>
+<td>满意度</td>
+<td>Q11</td>
+<td>Q16</td>
+<td>Q21</td>
+<td>Q26</td>
+<td>“我对这一轮修改外形的体验感到满意。”高分＝更满意</td>
+</tr>
+<tr>
+<td>当轮补充</td>
+<td>Q12</td>
+<td>Q17</td>
+<td>Q22</td>
+<td>Q27</td>
+<td>“关于这一轮体验，你还有什么想补充的吗？”不计分</td>
+</tr>
+</tbody>
+</table></div>
+<p>四项均用1至7级同意度：1非常不同意、2不同意、3比较不同意、4说不上同意或不同意、5比较同意、6同意、7非常同意。另有“无法判断／不想回答”，所有体验题也都可以跳过。</p>
+<p><strong>打断感和努力的方向，与控制感和满意度相反。</strong> 但这不意味着应反向计分后相加：它们是四个自拟单题，分别测不同方面，未构成经验证的量表，不是SUS、NASA-TLX，也不测完整的信任或认知负荷构念。</p>
+<p>打断题还有原始提示：“如果这一轮系统没有提问，请选1（非常不同意）。”因此某条件集中选1，可能首先说明没有发生提问；不能据此宣布它的整体体验最好。4分也不等于“满意”或“已经无法判断”，应保留原选项含义。</p>
+<h3 id="section-4">1.2 轮次不是策略</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>当前比较的行为</th>
+<th>主要用于回答</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E：直接执行</td>
+<td>先执行共同默认有效候选，之后允许检查和修复</td>
+<td>不先问是否更快，但增加首次误改？</td>
+</tr>
+<tr>
+<td>A：总是询问</td>
+<td>对可支持的初始请求先问一次，明确请求也确认</td>
+<td>提问是否带来收益，同时增加不必要的打断？</td>
+</tr>
+<tr>
+<td>N：原生LLM决策模块</td>
+<td>同一模型在共同harness内决定ASK、ACT或UNRESOLVED</td>
+<td>模型自己判断何时问，实际表现如何？</td>
+</tr>
+<tr>
+<td>S：选择性澄清</td>
+<td>用预定R1/R2/R3及小步可逆例外决定</td>
+<td>是否改善目标达成与提问成本之间的权衡？</td>
+</tr>
+</tbody>
+</table></div>
+<p>N不是完全自由规划的独立agent；四条件共用候选生成、工具、问题模板、显示和修复预算。正式分析要用“参与者编号＋实际场次＋轮次”连接分配表，不能把Q8一律当成E、Q13一律当成A。</p>
+<p>现有分配表的真实<strong>计划映射</strong>如下；此表没有表示这些人已参加：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>计划槽位</th>
+<th>第1轮</th>
+<th>第2轮</th>
+<th>第3轮</th>
+<th>第4轮</th>
+<th>若Q28选择“第4轮”</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P001</td>
+<td>A</td>
+<td>N</td>
+<td>E</td>
+<td>S</td>
+<td>对应偏好S</td>
+</tr>
+<tr>
+<td>P002</td>
+<td>E</td>
+<td>A</td>
+<td>S</td>
+<td>N</td>
+<td>对应偏好N</td>
+</tr>
+<tr>
+<td>P003</td>
+<td>N</td>
+<td>S</td>
+<td>A</td>
+<td>E</td>
+<td>对应偏好E</td>
+</tr>
+<tr>
+<td>P006</td>
+<td>S</td>
+<td>E</td>
+<td>N</td>
+<td>A</td>
+<td>对应偏好A</td>
+</tr>
+</tbody>
+</table></div>
+<p>例如，P001的S满意度来自Q26，而P002的S满意度来自Q21。下文“<strong>S满意度</strong>”都指先作这种映射，再汇总20个人各自的S轮评分；不是让20个人都用同一个题号代表S。</p>
+<h3 id="section-5">1.3 人数和分母</h3>
+<p>20人每人四轮，是20个独立参与者、80条分轮问卷记录；20人每人16项任务，是320条计划任务记录。每个条件有20份分轮评分及80项任务，但不是80名或320名参与者。</p>
+<p>一个人每个条件只做4项主任务，因此该人的成功比例只能是0/4、1/4、2/4、3/4或4/4。先求每人的条件内成功比例，再求同一人的S−N差值。相同参与者的四轮互有关联；不能当四组互不相关的人分析。</p>
+<p>以下评分表列出每个分值的人数，<strong>每一行单独合计</strong>。多个指标来自同一批20人，各行人数不能再相加称为样本量。全文中的低分、高分只描述具体分布，不设“达到多少人打6分就有效”的判定门槛。</p>
+<h2 id="section-6">2. 每类问题能支持到哪一层结论</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>问卷证据</th>
+<th>可以支持</th>
+<th>单凭它不能支持</th>
+<th>需要补充</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>打断题更低</td>
+<td>该轮报告的提问打断感较低</td>
+<td>实际更少提问、完成更快、整体更优</td>
+<td>ASK决策、实际问题展示/回答、时长</td>
+</tr>
+<tr>
+<td>控制题更高</td>
+<td>参与者更觉得能控制修改范围</td>
+<td>没有误改、撤销可靠、结果一定正确</td>
+<td>首次与末态、保护字段、撤销前后renderer</td>
+</tr>
+<tr>
+<td>努力题更低</td>
+<td>主观上较省精力</td>
+<td>操作更少、耗时更短、完整认知负荷下降</td>
+<td>操作、修复、等待和开放题</td>
+</tr>
+<tr>
+<td>满意题更高</td>
+<td>参与者对这一轮更满意</td>
+<td>更准确、更安全、信任提升、持续使用率更高</td>
+<td>成功率、原因、最终偏好；长期行为需另外研究</td>
+</tr>
+<tr>
+<td>Q28选某一轮更多</td>
+<td>在本次回顾中更多人愿意继续使用那一轮</td>
+<td>实际长期采用、所有人更喜欢、策略普遍优越</td>
+<td>个体映射、Q29、顺序与最终外观</td>
+</tr>
+<tr>
+<td>Q30说某次提问有用</td>
+<td>用户能指出有帮助的提问经历</td>
+<td>该问题客观上必要，或不问必然失败</td>
+<td>对应请求、候选、回答、提交和评分证据</td>
+</tr>
+<tr>
+<td>Q31说某次提问多余</td>
+<td>用户报告了多余或难回答的提问</td>
+<td>这次提问客观无收益，所有澄清都无价值</td>
+<td>具体问题、候选覆盖、任务类型</td>
+</tr>
+<tr>
+<td>Q32建议改进撤销</td>
+<td>撤销体验存在值得检查的问题</td>
+<td>撤销实现确实错误、所有人都遇到问题</td>
+<td>操作事件、错误与渲染复现</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="section-7">3. 十一类回答模式：模拟分布怎样读</h2>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-8">情境1：S获得较一致的正向支持</h3>
+<p><strong>看哪些题：</strong> 满意度Q11/Q16/Q21/Q26、控制感Q9/Q14/Q19/Q24、打断感Q8/Q13/Q18/Q23；Q28偏好、Q29原因、Q30有帮助的提问用于解释。</p>
+<p><strong>模拟评分分布：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/条件</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>N满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">14</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>S控制感</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>N控制感</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>S打断感</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>A打断感</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>满意度的同人配对可以是：S/N分别6/4分的8人、7/5分的5人、5/4分的4人、4/4分的2人、3/5分的1人，合计20人。因此17人给S更高满意度，2人相同，1人给S更低；这比只比较两条平均数更清楚。</p>
+<p>Q28映射后模拟为：S12人、N4人、A2人、E1人、没有特别偏好1人、都不想用0人、无法判断0人、跳过0人，合计20人。</p>
+<p>若真实日志也呈现以下模拟模式：S/N每人稳定成功任务数为4/3的12人、4/4的5人、3/3的2人、3/4的1人，则S共77/80次、N共66/80次稳定成功；12人S成功率更高、7人相同、1人更低。S平均比N高13.75个百分点，仍需用20人的配对差值给出不确定性。</p>
+<p><strong>可以怎样写：</strong> “在这组任务和参与者中，S的稳定成功率及满意度呈正向差异，且相较A报告的打断感更低；这些证据共同支持选择性澄清可能改善该系统的使用体验。”</p>
+<p><strong>仍不能怎样写：</strong> 仅凭这些模拟数量不能宣布“显著有效”或“所有指标最佳”。还要报告努力、总时间、修复、失败及个别反例；控制感也不能改写成“信任提升”。主观与客观方向一致，比只有一项偏好票数更有说服力，但不构成普遍有效的证明。</p>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-9">情境2：E快、少打断，但更容易首次做错</h3>
+<p><strong>看哪些题：</strong> 打断Q8/Q13/Q18/Q23、控制Q9/Q14/Q19/Q24、满意Q11/Q16/Q21/Q26；当轮补充Q12/Q17/Q22/Q27及Q32看检查、修复与撤销经历。</p>
+<p><strong>模拟评分分布：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/条件</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E打断感</td>
+<td style="text-align:right">20</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>E控制感</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>E投入努力</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>E满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>S满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>这里E打断题20人都选1，仅与“这一轮没有系统提问”的假设相符。低打断不是正确执行的证据。</p>
+<p>假设日志显示，按每人每条件4任务的平均端到端时间比较，15人E更快、3人相近到所报告的时间精度、2人E更慢，合计20人；E首次成功38/80、最终稳定成功49/80，S分别65/80、72/80。E有31次修复，其中12次为撤销；S有14次修复，其中4次为撤销。<strong>撤销已包含在这里的修复次数中，不能算成E共43次修复。</strong></p>
+<p>Q28模拟为：E3人、A2人、N5人、S8人、没有特别偏好1人、都不想用1人、无法判断0人、跳过0人，共20人。这允许少数人仍愿意选E，因为他们可能更重视即时反馈。</p>
+<p><strong>可支持：</strong> 若时间记录包含失败、超时和修复，可描述“E的即时执行减少了提问打断，但本任务集里首次正确率较低，检查和修复负担更大”。若只有满意度和控制感低，只能写“体验评价较差”，还不能加上“更易错”。</p>
+<p><strong>还要排查：</strong> 目标是否根本没进入共同候选、renderer是否失败、修复是否发生在某类任务。不能把候选遗漏或共同执行故障全归因于E的决策规则；只比较成功任务的耗时，也不能支撑“E整体更快”。</p>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-10">情境3：A稳，但打断偏多</h3>
+<p><strong>看哪些题：</strong> 打断Q8/Q13/Q18/Q23、控制Q9/Q14/Q19/Q24、满意Q11/Q16/Q21/Q26，以及Q30、Q31是否同时提到有用确认和多余确认。</p>
+<p><strong>模拟评分分布：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/条件</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A打断感</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>S打断感</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>A控制感</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>A满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>假设日志显示A稳定成功76/80、S为74/80；80项A任务均为可支持请求，A作出80次初始ASK、S作出34次，并且另有前端证据确认这些问题已展示。Q31中，12人指出明确指令还需要确认、5人回答没有多余提问、3人未提供可分类内容，合计20人；这里采用“一人一个主要回答类别”计数。</p>
+<p>Q28模拟为：A5人、S9人、N3人、E1人、没有特别偏好2人、都不想用0人、无法判断0人、跳过0人，共20人。</p>
+<p><strong>可支持：</strong> “频繁确认伴随较高控制感和较高打断感；S可能用更少提问维持接近的目标达成。”76/80比74/80只多2项任务，不能据此确认A更稳，也不能确认S已经不劣于A。稳定成功的配对差与区间仍需报告。</p>
+<p><strong>不能简化成：</strong> “大家讨厌提问。”同一个人完全可以认为某些澄清有用，同时认为另一些确认多余；具体应对照T1明确任务与T3/T4歧义、历史任务的事件。</p>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-11">情境4：S有效，但用户觉得费力</h3>
+<p><strong>看哪些题：</strong> 努力Q10/Q15/Q20/Q25是关键；再看控制Q9/Q14/Q19/Q24、满意Q11/Q16/Q21/Q26、Q29至Q32的解释。</p>
+<p><strong>模拟评分分布：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/条件</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S控制感</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>S投入努力</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>N投入努力</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>S满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>S打断感</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>假设日志显示S稳定成功73/80、N为60/80，但按人汇总后的条件平均端到端时间为S58秒/任务、N41秒/任务；这些时间包含已完成失败任务，未删除慢任务。Q30模拟为12人描述了澄清帮助、5人明确回答没有、3人留空，共20人；Q31模拟为9人描述选项难理解、4人回答没有、7人留空，共20人。两题可由同一人作答，不能相加称为40人。</p>
+<p>Q28模拟为：S7人、N7人、E2人、A2人、没有特别偏好2人、都不想用0人、无法判断0人、跳过0人，共20人。</p>
+<p><strong>可支持：</strong> “S可能提升目标达成，但伴随较高主观努力，偏好并未一致转向S。”这是一种真实的收益—负担权衡，并不因为成功率较高就自动成为全面胜出。</p>
+<p><strong>如何定位原因：</strong> 对齐服务等待与用户操作时间。如果额外时间主要在模型调用，不应称为用户“思考更久”；如果用户反复阅读难辨的选项、修改回答，才有线索指向选项负担。努力也可能来自有效检查，需具体开放回答支持，不能只凭高分替参与者编出原因。</p>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-12">情境5：主观评价与客观表现不一致</h3>
+<p><strong>看哪些题：</strong> 满意Q11/Q16/Q21/Q26、控制Q9/Q14/Q19/Q24、Q28与Q29；客观正确率从独立任务评分取得。</p>
+<p><strong>模拟分支A——更喜欢S，但S实际目标达成更差：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/条件</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S满意度（分支A）</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>N满意度（分支A）</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>若日志中S稳定成功58/80、N为70/80，而Q28为S12人、N4人、A2人、E1人、没有特别偏好1人，其余选项0人，共20人，可以说“回顾偏好与目标达成方向不一致”。不能把喜欢写成更准确。原因可能涉及即时反馈、最终外观、任务目标不易察觉或不同价值取舍；这些只是待核实解释，应看Q29和逐任务记录。</p>
+<p><strong>模拟分支B——S更准确，但更不受欢迎：</strong> 这是另一种独立的20人情境，不与分支A相加。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/条件</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S满意度（分支B）</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>N满意度（分支B）</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>若S稳定成功74/80、N为62/80，则应检查多余确认、等待、难懂选项或不自然的交互。可以写“准确性收益尚未转化为更好的满意体验”；不能因此说问卷“错了”，也不能删除不支持S的主观指标。</p>
+<p>两种分支都说明应同时呈现成功率、四项单题和偏好。一个综合总分会掩盖这种重要的不一致。</p>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-13">情境6：N与S近似</h3>
+<p><strong>看哪些题：</strong> 满意Q11/Q16/Q21/Q26、打断Q8/Q13/Q18/Q23、Q28、Q29；重点比较同一人的N轮和S轮。</p>
+<p><strong>模拟评分分布：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/条件</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">9</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>N满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">9</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>S打断感</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>N打断感</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>满意度的一个具体同人分布是：S/N为4/4分的6人、5/5分的6人、6/6分的2人、6/5分的3人、5/6分的3人，共20人。14人相同，3人更喜欢S，3人更喜欢N；边际分布相同并不代表每个人感受相同。</p>
+<p>模拟稳定成功任务数S/N为4/4的10人、3/3的6人、4/3的2人、3/4的2人，共20人；两条件都是72/80。Q28为N6人、S6人、E1人、A1人、没有特别偏好6人，其余选项0人，共20人。</p>
+<p><strong>可支持：</strong> “本样本中N与S的评分和成功率点估计接近，未呈现清晰的一致优势。”仍应展示区间和个体差值。</p>
+<p><strong>不能支持：</strong> “S和N等效”“规则没有用”“原生模型已经解决澄清”。要证明等效，需要事先定义有实际意义的等效界限和相应设计；当前协议未给出这种承诺。若N与S的实际ASK/ACT决策本来就高度一致，结果近似也可能反映两者采取了相同动作。还可描述调用量、等待、可解释证据的区别，但不能用它们替代未观察到的UX优势。</p>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-14">情境7：四策略的体验和成功率都近似</h3>
+<p><strong>看哪些题：</strong> 全部16道评分题；Q28区分“没有特别偏好”与“都不想用”；Q29至Q32用于看任务是否太容易、差别是否不易察觉。</p>
+<p><strong>模拟满意度分布：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/条件</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>A满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>N满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>S满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>再假设四条件的其他三项评分也没有清晰方向差异，稳定成功都是72/80。Q28为E2人、A2人、N2人、S2人、没有特别偏好10人、都不想用2人、无法判断0人、跳过0人，共20人。</p>
+<p><strong>可支持：</strong> “当前样本和任务中，没有观察到清晰的体验或稳定成功优势。”10人无偏好与2人都不想用必须分开；无偏好不意味着都满意，也不意味着都不满意。</p>
+<p><strong>应区分三种解释：</strong> 各策略确实相近；任务存在天花板/地板而难以区分；样本与指标提供的信息不足。仅凭20人的相近分布不能选定其中一种。若提问数仍是E0、A80、N34、S32，便只能说评分及成功率接近，不能写“所有表现完全一样”。</p>
+<p>如果另一独立情境中四条件满意度都集中在1至3分，应转向共同系统、界面或任务问题；如果都集中在6至7分，可能涉及满意度上限。不能只因某题分布集中，就宣告量表失效或四策略等效。</p>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-15">情境8：用户分群，总体平均掩盖相反偏好</h3>
+<p><strong>看哪些题：</strong> Q4（VR使用次数）、Q5（此前是否试用原型），再与满意Q11/Q16/Q21/Q26、努力Q10/Q15/Q20/Q25及Q28关联。Q4测使用次数，不等于操作熟练度；Q5测原型接触，不等于喜欢该原型。</p>
+<p>假设Q4为从未用过8人、1至2次6人、3至10次4人、10次以上2人、记不清/不想回答0人、跳过0人，共20人。暂作探索性描述时，可把前两类14人与后两类6人分开；这只是便于示例的分组，不能事后挑选切点制造优势。</p>
+<p><strong>模拟同人满意度配对（左S、右N）：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Q4经验组</th>
+<th>具体分数对及人数</th>
+<th style="text-align:right">组内合计</th>
+<th>同人方向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从未/1至2次</td>
+<td>6/4分8人；5/4分4人；4/5分2人</td>
+<td style="text-align:right">14</td>
+<td>12人S更高、2人S更低</td>
+</tr>
+<tr>
+<td>3至10次/10次以上</td>
+<td>4/6分4人；5/5分2人</td>
+<td style="text-align:right">6</td>
+<td>4人S更低、2人相同</td>
+</tr>
+</tbody>
+</table></div>
+<p>总计20人：12人S满意度更高、2人相同、6人更低。Q28可以相应呈现：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>经验组</th>
+<th style="text-align:right">E</th>
+<th style="text-align:right">A</th>
+<th style="text-align:right">N</th>
+<th style="text-align:right">S</th>
+<th style="text-align:right">无特别偏好</th>
+<th style="text-align:right">都不想用</th>
+<th style="text-align:right">无法判断</th>
+<th style="text-align:right">跳过</th>
+<th style="text-align:right">合计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从未/1至2次</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">10</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">14</td>
+</tr>
+<tr>
+<td>3至10次/10次以上</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">6</td>
+</tr>
+</tbody>
+</table></div>
+<p>同时，Q5若为没有试用15人、有4人、不确定/不想回答1人、跳过0人，共20人，应检查这4名试用者是否集中在某经验组，避免把原型熟悉误读成VR经验效应。</p>
+<p><strong>可支持：</strong> “探索性分组提示，较少VR接触者与较多接触者可能对澄清有不同取舍。”6人的小组只能提供线索。组间看起来相反不等于已验证统计交互，也不足以直接规定“新手用S、熟手用N”。没有实际测量的职业、年龄或人格不能由回答风格推断。</p>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-16">情境9：顺序、学习或疲劳影响回答</h3>
+<p><strong>看哪些题：</strong> 按真实轮次比较努力Q10→Q15→Q20→Q25和满意Q11→Q16→Q21→Q26；再看Q12/Q17/Q22/Q27、Q29、Q32，以及实验时间与休息记录。</p>
+<p><strong>模拟按轮次的努力分布；这里特意不先把轮次改成策略：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/轮次</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第1轮努力Q10</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>第2轮努力Q15</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>第3轮努力Q20</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>第4轮努力Q25</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>Q32若按一个主要主题归类，可能为后半程疲劳8人、操作逐渐熟悉5人、同时提到两者3人、没有相关说明4人，共20人。Q28原始轮次为第1轮9人、第2轮5人、第3轮3人、第4轮2人、无特别偏好1人，其余选项0人，共20人。</p>
+<p><strong>可支持：</strong> “存在随轮次变化的体验模式，需要检查疲劳、熟悉和回顾记忆的影响。”努力变高不直接证明疲劳；任务难度、服务延迟或先前条件的迁移也可能参与。</p>
+<p>完整20槽位的计划中，各策略在每个位置各有5人，顺序做了平衡。但实际退出、漏答或临时换顺序仍会破坏平衡；即使完全平衡，也应展示轮次趋势并作计划中的顺序/任务敏感性分析。Q28偏好第1轮不等于偏好E，更不等于偏好S。</p>
+<p>若相反出现后几轮努力下降、操作时间缩短，可考虑学习效应，但仍须检查实际任务和日志；不要把学习曲线直接写成某策略造成的提升。</p>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-17">情境10：角色审美与交互策略混在一起</h3>
+<p><strong>看哪些题：</strong> 满意Q11/Q16/Q21/Q26、Q28偏好、Q29理由、Q32改进；问卷没有单独的角色审美评分题，因此只能从自愿开放回答获得有限线索。</p>
+<p>当前演示需求是肌肉型、蓝西装男性与黄色奶龙，并默认男性。<strong>演示增加角色不自动改变现有正式协议“同一个固定角色”的要求。</strong> 角色风格、默认颜色、比例和表情都可能影响喜欢程度、目标可辨性及新奇感；当前任务研究的是澄清策略，不能把这些变化偷偷当成策略差异。</p>
+<p>以下是一个<strong>设计偏差反例</strong>：假设20人都完成四轮，但S轮使用奶龙、N轮使用男性。这样的20人虽有完整答卷，却不满足“相同角色比较策略”的条件，不能称为20个合格的原方案对照。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/角色与条件</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S轮/奶龙满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>N轮/男性满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">8</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>Q28假设S14人、N2人、A2人、E1人、无特别偏好1人，其余选项0人，共20人。Q29主要理由若为喜欢角色外观12人、喜欢交互过程5人、未说明3人，共20人，则“更喜欢S轮”很可能混有角色偏好。</p>
+<p><strong>可支持：</strong> 参与者更喜欢这一整套“策略＋角色＋展示”的体验。<strong>不能支持：</strong> S的澄清决策单独导致满意度提高。即便Q29没提外观，也不能证明不存在外观影响。</p>
+<p>如果四个条件确实始终使用同一个男性角色，审美主要是共同背景，通常不能单独解释同一人的S−N差异；但不同任务最终颜色、配饰、比例和目标难度仍需核对。若不同参与者自行挑选角色，选择本身也不是随机分配，不能直接比较“喜欢奶龙的人”和“喜欢男性的人”来推断角色因果效应。</p>
+<p>正式采集前若决定使用新素材，应对角色、材质映射、目标卡截图、颜色/配饰/比例可见性及构建版本重新验收并记录。已经冻结的采集不得无记录换模型；不同素材版本要保留标识，不能无条件合并。本文仅说明分析边界，不把演示改动写入现有冻结方案，也不新增问卷题。</p>
+<span class="case-marker" aria-hidden="true">模拟情境 · 独立20人示例</span><h3 id="section-18">情境11：高分看似明显，但缺失使判断受限</h3>
+<p><strong>看哪些题：</strong> 以满意Q11/Q16/Q21/Q26为例；所有评分、Q28和日志都要保留各自缺失。这里仍假设20人完成四轮任务，但选填题不要求人人回答，故有效评分人数小于20。</p>
+<p><strong>模拟有效评分分布：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标/条件</th>
+<th style="text-align:right">1分</th>
+<th style="text-align:right">2分</th>
+<th style="text-align:right">3分</th>
+<th style="text-align:right">4分</th>
+<th style="text-align:right">5分</th>
+<th style="text-align:right">6分</th>
+<th style="text-align:right">7分</th>
+<th style="text-align:right">有效人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">6</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">12</td>
+</tr>
+<tr>
+<td>N满意度</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">4</td>
+<td style="text-align:right">7</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">18</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>条件</th>
+<th style="text-align:right">有效1至7分</th>
+<th style="text-align:right">无法判断/不想回答</th>
+<th style="text-align:right">空白跳过</th>
+<th style="text-align:right">参加人数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S</td>
+<td style="text-align:right">12</td>
+<td style="text-align:right">5</td>
+<td style="text-align:right">3</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td>N</td>
+<td style="text-align:right">18</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">20</td>
+</tr>
+</tbody>
+</table></div>
+<p>若两边都有效的只有10人，就只有10个满意度配对。一个与上表相容的配对例子是S/N为6/4分的4人、6/5分的2人、7/5分的2人、5/6分的1人、7/7分的1人，共10人：8人S更高、1人相同、1人更低。其余S有效而N缺失的2人、S缺失而N有效的8人，共同构成全部20人。</p>
+<p>Q28可为S8人、N4人、A1人、E1人、无特别偏好1人、都不想用0人、无法判断3人、跳过2人，共20人。不能把后两类5人都放进“无偏好”，更不能删掉分母后写“多数参与者选择S”而不说明仅15人给出可解释的偏好选项。</p>
+<p><strong>可支持：</strong> “S的12份有效满意度多为高分；10个完整配对多偏向S，但S缺失较多，判断受限。”不能说“20人普遍满意”。也不能把无法判断转成8分、0分、4分，或把缺失自动记成反对。</p>
+<p>日志也可能缺失：若S的80项任务有6项缺renderer或保持探针，已知74项中69项成功，则应报告“已知结果69/74，另6项无法评分”。按这6项全失败至全成功的极端情形，完整80项的成功比例可能从69/80到75/80；如果N为71/80，就不能据已有证据确定谁更高。这个范围只显示缺失的影响，不是替缺失赋值，更不是置信区间。</p>
+<p>先查缺失是否集中于困难任务、特定策略、特定设备或后几轮。真实故障导致的已知失败与“没有足够证据判定”不同：前者应留在端到端结果，后者保留缺失和原因，不猜测成成功或失败。</p>
+<h2 id="section-19">4. 开始前和结束后的题，怎样参与解释</h2>
+<h3 id="section-20">4.1 Q1至Q3决定能否正确纳入，不是效果分数</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>作用</th>
+<th>20人主要情境中的要求</th>
+<th>不允许的做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1参与者编号</td>
+<td>连接分配、问卷、实际场次与日志</td>
+<td>20个核对过的唯一正式编号</td>
+<td>同一人重复下载算新人；四轮算四人；依文字猜身份</td>
+</tr>
+<tr>
+<td>Q2实验类型</td>
+<td>区分debug、pilot、formal</td>
+<td>纳入的20人均为formal，且与研究者记录一致</td>
+<td>把调试或预实验补足20人；只信手填类型而不核对</td>
+</tr>
+<tr>
+<td>Q3参加同意</td>
+<td>本次研究参加许可</td>
+<td>20人均明确同意，且有对应记录</td>
+<td>没有同意仍算研究样本；旧问卷同意替代本次同意</td>
+</tr>
+</tbody>
+</table></div>
+<p>Q3不同意时结束流程，不进入Q4至Q32。线上拒绝路径是否保存服务端记录尚未验证；不能承诺“服务器绝对不保存”。拒绝不算不满意，不能编码为1分；研究样本中也不能只因后台有一条拒绝记录就增加一人。</p>
+<p>人数流程另报联系、到场、同意、开始、四轮完成、主动退出、技术中止，不能由问卷条数反推全部流程。例如一个<strong>独立流程模拟</strong>：20人开始，17人完成、2人退出、1人技术中止，则20＝17＋2＋1；它不再是正文假设的20个完整参与者。完整四条件比较最多17人，仍须检查各项缺失；另外3人的已完成记录按许可和事先规则保留说明，不能重填槽位、补造答案或隐去退出。</p>
+<p>“全部结束后”是末页名称，不是退出原因问卷。当前Q28至Q32没有专门收集退出原因，研究者须用现场记录补充；不要把Q32空白猜成疲劳退出。</p>
+<h3 id="section-21">4.2 Q4、Q5提供背景，不证明人群需求</h3>
+<p>情境8给出了完整的20人背景分布。Q4可用于描述VR接触程度和探索体验差异，不能直接叫作“熟练度测试”；Q5用于说明原型熟悉及可能的学习效应。背景未知、记不清和不愿回答应单列，不能强行归入“新手”。</p>
+<p>当前问卷没有直接测量年龄、性别、人格或对男性/奶龙的独立审美偏好，不能从体验分数中倒推出这些属性。也不能把少数某类使用者的回答扩展为“所有VR用户的需求”。</p>
+<h3 id="section-22">4.3 Q6、Q7必须满足三个条件才关联旧问卷</h3>
+<p>旧课程问卷的22条记录包含19条已知模拟回答，另3条来源尚未核实。这是旧记录的来源事实，不是本次20人的数据。模拟和来源未核实记录不能用于真人效果，也不能当作群体需求证据。</p>
+<p>个体关联必须同时满足：<strong>旧回答已逐条确认真人来源；本人在Q6明确同意关联；Q7提供的已有匿名编号确实对应。</strong> 同意参加Q3不等于同意关联Q6；Q7非空也不等于授权仍有效。</p>
+<p>一个独立模拟分布可以是Q6同意6人、不同意8人、没有编号/不确定4人、跳过2人，共20人。6个同意者中，4人填写已有编号、2人留空，合计6人。再假设那4条旧记录中有2条后来核实为真人、1条已知模拟、1条仍未核实，则最多关联2人。<strong>这里的“后来核实2条”只是规则演示，本文没有进行该核实，也没有新增已确认真人旧记录。</strong></p>
+<p>Q6撤回同意后，线上隐藏的Q7值可能仍留在前端；导出时必须重查最终许可，不能因为旧编号存在就关联。不根据文本、时间或本次新分配编号猜旧身份。</p>
+<p>即便合法关联，旧课程问卷是不同任务和题干。旧Q5“先问/先做”的假想偏好可作探索性背景，不能当本次观察结果；旧Q6等待区间不能换算成实际平均秒数，旧Q1也不是本次VR使用经验。</p>
+<h3 id="section-23">4.4 Q28至Q32的正确用法</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>题号</th>
+<th>原题</th>
+<th>读法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q28</td>
+<td>如果以后还要做类似的外形修改，你更愿意使用哪一轮的系统？</td>
+<td>每人一票，先按其分配映射；保留无偏好、都不想用、无法判断及空白</td>
+</tr>
+<tr>
+<td>Q29</td>
+<td>你为什么这样选择？</td>
+<td>解释偏好取舍；不只收集支持S的理由</td>
+</tr>
+<tr>
+<td>Q30</td>
+<td>有没有哪次提问帮你完成了修改？如果有，它帮在什么地方？</td>
+<td>找到有帮助的具体事件；“没有”是有效回答，不是缺失</td>
+</tr>
+<tr>
+<td>Q31</td>
+<td>有没有哪次提问让你觉得没必要，或者不知道怎么回答？如果有，请描述一下。</td>
+<td>区分多余与难回答；同一人可以Q30和Q31都举例</td>
+</tr>
+<tr>
+<td>Q32</td>
+<td>对于修改外形、检查结果或撤销操作，你还有什么改进建议？</td>
+<td>定位可改进处；它不直接测角色喜好、退出原因或长期使用</td>
+</tr>
+</tbody>
+</table></div>
+<p>若做主题计数，提前说明是“一人一个主要主题”，还是“一人可以多个主题”。前者完整分类加起来应等于有效回答人数；后者合计可超过人数，但必须明确多标签，并区分空白与明确回答“没有”。引用原文须来自实际匿名回答，本文的解释句不能变成参与者引言。</p>
+<h2 id="section-24">5. 需要哪些日志，才可以把体验描述推进为性能结论</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>想写的结论</th>
+<th>必须核对的证据</th>
+<th>当前实现与解释边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>更准确、最后稳定成功</td>
+<td>私有目标允许集合、保护字段、末态renderer、3次保持探针</td>
+<td><code>stable_goal_success</code>不是只比较JSON；缺renderer/探针时不能猜成功</td>
+</tr>
+<tr>
+<td>一开始就做对</td>
+<td>任何修复前首次提交、对应revision的实际渲染、目标检查</td>
+<td><code>first_commit_success</code>与修复后成功分开；已结束且无首次提交按协议记失败</td>
+</tr>
+<tr>
+<td>更少误改</td>
+<td>过程中各次实际外观与需保持字段</td>
+<td><code>collateral_change</code>记录曾发生的附带误改，修好后仍不能抹掉</td>
+</tr>
+<tr>
+<td>少提问、少打断</td>
+<td>初始ASK、实际问题显示、用户回答、修复阶段问题</td>
+<td><code>policy_questions</code>当前只数后端ASK决策，不独立证明问题实际展示；主观打断另由问卷报告</td>
+</tr>
+<tr>
+<td>更少修复/撤销</td>
+<td>接受的修复请求、undo事件、操作前后状态</td>
+<td>导出器<code>repair_count</code>已包含<code>undo_count</code>，二者不能相加；手动恢复也不能算模型成功</td>
+</tr>
+<tr>
+<td>更快</td>
+<td>请求到完成/超时的客户端单调计时，含等待与修复</td>
+<td>保持探针单列；只比较成功任务、删慢任务或用未同步设备时钟相减会误导</td>
+</tr>
+<tr>
+<td>更省等待或费用</td>
+<td>模型调用、重试、token/费用、同一时钟上的等待区间</td>
+<td>N可能多一次gate调用；总时间、服务等待、用户操作分开，重叠等待不能重复扣除</td>
+</tr>
+<tr>
+<td>某条澄清规则有效</td>
+<td>候选、默认patch、触发证据、问题、回答、后续结果</td>
+<td>候选遗漏、错误gate、无效问题、执行失败要分开；有用的主观回忆不是反事实证明</td>
+</tr>
+<tr>
+<td>新角色没有影响比较</td>
+<td>角色/材质/构建标识、目标截图、实际颜色/配饰/比例、任务分配</td>
+<td>共同界面不等于素材一定一致；男性/奶龙demo版本不能自动混入旧正式构建</td>
+</tr>
+</tbody>
+</table></div>
+<p>还应报告技术失败、超时、未解决和候选覆盖。问卷满意度高不能覆盖技术失败；一次API重试最终成功，也仍应记录其等待和故障经历。</p>
+<h2 id="section-25">6. 按现有分析计划，怎样写出可靠而不过度的结论</h2>
+<ol>
+<li><strong>先确定真实样本。</strong> 核对同意、编号、场次、formal阶段、实际完成与退出。重复提交由研究者明确保留修订版本，不当作新增参与者。20不是最低导入门槛，也不是必须凑满的数字。</li>
+<li><strong>分别展示四项单题。</strong> 每条件给1至7的分布、有效n、无法判断n、跳过n；可补充中位数和个体配对图，不生成跨构念“总UX分”。若用均值差作为描述，保留其有序单题的解释边界，并同时给分布。</li>
+<li><strong>保留配对和预定比较。</strong> 主比较是每人S−N的稳定成功比例差；预定次要比较为S−A的询问/打断，以及S−E的首次成功。不要在看到结果后只挑有利指标当主结果。</li>
+<li><strong>显示差异大小和不确定性。</strong> 现有协议按参与者整体bootstrap，保留四条件和任务结构。客观分析器先聚合每人每条件4任务，再处理参与者配对差；不是对320条任务当独立样本抽样。若另报多项预定检验的p值，按协议作Holm校正。本文没有运行统计检验，也没有用假想人数宣布显著。</li>
+<li><strong>检查缺失与顺序。</strong> 报告每项完整配对人数；结合任务类型、轮次、原型经验与故障作预定或明确标为探索性的检查。样本很小时区间也不稳定，不能把一次“未显著”写成等效。</li>
+<li><strong>让开放题解释已观察的模式。</strong> 对齐到当轮/任务事件，保留反例；不把研究者猜测写成用户原话。Q28是回顾偏好，不替代逐轮体验与客观表现。</li>
+<li><strong>限定结论范围。</strong> 结论涉及实际参与者、本组外形任务、使用的模型与harness及角色素材版本；不直接外推到所有VR角色、语音交互或长期采用。</li>
+</ol>
+<p>当前<code>analyze_trials.py</code>只自动处理客观任务指标，<strong>不自动分析问卷评分、访谈、任务类型或顺序影响</strong>。它排除非formal记录、拒绝重复试次和无效/缺失必需数值；完整参与者要求四条件各4任务且共16个不同任务。它会列出不完整者，但不替研究者完成缺失敏感性分析。能输出bootstrap区间也不代表样本充分或研究已完成。</p>
+<p>当前<code>import_responses.py</code>对本地问卷文件做身份、同意、版本、重复及六页结构校验；把“无法判断”和跳过评分导出为空值，在原始记录里保留区别。<strong>问卷星导出需要先核验实际列头与编码</strong>，不能假设直接喂入本地JSON导入器即可。统一JSON中的第8个评分选项是非分数选项，不能当8分。</p>
+<p>可直接套用的真实结果表述模板如下，方括号必须用实际数据填入：</p>
+<blockquote>
+<p>“共有[实际人数]名正式参与者开始研究，其中[完整人数]名完成四条件。S−N稳定成功率的平均参与者内差为[数值]个百分点，[区间方法及95%区间]。满意度有[配对n]个完整配对，其中[人数]人S较高、[人数]人相同、[人数]人N较高；另有[缺失情况]。S相较A的打断感呈[实际方向]，但[努力/时间/失败的实际限制]。本结果支持[限定范围的结论]，不支持[尚未验证的更强结论]。”</p>
+</blockquote>
+<h2 id="section-26">7. 来源与本次核对范围</h2>
+<p>本说明依据项目文件，不引用未经核对的外部量表或网页结论。题号以统一问卷及字段映射为准；分表规格用于核对稳定字段和选项；研究限制依据协议与当前代码。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>本地来源</th>
+<th>本文使用的内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../Study/survey/questionnaire_unified.json">统一问卷JSON</a></td>
+<td>六页32题、原题、选项、必答/选填、同意与关联条件</td>
+</tr>
+<tr>
+<td><a href="../Study/survey/unified_field_map.csv">题号—字段映射</a></td>
+<td>Q1至Q32和每轮字段的准确对应</td>
+</tr>
+<tr>
+<td><a href="../Study/survey/questionnaires.json">分表问卷规格</a></td>
+<td>稳定字段、选项编码、单题测量说明与阶段</td>
+</tr>
+<tr>
+<td><a href="../Study/materials/protocol.md">研究协议</a></td>
+<td>四条件、固定角色、任务、招募、预定比较、退出/旧数据规则</td>
+</tr>
+<tr>
+<td><a href="../Study/README.md">Study README</a></td>
+<td>计划容量、真实采集边界、工程材料与结果区别</td>
+</tr>
+<tr>
+<td><a href="../Study/materials/data_dictionary.md">数据字典</a></td>
+<td>成功、误改、时间、版本及事件证据定义</td>
+</tr>
+<tr>
+<td><a href="../Study/materials/participant_schedule.csv">计划分配表</a></td>
+<td>参与者槽位—轮次—策略映射；不是已完成记录</td>
+</tr>
+<tr>
+<td><a href="../Study/analyze_trials.py">客观分析代码</a></td>
+<td>完整参与者条件、配对bootstrap、实际已实现比较和限制</td>
+</tr>
+<tr>
+<td><a href="../Study/survey/import_responses.py">问卷导入代码</a></td>
+<td>身份/阶段/同意/重复校验、四轮展开、缺失处理</td>
+</tr>
+<tr>
+<td><a href="../Study/survey/session_identity.py">身份规则</a></td>
+<td>调试、预实验、正式编号与场次校验</td>
+</tr>
+<tr>
+<td><a href="../../../Tools/AppearanceExperiment/export_study.py">任务日志导出器</a></td>
+<td>renderer证据、ASK计数边界、修复含撤销、缺失不猜测</td>
+</tr>
+<tr>
+<td><a href="%E9%97%AE%E5%8D%B7%E5%AE%8C%E6%95%B4%E8%AE%BE%E8%AE%A1%E4%B8%8E%E9%A2%98%E7%9B%AE.md">现有完整设计说明</a></td>
+<td>题目设计背景、线上边界、旧记录来源和演示证据范围</td>
+</tr>
+</tbody>
+</table></div>
+<p>所有数值表均用于说明“如果出现这种回答，可以怎样解释”。实际采集后应按实际人数重做分布与配对分析，不能将本文中的20人、偏好票数或成功次数替换成“研究发现”。</p>
+
+<a class="top-link" href="#top">回到顶部 ↑</a>
+<footer>同名Markdown为可编辑文本版本。页面离线可读，无外部字体、脚本或统计服务；没有生成或提交任何参与者回答。</footer>
+</main>
+</div>
+<script>
+const items=[...document.querySelectorAll('aside a')];
+const targets=items.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+if('IntersectionObserver' in window){
+ const observer=new IntersectionObserver(entries=>{
+  for(const entry of entries){if(entry.isIntersecting){items.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+entry.target.id));}}
+ },{rootMargin:'-80px 0px -65% 0px',threshold:0});
+ targets.forEach(target=>observer.observe(target));
+}
+document.querySelectorAll('.mobile-nav a').forEach(a=>a.addEventListener('click',()=>a.closest('details').open=false));
+</script>
+</body>
+</html>
