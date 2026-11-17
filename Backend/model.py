@@ -150,6 +150,24 @@ class DeepSeekModel:
     def decide(self, context: dict) -> tuple[dict, list[dict]]:
         return self._call("native_gate", NATIVE_PROMPT, context)
 
+    def interpret_tutor(self, context: dict) -> tuple[dict, list[dict]]:
+        # Lazy import: the read-only interpreter reuses core validation helpers.
+        from tutor_interpretation import TUTOR_INTERPRETER_PROMPT
+        return self._call("tutor_interpreter", TUTOR_INTERPRETER_PROMPT, context)
+
+    def decide_tutor(self, context: dict) -> tuple[dict, list[dict]]:
+        from tutor_policy import NATIVE_PROMPT as TUTOR_NATIVE_PROMPT
+        return self._call("tutor_native_gate", TUTOR_NATIVE_PROMPT, context)
+
+    def resolve_tutor_answer(self, context: dict) -> tuple[dict, list[dict]]:
+        from tutor_interpretation import TUTOR_INTERPRETER_PROMPT
+        from tutor_session import RESOLUTION_INSTRUCTION
+        return self._call("tutor_clarification", TUTOR_INTERPRETER_PROMPT + RESOLUTION_INSTRUCTION, context)
+
+    def generate_tutor(self, context: dict) -> tuple[dict, list[dict]]:
+        from tutor_generation import TUTOR_ANSWER_PROMPT
+        return self._call("tutor_answer", TUTOR_ANSWER_PROMPT, context)
+
 class MockModel:
     """Explicit development fixture; never represented as DeepSeek output or participant data."""
     mode, model = "mock", "deterministic-development-fixture"

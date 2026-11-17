@@ -1,0 +1,93 @@
+{
+  "version": "speech-selected-v2",
+  "status": "voices_selected_tone_validation_pending",
+  "asr_model": "qwen-audio-3.0-asr-flash",
+  "tts_model": "qwen-audio-3.0-tts-plus",
+  "sample_text": "Let's explore this idea together, one step at a time.",
+  "voices": {
+    "voice_a": {
+      "provider_id": "longanlingxin",
+      "evidence": "Plus official list: English supported; female"
+    },
+    "voice_b": {
+      "provider_id": "longanhuan_v3.6",
+      "evidence": "Token Plan Plus example and prior successful call; voice table lists under Flash; provisional"
+    },
+    "voice_c": {
+      "provider_id": "qwen-audio-3.0-tts-plus-loongolivialin",
+      "display_name": "Olivia Lin",
+      "catalog_description": "温柔知性音",
+      "catalog_language": "英文",
+      "catalog_gender": "女",
+      "source_sheet": "Sheet1",
+      "source_range": "B578:H578",
+      "evidence": "Official Plus basic voice catalog; audible style control pending review"
+    },
+    "voice_d": {
+      "provider_id": "qwen-audio-3.0-tts-plus-loongadriangao",
+      "display_name": "Adrian Gao",
+      "catalog_description": "沉稳大气音",
+      "catalog_language": "英文",
+      "catalog_gender": "男",
+      "source_sheet": "Sheet1",
+      "source_range": "B582:H582",
+      "evidence": "Official Plus basic voice catalog; actual preference and tone differentiation pending listening"
+    },
+    "voice_e": {
+      "provider_id": "qwen-audio-3.0-tts-plus-loongjameszhao",
+      "display_name": "James Zhao",
+      "catalog_description": "新闻播报音",
+      "catalog_language": "英文",
+      "catalog_gender": "男",
+      "source_sheet": "Sheet1",
+      "source_range": "B583:H583",
+      "evidence": "Official Plus basic voice catalog; actual preference and tone differentiation pending listening"
+    }
+  },
+  "tone_instructions": {
+    "professional": "Speak in English with a professional, composed and matter-of-fact delivery. Keep the selected speaker identity and requested speaking rate. Read only the supplied text without additions or sound effects.",
+    "friendly": "Speak in English with a warm, approachable and conversational delivery. Keep the selected speaker identity and requested speaking rate. Read only the supplied text without additions or sound effects.",
+    "encouraging": "Speak in English with a supportive, reassuring and gently motivating delivery. Keep the selected speaker identity and requested speaking rate. Read only the supplied text without additions or sound effects."
+  },
+  "application_rate": {
+    "min": 0.7,
+    "max": 1.3,
+    "step": 0.01,
+    "default": 1.0
+  },
+  "fixed_parameters": {
+    "format": "wav",
+    "sample_rate": 24000,
+    "volume": 50,
+    "pitch": 1.0,
+    "seed": 4435,
+    "language_hints": [
+      "en"
+    ]
+  },
+  "review_rates": [
+    0.7,
+    1.0,
+    1.3
+  ],
+  "live_runtime_enabled": false,
+  "user_voice_preference": {
+    "selected": [
+      "voice_a",
+      "voice_b",
+      "voice_c",
+      "voice_d",
+      "voice_e"
+    ],
+    "first_choice": "voice_d",
+    "date": "2026-11-10",
+    "renamed_from": {
+      "voice_a": "previous_voice_b",
+      "voice_b": "previous_voice_c",
+      "voice_c": "previous_voice_d",
+      "voice_d": "previous_voice_g",
+      "voice_e": "previous_voice_h"
+    }
+  },
+  "default_voice": "voice_d"
+}

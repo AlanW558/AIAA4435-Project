@@ -1,0 +1,78 @@
+{
+  "version": "task-navigation-v1",
+  "purpose": "practice",
+  "modules": [
+    {
+      "direction": "reply_length",
+      "title": "Reply length",
+      "tasks": [
+        {
+          "task_code": "PRACTICE-L1",
+          "scenario": "C1",
+          "title": "Ask for key points",
+          "instructions": "Prepare the tutor settings, then ask the tutor to explain active recall using only the key points. Compare the four results after any clarification questions have been answered. This is a practice task."
+        },
+        {
+          "task_code": "PRACTICE-L2",
+          "scenario": "C2",
+          "title": "Ask for a shorter explanation",
+          "instructions": "Prepare the tutor settings, then ask for a slightly shorter explanation of spaced practice. Decide what a useful shorter answer means to you and express your request naturally. Compare the four results. This is a practice task."
+        }
+      ]
+    },
+    {
+      "direction": "speech_rate",
+      "title": "Speech rate",
+      "tasks": [
+        {
+          "task_code": "PRACTICE-R1",
+          "scenario": "C1",
+          "title": "Speech rate practice 1",
+          "instructions": "Ask the tutor to speak a little more slowly while keeping the other settings unchanged. Compare all four results after any clarifications. This is a practice task, not a formal study task."
+        },
+        {
+          "task_code": "PRACTICE-R2",
+          "scenario": "C2",
+          "title": "Speech rate practice 2",
+          "instructions": "Ask the tutor to return to its default speaking speed. Compare all four results after any clarifications. This is a practice task, not a formal study task."
+        }
+      ]
+    },
+    {
+      "direction": "tone",
+      "title": "Tone",
+      "tasks": [
+        {
+          "task_code": "PRACTICE-T1",
+          "scenario": "C1",
+          "title": "Tone practice 1",
+          "instructions": "Ask the tutor to use a friendly wording style while keeping the other settings unchanged. Compare all four results after any clarifications. This is a practice task, not a formal study task."
+        },
+        {
+          "task_code": "PRACTICE-T2",
+          "scenario": "C2",
+          "title": "Tone practice 2",
+          "instructions": "Ask the tutor to use an encouraging wording style after a practice mistake. Compare all four results after any clarifications. This is a practice task, not a formal study task."
+        }
+      ]
+    },
+    {
+      "direction": "voice",
+      "title": "Voice",
+      "tasks": [
+        {
+          "task_code": "PRACTICE-V1",
+          "scenario": "C1",
+          "title": "Voice practice 1",
+          "instructions": "Listen to the available voice samples, then ask the tutor to use Voice D. Compare all four results after any clarifications. This is a practice task, not a formal study task."
+        },
+        {
+          "task_code": "PRACTICE-V2",
+          "scenario": "C2",
+          "title": "Voice practice 2",
+          "instructions": "Ask the tutor to use another available voice of your choice. Keep the pace and tone unchanged. Compare all four results after any clarifications. This is a practice task, not a formal study task."
+        }
+      ]
+    }
+  ]
+}

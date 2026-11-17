@@ -18,4 +18,4 @@ if [[ -f "$teacher_key_path" ]]; then
   export DEEPSEEK_API_KEY
   [[ -n "$DEEPSEEK_API_KEY" ]] || { echo "Teacher credential file is empty." >&2; exit 1; }
 fi
-exec python3 "$project_dir/Backend/server.py" --mode live --host 127.0.0.1 --port "${APPEARANCE_PORT:-8765}" --log-dir "$project_dir/StudyData/logs" "$@"
+exec "${APPEARANCE_PYTHON:-python3}" "$project_dir/Backend/server.py" --mode live --host 127.0.0.1 --port "${APPEARANCE_PORT:-8765}" --log-dir "$project_dir/StudyData/logs" "$@"

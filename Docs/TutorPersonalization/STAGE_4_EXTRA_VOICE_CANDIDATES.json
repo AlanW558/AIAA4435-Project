@@ -1,0 +1,76 @@
+{
+  "version": "speech-extra-candidates-v1",
+  "status": "candidate_pending_listening",
+  "asr_model": "qwen-audio-3.0-asr-flash",
+  "tts_model": "qwen-audio-3.0-tts-plus",
+  "sample_text": "Let's explore this idea together, one step at a time.",
+  "voices": {
+    "voice_d": {
+      "provider_id": "qwen-audio-3.0-tts-plus-loongolivialin",
+      "display_name": "Olivia Lin",
+      "catalog_description": "温柔知性音",
+      "catalog_language": "英文",
+      "catalog_gender": "女",
+      "source_sheet": "Sheet1",
+      "source_range": "B578:H578",
+      "evidence": "Official Plus basic voice catalog; audible style control pending review"
+    },
+    "voice_e": {
+      "provider_id": "qwen-audio-3.0-tts-plus-loonglunawang",
+      "display_name": "Luna Wang",
+      "catalog_description": "智能助手音",
+      "catalog_language": "英文",
+      "catalog_gender": "女",
+      "source_sheet": "Sheet1",
+      "source_range": "B579:H579",
+      "evidence": "Official Plus basic voice catalog; audible style control pending review"
+    },
+    "voice_f": {
+      "provider_id": "qwen-audio-3.0-tts-plus-loongnorahu",
+      "display_name": "Nora Hu",
+      "catalog_description": "活泼灵动音",
+      "catalog_language": "英文",
+      "catalog_gender": "女",
+      "source_sheet": "Sheet1",
+      "source_range": "B581:H581",
+      "evidence": "Official Plus basic voice catalog; audible style control pending review"
+    }
+  },
+  "tone_instructions": {
+    "professional": "Speak in English with a professional, composed and matter-of-fact delivery. Keep the selected speaker identity and requested speaking rate. Read only the supplied text without additions or sound effects.",
+    "friendly": "Speak in English with a warm, approachable and conversational delivery. Keep the selected speaker identity and requested speaking rate. Read only the supplied text without additions or sound effects.",
+    "encouraging": "Speak in English with a supportive, reassuring and gently motivating delivery. Keep the selected speaker identity and requested speaking rate. Read only the supplied text without additions or sound effects."
+  },
+  "application_rate": {
+    "min": 0.7,
+    "max": 1.3,
+    "step": 0.01,
+    "default": 1.0
+  },
+  "fixed_parameters": {
+    "format": "wav",
+    "sample_rate": 24000,
+    "volume": 50,
+    "pitch": 1.0,
+    "seed": 4435,
+    "language_hints": [
+      "en"
+    ]
+  },
+  "review_rates": [
+    0.7,
+    1.0,
+    1.3
+  ],
+  "live_runtime_enabled": false,
+  "preference": {
+    "first_choice": "voice_b",
+    "backup": "voice_c",
+    "new_candidates": [
+      "voice_d",
+      "voice_e",
+      "voice_f"
+    ],
+    "final_selection": "pending_user_listening"
+  }
+}

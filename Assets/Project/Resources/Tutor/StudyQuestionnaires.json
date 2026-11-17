@@ -1,0 +1,245 @@
+{
+  "version": "study-questionnaire-ui-v1",
+  "attribute_version": "attribute-feedback-v3",
+  "natural_version": "natural-selective-feedback-v2",
+  "items": [
+    {
+      "id": "A0",
+      "text": "To what extent did this approach’s final outcome meet the task requirements?",
+      "help": "Consider both the requested change and the settings that were supposed to stay unchanged.",
+      "scale": "category",
+      "special": "unable_to_judge",
+      "source": "Project-specific"
+    },
+    {
+      "id": "A1",
+      "text": "Overall, how difficult or easy was it to make this adjustment using this approach?",
+      "scale": "ease7",
+      "special": "unable_to_judge",
+      "source": "SEQ 改编：限定本次调整及当前策略；并行评价的使用情境也不同于独立完成任务"
+    },
+    {
+      "id": "A2",
+      "text": "With this approach, I felt in control of the changes made to the tutor.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "SASSI Table 4 控制感内容改编：一般交互改为 tutor 修改，采用本项目七点量尺"
+    },
+    {
+      "id": "A3",
+      "text": "This approach’s decision about whether to ask for clarification suited my needs in this task.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目专用题，不声称来自标准量表"
+    },
+    {
+      "id": "A4",
+      "text": "Overall, I am satisfied with my experience of making this adjustment using this approach.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目自编单题满意度；不称 SUS 或 SASSI 分数"
+    },
+    {
+      "id": "N0",
+      "text": "To what extent did the tutor’s final setup match what you wanted by the end of the conversation?",
+      "scale": "category",
+      "special": "unable_to_judge",
+      "source": "项目自编；自然情境没有统一正确终态，结束不等于达标"
+    },
+    {
+      "id": "N1",
+      "text": "The tutor’s responses reflected the meaning of what I was trying to communicate.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "受 SASSI System Response Accuracy 启发；关注感知的意思理解，不是客观 STT 准确率；本题为概念改写，不是原题照用"
+    },
+    {
+      "id": "N2",
+      "text": "I knew how to phrase my requests so that the tutor could respond to them.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "SASSI Habitability 相关内容改编；识别参与者是否不断猜测应该怎么说"
+    },
+    {
+      "id": "N3",
+      "text": "I felt in control of the changes made to the tutor throughout the conversation.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "SASSI 控制感内容改编；评价整段交流而非一个修改回合"
+    },
+    {
+      "id": "N4",
+      "text": "The tutor’s decisions about whether to ask for clarification suited my needs during the conversation.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目专用；包括决定不询问的情况，不预设询问越少越好"
+    },
+    {
+      "id": "N5",
+      "text": "The tutor’s clarification questions disrupted the flow of the conversation more than I wanted.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目专用，非 SASSI 原题；将打断对象限定为澄清问题，区分可接受澄清与非期望打断"
+    },
+    {
+      "id": "N6",
+      "text": "How much thinking and concentration did interacting with the tutor require during this conversation?",
+      "scale": "demand7",
+      "special": "unable_to_judge",
+      "source": "参考 NASA-TLX Mental Demand 改写；以整段交互所需思考/注意力替代旧省力题；不是完整工作负荷工具"
+    },
+    {
+      "id": "N7",
+      "text": "Overall, I am satisfied with my experience of personalizing the tutor during this conversation.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目自编；保留定制体验满意度，不能把 SUS 的整体可用性等同满意度"
+    },
+    {
+      "id": "S1",
+      "text": "I think that I would like to use this system frequently.",
+      "scale": "agreement5",
+      "special": "skipped",
+      "source": "Brooke 1996 SUS; © Digital Equipment Corporation 1986"
+    },
+    {
+      "id": "S2",
+      "text": "I found the system unnecessarily complex.",
+      "scale": "agreement5",
+      "special": "skipped",
+      "source": "Brooke 1996 SUS; © Digital Equipment Corporation 1986"
+    },
+    {
+      "id": "S3",
+      "text": "I thought the system was easy to use.",
+      "scale": "agreement5",
+      "special": "skipped",
+      "source": "Brooke 1996 SUS; © Digital Equipment Corporation 1986"
+    },
+    {
+      "id": "S4",
+      "text": "I think that I would need the support of a technical person to be able to use this system.",
+      "scale": "agreement5",
+      "special": "skipped",
+      "source": "Brooke 1996 SUS; © Digital Equipment Corporation 1986"
+    },
+    {
+      "id": "S5",
+      "text": "I found the various functions in this system were well integrated.",
+      "scale": "agreement5",
+      "special": "skipped",
+      "source": "Brooke 1996 SUS; © Digital Equipment Corporation 1986"
+    },
+    {
+      "id": "S6",
+      "text": "I thought there was too much inconsistency in this system.",
+      "scale": "agreement5",
+      "special": "skipped",
+      "source": "Brooke 1996 SUS; © Digital Equipment Corporation 1986"
+    },
+    {
+      "id": "S7",
+      "text": "I would imagine that most people would learn to use this system very quickly.",
+      "scale": "agreement5",
+      "special": "skipped",
+      "source": "Brooke 1996 SUS; © Digital Equipment Corporation 1986"
+    },
+    {
+      "id": "S8",
+      "text": "I found the system very cumbersome to use.",
+      "scale": "agreement5",
+      "special": "skipped",
+      "source": "Brooke 1996 SUS; © Digital Equipment Corporation 1986"
+    },
+    {
+      "id": "S9",
+      "text": "I felt very confident using the system.",
+      "scale": "agreement5",
+      "special": "skipped",
+      "source": "Brooke 1996 SUS; © Digital Equipment Corporation 1986"
+    },
+    {
+      "id": "S10",
+      "text": "I needed to learn a lot of things before I could get going with this system.",
+      "scale": "agreement5",
+      "special": "skipped",
+      "source": "Brooke 1996 SUS; © Digital Equipment Corporation 1986"
+    },
+    {
+      "id": "U1",
+      "text": "How would you describe this system?",
+      "left": "obstructive",
+      "right": "supportive",
+      "scale": "bipolar7",
+      "special": "skipped",
+      "source": "UEQ-S original English word pairs"
+    },
+    {
+      "id": "U2",
+      "text": "How would you describe this system?",
+      "left": "complicated",
+      "right": "easy",
+      "scale": "bipolar7",
+      "special": "skipped",
+      "source": "UEQ-S original English word pairs"
+    },
+    {
+      "id": "U3",
+      "text": "How would you describe this system?",
+      "left": "inefficient",
+      "right": "efficient",
+      "scale": "bipolar7",
+      "special": "skipped",
+      "source": "UEQ-S original English word pairs"
+    },
+    {
+      "id": "U4",
+      "text": "How would you describe this system?",
+      "left": "confusing",
+      "right": "clear",
+      "scale": "bipolar7",
+      "special": "skipped",
+      "source": "UEQ-S original English word pairs"
+    },
+    {
+      "id": "U5",
+      "text": "How would you describe this system?",
+      "left": "boring",
+      "right": "exciting",
+      "scale": "bipolar7",
+      "special": "skipped",
+      "source": "UEQ-S original English word pairs"
+    },
+    {
+      "id": "U6",
+      "text": "How would you describe this system?",
+      "left": "not interesting",
+      "right": "interesting",
+      "scale": "bipolar7",
+      "special": "skipped",
+      "source": "UEQ-S original English word pairs"
+    },
+    {
+      "id": "U7",
+      "text": "How would you describe this system?",
+      "left": "conventional",
+      "right": "inventive",
+      "scale": "bipolar7",
+      "special": "skipped",
+      "source": "UEQ-S original English word pairs"
+    },
+    {
+      "id": "U8",
+      "text": "How would you describe this system?",
+      "left": "usual",
+      "right": "leading edge",
+      "scale": "bipolar7",
+      "special": "skipped",
+      "source": "UEQ-S original English word pairs"
+    }
+  ],
+  "sources": {
+    "SUS": "https://hci-studies.org/methods-and-measures/downloads/SUS_Brooke1996.pdf",
+    "UEQ-S": "https://www.ueq-online.org/Material/Handbook.pdf"
+  }
+}

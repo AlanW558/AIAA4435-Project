@@ -1,0 +1,1088 @@
+{
+  "version": "task-navigation-v2",
+  "purpose": "study_preview",
+  "materials_version": "attribute-materials-v1",
+  "modules": [
+    {
+      "direction": "speech_rate",
+      "title": "Speech rate",
+      "tasks": [
+        {
+          "task_code": "R1-1",
+          "scenario": "C1",
+          "title": "Speech rate · R1-1",
+          "instructions": "Change the speaking speed to 90% of the model’s default speed.",
+          "context_text": "Fixed starting settings: Rate 1.20 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.20 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.2,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "R1-2",
+          "scenario": "C1",
+          "title": "Speech rate · R1-2",
+          "instructions": "Reduce the current speaking speed by 10%.",
+          "context_text": "Fixed starting settings: Rate 1.20 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.20 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.2,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "R2-1",
+          "scenario": "C2",
+          "title": "Speech rate · R2-1",
+          "instructions": "Make the tutor speak a little more slowly. Your target is between 0.90 and 0.95 of the default speed.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "R2-2",
+          "scenario": "C2",
+          "title": "Speech rate · R2-2",
+          "instructions": "Make the tutor speak a little faster, aiming for 0.90 to 0.95 of the default speed.",
+          "context_text": "Fixed starting settings: Rate 0.85 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 0.85 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 0.85,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "R3-1",
+          "scenario": "C3",
+          "title": "Speech rate · R3-1",
+          "instructions": "You want the delivery to feel calmer by slowing the pace to 0.85–0.90, without changing the tone or voice.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "R3-2",
+          "scenario": "C3",
+          "title": "Speech rate · R3-2",
+          "instructions": "You want the detailed explanation to be easier to follow by slowing the pace to 0.95–1.00. Keep all its detail.",
+          "context_text": "Fixed starting settings: Rate 1.15 x default; Detailed; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.15 x default; Detailed; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice. For example, close your notes, explain one idea aloud, and then check what you missed.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.15,
+              "reply_length": "detailed",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice. For example, close your notes, explain one idea aloud, and then check what you missed."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "R4-1",
+          "scenario": "C4",
+          "title": "Speech rate · R4-1",
+          "instructions": "Restore the previous speaking pace, leaving the other settings as they are now.",
+          "context_text": "Fixed starting settings: Rate 1.10 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample history 1: Rate 0.90 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.\n\nExample history 2: Rate 1.10 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 0.9,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              },
+              {
+                "kind": "setting",
+                "patch": {
+                  "speech_rate": 1.1
+                },
+                "query": "Example setup: change speech_rate to 1.1."
+              },
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "R4-3",
+          "scenario": "C4",
+          "title": "Speech rate · R4-3",
+          "instructions": "For this task, use 0.90 of the default speed, even though your earlier preference was 1.10.",
+          "context_text": "Fixed starting settings: Rate 1.10 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.10 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.\n\nEarlier example preference: I usually prefer a pace of 1.10.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.1,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": [
+              {
+                "field": "speech_rate",
+                "value": 1.1,
+                "text": "I usually prefer a pace of 1.10."
+              }
+            ]
+          },
+          "materials": []
+        }
+      ]
+    },
+    {
+      "direction": "reply_length",
+      "title": "Reply length",
+      "tasks": [
+        {
+          "task_code": "L1-1",
+          "scenario": "C1",
+          "title": "Reply length · L1-1",
+          "instructions": "Give only the key answer or recommendation, without explaining the reason or adding an example.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "L1-3",
+          "scenario": "C1",
+          "title": "Reply length · L1-3",
+          "instructions": "Give the key answer, explain why it makes sense, and add one relevant concrete example.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "L2-1",
+          "scenario": "C2",
+          "title": "Reply length · L2-1",
+          "instructions": "Make the answer a little less detailed: keep the key point and a short reason, but remove the example.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Detailed; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Detailed; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice. For example, close your notes, explain one idea aloud, and then check what you missed.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "detailed",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice. For example, close your notes, explain one idea aloud, and then check what you missed."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "L2-2",
+          "scenario": "C2",
+          "title": "Reply length · L2-2",
+          "instructions": "Add a little explanation to the key answer so you know why it is useful, without adding an example.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Brief; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Brief; Professional; Voice A\nUse active recall to practise retrieving information from memory.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "brief",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "L3-1",
+          "scenario": "C3",
+          "title": "Reply length · L3-1",
+          "instructions": "You feel overloaded and want a less overwhelming answer: keep only its key point, rather than changing the speaking speed.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Detailed; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Detailed; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice. For example, close your notes, explain one idea aloud, and then check what you missed.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "detailed",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice. For example, close your notes, explain one idea aloud, and then check what you missed."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "L3-2",
+          "scenario": "C3",
+          "title": "Reply length · L3-2",
+          "instructions": "You need more support to understand the material: add an explanation and an example, rather than only receiving more encouraging wording.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Brief; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Brief; Professional; Voice A\nUse active recall to practise retrieving information from memory.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "brief",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "L4-2",
+          "scenario": "C4",
+          "title": "Reply length · L4-2",
+          "instructions": "Restore the middle answer format, which included an explanation and a concrete example.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Brief; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample history 1: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.\n\nExample history 2: Rate 1.00 x default; Detailed; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice. For example, close your notes, explain one idea aloud, and then check what you missed.\n\nExample history 3: Rate 1.00 x default; Brief; Professional; Voice A\nUse active recall to practise retrieving information from memory.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              },
+              {
+                "kind": "setting",
+                "patch": {
+                  "reply_length": "detailed"
+                },
+                "query": "Example setup: change reply_length to detailed."
+              },
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice. For example, close your notes, explain one idea aloud, and then check what you missed."
+              },
+              {
+                "kind": "setting",
+                "patch": {
+                  "reply_length": "brief"
+                },
+                "query": "Example setup: change reply_length to brief."
+              },
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "L4-3",
+          "scenario": "C4",
+          "title": "Reply length · L4-3",
+          "instructions": "Restore the earlier key-point-plus-reason format, while keeping the friendly tone you now have.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Detailed; Friendly; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample history 1: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.\n\nExample history 2: Rate 1.00 x default; Detailed; Friendly; Voice A\nTry testing yourself from memory; it is a useful way to study. Retrieving an answer helps you notice what you can remember and what needs more practice. For example, close your notes, explain one idea aloud, and then check what you missed.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              },
+              {
+                "kind": "setting",
+                "patch": {
+                  "reply_length": "detailed",
+                  "tone": "friendly"
+                },
+                "query": "Example setup: change reply_length to detailed, tone to friendly."
+              },
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Try testing yourself from memory; it is a useful way to study. Retrieving an answer helps you notice what you can remember and what needs more practice. For example, close your notes, explain one idea aloud, and then check what you missed."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        }
+      ]
+    },
+    {
+      "direction": "tone",
+      "title": "Tone",
+      "tasks": [
+        {
+          "task_code": "T1-1",
+          "scenario": "C1",
+          "title": "Tone · T1-1",
+          "instructions": "Use a Friendly tone for the tutor’s responses.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "T1-3",
+          "scenario": "C1",
+          "title": "Tone · T1-3",
+          "instructions": "Use a Professional tone for the tutor’s responses.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Encouraging; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Encouraging; Voice A\nKeep practising recall from memory; each attempt can help you improve. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "encouraging",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Keep practising recall from memory; each attempt can help you improve. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "T2-2",
+          "scenario": "C2",
+          "title": "Tone · T2-2",
+          "instructions": "Make the wording more neutral and matter-of-fact, while keeping the same amount of information.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Friendly; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Friendly; Voice A\nTry testing yourself from memory; it is a useful way to study. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "friendly",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Try testing yourself from memory; it is a useful way to study. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "T2-3",
+          "scenario": "C2",
+          "title": "Tone · T2-3",
+          "instructions": "After a practice mistake, you want wording that supports another attempt and reinforces that progress is possible.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Friendly; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Friendly; Voice A\nTry testing yourself from memory; it is a useful way to study. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "friendly",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Try testing yourself from memory; it is a useful way to study. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "T3-1",
+          "scenario": "C3",
+          "title": "Tone · T3-1",
+          "instructions": "Make the interaction feel less intimidating by using friendly wording. Keep the current pace and voice.",
+          "context_text": "Fixed starting settings: Rate 1.10 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.10 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.1,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "T3-2",
+          "scenario": "C3",
+          "title": "Tone · T3-2",
+          "instructions": "You want to feel more motivated to continue: use supportive encouragement, without giving a longer explanation.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Brief; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Brief; Professional; Voice A\nUse active recall to practise retrieving information from memory.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "brief",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "T4-1",
+          "scenario": "C4",
+          "title": "Tone · T4-1",
+          "instructions": "Restore the friendly style used in the previous response.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample history 1: Rate 1.00 x default; Balanced; Friendly; Voice A\nTry testing yourself from memory; it is a useful way to study. Retrieving an answer helps you notice what you can remember and what needs more practice.\n\nExample history 2: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "friendly",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Try testing yourself from memory; it is a useful way to study. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              },
+              {
+                "kind": "setting",
+                "patch": {
+                  "tone": "professional"
+                },
+                "query": "Example setup: change tone to professional."
+              },
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": []
+        },
+        {
+          "task_code": "T4-3",
+          "scenario": "C4",
+          "title": "Tone · T4-3",
+          "instructions": "For this task, use an Encouraging tone instead of your earlier preference for professional wording. Keep Voice B.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice B\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice B\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.\n\nEarlier example preference: I usually prefer professional wording.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_b"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": [
+              {
+                "field": "tone",
+                "value": "professional",
+                "text": "I usually prefer professional wording."
+              }
+            ]
+          },
+          "materials": []
+        }
+      ]
+    },
+    {
+      "direction": "voice",
+      "title": "Voice",
+      "tasks": [
+        {
+          "task_code": "V1-1",
+          "scenario": "C1",
+          "title": "Voice · V1-1",
+          "instructions": "Switch to Voice B, which you heard during familiarisation.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": [
+            {
+              "label": "Starting voice",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_a"
+              }
+            },
+            {
+              "label": "Target sample B",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_b"
+              }
+            }
+          ]
+        },
+        {
+          "task_code": "V1-2",
+          "scenario": "C1",
+          "title": "Voice · V1-2",
+          "instructions": "Switch to Voice C, which you heard during familiarisation.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice B\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice B\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_b"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": [
+            {
+              "label": "Starting voice",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_b"
+              }
+            },
+            {
+              "label": "Target sample C",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_c"
+              }
+            }
+          ]
+        },
+        {
+          "task_code": "V2-1",
+          "scenario": "C2",
+          "title": "Voice · V2-1",
+          "instructions": "Listen to target sample B. Choose that vocal character and describe what you would like in your own words. Keep the speaking rate and wording style.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": [
+            {
+              "label": "Starting voice",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_a"
+              }
+            },
+            {
+              "label": "Target sample B",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_b"
+              }
+            }
+          ]
+        },
+        {
+          "task_code": "V2-2",
+          "scenario": "C2",
+          "title": "Voice · V2-2",
+          "instructions": "Listen to target sample C. Choose that vocal character and describe what you would like in your own words. Keep the other settings.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": [
+            {
+              "label": "Starting voice",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_a"
+              }
+            },
+            {
+              "label": "Target sample C",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_c"
+              }
+            }
+          ]
+        },
+        {
+          "task_code": "V3-1",
+          "scenario": "C3",
+          "title": "Voice · V3-1",
+          "instructions": "You want a different feel to the delivery by changing to target voice B. Keep the current pace and wording style. Listen to the target before making your request.",
+          "context_text": "Fixed starting settings: Rate 1.10 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.10 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.1,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": [
+            {
+              "label": "Starting voice",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.1,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_a"
+              }
+            },
+            {
+              "label": "Target sample B",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.1,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_b"
+              }
+            }
+          ]
+        },
+        {
+          "task_code": "V3-2",
+          "scenario": "C3",
+          "title": "Voice · V3-2",
+          "instructions": "You want a different feel to the delivery by changing to target voice A. Keep the current pace and wording style. Listen to the target before making your request.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice B\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample starting response: Rate 1.00 x default; Balanced; Professional; Voice B\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_b"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": [
+            {
+              "label": "Starting voice",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_b"
+              }
+            },
+            {
+              "label": "Target sample A",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_a"
+              }
+            }
+          ]
+        },
+        {
+          "task_code": "V4-2",
+          "scenario": "C4",
+          "title": "Voice · V4-2",
+          "instructions": "Restore the voice from the middle history entry.",
+          "context_text": "Fixed starting settings: Rate 1.00 x default; Balanced; Professional; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample history 1: Rate 1.00 x default; Balanced; Professional; Voice B\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.\n\nExample history 2: Rate 1.00 x default; Balanced; Professional; Voice C\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.\n\nExample history 3: Rate 1.00 x default; Balanced; Professional; Voice A\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_b"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              },
+              {
+                "kind": "setting",
+                "patch": {
+                  "voice": "voice_c"
+                },
+                "query": "Example setup: change voice to voice_c."
+              },
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              },
+              {
+                "kind": "setting",
+                "patch": {
+                  "voice": "voice_a"
+                },
+                "query": "Example setup: change voice to voice_a."
+              },
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": [
+            {
+              "label": "History 1 · Voice B",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_b"
+              }
+            },
+            {
+              "label": "History 2 · Voice C",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_c"
+              }
+            },
+            {
+              "label": "History 3 · Voice A",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.0,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_a"
+              }
+            }
+          ]
+        },
+        {
+          "task_code": "V4-3",
+          "scenario": "C4",
+          "title": "Voice · V4-3",
+          "instructions": "Restore the earlier Voice B, but keep the current faster pace and friendly tone.",
+          "context_text": "Fixed starting settings: Rate 1.15 x default; Balanced; Friendly; Voice A\n\nThe following is supplied example context, not a record of your own earlier conversation.\n\nExample history 1: Rate 0.90 x default; Balanced; Professional; Voice B\nUse active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice.\n\nExample history 2: Rate 1.15 x default; Balanced; Friendly; Voice A\nTry testing yourself from memory; it is a useful way to study. Retrieving an answer helps you notice what you can remember and what needs more practice.",
+          "public_start": {
+            "settings": {
+              "speech_rate": 0.9,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_b"
+            },
+            "public_setup": [
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              },
+              {
+                "kind": "setting",
+                "patch": {
+                  "voice": "voice_a",
+                  "speech_rate": 1.15,
+                  "tone": "friendly"
+                },
+                "query": "Example setup: change voice to voice_a, speech_rate to 1.15, tone to friendly."
+              },
+              {
+                "kind": "exchange",
+                "user": "How can active recall help me study?",
+                "assistant": "Try testing yourself from memory; it is a useful way to study. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ],
+            "soft_preferences": []
+          },
+          "materials": [
+            {
+              "label": "History 1 · Voice B",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 0.9,
+                "reply_length": "balanced",
+                "tone": "professional",
+                "voice": "voice_b"
+              }
+            },
+            {
+              "label": "History 2 · Voice A",
+              "text": "Let's explore this idea together, one step at a time.",
+              "settings": {
+                "speech_rate": 1.15,
+                "reply_length": "balanced",
+                "tone": "friendly",
+                "voice": "voice_a"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
