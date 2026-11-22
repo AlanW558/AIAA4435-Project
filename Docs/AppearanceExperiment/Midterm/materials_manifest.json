@@ -13,12 +13,12 @@
   "source_sha256": {
     "Study/survey/questionnaire_unified.json": "b21a4c18a55f578cf1afcff23f29a44f251e3a54bf6bb0e725bab05a4a4914cc",
     "Study/survey/publication_status.json": "0a6a3f20149153805576f782b18f6f1aed96d8db440e47826ae9ad91010caa88",
-    "Midterm/design_narrative.md": "7e62af0dccb64961f87f91f87f142656c6854eb9cd686771cd3e6555ad9e0418",
-    "Midterm/design_brief_content.html": "c6a118e14f621d9dd8af12ea37d873af53f8b7d745b28d6597f5675e874cadbb"
+    "Midterm/design_narrative.md": "bdce86a3e6bf33792f912b14b325e6ffcadbf2913dc8e93a793cc26e482870a6",
+    "Midterm/design_brief_content.html": "79a7f789694699f59b02f52c0dd550c764ef9b1d6a7fe8bc6cca4e63f552abf7"
   },
   "pdf_render_status": "passed",
   "pdf_pages": 7,
-  "pdf_visual_review": "all_7_pages_reviewed",
+  "pdf_visual_review": "original_7_pages_reviewed; corrected_page_6_reviewed_2026-11-22",
   "pdf_chinese_text_extraction": "passed",
   "pdf_embedded_fonts": [
     "DroidSansFallback",
@@ -31,12 +31,30 @@
   "no_synthetic_participant_responses": true,
   "artifacts": {
     "问卷设计说明_中期汇报.pdf": {
-      "bytes": 153195,
-      "sha256": "8c95ca1bee510e07c1a64012d55748d996abbf5175d8bb394841dab109a06679"
+      "bytes": 169378,
+      "sha256": "455d32584a53ef1d257f67becef43abed9df954a2239b5cff331e6b15b03ab34"
     },
     "问卷完整设计与题目.md": {
-      "bytes": 43075,
-      "sha256": "1a15dd0d98a1d7bb8186917f44ce5554560f3ad6c5e60d892655411ebbda089f"
+      "bytes": 43130,
+      "sha256": "5617590680cc9556cea5ab872925d358d726e76208432552c5539e922ef1b62e"
     }
+  },
+  "provenance_correction": {
+    "date": "2026-11-22",
+    "basis": "Researcher confirmed that all 22 early formative questionnaire responses are real, not simulated.",
+    "scope": "Source wording in Markdown, HTML and PDF page 6; no questionnaire items, response counts or numerical results changed.",
+    "method": "PyMuPDF replace provenance paragraph on page 6 using updated HTML source; other pages text unchanged",
+    "checks": "provenance_correction_checks.json",
+    "original_artifacts": {
+      "问卷设计说明_中期汇报.pdf": {
+        "bytes": 153195,
+        "sha256": "8c95ca1bee510e07c1a64012d55748d996abbf5175d8bb394841dab109a06679"
+      },
+      "问卷完整设计与题目.md": {
+        "bytes": 43075,
+        "sha256": "1a15dd0d98a1d7bb8186917f44ce5554560f3ad6c5e60d892655411ebbda089f"
+      }
+    },
+    "inherited_checks": "The original full-document render, questionnaire, QR and link checks remain historical. The correction reran PDF text/page/link checks and visually reviewed page 6."
   }
 }

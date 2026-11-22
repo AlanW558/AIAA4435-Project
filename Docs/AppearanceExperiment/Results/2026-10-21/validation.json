@@ -2,7 +2,7 @@
   "validated_at": "2026-10-21T06:54:30.214227+00:00",
   "status": "passed",
   "source_sha256": "762e71a85753ee038ee9e13a7399cd7c0d8a3526105425f67793303196d57b6c",
-  "analysis_sha256": "24806733a97350e8d8b5306cbd64011b79b302672b95266db3532465c1592271",
+  "analysis_sha256": "f133fa0ff54af1ca2239b14057b463b8235e520be6ca2dda5162b3db76982369",
   "reader": "Python standard library ZIP/XML; independent of openpyxl and production analysis",
   "checks": [
     "32-question schema and 15 eligible distinct respondents",
@@ -18,5 +18,12 @@
     "Bootstrap intervals and Monte Carlo permutations are produced by the analysis script, not independently rerun here.",
     "Q29 theme coding requires human review; this audit checks coverage only.",
     "Paper originals and reported study context were not independently verified."
-  ]
+  ],
+  "provenance_correction": {
+    "date": "2026-11-22",
+    "original_analysis_sha256": "24806733a97350e8d8b5306cbd64011b79b302672b95266db3532465c1592271",
+    "scope": "Only research_context changed to record the researcher confirmation that the early 22 responses are real. All other parsed analysis fields are identical to the previously validated file.",
+    "numerical_fields_unchanged": true,
+    "original_validation_preserved": "validated_at, checks, reader and limitations describe the original 2026-10-21 validation; statistics were not rerun for this wording correction."
+  }
 }

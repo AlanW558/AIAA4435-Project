@@ -59,7 +59,7 @@ python3 Tools/AppearanceExperiment/export_study.py \
 
 默认只导出 live/formal；debug、mock、pilot 都不混入正式结果。缺失探针/渲染/版本证据保留空值，不能把未测量写成成功。本次问卷可以支持主观评分分析；成功率、完成时间等结论仍需对应的真实任务日志。
 
-中文六页、32 题问卷已发布；实际链接和发布证据以 [publication_status.json](Study/survey/publication_status.json) 为准。旧草稿及模拟记录不能作为本次真人实验结果。
+中文六页、32 题问卷已发布；实际链接和发布证据以 [publication_status.json](Study/survey/publication_status.json) 为准。工程调试和教学模拟示例不能作为本次真人实验结果。早期22份问卷已由研究者于2026-11-22确认为真实回答，可用于形成性偏好分析，与本次15人外形结果分别报告。
 
 ## 编辑、构建与检查
 
