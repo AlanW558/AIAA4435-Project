@@ -22,6 +22,8 @@ The analysis is intended for a **formative study**, not a population-level surve
 
 # 2. Data sources and provenance
 
+**Source confirmation (2026-11-22):** The researcher confirmed that all 22 formative questionnaire responses are real participant responses, not simulated. They support the formative analysis of reported experiences and hypothetical-scenario preferences below. They are reported separately from the later 15-participant appearance study; participant overlap has not been established. This clarification does not change the responses, sample counts or statistics.
+
 Local source files used in this analysis:
 
 - `AdjustinganAIThroughConversation-默认报告.xlsx` — aggregated responses for Q1–Q12.

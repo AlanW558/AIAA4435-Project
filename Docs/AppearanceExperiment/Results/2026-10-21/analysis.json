@@ -38,7 +38,15 @@
     "trial_logs_linked_to_participant_records": false,
     "paper_originals_independently_checked": false,
     "planned_counterbalanced_schedule_used_for_this_analysis": false,
-    "old_simulated_survey_included": false
+    "old_formative_survey_included": false,
+    "old_formative_survey_provenance": {
+      "questionnaire_id": "384478976",
+      "response_count": 22,
+      "classification": "real_questionnaire_responses",
+      "basis": "Researcher confirmed on 2026-11-22 that all 22 responses are not simulated.",
+      "confirmation_date": "2026-11-22",
+      "scope": "Formative needs and hypothetical-scenario preferences; separate from this 15-participant appearance study. Participant overlap is not established."
+    }
   },
   "total_records": 15,
   "included_n": 15,

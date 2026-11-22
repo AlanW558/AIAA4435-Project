@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-22",
+  "method": "PyMuPDF replace provenance paragraph on page 6 using updated HTML source; other pages text unchanged",
+  "pages": 7,
+  "updated_page": 6,
+  "original_sha256": "8c95ca1bee510e07c1a64012d55748d996abbf5175d8bb394841dab109a06679",
+  "corrected_sha256": "455d32584a53ef1d257f67becef43abed9df954a2239b5cff331e6b15b03ab34",
+  "text_checks": "passed",
+  "link_preserved": true,
+  "original_other_pages_text_unchanged": true,
+  "replacement_scale": 1.0,
+  "spare_height_points": 30.55999755859375,
+  "visual_review": "page_6_reviewed_at_794x1123_no_overlap_or_clipping"
+}
