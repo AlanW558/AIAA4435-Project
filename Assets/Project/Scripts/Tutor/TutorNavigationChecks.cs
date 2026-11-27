@@ -49,7 +49,7 @@ namespace IAI.Tutor
                 client.Select(condition); yield return Idle();
                 string question = client.View.question.question_id;
                 panel.TaskDetailsButton.onClick.Invoke();
-                Check(panel.TaskCardOpen && !client.CanSubmit && !panel.Speech.CanRecord && !panel.Playback.CanSample, "Task details suspend input and playback during clarification");
+                Check(panel.TaskCardOpen && !client.CanSubmit && !panel.Speech.CanRecord && !panel.Playback.Active, "Task details suspend input and playback during clarification");
                 panel.BeginTaskButton.onClick.Invoke();
                 Check(!panel.TaskCardOpen && client.View.question.question_id == question, "Closing task card preserves captured clarification");
                 client.ChooseOption("c1"); yield return Idle();
@@ -86,7 +86,7 @@ namespace IAI.Tutor
             string first = client.State.task_id;
             panel.Navigation.Next(); Check(client.State.task_id == first && !client.Busy, "Next cannot skip missing results or feedback");
             panel.TaskDetailsButton.onClick.Invoke();
-            Check(!client.CanPrepare && !panel.SampleButton.interactable, "Task details block hidden preparation controls");
+            Check(!client.CanPrepare && !panel.ConfirmControlsButton.interactable, "Task details block hidden preparation controls");
             panel.BeginTaskButton.onClick.Invoke();
             yield return Reveal();
             Check(!panel.NextTaskButton.interactable, "Unrated results cannot advance");

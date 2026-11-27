@@ -136,10 +136,17 @@ class ServiceTests(unittest.TestCase):
     def test_free_text_answer_uses_its_own_pending_question(self):
         self.start()
         self.model.raw = answer("c1")
+        self.model.resolved = tailoring("brief")
         self.respond(response={"text": "Yes, key points please."})
-        self.wait(lambda v: v["results_visible"])
+        view = self.wait(lambda v: v["results_visible"])
         self.assertEqual(self.model.calls.count("interpret"), 2)
-        self.assertEqual(self.model.contexts[-1]["pending"]["original_query"], "Change reply length.")
+        bound = next(c for c in self.model.contexts if c.get('answering_pending_question'))
+        self.assertEqual(bound['pending']['original_query'], 'Change reply length.')
+        resolved = next(c for c in self.model.contexts if c.get('clarification_resolution'))
+        self.assertEqual(resolved['clarification_resolution']['question']['original_query'], 'Change reply length.')
+        self.assertEqual(resolved['clarification_resolution']['answer'], 'Yes, key points please.')
+        self.assertEqual(self.model.calls.count('resolve'), 1)
+        self.assertEqual(view['branches']['A']['result']['state']['settings']['reply_length'], 'brief')
         self.assertEqual(self.model.calls.count("native"), 1)
 
     def test_unresolved_clarification_asks_again_with_new_id(self):

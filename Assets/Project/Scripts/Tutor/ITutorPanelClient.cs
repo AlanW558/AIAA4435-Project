@@ -28,6 +28,7 @@ namespace IAI.Tutor
         void SetSpeechRate(float value);
         void SetTone(int index);
         void SetVoice(int index);
+        void SetDialogueSettings(TutorDialoguePatch patch);
         bool CanUndoSetting(string field);
         void UndoSetting(string field);
         void UndoReplyLength();

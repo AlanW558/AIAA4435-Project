@@ -9,7 +9,14 @@ using UnityEngine;
 namespace IAI.Tutor
 {
     [Serializable] public class TutorTaskCard
-    { public string task_code, scenario, title, instructions, context_text; public TutorStudyMaterial[] materials; }
+    {
+        public string task_code, display_code, scenario, title, instructions, context_text, keep_unchanged, request_example;
+        public TutorStudyMaterial[] materials;
+        public string DisplayCode => string.IsNullOrEmpty(display_code) ? task_code : display_code;
+        public string ParticipantInstructions => "Task goal\n" + instructions + "\n\nKeep unchanged\n" +
+            (string.IsNullOrWhiteSpace(keep_unchanged) ? "All settings other than the requested change." : keep_unchanged) +
+            "\n\nRequest example\n" + (string.IsNullOrWhiteSpace(request_example) ? "Use your own words to ask the tutor for the requested change." : request_example);
+    }
     [Serializable] public class TutorStudyMaterial { public string label, text; public TutorSettings settings; }
     [Serializable] public class TutorTaskModule
     { public string direction, title; public TutorTaskCard[] tasks; }
@@ -22,7 +29,11 @@ namespace IAI.Tutor
         {
             var value = JsonUtility.FromJson<TutorTaskManifest>(json);
             var directions = new[] { "speech_rate", "reply_length", "tone", "voice" };
-            if (value == null || !(value.version == "task-navigation-v1" && value.purpose == "practice" || value.version == "task-navigation-v2" && value.purpose == "study_preview" && value.materials_version == "attribute-materials-v1") || value.modules == null || value.modules.Length == 0 || value.modules.Length > 4)
+            bool studyVersion = value != null && value.purpose == "study_preview" &&
+                (value.version == "task-navigation-v2" && value.materials_version == "attribute-materials-v1" ||
+                 value.version == "task-navigation-v3" && value.materials_version == "attribute-materials-v2" ||
+                 value.version == "task-navigation-v4" && value.materials_version == "attribute-materials-v3");
+            if (value == null || !(value.version == "task-navigation-v1" && value.purpose == "practice" || studyVersion) || value.modules == null || value.modules.Length == 0 || value.modules.Length > 4)
                 throw new ArgumentException("Use a versioned practice task manifest.");
             var codes = new HashSet<string>(); var used = new HashSet<string>();
             foreach (var module in value.modules)
@@ -33,6 +44,15 @@ namespace IAI.Tutor
                     if (task == null || task.task_code == null || !Regex.IsMatch(task.task_code, @"\A[A-Za-z0-9_-]{1,64}\z") || !codes.Add(task.task_code) ||
                         !new[] { "C1", "C2", "C3", "C4" }.Contains(task.scenario) || !Text(task.title, 100) || !Text(task.instructions, 1500))
                         throw new ArgumentException("Task codes must be unique; each task needs a title, scenario and instructions.");
+                if (value.version == "task-navigation-v4")
+                    foreach (var scenario in new[] { "C1", "C2", "C3", "C4" })
+                    {
+                        var pair = module.tasks.Where(t => t.scenario == scenario).ToArray();
+                        for (int i = 0; i < pair.Length; i++)
+                            if (!Text(pair[i].display_code, 64) || !pair[i].display_code.EndsWith("-" + (i + 1)) ||
+                                !Text(pair[i].keep_unchanged, 1500) || !Text(pair[i].request_example, 1500))
+                                throw new ArgumentException("Current task cards need consecutive display numbers and all three instruction sections.");
+                    }
             }
             if (value.purpose == "study_preview")
             {
@@ -88,10 +108,10 @@ namespace IAI.Tutor
             (client.State.can_submit || client.State.lifecycle == "submitted" && HasNextInModule);
         public string Progress => manifest == null ? "Task sequence unavailable" :
             $"{(StudyPreview ? "Study preview" : "Practice")} · {Module.title} · Task {taskIndex + 1}/{Module.tasks.Length}";
-        public string Title => AtPreferenceBoundary ? "Task comparisons complete" : Task?.title ?? "Task instructions";
+        public string Title => AtPreferenceBoundary ? "Task comparisons complete" : Task?.DisplayCode ?? "Task instructions";
         public string Instructions => Error.Length > 0 ? Error : AtPreferenceBoundary
             ? "Complete the strategy preference on this panel before continuing."
-            : (Task?.instructions ?? "") + "\n\nUse your own words. Speak to the tutor; you do not need to read a fixed sentence." + (StudyPreview ? "\n\n" + Task.context_text : "");
+            : Task?.ParticipantInstructions ?? "";
         public string Guidance => Error.Length > 0 ? Error : !Active ? (StudyPreview ? "32-task study preview · Not participant collection." : "Practice sequence · Not formal study data.")
             : ComparisonComplete ? "Comparison feedback complete. The natural conversation module comes next."
             : AtPreferenceBoundary ? "Complete the preference feedback before continuing."

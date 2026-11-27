@@ -158,6 +158,36 @@ class AudioTests(unittest.TestCase):
         self.assertEqual(self.tts.calls[-1][1], override)
         self.assertEqual(session.state.snapshot()['settings'], v['settings'])
 
+    def pending_question(self):
+        v=self.sessions.create({'condition':'A'})
+        v=self.sessions.mutate(v['session_id'],'request',{'request_id':uuid.uuid4().hex,'expected_revision':v['revision'],'query':'Compare an easier explanation.'})
+        return v, {'request_id':uuid.uuid4().hex,'expected_revision':v['revision'],'condition':'A','purpose':'clarification','exchange_id':0,'question_id':v['question']['question_id']}
+
+    def test_natural_question_uses_current_authoritative_text_and_settings(self):
+        v,body=self.pending_question()
+        self.audio.synthesize('sessions',v['session_id'],body)
+        spoken,settings=self.tts.calls[-1]
+        self.assertTrue(spoken.startswith(v['question']['text']))
+        self.assertEqual(settings,v['settings'])
+        for option in v['question']['options']:
+            if option['id'] not in ('other','cancel'):self.assertIn(option['label'],spoken)
+        self.assertEqual(self.sessions.view(self.sessions.get(v['session_id'])),v)
+        records=[json.loads(line) for p in Path(self.temp.name).rglob('*.jsonl') for line in p.read_text().splitlines()]
+        self.assertEqual(next(r for r in records if r['event']=='audio_ready')['question_id'],body['question_id'])
+
+    def test_question_tts_rejects_comparison_forgery_and_stale_question(self):
+        v,body=self.pending_question()
+        for kind,identifier,change in [('comparisons',self.id,{}),('sessions',v['session_id'],{'question_id':'old'}),('sessions',v['session_id'],{'text':'forged'})]:
+            with self.assertRaises(APIError):self.audio.synthesize(kind,identifier,{**body,**change})
+        self.assertEqual(self.tts.calls,[])
+
+    def test_answer_during_question_synthesis_discards_audio(self):
+        v,body=self.pending_question()
+        self.tts.hook=lambda:self.sessions.mutate(v['session_id'],'cancel',{'request_id':uuid.uuid4().hex,'expected_revision':v['revision'],'question_id':v['question']['question_id']})
+        with self.assertRaises(APIError):self.audio.synthesize('sessions',v['session_id'],body)
+        records=[json.loads(line) for p in Path(self.temp.name).rglob('*.jsonl') for line in p.read_text().splitlines()]
+        self.assertIn('audio_discarded',[r['event'] for r in records])
+
 
 class AudioHTTPTests(unittest.TestCase):
     def test_audio_bytes_runtime_capability_and_noncacheable_response(self):

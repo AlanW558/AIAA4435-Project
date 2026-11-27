@@ -101,11 +101,57 @@ class GenerationTests(unittest.TestCase):
         v = self.app.create({})
         self.model.raw = tailoring("brief")
         v = self.mutate(v, "request", query="Key points from now on")
+        v = self.generate(v)  # Complete the actual acknowledgement before follow-ups.
         for query in ("What is recall?", "Why use it?"):
             v = self.generate(self.queue(v, query))
             self.assertEqual(v["response"]["settings"]["reply_length"], "brief")
         self.assertEqual(v["settings"]["reply_length"], "brief")
         self.assertEqual(len(v["changes"]), 1)
+
+    def test_adjustment_only_generates_real_outcome_grounded_reply(self):
+        self.model.raw = tailoring("brief")
+        v = self.mutate(self.app.create({"condition":"E"}), "request", query="Keep it short, please.")
+        self.assertEqual(len(v["generation_jobs"]), 1)
+        self.assertEqual(v["conversation"], [])
+        self.model.answer_result = parts("I'll keep the key points concise.", "Supporting detail.", "Example.")
+        v = self.generate(v)
+        outcome = self.model.contexts[-1]["settings_response"]
+        self.assertEqual(outcome["outcome"], "applied")
+        self.assertEqual(outcome["changed_fields"]["reply_length"], {"before":"balanced","after":"brief"})
+        self.assertEqual(v["response"]["text"], "I'll keep the key points concise.")
+        self.assertEqual(outcome["voice_labels"]["voice_d"], "Male voice 1")
+        self.assertEqual(v["conversation"][-1]["messages"][0]["content"], "Keep it short, please.")
+
+    def test_clarification_waits_then_generates_one_adjustment_reply(self):
+        self.model.raw = tailoring("brief")
+        v = self.mutate(self.app.create({"condition":"A"}),"request",query="Keep it short.")
+        self.assertEqual(v["generation_jobs"], [])
+        v = self.mutate(v,"answer",question_id=v["question"]["question_id"],option_id="c1")
+        self.assertEqual(len(v["generation_jobs"]),1)
+        v = self.generate(v)
+        self.assertEqual(self.model.contexts[-1]["settings_response"]["outcome"],"applied")
+
+    def test_cancel_and_noop_replies_do_not_claim_a_change(self):
+        self.model.raw = tailoring("brief")
+        v = self.mutate(self.app.create({"condition":"A"}),"request",query="Keep it short.")
+        v = self.mutate(v,"cancel",question_id=v["question"]["question_id"])
+        v = self.generate(v)
+        outcome=self.model.contexts[-1]["settings_response"]
+        self.assertEqual(outcome["outcome"],"cancelled")
+        self.assertEqual(outcome["changed_fields"],{})
+        v=self.mutate(v,"settings",patch={"reply_length":"balanced"})
+        self.generate(v)
+        self.assertEqual(self.model.contexts[-1]["settings_response"]["outcome"],"unchanged")
+
+    def test_confirmed_full_controls_generate_one_reply_with_all_new_settings(self):
+        v = self.mutate(self.app.create({}),"settings",patch={"speech_rate":.7,"reply_length":"detailed","tone":"friendly","voice":"voice_a"})
+        self.assertEqual(len(v["changes"]),1)
+        self.assertEqual(len(v["generation_jobs"]),1)
+        self.model.answer_result=parts("I have applied those choices.","A relevant explanation.","A next step.")
+        v=self.generate(v)
+        self.assertEqual(v["response"]["text"],"I have applied those choices.\n\nA relevant explanation.\n\nA next step.")
+        self.assertEqual(v["response"]["settings"]["speech_rate"],.7)
+        self.assertEqual(v["conversation"][-1]["messages"][0]["content"],"[Controls confirmed]")
 
     def test_one_turn_setting_is_recorded_without_changing_persistent_state(self):
         self.model.raw = tailoring("brief", kind="mixed", scope="turn", conversation_query="What is recall?")

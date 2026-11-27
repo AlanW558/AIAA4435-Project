@@ -36,7 +36,8 @@ namespace IAI.Tutor
         public TutorSpeechInput Speech { get; private set; }
         public TutorAudioPlayback Playback { get; private set; }
         public Button ReplyAudioButton { get; private set; }
-        Text replyAudioStatus, sampleStatus;
+        public Button QuestionAudioButton { get; private set; }
+        Text replyAudioStatus, controlsStatus;
         Font interfaceFont;
         public bool SpeechVisible => isActiveAndEnabled && !(StudyFlow && StudyFlow.Speech && (StudyFlow.Speech.Recording || StudyFlow.Speech.Working)) && !(Study && Study.SpeechBusy) && !TaskCardOpen && CurrentTab == 0 && (!seat || seat.IsSeated);
         public Button RecordButton { get; private set; }
@@ -47,14 +48,19 @@ namespace IAI.Tutor
         public int CurrentTab { get; private set; }
         public InputField DebugInput { get; private set; }
         public Slider RateSlider { get; private set; }
-        public Button SampleButton { get; private set; }
+        public Button ConfirmControlsButton { get; private set; }
+        TutorDialoguePatch pendingControls;
+        string pendingControlContext = "";
+        public bool HasPendingControls => Driver != null && Driver.Connected && pendingControls != null && !pendingControls.Matches(Driver.View.settings);
         public Button[] ToneButtons { get; private set; }
         public Button[] VoiceButtons { get; private set; }
         public Button UndoPrevious { get; private set; }
         public Button UndoNext { get; private set; }
         public string SelectedUndoField { get; private set; } = "reply_length";
-        public bool CanEditControls => Driver != null && Driver.CanEdit;
-        public string ControlContext => Driver == null || !Driver.Connected ? "" : Driver.View.session_id + ":" + Driver.View.condition + ":" + Driver.View.revision + ":" + (comparison && comparison.Paused);
+        public bool CanEditControls => Driver != null && Driver.CanEdit && !TaskCardOpen &&
+            !(Speech && (Speech.Recording || Speech.Working)) && !(Study && Study.SpeechBusy) &&
+            !(StudyFlow && StudyFlow.Speech && (StudyFlow.Speech.Recording || StudyFlow.Speech.Working));
+        public string ControlContext => Driver == null || !Driver.Connected ? "" : Driver.View.session_id + ":" + Driver.View.condition + ":" + Driver.View.revision + ":" + Driver.View.state_revision + ":" + (comparison ? comparison.State.revision : Driver.View.revision) + ":" + (comparison && comparison.Paused);
         public string DisplayedRate => rateValue ? rateValue.text : "";
         public string DisplayedTone => toneValue ? toneValue.text : "";
         public string DisplayedVoice => voiceValue ? voiceValue.text : "";
@@ -240,8 +246,8 @@ namespace IAI.Tutor
                 var preparation = Rect("Shared preparation", root, new Vector2(0, 350), new Vector2(880, 54));
                 preparationStrip = preparation.gameObject;
                 Label(preparation, "Preparation heading", "Shared starting settings", new Vector2(-170, 0), new Vector2(530, 50), 24);
-                ConfirmPreparationButton = Button(preparation, "Confirm preparation", "Confirm settings", new Vector2(300, 0), new Vector2(280, 48), () => {
-                    if (!comparison.CanConfirmPreparation) return;
+                ConfirmPreparationButton = Button(preparation, "Confirm preparation", "Begin comparison", new Vector2(300, 0), new Vector2(280, 48), () => {
+                    if (!comparison.CanConfirmPreparation || HasPendingControls) return;
                     if (Playback) Playback.Stop(reason: "context_changed");
                     comparison.ConfirmPreparation();
                 });
@@ -304,6 +310,7 @@ namespace IAI.Tutor
             Button(p, "Transcript down", "↓", new Vector2(420, 164), new Vector2(36, 40), () => ScrollBy(conversationScroll, -.25f));
             questionArea = Rect("Clarification", p, new Vector2(0, -80), new Vector2(880, 220));
             questionText = Label(questionArea, "Question", "", new Vector2(0, 80), new Vector2(860, 64), 26);
+            QuestionAudioButton=Button(questionArea,"Replay question","Play question",new Vector2(335,80),new Vector2(198,44),()=>Playback.ToggleClarification());
             optionsRoot = Rect("Options", questionArea, new Vector2(0, -20), new Vector2(880, 160));
             var entry = Rect("Speech transcript", p, new Vector2(0, -245), new Vector2(550, 70));
             var bg = entry.gameObject.AddComponent<Image>(); bg.color = new Color(1, .96f, .88f, .10f); bg.sprite = rounded; bg.type = Image.Type.Sliced;
@@ -318,37 +325,34 @@ namespace IAI.Tutor
             DebugInput.onValueChanged.AddListener(_ => RefreshInputAvailability());
             SendButton = Button(p, "Send", "Send", new Vector2(365, -245), new Vector2(145, 70), () => { if (Speech && Speech.HasCapture) Speech.Submit(); else SubmitDebug(); });
             RecordButton = Button(p, "Record speech", "Record", new Vector2(-365, -245), new Vector2(145, 70), () => Speech.PressRecord());
-            ReplyAudioButton = Button(p, "Play reply", "Play reply", new Vector2(352, -184), new Vector2(164, 40), () => Playback.ToggleReply());
-            replyAudioStatus = Label(p, "Reply audio status", "", new Vector2(-96, -184), new Vector2(650, 40), 21);
+            ReplyAudioButton = Button(p, "Play reply", "Play reply", new Vector2(335, -184), new Vector2(198, 40), () => { if (Driver.HasQuestion) Playback.ToggleClarification(); else Playback.ToggleReply(); });
+            replyAudioStatus = Label(p, "Reply audio status", "", new Vector2(-115, -184), new Vector2(612, 40), 21);
         }
         void BuildControls(Transform p)
         {
-            Surface(p, "Sample strip", new Vector2(0, 222), new Vector2(880, 54), .07f);
-            Label(p, "Sample sentence", "Let's explore this idea together, one step at a time.", new Vector2(-112, 222), new Vector2(620, 48), 27);
-            SampleButton = Button(p, "Play sample", "Play sample", new Vector2(344, 222), new Vector2(188, 44), () => Playback.ToggleSample());
-            SetInterfaceText(SampleButton, 29);
-            SampleButton.interactable = false;
-            // Reserve a small line for live audio feedback; no permanent boilerplate.
-            sampleStatus = Label(p, "Sample status", "", new Vector2(0, 179), new Vector2(860, 30), 22);
-            Label(p, "Speech rate heading", "Speech rate", new Vector2(-250, 140), new Vector2(360, 46), 36);
-            rateValue = Label(p, "Speech rate value", "—", new Vector2(235, 140), new Vector2(390, 46), 34, TextAnchor.MiddleRight);
-            RateSlider = SliderControl(p, "Speech rate", new Vector2(0, 94), .7f, 1.3f, false);
+            Label(p, "Speech rate heading", "Speech rate", new Vector2(-250, 224), new Vector2(360, 46), 36);
+            rateValue = Label(p, "Speech rate value", "—", new Vector2(235, 224), new Vector2(390, 46), 34, TextAnchor.MiddleRight);
+            RateSlider = SliderControl(p, "Speech rate", new Vector2(0, 176), .7f, 1.3f, false);
             var rateCommit = RateSlider.gameObject.AddComponent<TutorLengthCommit>(); rateCommit.panel = this; rateCommit.speechRate = true;
-            RateSlider.onValueChanged.AddListener(value => { if (CanEditControls) rateValue.text = value.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) + "× default"; });
-            Label(p, "Reply length heading", "Reply length", new Vector2(-250, 22), new Vector2(360, 46), 36);
-            lengthValue = Label(p, "Reply length value", "—", new Vector2(260, 22), new Vector2(340, 46), 34, TextAnchor.MiddleRight);
-            LengthSlider = SliderControl(p, "Reply length", new Vector2(0, -24), 0, 2, true);
+            RateSlider.onValueChanged.AddListener(value => { if (CanEditControls && pendingControls != null) { pendingControls.speech_rate = Mathf.Round(value * 100) / 100; RefreshDraft(); } });
+            Label(p, "Reply length heading", "Reply length", new Vector2(-250, 112), new Vector2(360, 46), 36);
+            lengthValue = Label(p, "Reply length value", "—", new Vector2(260, 112), new Vector2(340, 46), 34, TextAnchor.MiddleRight);
+            LengthSlider = SliderControl(p, "Reply length", new Vector2(0, 64), 0, 2, true);
             var commit = LengthSlider.gameObject.AddComponent<TutorLengthCommit>(); commit.panel = this;
-            LengthSlider.onValueChanged.AddListener(value => { if (Driver == null || !Driver.CanEdit) return; lengthValue.text = LengthName((int)value); });
-            lengthDescription = Label(p, "Reply length description", "", new Vector2(0, -65), new Vector2(860, 38), 28);
-            Label(p, "Tone heading", "Tone", new Vector2(-250, -116), new Vector2(360, 44), 36);
+            LengthSlider.onValueChanged.AddListener(value => { if (CanEditControls && pendingControls != null) { pendingControls.reply_length = new[]{"brief","balanced","detailed"}[Mathf.RoundToInt(value)]; RefreshDraft(); } });
+            lengthDescription = Label(p, "Reply length description", "", new Vector2(0, 19), new Vector2(860, 38), 28);
+            Label(p, "Tone heading", "Tone", new Vector2(-250, -26), new Vector2(360, 44), 36);
             toneValue = Label(p, "Tone value", "—", Vector2.zero, new Vector2(390, 44), 24, TextAnchor.MiddleRight);
             toneValue.gameObject.SetActive(false); // The selected option already identifies the current tone.
-            ToneButtons = Choices(p, "Tone", new[] { "Professional", "Friendly", "Encouraging" }, -162, i => Driver.SetTone(i));
-            Label(p, "Voice heading", "Voice", new Vector2(-250, -222), new Vector2(360, 44), 36);
+            ToneButtons = Choices(p, "Tone", new[] { "Professional", "Friendly", "Encouraging" }, -72, i => { if(CanEditControls && pendingControls!=null) { pendingControls.tone=new[]{"professional","friendly","encouraging"}[i]; RefreshDraft(); } });
+            Label(p, "Voice heading", "Voice", new Vector2(-250, -128), new Vector2(360, 44), 36);
             voiceValue = Label(p, "Voice value", "—", Vector2.zero, new Vector2(390, 44), 24, TextAnchor.MiddleRight);
             voiceValue.gameObject.SetActive(false);
-            VoiceButtons = Choices(p, "Voice", TutorVoiceCatalog.Labels, -268, i => Driver.SetVoice(i));
+            VoiceButtons = Choices(p, "Voice", TutorVoiceCatalog.Labels, -188, i => { if(CanEditControls && pendingControls!=null) { pendingControls.voice=TutorVoiceCatalog.Ids[i]; RefreshDraft(); } });
+            foreach(var button in VoiceButtons) { button.GetComponent<RectTransform>().sizeDelta=new Vector2(160,68);var label=button.GetComponentInChildren<Text>();label.rectTransform.sizeDelta=new Vector2(148,64);label.text=label.text.Replace(" voice ","\nvoice ");label.resizeTextForBestFit=false;label.fontSize=26; }
+            controlsStatus = Label(p, "Controls status", "", new Vector2(-150,-264),new Vector2(548,66),24);
+            ConfirmControlsButton=Button(p,"Confirm changes","Confirm changes",new Vector2(290,-264),new Vector2(288,56),ConfirmControls);
+            SetInterfaceText(ConfirmControlsButton,28);
             foreach (var text in p.GetComponentsInChildren<Text>(true)) text.font = interfaceFont;
         }
         void BuildHistory(Transform p)
@@ -396,8 +400,22 @@ namespace IAI.Tutor
             if (LengthSlider) LengthSlider.GetComponent<TutorLengthCommit>().CancelDrag();
             if (RateSlider) RateSlider.GetComponent<TutorLengthCommit>().CancelDrag();
         }
-        public void CommitRate() { if (CanEditControls) { Driver.SetSpeechRate(RateSlider.value); Render(); } else Render(); }
-        public void CommitLength() { if (Driver != null && Driver.CanEdit) { Driver.SetReplyLength(Mathf.RoundToInt(LengthSlider.value)); Render(); } else Render(); }
+        public void CommitRate() { RefreshDraft(); }
+        public void CommitLength() { RefreshDraft(); }
+        void RefreshDraft()
+        {
+            if (Playback && Playback.Active) Playback.Stop(reason:"settings_changed");
+            Render();
+        }
+        public void ConfirmControls()
+        {
+            if (!CanEditControls || !HasPendingControls || pendingControlContext != ControlContext) return;
+            var patch = new TutorDialoguePatch { speech_rate=pendingControls.speech_rate,reply_length=pendingControls.reply_length,tone=pendingControls.tone,voice=pendingControls.voice };
+            if(Playback)Playback.Stop(reason:"settings_changed");CancelControlDrags();
+            bool preparing=comparison && comparison.CanPrepare;
+            Driver.SetDialogueSettings(patch);
+            if(!preparing)OpenTab(0);
+        }
         public void SubmitDebug()
         {
             if (!desktopDebugInput || Driver == null || !Driver.CanSubmit || string.IsNullOrWhiteSpace(DebugInput.text)) return;
@@ -414,6 +432,9 @@ namespace IAI.Tutor
                 if (Study) Study.Render();
             }
             var v = Driver.View;
+            if (!Driver.Connected) { pendingControls=null; pendingControlContext=""; }
+            else if(pendingControls==null || pendingControlContext!=ControlContext)
+            { pendingControls=TutorDialoguePatch.From(v.settings);pendingControlContext=ControlContext; }
             if (controlContext != ControlContext || !CanEditControls) { CancelControlDrags(); controlContext = ControlContext; }
             badge.text = Driver.Connected ? $"DEBUG · {v.condition}\n{v.mode.ToUpperInvariant()}" : "NOT CONNECTED";
             status.text = !string.IsNullOrEmpty(Driver.Error) ? Driver.Error : Driver.Busy ? Driver.Activity
@@ -428,7 +449,7 @@ namespace IAI.Tutor
                 if (!comparison.Connected && string.IsNullOrEmpty(Driver.Error)) status.text = freeTesting ? "Connect to begin free testing." : "Open the Study panel to read the task and begin.";
                 bool preparing = comparison.PreparationPending;
                 preparationStrip.SetActive(preparing && !TaskCardOpen);
-                ConfirmPreparationButton.interactable = comparison.CanConfirmPreparation;
+                ConfirmPreparationButton.interactable = comparison.CanConfirmPreparation && !HasPendingControls;
                 if (preparing && preparingTask != comparison.State.task_id)
                 { preparingTask = comparison.State.task_id; OpenTab(1); }
                 else if (!preparing && comparison.Connected && comparison.State.preparation_confirmed && preparingTask == comparison.State.task_id)
@@ -448,7 +469,7 @@ namespace IAI.Tutor
                     strategyText.fontSize = ordinary ? 29 : 24;
                     strategyText.fontStyle = condition == comparison.Selected ? FontStyle.Bold : FontStyle.Normal;
                     StrategyButtons[i].GetComponent<PanelControlFeedback>().selected = condition == comparison.Selected;
-                    StrategyButtons[i].interactable = comparison.Available;
+                    StrategyButtons[i].interactable = comparison.Available || StudyFlow && StudyFlow.CanReviewAttributeResults && comparison.CanPauseOrResume && !comparison.Paused;
                 }
                 StopButton.interactable = comparison.CanStop;
                 pauseOverlay.gameObject.SetActive(comparison.Paused);
@@ -486,12 +507,14 @@ namespace IAI.Tutor
             UndoButton.GetComponentInChildren<Text>().text = UndoButton.interactable ? "Undo latest " + (SelectedUndoField == "all" ? "change" : TutorHistoryPresentation.Label(SelectedUndoField).ToLowerInvariant() + " change") : "No available change to undo";
             UndoPrevious.interactable = UndoNext.interactable = CanEditControls && UndoFields.Any(f => f != SelectedUndoField && Driver.CanUndoSetting(f));
             LengthSlider.interactable = RateSlider.interactable = CanEditControls;
-            SampleButton.interactable = Playback && Playback.CanSample;
+            ConfirmControlsButton.interactable = CanEditControls && HasPendingControls;
+            controlsStatus.text = HasPendingControls ? "Changes pending confirmation" : "Choose settings, then confirm.";
             foreach (var button in ToneButtons.Concat(VoiceButtons)) button.interactable = CanEditControls;
             if (Driver.Connected)
             {
                 string[] lengths = { "brief", "balanced", "detailed" };
-                int index = Array.IndexOf(lengths, v.settings.reply_length);
+                var shown = pendingControls;
+                int index = Array.IndexOf(lengths, shown.reply_length);
                 var commit = LengthSlider.GetComponent<TutorLengthCommit>();
                 if (!Driver.CanEdit) commit.CancelDrag();
                 if (!commit.IsDragging)
@@ -500,23 +523,25 @@ namespace IAI.Tutor
                     lengthValue.text = LengthName(index);
                 }
                 lengthDescription.text = index == 0 ? "Key answer only" : index == 1 ? "Key answer + a short reason" : "Key answer + explanation + a relevant example or steps";
+                lengthValue.text = LengthName(index);
                 if (!RateSlider.GetComponent<TutorLengthCommit>().IsDragging)
                 {
-                    RateSlider.SetValueWithoutNotify(v.settings.speech_rate);
-                    rateValue.text = v.settings.speech_rate.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) + "× default";
+                    RateSlider.SetValueWithoutNotify(shown.speech_rate);
+                    rateValue.text = shown.speech_rate.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) + "× default";
                 }
-                toneValue.text = Capital(v.settings.tone);
-                voiceValue.text = TutorHistoryPresentation.Value(v.settings, "voice") + (v.audio_available ? "" : " · Audio not connected");
+                rateValue.text = shown.speech_rate.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture) + "× default";
+                toneValue.text = Capital(shown.tone);
+                voiceValue.text = TutorVoiceCatalog.Labels[Array.IndexOf(TutorVoiceCatalog.Ids,shown.voice)] + (v.audio_available ? "" : " · Audio not connected");
                 string[] tones = { "professional", "friendly", "encouraging" }, voices = TutorVoiceCatalog.Ids;
                 for (int i = 0; i < 3; i++)
                 {
-                    ToneButtons[i].GetComponent<PanelControlFeedback>().selected = v.settings.tone == tones[i];
-                    ToneButtons[i].GetComponentInChildren<Text>().fontStyle = v.settings.tone == tones[i] ? FontStyle.Bold : FontStyle.Normal;
+                    ToneButtons[i].GetComponent<PanelControlFeedback>().selected = shown.tone == tones[i];
+                    ToneButtons[i].GetComponentInChildren<Text>().fontStyle = shown.tone == tones[i] ? FontStyle.Bold : FontStyle.Normal;
                 }
                 for (int i = 0; i < voices.Length; i++)
                 {
-                    VoiceButtons[i].GetComponent<PanelControlFeedback>().selected = v.settings.voice == voices[i];
-                    VoiceButtons[i].GetComponentInChildren<Text>().fontStyle = v.settings.voice == voices[i] ? FontStyle.Bold : FontStyle.Normal;
+                    VoiceButtons[i].GetComponent<PanelControlFeedback>().selected = shown.voice == voices[i];
+                    VoiceButtons[i].GetComponentInChildren<Text>().fontStyle = shown.voice == voices[i] ? FontStyle.Bold : FontStyle.Normal;
                 }
                 appearance.text = $"Appearance · {Capital(v.settings.avatar_id)} · {Capital(v.settings.outfit)}\n{Capital(v.settings.jacket_color)} · {Capital(v.settings.accessory)} · {v.settings.scale:0.00}×";
             }
@@ -538,7 +563,8 @@ namespace IAI.Tutor
                 {
                     foreach (var message in exchange.messages ?? Array.Empty<TutorMessage>())
                     {
-                        transcript.Append(message.role == "user" ? "YOU\n" : "TUTOR\n").Append(message.content).Append("\n");
+                        bool controlAction=message.role=="user" && (message.content=="[Controls confirmed]" || message.content=="[Undo selected in Controls]");
+                        transcript.Append(controlAction ? "CONTROL ACTION\n" : message.role == "user" ? "YOU\n" : "TUTOR\n").Append(message.content).Append("\n");
                         if (message.role != "user" && exchange.settings != null)
                             transcript.Append("Answer settings · ").Append(string.Join(" · ", new[] { "reply_length", "tone", "speech_rate", "voice" }.Select(f => TutorHistoryPresentation.Value(exchange.settings, f)))).Append("\n");
                         transcript.Append("\n");
@@ -588,7 +614,9 @@ namespace IAI.Tutor
                     }
                 }
             }
-            if (ask) { questionText.supportRichText = false; questionText.text = Driver.View.question.text; }
+            if (ask) { questionText.supportRichText = false; questionText.text = Driver.View.question.text;
+                questionText.rectTransform.anchoredPosition=new Vector2(comparison?0:-110,80);
+                questionText.rectTransform.sizeDelta=new Vector2(comparison?860:640,64); }
             foreach (var button in OptionButtons) button.interactable = !Driver.Busy && !Driver.UnknownOutcome;
         }
         void RefreshInputAvailability()
@@ -603,14 +631,14 @@ namespace IAI.Tutor
             if (!Playback || !ReplyAudioButton || Driver == null) return;
             bool ask = Driver.HasQuestion;
             ReplyAudioButton.gameObject.SetActive(!ask); replyAudioStatus.gameObject.SetActive(!ask);
-            SampleButton.interactable = Playback.CanSample || Playback.Active && Playback.Purpose == "sample";
-            ReplyAudioButton.interactable = Playback.CanReply || Playback.Active && Playback.Purpose == "reply";
+            QuestionAudioButton.gameObject.SetActive(ask && !comparison);
+            QuestionAudioButton.interactable=Playback.CanClarification || Playback.Active && Playback.Purpose=="clarification";
+            QuestionAudioButton.GetComponentInChildren<Text>().text=Playback.Active && Playback.Purpose=="clarification" ? (Playback.Loading?"Cancel audio":"Stop question") : "Play question";
+            ReplyAudioButton.interactable = (ask ? Playback.CanClarification : Playback.CanReply) || Playback.Active;
             string active = Playback.Loading ? "Cancel audio" : "Stop " + Playback.Purpose;
-            SampleButton.GetComponentInChildren<Text>().text = Playback.Active && Playback.Purpose == "sample" ? active : "Play sample";
-            ReplyAudioButton.GetComponentInChildren<Text>().text = Playback.Active && Playback.Purpose == "reply" ? active : "Play reply";
-            replyAudioStatus.text = Playback.Purpose == "reply" && Playback.Status.Length > 0 ? Playback.Status : "Listen to the latest reply using its original settings.";
-            sampleStatus.text = Playback.Purpose == "sample" ? Playback.Status.Replace(" Select Play to listen again.", "") : "";
-            if (Playback.AuditError.Length > 0) replyAudioStatus.text = sampleStatus.text = Playback.AuditError;
+            ReplyAudioButton.GetComponentInChildren<Text>().text = Playback.Active ? active : ask ? "Play question" : "Play reply";
+            replyAudioStatus.text = Playback.Status.Length > 0 ? Playback.Status : ask ? "Answer when you are ready." : "Listen to the latest tutor reply.";
+            if (Playback.AuditError.Length > 0) replyAudioStatus.text = Playback.AuditError;
         }
         void RenderSpeech()
         {

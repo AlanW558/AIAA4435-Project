@@ -56,12 +56,24 @@ namespace IAI.Tutor
                 File.WriteAllBytes(Path.Combine(folder,"tutor-"+purpose+".wav"),r.downloadHandler.data);
             }
         }
+        IEnumerator FinishAttribute()
+        {
+            // The caller has already revealed the first task's results.
+            for(int i=0;i<8;i++)
+            {
+                flow.CaptureEvaluation();yield return Wait(()=>!flow.Running,"complete task or open attribute questionnaire");
+                Check(flow.Error.Length==0,flow.Error);
+                if(flow.ExpandedForFeedback)yield break;
+                yield return Prepare();comparison.SubmitUserUtterance("Make the answer brief and explain recall.");yield return Reveal();
+            }
+            Check(false,"Attribute questionnaire must follow exactly eight completed tasks.");
+        }
         IEnumerator FillAll()
         {
             foreach(string c in TutorComparisonClient.Conditions)
             {
-                flow.SelectApproach(c);yield return Wait(()=>!comparison.Busy&&comparison.Selected==c,"select rating");
-                flow.Choose("A0","answered",new JValue("partly_met"));for(int i=1;i<5;i++)flow.Choose("A"+i,"answered",new JValue(4));
+                flow.SelectApproach(c);yield return Wait(()=>!comparison.Busy,"select rating");
+                for(int i=0;i<5;i++)flow.Choose("A"+i,"answered",new JValue(4));
             }
             Check(flow.ReadyToSubmit,"All ratings should be ready.");
         }
@@ -80,21 +92,22 @@ namespace IAI.Tutor
                 File.WriteAllText(Path.Combine(folder,"request-transcript.txt"),panel.Speech.Transcript);
                 panel.Speech.Submit();yield return Reveal();
                 comparison.Select("S");yield return Wait(()=>!comparison.Busy&&comparison.Selected=="S","select S");
-                yield return Audio("sample");yield return Audio("reply");
+                yield return Audio("reply");
                 File.WriteAllText(Path.Combine(folder,"drop-runtime.once"),"settings");
                 comparison.SetSpeechRate(comparison.View.settings.speech_rate<1.2f?1.3f:.7f);
                 yield return Wait(()=>!comparison.Busy&&comparison.UnknownOutcome,"lost runtime acknowledgement");
                 flow.RestoreStudy();yield return Wait(()=>!flow.Running,"runtime receipt synchronization");
                 Check(flow.Error.Length==0&&!comparison.UnknownOutcome,"Exact receipt must clear uncertainty without replay.");
-                flow.ContinueInteraction();flow.CaptureEvaluation();yield return Wait(()=>!flow.Running,"questionnaire");
+                yield return Wait(()=>comparison.State.results_visible&&TutorComparisonClient.Conditions.All(c=>comparison.State.branches.Get(c).status=="ready"),"recovered shared round revealed");
+                flow.ContinueInteraction();yield return FinishAttribute();
                 flow.Speech.RecognizeFixture(File.ReadAllBytes(Path.Combine(folder,"comment-synthetic.wav")));
                 yield return Wait(()=>!flow.Speech.Working&&flow.Speech.CanSend,"cloud survey ASR");
                 File.WriteAllText(Path.Combine(folder,"survey-transcript.txt"),flow.Speech.Transcript);flow.Speech.Submit();
                 yield return FillAll();
-                File.WriteAllText(Path.Combine(folder,"drop-submit.once"),"submit_task");flow.SubmitAndNext();
+                File.WriteAllText(Path.Combine(folder,"drop-submit.once"),"submit_attribute");flow.SubmitAndNext();
                 yield return Wait(()=>!flow.Running,"lost submit acknowledgement");
                 Check(flow.Data.Journal.PendingCount==1,"Original questionnaire submission must remain pending.");
-                Check(((JObject)flow.State["tasks"]).Count==1,"Client must not advance without receipt.");
+                Check(((JObject)flow.State["tasks"]).Count==8,"Client must not open the next attribute without a submission receipt.");
             }
             else
             {
@@ -102,13 +115,15 @@ namespace IAI.Tutor
                 flow.RestoreStudy();yield return Wait(()=>!flow.Running&&flow.State!=null,"restore saved run");
                 Check(flow.Error.Length==0,flow.Error);Check(flow.RunId==original,"Restarts must keep the same run ID.");
                 Check(flow.Data.Journal.PendingCount==0,"Exact pending submission receipt should reconcile.");
-                Check(((JObject)flow.State["questionnaires"]).Properties().Count(q=>q.Value.Value<string>("record_stage")=="submitted")==4,"Exactly four final records for the first task.");
+                Check(((JObject)flow.State["questionnaires"]).Properties().Count(q=>q.Value.Value<string>("record_stage")=="submitted")==4,"Exactly four final records for the first attribute.");
                 if(phase=="2")
                 {
-                    Check(((JObject)flow.State["tasks"]).Count==2,"Recovery should open just one next task.");
+                    Check(((JObject)flow.State["tasks"]).Count==8,"Recovery must stop at the attribute preference boundary.");
+                    flow.ChoosePreference("selected","S");flow.SubmitPreference();yield return Wait(()=>!flow.Running,"first attribute preference");
+                    Check(((JObject)flow.State["tasks"]).Count==9,"One acknowledged preference opens just one next task.");
                     yield return Prepare();comparison.SubmitUserUtterance("Make the answer brief and explain recall.");yield return Reveal();
-                    flow.CaptureEvaluation();yield return Wait(()=>!flow.Running,"second questionnaire");flow.SelectApproach("S");yield return Wait(()=>!comparison.Busy&&comparison.Selected=="S","S partial draft");
-                    flow.Choose("A0","answered",new JValue("not_met"));flow.Choose("A1","answered",new JValue(2));
+                    yield return FinishAttribute();flow.SelectApproach("S");yield return Wait(()=>!comparison.Busy,"S partial draft");
+                    flow.Choose("A0","answered",new JValue(1));flow.Choose("A1","answered",new JValue(2));
                     Check(!flow.ReadyToSubmit,"Partial drafts must block navigation.");
                     if(System.Environment.GetEnvironmentVariable("IAI_STUDY_OFFLINE_FAULT")=="1")
                     {
@@ -126,13 +141,14 @@ namespace IAI.Tutor
                         Check(flow.State.Value<string>("lifecycle")=="paused","Original unsent pause must apply after recovery.");
                         flow.PauseResume();yield return Wait(()=>!flow.Running&&flow.State.Value<string>("lifecycle")=="active","explicit resume");yield return null;
                     }
-                    flow.SelectApproach("S");yield return Wait(()=>!comparison.Busy&&comparison.Selected=="S","restored S draft");
+                    flow.SelectApproach("S");yield return Wait(()=>!comparison.Busy,"restored S draft");
                     var q=((JObject)flow.State["questionnaires"]).Properties().Select(p=>(JObject)p.Value).Single(x=>x.Value<string>("condition")=="S"&&x.Value<string>("record_stage")=="draft");
                     var draft=JObject.Parse(flow.Data.Journal.RestoreLocal("draft:"+q.Value<string>("questionnaire_id")));
+                    Check(q.Value<string>("questionnaire_version")=="attribute-summary-feedback-v3" && draft["answers"]["A0"]["value"].Type==JTokenType.Integer && draft["answers"]["A0"].Value<int>("value")==1,"Numeric outcome version and draft survive restart without conversion.");
                     Check(draft["answers"]["A1"].Value<int>("value")==2,"Unsynchronized local rating survives client/backend restart.");
                     Check(q["answers"]["A1"].Value<string>("status")=="unanswered","Local draft was never silently promoted to saved server feedback.");
                     Check(!flow.ReadyToSubmit,"Unanswered items must remain unanswered.");yield return FillAll();
-                    flow.SubmitAndNext();yield return Wait(()=>!flow.Running,"second task saved");Check(flow.Error.Length==0,flow.Error);
+                    flow.SubmitAndNext();yield return Wait(()=>!flow.Running,"second attribute saved");Check(flow.Error.Length==0,flow.Error);
                     flow.ExitStudy();yield return Wait(()=>!flow.Running,"explicit early exit");Check(flow.State.Value<string>("end_reason")=="participant_exit","Early exit must not claim normal completion.");
                 }
             }

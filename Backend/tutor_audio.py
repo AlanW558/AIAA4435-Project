@@ -20,12 +20,17 @@ class TutorAudio:
         return callable(getattr(self.speech, 'synthesize', None))
 
     def resolve(self, kind, identifier, data):
-        if set(data) != {'request_id', 'expected_revision', 'condition', 'purpose', 'exchange_id'}:
+        expected = {'request_id', 'expected_revision', 'condition', 'purpose', 'exchange_id'}
+        if data.get('purpose') == 'clarification':
+            expected.add('question_id')
+        if set(data) != expected:
             raise APIError(400, 'invalid_audio_request', 'Send only the audio target and its context.')
         if not isinstance(data['request_id'], str) or not IDENTIFIER.fullmatch(data['request_id']):
             raise APIError(400, 'invalid_request_id', 'Use a valid audio request ID.')
-        if data['purpose'] not in ('sample', 'reply', 'material') or type(data['exchange_id']) is not int:
-            raise APIError(400, 'invalid_audio_target', 'Choose sample or a recorded tutor reply.')
+        if data['purpose'] not in ('sample', 'reply', 'material', 'clarification') or type(data['exchange_id']) is not int:
+            raise APIError(400, 'invalid_audio_target', 'Choose a recorded tutor reply or current clarification.')
+        if data['purpose'] == 'clarification' and (kind != 'sessions' or data['exchange_id'] != 0 or not isinstance(data['question_id'], str) or not IDENTIFIER.fullmatch(data['question_id'])):
+            raise APIError(400, 'invalid_audio_target', 'Clarification speech belongs to the current natural conversation only.')
         app = self.comparisons if kind == 'comparisons' else self.tutor
         target = app.get(identifier)
         with target.lock:
@@ -44,10 +49,18 @@ class TutorAudio:
                     raise APIError(409, 'audio_hidden', 'Wait for all required clarifications and results.')
                 snapshot = view['baseline'] if initial else branch['result']['state']
             else:
-                if data['condition'] != view['condition'] or view.get('question') or any(j['status'] == 'queued' for j in view['generation_jobs']):
+                if data['condition'] != view['condition'] or (view.get('question') and data['purpose'] != 'clarification') or any(j['status'] == 'queued' for j in view['generation_jobs']):
                     raise APIError(409, 'audio_unavailable', 'Finish the current interaction before playing audio.')
                 snapshot = view
-            if data['purpose'] == 'material':
+            if data['purpose'] == 'clarification':
+                question = view.get('question')
+                if not question or question['question_id'] != data['question_id']:
+                    raise APIError(409, 'stale_question', 'This clarification is no longer active.')
+                text, settings = question['text'], snapshot['settings']
+                choices = [o['label'] for o in question.get('options', []) if o['id'] not in ('other', 'cancel')]
+                if choices:
+                    text += (' The proposed choice is: ' if len(choices) == 1 else ' The choices are: ') + '; or '.join(choices) + '.'
+            elif data['purpose'] == 'material':
                 if kind != 'comparisons':
                     raise APIError(400, 'invalid_material', 'Listening materials belong to registered study tasks.')
                 material = audio_material(target.sequence, target.comparison.task_code, data['exchange_id'])
@@ -80,6 +93,8 @@ class TutorAudio:
                 'exchange_id': data['exchange_id'], 'expected_revision': data['expected_revision'],
                 'text_sha256': hashlib.sha256(text.encode()).hexdigest(),
                 'speech_settings': {k: settings[k] for k in ('voice', 'tone', 'speech_rate')}}
+        if data['purpose'] == 'clarification':
+            meta['question_id'] = data['question_id']
         meta.update(branch_revision=branch['branch_revision'] if branch else None,
                     settings_scope='study_material' if data['purpose'] == 'material' else 'shared_preparation' if kind == 'comparisons' and view.get('preparation_required') and not view.get('preparation_confirmed') else 'task_baseline' if kind == 'comparisons' and view['phase'] == 'awaiting_input' else 'branch',
                     state_revision=snapshot.get('state_revision', snapshot.get('revision')),

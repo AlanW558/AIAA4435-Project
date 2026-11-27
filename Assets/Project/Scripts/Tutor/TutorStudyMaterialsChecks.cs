@@ -38,28 +38,15 @@ namespace IAI.Tutor
                     Check(client.State.preparation_locked&&client.PreparationPending&&!client.CanPrepare,"Fixed baseline; no preparation edits");
                     Check(!panel.RateSlider.interactable&&!panel.LengthSlider.interactable&&panel.VoiceButtons.All(b=>!b.interactable)&&panel.ToneButtons.All(b=>!b.interactable),"All controls disabled during study preparation");
                     Check(panel.ConfirmPreparationButton.interactable,"Can confirm a locked baseline");
-                    Check(client.State.baseline.conversation.Length>0&&string.IsNullOrEmpty(client.State.initial_query),"Supplied example context; no automatic participant request");
-                    if(task.task_code.StartsWith("R1"))Check(Mathf.Abs(client.State.baseline.settings.speech_rate-1.2f)<.001f,"Relative/default reference begins at 1.20");
-                    if(task.materials!=null&&task.materials.Length>0)
-                    {
-                        study.OpenPage(0);yield return null;
-                        Check(panel.Playback.CanMaterial&&study.MaterialButtons[0].interactable,"Study samples available on task page");
-                        for(int i=0;i<task.materials.Length;i++)
-                        {
-                            study.MaterialButtons[i].onClick.Invoke();
-                            yield return Wait(()=>!panel.Playback.Active,"Synthetic listening sample settles");
-                            Check(panel.Playback.Status.StartsWith("Playback complete"),"Listening sample plays and completes: "+task.task_code+"/"+i);
-                            yield return new WaitForSeconds(.15f);
-                        }
-                        if(task.task_code=="V4-2")Screenshot("voice-history-task.png");
-                        if(task.task_code=="V2-1")Screenshot("voice-target-task.png");
-                        study.BeginButton.onClick.Invoke();yield return Idle();
-                    }
+                    Check(client.State.baseline.conversation.Length>0&&string.IsNullOrEmpty(client.State.initial_query),"Stored starting state does not send an automatic participant request");
+                    Check(task.ParticipantInstructions.Contains("Task goal\n") && task.ParticipantInstructions.Contains("Keep unchanged\n") && task.ParticipantInstructions.Contains("Request example\n") && !task.ParticipantInstructions.Contains("Supplied Starting Context"), "Task card contains the three approved sections");
+                    Check(!study.GetComponentsInChildren<Button>(true).Any(b=>b.name.StartsWith("Play") || b.name.Contains("sample")), "No fixed material playback buttons");
+                    Check(task.DisplayCode.EndsWith("-"+(Array.IndexOf(module.tasks.Where(t=>t.scenario==task.scenario).ToArray(),task)+1)), "Consecutive participant-facing task numbers");
                     if(task.task_code=="R1-2"){study.OpenPage(0);yield return null;Screenshot("relative-rate-task.png");study.BeginButton.onClick.Invoke();yield return Idle();}
                     panel.ConfirmPreparationButton.onClick.Invoke();yield return Idle();Check(client.State.preparation_confirmed,"Baseline confirmed before recording");
                     client.SubmitUserUtterance("Compare an easier explanation.");yield return Idle();
                     yield return Wait(()=>TutorComparisonClient.Conditions.All(c=>client.State.branches.Get(c).status!="processing"),"Strategies settled before clarifications");
-                    Check(!client.State.results_visible&&!panel.Playback.CanMaterial,"Hidden results and unavailable material audio during clarification");
+                    Check(!client.State.results_visible&&!panel.Playback.Active,"Clarification barrier hides results without fixed sample playback");
                     foreach(string c in TutorComparisonClient.Conditions)
                     {
                         if(client.State.branches.Get(c).status!="awaiting_clarification")continue;
@@ -86,7 +73,7 @@ namespace IAI.Tutor
             Check(panel.Navigation.ComparisonComplete&&!study.NextButton.interactable,"Natural module handoff; no fifth comparison module");
             Check(ids.Distinct().Count()==32,"32 distinct tasks completed");
             File.WriteAllLines(Path.Combine(folder,"task-ids.txt"),ids);
-            Result="PASS: "+checks.Count+" checks; 32 study-preview tasks, 5 preferences; synthetic audio; no provider/microphone calls";Save();Debug.Log("TUTOR_STUDY_MATERIALS_CHECKS "+Result);
+            Result="PASS: "+checks.Count+" checks; 32 study-preview tasks, 5 preferences; no fixed sample audio or provider/microphone calls";Save();Debug.Log("TUTOR_STUDY_MATERIALS_CHECKS "+Result);
         }
         void Screenshot(string name)
         {

@@ -2,7 +2,11 @@
 
 通过语音调整 VR tutor 的交流属性与外观，研究 Selective 的澄清与执行策略。当前包含 Unity 场景、DeepSeek 对话后端、Qwen STT/TTS、四策略比较、Selective 连续交流，以及任务、问卷和研究数据保存链路。
 
-更新：2026-11-17。最新实现已完成本机编译、自动联调及部分人工语音/问卷操作验证；最新版本尚未完成 PICO 头显整体验收。研究入口当前创建 `engineering` 运行，不代表正式采集已开放。
+更新：2026-11-28。此前已完成本机编译、完整流程／恢复检查、真实 API 代表性语音用例及部分人工语音／问卷操作验证；最新版本尚未完成 PICO 头显整体验收。研究入口当前创建 `engineering` 运行，不代表正式采集已开放。详见[打包前本机验收](Docs/TutorPersonalization/PRE_HEADSET_ACCEPTANCE_20261127.md)。
+
+本次同步[生成回复、属性确认与属性级问卷](Docs/TutorPersonalization/Study/GENERATED_REPLY_AND_ATTRIBUTE_CONFIRMATION.md)：移除固定试听，四项设置确认后统一发送 API；四属性各八题，每属性填写 20 项 1–7 评价（含 A0 完成度）及一项可多选的策略偏好。新偏好题移除 Unable to judge，量表自己的无法判断选项保留。历史问卷按原版本读取。
+
+[Experiments](Experiments/README.md) 提供不经 STT 的文本 API 辅助实验、32 题的实际输出与 128 份音频、独立网页问卷、匿名参与者 1 与总数据汇总，以及可执行分析 notebook。已归档音频与反馈属于其生成时的版本，不因后续澄清修复而被替换或重新评分。
 
 ## 从这里开始
 
@@ -32,7 +36,7 @@
 | XR Interaction Toolkit | 3.0.8 |
 | Input System | 1.14.0 |
 | Unity MCP | 10.3.0，固定源码提交 `aa5fc638d623f56178d50329d9ad8c541a57fe66` |
-| Android | ARM64 / IL2CPP / Vulkan / PICO Multiview；minSdk 29、targetSdk 34 |
+| Android | ARM64 / IL2CPP / Vulkan / PICO Multiview；新版 USB 测试配置固定 minSdk 29、targetSdk 34 |
 
 通过 Unity Hub 安装相同 Editor 和 Android Build Support（含 SDK、NDK、OpenJDK）。不要直接用其他 Unity 版本升级主项目。
 
@@ -125,15 +129,16 @@ APPEARANCE_ENV_FILE="$PWD/.env" APPEARANCE_PYTHON=python3 \
 
 先停止同端口旧服务。此脚本默认绑定 `127.0.0.1:8765`，日志/数据库写入 `StudyData/logs/`。脚本还兼容本机 `~/.config/aiaa4435/deepseek-teacher.key` 覆盖配置；若该文件存在，优先使用它，详情见脚本。模型密钥始终留在后端，不写入场景或 APK。
 
-打开自由测试桌面场景，进入 Play → Connect。比较模式确认共同初始设置后，Record → Stop → 复核转写 → Send。Controls 可调四属性并 Play sample；History 查看修改。研究场景用独立纸色面板登记、阅读任务、填写和提交问卷；不要把自由测试记录当正式研究数据。
+打开自由测试桌面场景，进入 Play → Connect。比较模式确认共同初始设置后，Record → Stop → 复核转写 → Send。Controls 调整四属性后按 Confirm changes，播放模型根据实际修改生成的回复；History 查看修改。研究场景用独立暖色面板登记、阅读任务、填写和提交问卷；任务页收紧、问卷页展开，详见[自适应面板](Docs/TutorPersonalization/ADAPTIVE_STUDY_PANEL.md)。不要把自由测试记录当正式研究数据。
 
 ## VR 场景与构建边界
 
 - 入座后 tutor 位于正前方；控制面板在右侧，任务/问卷面板在左前方。控制面板支持拖动，研究面板可收起为 Show panel 按钮。
-- **当前提交的 Build Settings 仍启用旧 `CloudConversationRoom`。** 旧 `AIAA4435 > Build > Build Pico APK` 和 `macos.sh build-pico` 分别针对旧房间/外观场景，不会构建最新 Tutor 研究。
-- 构建新版本前退出 Play，选择 Android，在 File > Build Settings 的 Scenes In Build 中加入并只启用目标 `TutorComparisonVR`（研究）或 `TutorFreeTestVR`（自由测试），再 Build。不要将桌面场景作为头显入口，也不要运行会重新生成旧场景的构建脚本。
-- 保留已配置的 PICO XR、ARM64/IL2CPP 等项目设置，检查录音权限与网络可达性。头显上的 localhost 指头显本身：USB 开发可使用 `adb reverse tcp:8765 tcp:8765`；无线运行则使用头显可达的后端地址，并显式配置后端监听接口及 Unity endpoint。
-- 本轮未生成新版 APK，尚需头显真实录音、播放、射线、拖动、长时流程和设备端恢复验收。早期房间的设备测试不作为新版功能验收。
+- 当前项目默认构建场景为 `TutorComparisonVR`。新版入口：`AIAA4435 > Tutor > Device > Build Both USB Test APKs`，或关闭普通编辑器后运行 `python3 Tools/TutorBuild/build_usb.py`。它直接构建现有场景，不重新生成房间或面板。详见 [Tutor USB 构建说明](Tools/TutorBuild/README.md)。
+- 研究包为 `com.iai.aiaa4435.project`；自由测试包为 `com.iai.aiaa4435.tutor.free`，两者可同时安装。旧 `AIAA4435 > Build > Build Pico APK` 与 `macos.sh build-pico` 仍仅用于历史房间／外观版本。
+- 保留 PICO XR、ARM64/IL2CPP、Vulkan。当前 PICO SDK 禁止 Unity 2022＋Vulkan 启用 Development Build，因此 USB 测试包为非 Development，Player 与 Android manifest 显式允许 HTTP。此设置是本机测试配置，不能当作已完成发布验收。
+- 头显使用 `adb reverse tcp:8765 tcp:8765` 访问电脑后端；无线运行需另外配置可达地址、监听接口及传输设置。`bash Tools/TutorDevice/start_usb_backend.sh` 启动隔离的头显工程后端，数据写入 `StudyData/device-usb/backend/`。
+- [设备工具](Tools/TutorDevice/README.md)提供识别、USB 连接、保留数据的安装、双副本日志取回及问卷／对话联合导出。尚需头显真实录音、播放、射线、拖动、长时流程和设备端恢复验收；APK 静态检查不代表这些项目通过。
 
 ## 数据与导出
 
@@ -145,7 +150,7 @@ python3 Backend/export_study_data.py \
   --destination StudyData/exports/NEW_EXPORT_DIRECTORY
 ```
 
-替换运行编号和新的目标目录；批量导出用 `--all` 替代 `--run`。已提交问卷 CSV、未完成记录、对话/审计 JSONL 和清单分别输出；有头显 journal 副本时加 `--local-journal /path/to/copied/journal`。详细步骤见[保存与导出说明](Docs/TutorPersonalization/STUDY_DATA_PERSISTENCE_IMPLEMENTATION.md)。实际日志、数据库、导出包和私有配置不进入 Git。
+替换运行编号和新的目标目录；批量导出用 `--all` 替代 `--run`。已提交问卷 CSV、未完成记录、对话/审计 JSONL 和清单分别输出；有头显 journal 副本时加 `--local-journal /path/to/copied/journal`。详细步骤见[保存与导出说明](Docs/TutorPersonalization/STUDY_DATA_PERSISTENCE_IMPLEMENTATION.md)。实际运行日志、数据库、未筛选导出包和私有配置不进入 Git；本次明确授权公开的匿名辅助实验资料单独整理在 `Experiments/`。
 
 ## 本地检查与协作
 
@@ -155,9 +160,9 @@ python3 -m unittest discover -s Tools/AppearanceExperiment/tests -q
 python3 -m unittest discover -s Docs/AppearanceExperiment/Study/tests -q
 ```
 
-HTTP 测试需要本机回环端口，不调用付费模型。Unity 编译和桌面检查不替代头显测试。历史阶段文档的测试数字对应当时版本；当前交付检查见 [GitHub 交付记录](Docs/TutorPersonalization/GITHUB_DELIVERY.md)。
+HTTP 测试需要本机回环端口，不调用付费模型。Unity 编译和桌面检查不替代头显测试。历史阶段文档的测试数字对应当时版本；本次交付检查见 [2026-11-28 同步记录](Docs/TutorPersonalization/GITHUB_SYNC_20261128.md)，此前交付见 [GitHub 交付记录](Docs/TutorPersonalization/GITHUB_DELIVERY.md)。
 
 - Assets 与 `.meta` 一起提交，保留 GUID；模型、纹理、音视频、字体等依照 `.gitattributes` 使用 LFS。
-- 不上传 `.env`、真实参与者资料、`StudyData`、缓存、虚拟环境或 APK。
+- 不上传 `.env`、参与者身份资料、`StudyData`、缓存、虚拟环境或 APK。`Experiments/results/` 只保存明确授权发布的匿名结果与可追溯更正；不会自动把新的私人导出加入 Git。
 - 后续功能可在独立分支开发；本次按项目负责人要求直接整合到 main，保留已有历史。
 - 旧外观项目资料见 [AppearanceExperiment](Docs/AppearanceExperiment/README.md)，模型来源见 [Art](Art/AppearanceAvatars/README.md)。第三方资源仍遵循其原许可。

@@ -11,7 +11,7 @@ namespace IAI.Tutor
     public static class TutorVoiceCatalog
     {
         public static readonly string[] Ids = { "voice_a", "voice_b", "voice_c", "voice_d", "voice_e" };
-        public static readonly string[] Labels = { "Voice A", "Voice B", "Voice C", "Voice D", "Voice E" };
+        public static readonly string[] Labels = { "Female voice 1", "Female voice 2", "Female voice 3", "Male voice 1", "Male voice 2" };
     }
     [Serializable] public class TutorSettings
     {
@@ -59,6 +59,19 @@ namespace IAI.Tutor
     [Serializable] public class TutorToneControl : TutorMutation { public TutorTonePatch patch; }
     [Serializable] public class TutorVoicePatch { public string voice; }
     [Serializable] public class TutorVoiceControl : TutorMutation { public TutorVoicePatch patch; }
+    [Serializable] public class TutorDialoguePatch
+    {
+        public float speech_rate;
+        public string reply_length, tone, voice;
+        public static TutorDialoguePatch From(TutorSettings settings) => new TutorDialoguePatch {
+            speech_rate=settings.speech_rate, reply_length=settings.reply_length, tone=settings.tone, voice=settings.voice };
+        public bool Matches(TutorSettings settings) => settings != null && Mathf.Abs(speech_rate-settings.speech_rate)<.001f &&
+            reply_length==settings.reply_length && tone==settings.tone && voice==settings.voice;
+        public bool Valid => !float.IsNaN(speech_rate) && !float.IsInfinity(speech_rate) && speech_rate>=.7f && speech_rate<=1.3f &&
+            Array.IndexOf(new[]{"brief","balanced","detailed"},reply_length)>=0 &&
+            Array.IndexOf(new[]{"professional","friendly","encouraging"},tone)>=0 && Array.IndexOf(TutorVoiceCatalog.Ids,voice)>=0;
+    }
+    [Serializable] public class TutorDialogueControl : TutorMutation { public TutorDialoguePatch patch; }
     [Serializable] public class TutorUndo : TutorMutation { public string field = "reply_length"; }
     [Serializable] public class TutorGenerate : TutorMutation { public string job_id; }
 
@@ -76,6 +89,9 @@ namespace IAI.Tutor
         public string Error { get; private set; } = "";
         public string Activity { get; private set; } = "Not connected";
         public bool LastOk { get; private set; }
+        // Only a fresh local request may trigger automatic clarification speech.
+        // GET/restore never marks an old pending question for automatic replay.
+        public string QuestionForAutomaticSpeech { get; private set; } = "";
         public bool UnknownOutcome { get; private set; }
         public event Action Changed;
         public bool Connected => View != null && !string.IsNullOrEmpty(View.session_id);
@@ -100,7 +116,7 @@ namespace IAI.Tutor
         public void AttachStudyRuntime(string id)
         {
             if (Busy) return;
-            View = null; UnknownOutcome = false;
+            View = null; UnknownOutcome = false; QuestionForAutomaticSpeech = "";
             StartCoroutine(Run("/tutor/sessions/" + id, null, null, false));
         }
         void Start()
@@ -176,6 +192,11 @@ namespace IAI.Tutor
             if (View.settings.voice == value) return;
             SendMutation("settings", new TutorVoiceControl { patch = new TutorVoicePatch { voice = value } });
         }
+        public void SetDialogueSettings(TutorDialoguePatch patch)
+        {
+            if (!CanEdit || patch == null || !patch.Valid || patch.Matches(View.settings)) return;
+            SendMutation("settings", new TutorDialogueControl { patch = patch });
+        }
         public bool CanUndoSetting(string field) => CanEdit && TutorHistoryPresentation.CanUndo(View, field);
         public void UndoSetting(string field) { if (CanUndoSetting(field)) SendMutation("undo", new TutorUndo { field = field }); }
         public void UndoReplyLength() { UndoSetting("reply_length"); }
@@ -247,6 +268,10 @@ namespace IAI.Tutor
                     && (!Connected || parsed.session_id == View.session_id && parsed.revision >= View.revision);
                 if (valid && (!Connected || parsed.session_id == View.session_id) && (!Connected || parsed.revision >= View.revision))
                 {
+                    string previousQuestion=View?.question?.question_id;
+                    if(json!=null && request.result==UnityWebRequest.Result.Success && !parsed.idempotent_replay &&
+                        !string.IsNullOrEmpty(parsed.question?.question_id) && parsed.question.question_id!=previousQuestion)
+                        QuestionForAutomaticSpeech=parsed.question.question_id;
                     View = parsed;
                     ApplyAppearance();
                 }

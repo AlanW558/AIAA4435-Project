@@ -1,5 +1,7 @@
 # 参与者、会话、问卷与数据保存契约
 
+> **2026-11-28 版本补充：** 新建四属性问卷使用 `attribute-summary-feedback-v3`（每属性20项A0–A4七点评分＋一项多选偏好），Unity偏好单独使用 `strategy-preference-v2`。E/A/N/S可选1–4项，No preference互斥；偏好题移除无法判断，A0–A4的独立无法判断保留。manifest显式固定 `attribute_questionnaire_version` 和 `preference_questionnaire_version`。旧属性v1分类、v2数值A0/单选偏好和偏好v1按原版本恢复导出，不自动转换。以下早期字段/题量记录以[当前属性问卷修订](ATTRIBUTE_LEVEL_FEEDBACK_AMENDMENT.md)为准；32题仍保存独立完成证据，当前最终问卷为16份属性策略评价＋1份自然评价。
+
 版本：`study-data-contract-v1`；契约日期：2026-11-16；实现状态核对：2026-11-17。对应研究设计 `study-protocol-v1.7`。
 
 **状态：保存层、新版问卷、自然会话及实验控制器已接通。** 当前仍限工程/练习验证，不表示正式采集或头显验收已完成。字段含义以本文及[主设计](FINAL_USER_STUDY_DESIGN_4_STRATEGIES.md)为准，实际路径和实现差异见[保存层说明](../STUDY_DATA_PERSISTENCE_IMPLEMENTATION.md)和[流程接入](../STUDY_FLOW_INTEGRATION.md)。旧[流程契约 v1.5](STUDY_PROTOCOL_AND_QUESTIONNAIRE_CONTRACT.md)仅供历史追溯。

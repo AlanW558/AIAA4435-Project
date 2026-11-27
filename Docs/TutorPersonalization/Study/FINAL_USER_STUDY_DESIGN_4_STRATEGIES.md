@@ -1,10 +1,18 @@
 # Final User Study：四属性四策略比较与 Selective 自然情境评估
 
-版本：v1.7；研究范围/问卷冻结日期：2026-11-16；工程状态核对：2026-11-17。
+> **2026-11-28 最新问卷修订：** 当前属性问卷为 `attribute-summary-feedback-v3`，每属性八题后填写 20 项 A0–A4 七点评分及一项可多选的策略偏好；E/A/N/S 可选 1–4 项，No preference 必须单独选择。只移除偏好题的 Unable to judge / Unable to compare，不移除 A0–A4 的独立无法判断选项。Unity 偏好版本为 `strategy-preference-v2`；旧属性问卷 v1/v2 和旧偏好 v1 保留原形状、原量尺和版本。
 
-**当前实现：** 四属性 5 题（`attribute-feedback-v3`）、自然模拟 26 题（`natural-selective-feedback-v2`）、32 题导航、5 次偏好、Selective 自然会话、保存/导出与恢复均已接入。见[流程接入](../STUDY_FLOW_INTEGRATION.md)、[数据契约](STUDY_DATA_PERSISTENCE_CONTRACT.md)与[当前导航](../README.md)。研究入口仍为 engineering，正式采集与新版头显整体验收未完成；工程可运行不代表混合问卷已获心理测量验证。
+> **2026-11-27 实现修订：** Unity 新建运行与辅助工具统一为每属性八题后填写 20 项评价及一次属性偏好；任务卡采用三字段，移除固定试听，属性通过 Confirm changes 统一提交。详见[本次实现契约](GENERATED_REPLY_AND_ATTRIBUTE_CONFIRMATION.md)。下文较早日期的逐任务流程与试听设计为历史记录，不作为当前实现要求。
 
-本次仅同步实现说明，不改变已确认题目、来源、评分与数据契约版本。早期阶段记录见同目录历史草案，遇冲突以本设计的研究内容、数据契约及当前实现说明为准。
+版本：v1.9；研究范围/原问卷冻结日期：2026-11-16；工程状态核对：2026-11-27；属性评价单位及 A0 七点量尺修订：2026-11-27。
+
+**2026-11-27 当前任务材料修订：** 当前资源为 `task-navigation-v4` / `attribute-materials-v3`。新辅助批次使用 `StudyData/text-check-v3/`：32 题、情境内 1／2 连续编号、Task goal / Keep unchanged / Request example 三字段、全部策略播放 API 正常生成的回复，固定起始／参考试听已移除。旧数值和任务表保留为研究设计历史；当前完整题卡以资源题库和新版任务文件为准。内部 task_code 未变，旧批次记录保留。
+
+**2026-11-27 当前辅助试听问卷修订：** 用户决定将每道任务的 20 项改为每个属性的 20 项，再加 1 次属性内策略偏好；四属性合计 80 个核心答案＋4 个偏好＝84 项，32 道任务不变。具体题干范围、保存版本与分析单位见[属性级问卷修订](ATTRIBUTE_LEVEL_FEEDBACK_AMENDMENT.md)。Unity 新建运行与辅助页面现均使用属性级评价；旧逐任务反馈仅作历史记录，不平均或重标为新评价。
+
+**当前量尺：** 四属性每策略 5 题、每属性一次，均使用 1–7 评分（`attribute-summary-feedback-v3`）。A0 需求满足程度端点为 1 Not at all、7 Completely，原英文题干不变；Unable to judge 独立保存。自然模拟 26 题（`natural-selective-feedback-v2`）、32 题导航、偏好安排与 Selective 自然会话不因本次量尺调整而改变。见[本次问卷契约](ATTRIBUTE_LEVEL_FEEDBACK_AMENDMENT.md)、[流程接入](../STUDY_FLOW_INTEGRATION.md)与[数据契约](STUDY_DATA_PERSISTENCE_CONTRACT.md)。研究入口仍为 engineering，正式采集与新版头显整体验收未完成；工程可运行不代表混合问卷已获心理测量验证。
+
+以下保留此前冻结的研究设计与 Unity 接线说明。当前辅助试听页面的填写单位与保存版本，以顶部 2026-11-28 多选偏好及属性级问卷修订为准；其余范围仍参考下文及数据契约。早期阶段记录见同目录历史草案。
 
 ## 0. 最新范围决定（研究范围 2026-11-11；问卷更新 2026-11-16）
 
@@ -13,7 +21,7 @@
 - 四属性方向各保留四种情境，每情境由三题减为两题，即每方向八题、四方向共 **32 题**。第 5 节已完成并获用户接受的两题筛选；Voice 定性描述仍需与当前真实音色重新绑定。
 - 第五方向由独立外观实验扩展为模拟自然情境：研究者提供大方向，参与者自行决定细节；采用一段连续的开放交流：开始与 tutor 交谈并探索适合自己的交流方式，外观与交流属性在全过程都可随时调整；不分“先属性、后外观”的固定阶段，不规定具体数值、外观目标或固定口述。外观能力保留，纳入综合过程；旧十二道外观题只保留为可参考素材，不自动照搬到新模块。
 - 自然情境只运行 **Selective（S）**，每位参与者进行一段连续自由交流，结束后填写一次专用问卷。它不进行策略横向比较，也不套用四属性的“每情境两题”。当前范围为 **32 道受控任务＋1 段自然情境**，不能把两类活动当作 33 道等价任务。
-- 四属性统一保留完成情况分类题，以及感知难易度（SEQ 改编）、修改控制感（SASSI 改编）、澄清决策合适程度、总体满意度四道 1–7 评分题（2026-11-16 已确认；第一题使用难—易锚点，其余使用同意度）。“打断感”等过程维度不继续默认用于四属性的回合式逐任务问卷，用于模拟自然情境结束后的评估；两类任务不强制使用相同问卷。
+- 2026-11-16 原方案为完成情况分类题加四道 1–7 评分题；2026-11-27 后续修订将 A0 改为需求满足程度 1–7 分。当前五项为需求满足程度、感知难易度（SEQ 改编）、修改控制感（SASSI 改编）、澄清决策合适程度、总体满意度。A0 使用完全未满足—完全满足端点，A1 使用难—易端点，A2–A4 使用同意度。“打断感”等过程维度用于模拟自然情境结束后的评估，两类任务不强制使用相同问卷。
 - 四属性继续 E/A/N/S 同题并行和首次统一展示；每属性结束一次偏好，共四次。四属性全部结束后、自然情境之前，收集一次四属性比较的总体偏好。自然情境不再设置策略偏好，不将单策略体验解释为四策略比较。
 - 此次更新研究文档与已确认题目选择，不修改运行代码或问卷校验。四属性、外观、对话历史、澄清/修复、分支隔离及恢复能力继续实现。后续正式任务库、调度与问卷接线依据更新后的设计，不固定为五方向相同题量或六项评分。
 
@@ -25,7 +33,7 @@
 
 研究分为两部分：四属性受控任务比较同一初始请求下四种策略的目标达成、过程体验与偏好；随后用单一 Selective 连续交流评估其完整使用体验、问题与改进方向。主结果来自参与者问卷，不进行研究者客观音频测量或自动音频达标判定。自然情境不支持 Selective 优于其他策略的因果结论；第一次外观研究作为独立既有证据讨论，不与本轮直接合并成同一受控样本。
 
-四属性部分由研究者提供任务目标；参与者自由使用英文语音提出请求，不要求照读固定句。一次 STT 后，同一请求文本与相同公开起始状态进入四个独立策略分支。四策略在后台并行处理。首次展示前，参与者先回答实际触发的澄清；所有分支准备完毕后统一开放结果，避免提前完成的结果影响其他分支的澄清回答。开放后可自由切换、试听、查看和修复；每题填写对应问卷后点击 **Next question**。
+四属性部分由研究者提供任务目标；参与者自由使用英文语音提出请求，不要求照读固定句。一次 STT 后，同一请求文本与相同公开起始状态进入四个独立策略分支。四策略在后台并行处理。首次展示前，参与者先回答实际触发的澄清；所有分支准备完毕后统一开放结果，避免提前完成的结果影响其他分支的澄清回答。开放后可自由切换、试听、查看和修复；每题结束保存结果后进入下一题；该属性八题全部完成后，回顾结果并填写一次属性问卷。
 
 实验保留五个方向模块，前四个为属性比较，最后一个为 Selective 自然情境。四属性内部的呈现顺序尚未冻结，不沿用原 E/A/S 六序列方案；并行要求仅适用于属性比较。流程为：熟悉操作 → 四属性任务及各属性偏好 → 四属性总体偏好 → 休息/重置 → Selective 自然情境 → 自然情境问卷 → 可选访谈。允许旧研究参与者加入并记录既往参与情况；正式任务、界面说明及问卷使用英文。
 
@@ -65,9 +73,9 @@
 | Round 4 | Voice | 4 | 2 | 8 | 1 次 |
 | Round 5 | Selective 自然情境（含属性调整与外观改造） | 不划分固定情境 | 不适用 | 1 段连续交流 | 无策略偏好；结束一次专用问卷 |
 
-四属性合计 **32 题**；每题比较四策略，对应 128 个“任务×策略”评价单元，不是 128 个独立参与者。自然情境另有 1 份会话问卷：共 129 份评价记录，属性部分仍可按 32 次逐任务界面呈现。四属性内部顺序待定，自然情境在四属性比较和总体偏好之后。
+四属性合计 **32 题**；每题比较四策略，对应 128 个“任务×策略”结果。主观评价按每属性八题汇总，保存 16 份“属性×策略”五题问卷；自然情境另有 1 份会话问卷，共 17 份评价记录。128 个策略结果不是 128 个独立参与者，也不是 128 份当前主观问卷。四属性内部顺序待定，自然情境在四属性比较和总体偏好之后。
 
-四属性逐任务反馈，自然情境结束一次反馈。保留 **4 次属性末偏好＋1 次四属性总体偏好，共 5 次**，无每题偏好或自然情境偏好。完整路径的核心作答量为四属性 640 项＋自然情境 26 项＋偏好 5 项，共 **671 项**；不含可选原因、文字备注及访谈，实际点击次数受修改/多选影响，不等同于该数字。
+四属性每属性八题后反馈一次，自然情境结束一次反馈。保留 **4 次属性末偏好＋1 次四属性总体偏好，共 5 次**，无每题偏好或自然情境偏好。完整路径的核心作答量为四属性 80 项＋自然情境 26 项＋偏好 5 项，共 **111 项**；不含可选原因、文字备注及访谈，实际点击次数受修改/多选影响，不等同于该数字。
 
 ### 3.1 四类情境
 
@@ -336,44 +344,44 @@ Voice 任务中的定性描述仍是待核对素材。现有语速范围 0.70–
 | A4-2 | 公开颜色历史 orange → gray → 当前 blue；配图 | Restore the jacket colour from the first history entry. Keep the other appearance settings unchanged. | orange；多历史目标 |
 | A4-3 | 公开旧状态 sport/blue/glasses/1.00；当前 suit/purple/hat/1.05 | Restore the earlier sportswear, while keeping the current purple colour, hat and size. | sport；保留 purple/hat/1.05 |
 
-## 6. 四属性统一逐任务问卷（2026-11-16 已确认：5 题版）
+## 6. 四属性统一属性级问卷（2026-11-27：每策略 5 题版）
 
-适用于 Speech rate、Reply length、Tone、Voice。评价单位为当前任务中的一种策略；每任务四份反馈。四属性统一一题完成情况分类＋四题评分，不增加属性专用评分。可重看、重听后作答，不要求照读请求。本版是项目混合问卷：SEQ/SASSI 改编项与项目专用项分别报告，不称完整 SEQ/SASSI 量表。
+适用于 Speech rate、Reply length、Tone、Voice。评价单位为参与者在该属性全部八道任务中体验的一种策略；每属性四份反馈。四属性统一五题 1–7 评分，不增加属性专用评分，每题另有独立的无法判断选项。可重看、重听后作答，不要求照读请求。本版是项目混合问卷：SEQ/SASSI 改编项与项目专用项分别报告，不称完整 SEQ/SASSI 量表。
 
 英文引导：
 
-> Please rate your experience with this approach in the current task. Consider its responses, any clarification, and the final outcome. Do not rate the questionnaire or the process of switching between approaches.
+> Please rate your experience with this approach across all tasks for this attribute. Consider its responses, any clarification, and the outcomes. Do not rate the questionnaire or the process of switching between approaches.
 
-该引导帮助区分策略体验与实验操作负担，但不能消除并行比较、共享初始请求及先看先听的影响。SEQ 的评价单位已从独立任务改为该策略中的调整，不直接使用原工具常模或百分位。
+该引导帮助区分策略体验与实验操作负担，但不能消除并行比较、共享初始请求及先看先听的影响。SEQ 的评价单位已从独立任务改为该策略在整组属性任务中的调整体验，不直接使用原工具常模或百分位。
 
-### 6.1 完成情况 A0
+### 6.1 需求满足程度 A0
 
-**English:** `To what extent did this approach’s final outcome meet the task requirements?`
+**English:** `Overall, to what extent did this approach’s outcomes meet your requirements across the tasks for this attribute?`
 
 帮助说明：`Consider both the requested change and the settings that were supposed to stay unchanged.`
 
-选项：Fully met / Partly met / Not met / Unable to judge，分别表示完全达到、部分达到、未达到、无法判断。
+评分：1–7，端点为 **1 Not at all（完全未满足）**、**7 Completely（完全满足）**。另有独立的 **Unable to judge**，表示无法判断，不记为 4，也不当作失败。
 
-来源：项目自编结果题，不来自标准量表。设计理由：同时考虑要求的修改和保持要求，并区分结果达标与过程体验。分类不作等距分数求平均；结束、提交或播放均不自动表示成功。这是参与者主观目标符合程度，不称客观成功率。
+来源：项目自编结果题，不来自标准量表。设计理由：同时考虑要求的修改和保持要求，以七点程度评分表达整组任务的主观目标符合程度；原英文题干不变。A0 关注结果是否满足具体要求，A4 关注整体使用体验的满意度，分别分析，不合成总分。结束、提交或播放均不自动表示成功，本题也不称客观成功率。旧 v1 的分类答案保留原版本，不转换为分数或与 v2 合并分析。
 
 ### 6.2 四项评分 A1–A4
 
 | ID | 角度 | 英文施测候选题干 | 来源与改编范围 | 设计理由 | 评分 |
 | --- | --- | --- | --- | --- | --- |
-| A1 | 感知难易度 | Overall, how difficult or easy was it to make this adjustment using this approach? | [SEQ] 改编：限定本次调整及当前策略；并行评价的使用情境也不同于独立完成任务 | 替代原“省力程度”，降低含义含混；不与成功分类重复 | 1 Very difficult—7 Very easy；高分更容易 |
-| A2 | 修改控制感 | With this approach, I felt in control of the changes made to the tutor. | [SASSI] Table 4 控制感内容改编：一般交互改为 tutor 修改，采用本项目七点量尺 | 直接执行或澄清都可能影响控制感；不预设某策略更好 | 七点同意度；高分控制感更强 |
-| A3 | 澄清决策合适程度 | This approach’s decision about whether to ask for clarification suited my needs in this task. | 项目专用题，不声称来自标准量表 | 同时评价询问与不询问的选择，避免把询问数量等同质量 | 七点同意度；高分更合适 |
-| A4 | 总体满意度 | Overall, I am satisfied with my experience of making this adjustment using this approach. | 项目自编单题满意度；不称 SUS 或 SASSI 分数 | 保留用户确认的整体体验判断；与目标达标、控制感分开 | 七点同意度；高分更满意 |
+| A1 | 感知难易度 | Overall, how difficult or easy was it to make adjustments to this attribute using this approach? | [SEQ] 改编：限定本次调整及当前策略；并行评价的使用情境也不同于独立完成任务 | 评价调整过程的难易度，与结果满足要求的程度分开 | 1 Very difficult—7 Very easy；高分更容易 |
+| A2 | 修改控制感 | Across the tasks for this attribute, I felt in control of the changes made to the tutor with this approach. | [SASSI] Table 4 控制感内容改编：一般交互改为 tutor 修改，采用本项目七点量尺 | 直接执行或澄清都可能影响控制感；不预设某策略更好 | 七点同意度；高分控制感更强 |
+| A3 | 澄清决策合适程度 | This approach’s decisions about whether to ask for clarification suited my needs across the tasks for this attribute. | 项目专用题，不声称来自标准量表 | 同时评价询问与不询问的选择，避免把询问数量等同质量 | 七点同意度；高分更合适 |
+| A4 | 总体满意度 | Overall, I am satisfied with my experience of adjusting this attribute using this approach. | 项目自编单题满意度；不称 SUS 或 SASSI 分数 | 保留用户确认的整体体验判断；与目标达标、控制感分开 | 七点同意度；高分更满意 |
 
 A1 显示数字 1–7 和难—易端点，不套用同意度标签。A2–A4 的锚点为 1 Strongly disagree、2 Disagree、3 Somewhat disagree、4 Neither agree nor disagree、5 Somewhat agree、6 Agree、7 Strongly agree。
 
-A1–A4 各有独立 Unable to judge，作为缺失/不可判断类别报告，不记为 4 或失败。无预填答案。四项分别分析，不相加形成“策略质量总分”，不把不同构念合成一套量表计算整体内部一致性来证明效度。
+A0–A4 各有独立 Unable to judge，作为缺失/不可判断类别报告，不记为 4 或失败。无预填答案。五项分别分析，不相加形成“策略质量总分”，不把不同构念合成一套量表计算整体内部一致性来证明效度。
 
-本部分不加入完整 SUS、NASA-TLX 或更多 SASSI 条目：128 次重复评价已包含 640 个核心作答项；共享初始 STT 的识别问题也难以分别归因给四策略。打断感只进入自然模拟。
+本部分不加入完整 SUS、NASA-TLX 或更多 SASSI 条目：属性级评价已有 80 个核心作答项；共享初始 STT 的识别问题也难以分别归因给四策略。打断感只进入自然模拟。
 
 ### 6.3 可选原因与口述备注
 
-Q1 为 Partly met / Not met / Unable to judge 时可选填：
+正式 Unity 问卷中，A0 为 1–6 分或 Unable to judge 时可选填下列原因。这里仅控制原因选项是否显示，不据此定义客观任务成功阈值。辅助试听页面保留可选自由文字备注，不增加这些原因必答项。
 
 | 字段 | English option |
 | --- | --- |
@@ -384,19 +392,19 @@ Q1 为 Partly met / Not met / Unable to judge 时可选填：
 | interaction_problem | A speech, playback, or interaction problem affected my attempt or judgement. |
 | other | Another reason. |
 
-not_maintained 只在确实发生后续交流时提供。所有评价（包括 Fully met）均可添加 Additional comments。备注采用口述 STT，参与者确认后保存文字；不保存问卷录音，不送入 Tutor 上下文，不根据文字自动改评分。原因与备注均不作为下一题条件。
+not_maintained 只在确实发生后续交流时提供。所有评价（包括 A0 为 7 分）均可添加 Additional comments。VR 中备注采用口述 STT，参与者确认后保存文字；不保存问卷录音，不送入 Tutor 上下文，不根据文字自动改评分。辅助页面使用可选文字输入。原因与备注均不作为继续条件。
 
 ### 6.4 提交及题量
 
-每个策略的一题分类＋四题评分均有有效答案后才可 Next question。Unable to judge 为有效作答。重看不清空答案；分支结果/过程更新后需要重新确认其评价。暂停、退出不依赖问卷完整，也不自动算作成功。
+每属性八题完成后，四策略各五题评分均有有效答案，才可最终提交该属性问卷，再填写偏好并进入下一属性。Unable to judge 为有效作答。回顾不清空答案；问卷绑定八题的冻结结果版本。暂停不依赖问卷完整，也不自动算作成功。
 
-四属性共 32 题 × 4 策略：128 个完成情况分类答案、512 个评分答案，共 640 个核心选择；另有四次属性末偏好。自然情境、总体偏好和可选内容另计。每个属性八题结束后只问一次偏好，不在此基础上再重复“方向末偏好”。
+四属性共 4 属性 × 4 策略 × 5 题＝80 个评分答案；另有四次属性末偏好，辅助试听页面合计 84 个必答项目。自然情境、正式流程的总体偏好和可选内容另计。每个属性八题结束后只问一次偏好，不在此基础上再重复“方向末偏好”。
 
 ### 6.5 与现有实现的关系
 
-当前 `attribute-feedback-v3` 已在问卷资源、Unity 面板、后端校验和导出中接通：A1 使用 perceived_ease 难易度量尺，A2–A4 使用各自同意度题干。当前自然问卷为 `natural-selective-feedback-v2`。原始量尺、无法判断、显式跳答与未作答状态按数据契约区分。
+当前问卷契约为 `attribute-summary-feedback-v3`：A0 使用需求满足程度七点量尺，A1 使用 perceived_ease 难易度量尺，A2–A4 使用各自同意度题干。新版 Unity manifest 显式设置 `attribute_questionnaire_version` 为 v3，并将 `preference_questionnaire_version` 固定为 `strategy-preference-v2`；缺少该字段的旧属性级 manifest 仍按 v1 处理。当前自然问卷保持 `natural-selective-feedback-v2`。原始量尺、无法判断、显式跳答与未作答状态按数据契约区分。
 
-旧 `attribute-feedback-v2` 的 effort_ease 及更早 `task-feedback-q1-q7-v1` 仍只属于旧记录，不回填、不重标为新问卷或真实研究数据。已完成本机接线验证；正式施测前仍需预测试和头显验收。
+旧属性级 `attribute-summary-feedback-v1` 的分类 A0、逐任务 `attribute-feedback-v3`、旧 `attribute-feedback-v2` 的 effort_ease 及更早 `task-feedback-q1-q7-v1` 仍只属于各自版本，不回填、不重标为新问卷或真实研究数据。v3 草稿与旧版本隔离，类别不转换为分数。旧属性级 v2 的 A0 仍为 1–7 数值、偏好仍按单选标量读取；不会因当前版本升级误变成类别题，也不会把已有标量自动改成多选数组。正式施测前仍需预测试和头显验收。
 
 ## 7. 四次属性末偏好与一次比较总体偏好
 
@@ -404,34 +412,34 @@ not_maintained 只在确实发生后续交流时提供。所有评价（包括 F
 
 | 方向 | English question |
 | --- | --- |
-| Speech rate | For speech-rate adjustments, which approach would you prefer to use? |
-| Reply length | For reply-length adjustments, which approach would you prefer to use? |
-| Tone | For tone adjustments, which approach would you prefer to use? |
-| Voice | For voice adjustments, which approach would you prefer to use? |
+| Speech rate | For speech-rate adjustments, which approaches would you prefer to use? |
+| Reply length | For reply-length adjustments, which approaches would you prefer to use? |
+| Tone | For tone adjustments, which approaches would you prefer to use? |
+| Voice | For voice adjustments, which approaches would you prefer to use? |
 
 ### 7.2 四属性比较结束后一次
 
-**English:** `Considering the speech-rate, reply-length, tone, and voice tasks, which approach would you prefer to use overall?`
+**English:** `Considering the speech-rate, reply-length, tone, and voice tasks, which approaches would you prefer to use overall?`
 
 在四个属性及其偏好完成后、进入自然情境前填写。只评价四属性比较经历，避免后续额外 Selective 暴露改变比较基础。自然情境只体验 S，不询问该模块的策略偏好，结束后也不重复总体偏好。
 
 ### 7.3 五次偏好的统一规则
 
-- E — Execute-first；A — Always-ask；N — Native-gate；S — Selective；允许选 1、2 或 3 个并列最偏好者，保存集合而不自动翻倍计人。
-- `No clear preference`、`I would not want to use any of them`、`Unable to compare` 三个独立分类选项，与策略集合互斥。四者无高下时使用 No clear preference。
-- 无默认答案；分类选项均为有效回答。可选 STT 理由不作为继续条件。
+- E — Execute-first；A — Always-ask；N — Native-gate；S — Selective；可多选 1–4 个偏好策略。英文指导：`Select all approaches you prefer (one to four), or choose No preference on its own.` 保存唯一策略集合，不自动排序、不把多选换算成多个人。
+- 新偏好题仅另设 `No preference`，与策略集合互斥。选择它会清除策略勾选；选择任一策略会清除它。去掉偏好题的 Unable to judge / Unable to compare；旧提交中的这些状态按旧版本保留，不能解释成偏好 S 或均分给四策略。
+- 无默认答案；至少勾选一项策略，或独立选择 No preference，才完成该偏好题。全部取消回到未作答。A0–A4 的 Unable to judge 仍为有效独立作答；它们不受偏好选项删减影响。可选 STT 理由不作为继续条件。
 - 属性偏好与总体偏好独立收集，不从评分计算，也不强制一致。
 - 暂停/退出不以作答为前提；只有正常继续路径要求当前偏好已提交并获得保存确认。
 
 ## 8. 问卷数据含义与当前待落实内容
 
-任务与条件以方向、情境、任务 ID、策略代码关联。保留完成情况类别、新版四项评分的 1–7 数值或独立无法判断状态及问卷版本、原因集合、可选确认文本、四次属性偏好和一次四属性总体偏好。简要记录实际体验范围及结果版本，防止评分错配；不要求参与者输入编号。
+任务与条件以方向、情境、任务 ID、策略代码关联。四属性保存新版 A0–A4 五项评分的 1–7 整数或独立无法判断状态及问卷版本、原因集合、可选确认文本、四次属性偏好和一次四属性总体偏好。旧版完成情况类别保留原版本，不与新数值混算。简要记录实际体验范围及结果版本，防止评分错配；不要求参与者输入编号。
 
 自然情境另以独立会话 ID、S 条件和会话评价版本关联，保存 goal_fit、七项交互诊断评分、完整 SUS 十题、完整 UEQ-S 八题及可选确认文本；不伪造受控任务情境标签或另外三个策略的反馈。与四属性同名的评分维度仍保留不同问卷版本和评价单位，不直接混算。
 
-参与者、整场研究、模块、任务／对话及问卷使用分层编号；四属性 `attribute-feedback-v3`、自然 `natural-selective-feedback-v2` 与旧记录分离。草稿、最终提交、同步和完整性按[数据保存契约](STUDY_DATA_PERSISTENCE_CONTRACT.md)分别记录。
+参与者、整场研究、模块、任务／对话及问卷使用分层编号；四属性 `attribute-summary-feedback-v3`、自然 `natural-selective-feedback-v2` 与旧记录分离。草稿、最终提交、同步和完整性按[数据保存契约](STUDY_DATA_PERSISTENCE_CONTRACT.md)及本次版本修订分别记录。
 
-不把未答当作中间分，不把无法判断当失败，不将各角度混成总分。任务嵌套在同一参与者中，四策略又是同题重复比较；后续分析需保留这些关联。主要对比、统计处理和缺失分母尚未在本稿定案，不按结果挑选有利题目。英文自由表达使设计情境不保证成为实际歧义，不能用题库标签替代实际口述特征。
+不把未答当作中间分，不把无法判断当失败，不将各角度混成总分。新问卷的评价单位是参与者 × 属性 × 策略；八道任务构成同一属性评价的证据，不能由属性总评还原某一道任务或情境的主观评分。四策略为参与者内比较，后续分析需保留这些关联。主要对比、统计处理和缺失分母尚未在本稿定案，不按结果挑选有利题目。英文自由表达使设计情境不保证成为实际歧义，不能用题库标签替代实际口述特征。
 
 当前已实现四策略隔离与每轮统一揭示、真实语音接口、文本日志、独立问卷面板、新版 5/26 题反馈、五次偏好、32 题预演及 Selective 自然会话，并接通身份、可靠保存、导出和中断恢复。仍需完成正式分配/时长等施测设置的冻结、问卷预测试及新版头显整体验收；本机人工验证不覆盖完整自然模拟和全程头显体验，工程测试不证明问卷的心理测量效度。
 
@@ -580,9 +588,9 @@ SASSI 的 Speed 指系统响应速度，不是本项目可调 speech rate；NASA
 
 研究报告应称“由标准工具完整模块、改编条目和项目专用条目组成的问卷”，不能称整份问卷已验证、全部题目取自标准量表或新标准短版。来源明确不等于本项目已获信效度证据。SUS、UEQ-S、各诊断题、分类及偏好分别报告；不合成系统质量总分。
 
-预测试重点：能否分清 A1 的难易与其他题的同意程度；能否理解控制感/澄清/满意度区别；N2 是否被理解为交流表达而非学科能力；N5 的未发生选项；N6 的心理需求；SUS 五点及反向措辞；UEQ-S 词对；26 题结束问卷的负担。先记录理解问题和时间，再决定措辞/模块变化；预测试数据与正式数据分开。不得把程序测试通过当作心理测量验证，也不按正式结果挑选有利条目。
+预测试重点：能否分清 A0 的需求满足程度、A1 的难易与 A2–A4 的同意程度；能否区分 A0 的结果判断与 A4 的总体满意度；能否理解控制感/澄清的含义；N2 是否被理解为交流表达而非学科能力；N5 的未发生选项；N6 的心理需求；SUS 五点及反向措辞；UEQ-S 词对；26 题结束问卷的负担。先记录理解问题和时间，再决定措辞/模块变化；预测试数据与正式数据分开。不得把程序测试通过当作心理测量验证，也不按正式结果挑选有利条目。
 
-**实施状态：本次仅记录已确认方案，未修改程序。** 后续实现须新增明确问卷版本、逐题量尺及缺失类型，完整 SUS 原文须对照原版导入，保持 UEQ-S 词对。旧题意/量尺的答案不自动转换为新版。采集缺失状态与标准分完整性规则已在数据契约固定；主要分析结果、各分析的缺失分母／样本纳入规则、重复测量处理及是否进行多重比较校正仍需在正式采集前确定。
+**2026-11-16 编制阶段历史说明：** 当时仅记录已确认方案，尚未修改程序；其后接入状态以文首及第 6.5 节为准。逐题量尺和缺失类型需明确，完整 SUS 原文与 UEQ-S 词对保留，旧题意/量尺的答案不自动转换为新版。采集缺失状态与标准分完整性规则已在数据契约固定；主要分析结果、各分析的缺失分母／样本纳入规则、重复测量处理及是否进行多重比较校正仍需在正式采集前确定。
 
 [SEQ]: https://measuringu.com/evolution-of-seq/ "Sauro & Lewis: The Evolution of the Single Ease Question"
 [SUS]: https://hci-studies.org/methods-and-measures/downloads/SUS_Brooke1996.pdf "John Brooke (1996): SUS — A quick and dirty usability scale"

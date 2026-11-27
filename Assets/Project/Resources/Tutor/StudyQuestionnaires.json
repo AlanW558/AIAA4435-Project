@@ -1,43 +1,50 @@
 {
-  "version": "study-questionnaire-ui-v1",
-  "attribute_version": "attribute-feedback-v3",
+  "version": "study-questionnaire-ui-v3",
+  "attribute_version": "attribute-summary-feedback-v3",
   "natural_version": "natural-selective-feedback-v2",
   "items": [
     {
       "id": "A0",
-      "text": "To what extent did this approach’s final outcome meet the task requirements?",
-      "help": "Consider both the requested change and the settings that were supposed to stay unchanged.",
-      "scale": "category",
+      "text": "Overall, to what extent did this approach’s outcomes meet your requirements across the tasks for this attribute?",
+      "help": "Consider the requested changes and settings that should stay unchanged across all tasks for this attribute. Give one overall judgment; individual outcomes may differ.",
+      "scale": "fulfillment7",
       "special": "unable_to_judge",
-      "source": "Project-specific"
+      "source": "Project-specific",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total.",
+      "left": "Not at all",
+      "right": "Completely"
     },
     {
       "id": "A1",
-      "text": "Overall, how difficult or easy was it to make this adjustment using this approach?",
+      "text": "Overall, how difficult or easy was it to make adjustments to this attribute using this approach?",
       "scale": "ease7",
       "special": "unable_to_judge",
-      "source": "SEQ 改编：限定本次调整及当前策略；并行评价的使用情境也不同于独立完成任务"
+      "source": "SEQ 改编：限定本次调整及当前策略；并行评价的使用情境也不同于独立完成任务",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
     },
     {
       "id": "A2",
-      "text": "With this approach, I felt in control of the changes made to the tutor.",
+      "text": "Across the tasks for this attribute, I felt in control of the changes made to the tutor with this approach.",
       "scale": "agreement7",
       "special": "unable_to_judge",
-      "source": "SASSI Table 4 控制感内容改编：一般交互改为 tutor 修改，采用本项目七点量尺"
+      "source": "SASSI Table 4 控制感内容改编：一般交互改为 tutor 修改，采用本项目七点量尺",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
     },
     {
       "id": "A3",
-      "text": "This approach’s decision about whether to ask for clarification suited my needs in this task.",
+      "text": "This approach’s decisions about whether to ask for clarification suited my needs across the tasks for this attribute.",
       "scale": "agreement7",
       "special": "unable_to_judge",
-      "source": "项目专用题，不声称来自标准量表"
+      "source": "项目专用题，不声称来自标准量表",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
     },
     {
       "id": "A4",
-      "text": "Overall, I am satisfied with my experience of making this adjustment using this approach.",
+      "text": "Overall, I am satisfied with my experience of adjusting this attribute using this approach.",
       "scale": "agreement7",
       "special": "unable_to_judge",
-      "source": "项目自编单题满意度；不称 SUS 或 SASSI 分数"
+      "source": "项目自编单题满意度；不称 SUS 或 SASSI 分数",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
     },
     {
       "id": "N0",
@@ -241,5 +248,135 @@
   "sources": {
     "SUS": "https://hci-studies.org/methods-and-measures/downloads/SUS_Brooke1996.pdf",
     "UEQ-S": "https://www.ueq-online.org/Material/Handbook.pdf"
-  }
+  },
+  "legacy_attribute_version": "attribute-feedback-v3",
+  "legacy_attribute_items": [
+    {
+      "id": "A0",
+      "text": "To what extent did this approach’s final outcome meet the task requirements?",
+      "help": "Consider both the requested change and the settings that were supposed to stay unchanged.",
+      "scale": "category",
+      "special": "unable_to_judge",
+      "source": "Project-specific"
+    },
+    {
+      "id": "A1",
+      "text": "Overall, how difficult or easy was it to make this adjustment using this approach?",
+      "scale": "ease7",
+      "special": "unable_to_judge",
+      "source": "SEQ 改编：限定本次调整及当前策略；并行评价的使用情境也不同于独立完成任务"
+    },
+    {
+      "id": "A2",
+      "text": "With this approach, I felt in control of the changes made to the tutor.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "SASSI Table 4 控制感内容改编：一般交互改为 tutor 修改，采用本项目七点量尺"
+    },
+    {
+      "id": "A3",
+      "text": "This approach’s decision about whether to ask for clarification suited my needs in this task.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目专用题，不声称来自标准量表"
+    },
+    {
+      "id": "A4",
+      "text": "Overall, I am satisfied with my experience of making this adjustment using this approach.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目自编单题满意度；不称 SUS 或 SASSI 分数"
+    }
+  ],
+  "legacy_attribute_summary_version": "attribute-summary-feedback-v1",
+  "legacy_attribute_summary_items": [
+    {
+      "id": "A0",
+      "text": "Overall, to what extent did this approach’s outcomes meet your requirements across the tasks for this attribute?",
+      "help": "Consider the requested changes and settings that should stay unchanged across all tasks for this attribute. Give one overall judgment; individual outcomes may differ.",
+      "scale": "category",
+      "special": "unable_to_judge",
+      "source": "Project-specific",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+    },
+    {
+      "id": "A1",
+      "text": "Overall, how difficult or easy was it to make adjustments to this attribute using this approach?",
+      "scale": "ease7",
+      "special": "unable_to_judge",
+      "source": "SEQ 改编：限定本次调整及当前策略；并行评价的使用情境也不同于独立完成任务",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+    },
+    {
+      "id": "A2",
+      "text": "Across the tasks for this attribute, I felt in control of the changes made to the tutor with this approach.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "SASSI Table 4 控制感内容改编：一般交互改为 tutor 修改，采用本项目七点量尺",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+    },
+    {
+      "id": "A3",
+      "text": "This approach’s decisions about whether to ask for clarification suited my needs across the tasks for this attribute.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目专用题，不声称来自标准量表",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+    },
+    {
+      "id": "A4",
+      "text": "Overall, I am satisfied with my experience of adjusting this attribute using this approach.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目自编单题满意度；不称 SUS 或 SASSI 分数",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+    }
+  ],
+  "numeric_single_attribute_summary_version": "attribute-summary-feedback-v2",
+  "numeric_single_attribute_summary_items": [
+    {
+      "id": "A0",
+      "text": "Overall, to what extent did this approach’s outcomes meet your requirements across the tasks for this attribute?",
+      "help": "Consider the requested changes and settings that should stay unchanged across all tasks for this attribute. Give one overall judgment; individual outcomes may differ.",
+      "scale": "fulfillment7",
+      "special": "unable_to_judge",
+      "source": "Project-specific",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total.",
+      "left": "Not at all",
+      "right": "Completely"
+    },
+    {
+      "id": "A1",
+      "text": "Overall, how difficult or easy was it to make adjustments to this attribute using this approach?",
+      "scale": "ease7",
+      "special": "unable_to_judge",
+      "source": "SEQ 改编：限定本次调整及当前策略；并行评价的使用情境也不同于独立完成任务",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+    },
+    {
+      "id": "A2",
+      "text": "Across the tasks for this attribute, I felt in control of the changes made to the tutor with this approach.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "SASSI Table 4 控制感内容改编：一般交互改为 tutor 修改，采用本项目七点量尺",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+    },
+    {
+      "id": "A3",
+      "text": "This approach’s decisions about whether to ask for clarification suited my needs across the tasks for this attribute.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目专用题，不声称来自标准量表",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+    },
+    {
+      "id": "A4",
+      "text": "Overall, I am satisfied with my experience of adjusting this attribute using this approach.",
+      "scale": "agreement7",
+      "special": "unable_to_judge",
+      "source": "项目自编单题满意度；不称 SUS 或 SASSI 分数",
+      "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+    }
+  ],
+  "preference_version": "strategy-preference-v2"
 }

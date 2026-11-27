@@ -1,0 +1,2827 @@
+{
+  "schema": "aggregate-results-v1",
+  "generated_at": "2026-11-27T17:34:39.271299+00:00",
+  "n_unique_participants": 1,
+  "cohorts": [
+    {
+      "cohort_id": "bbe2fffb5ee51ceea2d90d40dd4db33ce937955d3441a50a6b693962482bdd5a",
+      "definition": {
+        "batch_id": "3f8161acea844f63b3591b0f44ddc5d9",
+        "source_questionnaire_version": "attribute-summary-feedback-v2",
+        "task_releases": {
+          "speech_rate": {
+            "R1-1": "f6d83e8b2c7ed7077541a800f9c3c56d4a274f2aff397871090b40d8578ffe0c",
+            "R1-2": "49347b545b2ff9cc2a73221a8cdc13cc956292aef398a3d5ec98854de0f9d3c4",
+            "R2-1": "7b02540754b144a348bb29559a95bd1f208ec75be14148c5d2484b1e3f70f434",
+            "R2-2": "36c6a751631639c11bf9bfb2a6d0d8e68905d1d58465f574d971532089318bf5",
+            "R3-1": "afe1e74431472285b626415c0f4dd9206b27f635541571b8b1865f329f1eb274",
+            "R3-2": "8126cb2caea540e99b79e0f018613f8f044f436eb133cdc8a0cc1f07a86059e5",
+            "R4-1": "b6eb7d6d90440b65dc32e2191ce97654eb5fadcc97f7953f40abdf4484499b47",
+            "R4-3": "12213e8d770ce6fa37f62ba039b6c0ed483da3373d0560c2d06cf4146d8d73fa"
+          },
+          "reply_length": {
+            "L1-1": "8818b90958606cf5f75878ce022181ab732f8ea5ea173c424f9f1f183bcc4c93",
+            "L1-3": "f4f4007fda67ff73488f6deb34bcd6341cf7c0086bb177e4d62318271b292933",
+            "L2-1": "d7f83f409b25892dcde0b2906c3274c76e2d75d7459cd346cbf6a487717f18bf",
+            "L2-2": "1d54588d4d81fbdd6bb462bcddb401b352801fd3e7528e874a29a735c2c1ec92",
+            "L3-1": "31984b145de03a9f1500e024ef14050cb47127ee8be9cda4d769259d115ad338",
+            "L3-2": "7092a10eab861ff05b64d959b44768ccbe40fa5d161ad735086992ba3bd855e9",
+            "L4-2": "b6954686393db85f31ceda56ad81e67074e56c31334a830cb7cedf37203453b9",
+            "L4-3": "307e38e521a724198b4b2954960328d3df85d22f9c633aefc999dbc021a8a897"
+          },
+          "tone": {
+            "T1-1": "75e2215e72c88b0876c5f3988fae80bdc002e8bff624655cd7e875b47000c851",
+            "T1-3": "1cfbad64346a320f21b311eaffe3bf2e36b9c8404f9d0dfb58d6cbede150bc85",
+            "T2-2": "442ab5790055111a8145d55a662e7247a4be4227cdcab46b0921e0359d6dbe62",
+            "T2-3": "ba3010916dbe6ab9a7fe1e032688115279ab5ec0a257aeb79d16ccc972bb33f3",
+            "T3-1": "92380dfe12c07c3a394d9babfce250c8f7a75ba64b85068bdd938a22bfa35be5",
+            "T3-2": "6dfc72510047821e545e405daeebad84fffd4c9ec4b23d06f84e66410065b78a",
+            "T4-1": "19f94d8fa650231027231ae59b598960ef5bd4f725c598a36502dc85b4682a16",
+            "T4-3": "1cc5466719e50c609e800cb173c416bcbd1dd621e1557b279ffb70e365e08d6f"
+          },
+          "voice": {
+            "V1-1": "e9c2acaeb7bc5fbcdd2a3b0e1a0bc26076c7b6241599c239dcb9e04061afccc3",
+            "V1-2": "aa47caf9ed0268672e0c2962b4fe8aadf204da58f1c95750a7e7bb2a1f042392",
+            "V2-1": "80a5b1282013d9e94fcc9ebdb7a93c5af02172b72b836dfa414b00314c84df5e",
+            "V2-2": "6b7310c83f43e3f9533e06e76e397ef008d2560ee756182dcda20b3db3cd6a58",
+            "V3-1": "8f3dbc026abacf4c17bd07f9f7951fbe1dd6bef12fdca4a310d2d2f5b7dbc805",
+            "V3-2": "5f17a02b4e157c8312836e0633db1cbbd90d3f21e0554fca8f19f44de179df9e",
+            "V4-2": "80745d73fc3dd81ad5300156dc1f22f6da81b1cb42e12a9df0b9ec66f50df2a1",
+            "V4-3": "665c5b80a09b9fdf4c0500a4a6dc60ef7e250fb68dc38d8b54a74db27f3334b2"
+          }
+        },
+        "collection_unit": "attribute",
+        "collection_method": "auxiliary_api_review"
+      },
+      "participants": [
+        {
+          "participant_id": "P001",
+          "display_label": "参与者1",
+          "completion_status": "complete",
+          "source_sha256": "d3b88c1060f06527ad6769248e93b98097e8462f622b44f76e1582b3b2a23d7c",
+          "source_questionnaire_version": "attribute-summary-feedback-v2",
+          "amendments": [
+            {
+              "domain": "tone",
+              "field": "preference",
+              "previous": {
+                "status": "unable_to_judge",
+                "value": null
+              },
+              "replacement": {
+                "status": "answered",
+                "value": [
+                  "N",
+                  "S"
+                ]
+              },
+              "reason": "The participant explicitly clarified that the original tone unable-to-judge selection meant simultaneous preference for Native-gate and Selective. Count one full vote for each selected strategy; preserve all 80 original scores.",
+              "authority": "Explicit participant correction in the project conversation; applies only to P001 tone preference.",
+              "recorded_on": "2026-11-28",
+              "amendment_id": "7884831c9630c6ef35e4265cca1665e0a04fe030b873e05dc39a4bf14a53205a"
+            }
+          ],
+          "provenance": {
+            "collection_method": "auxiliary_api_review",
+            "formal_vr_study": false,
+            "request_and_clarification_authorship": "Requests and clarification answers were drafted or revised by the assistant with explicit user authorization. They are not recordings of participant speech; this workflow bypassed STT.",
+            "rating_authorship": "Participant-entered ratings downloaded from the original v2 review page. No scores were filled or revised by the assistant.",
+            "preference_amendment": "Participant explicitly clarified the tone preference as N plus S after download. All other preferences and 80 numeric responses remain unchanged.",
+            "audio_timing_note": "text-check-v4 audio predates the subsequent clarification repair. The exported evidence and participant ratings have not been regenerated or regraded."
+          }
+        }
+      ],
+      "questionnaire_items": [
+        {
+          "id": "A0",
+          "text": "Overall, to what extent did this approach’s outcomes meet your requirements across the tasks for this attribute?",
+          "help": "Consider the requested changes and settings that should stay unchanged across all tasks for this attribute. Give one overall judgment; individual outcomes may differ.",
+          "scale": "fulfillment7",
+          "special": "unable_to_judge",
+          "source": "Project-specific",
+          "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total.",
+          "left": "Not at all",
+          "right": "Completely"
+        },
+        {
+          "id": "A1",
+          "text": "Overall, how difficult or easy was it to make adjustments to this attribute using this approach?",
+          "scale": "ease7",
+          "special": "unable_to_judge",
+          "source": "SEQ 改编：限定本次调整及当前策略；并行评价的使用情境也不同于独立完成任务",
+          "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+        },
+        {
+          "id": "A2",
+          "text": "Across the tasks for this attribute, I felt in control of the changes made to the tutor with this approach.",
+          "scale": "agreement7",
+          "special": "unable_to_judge",
+          "source": "SASSI Table 4 控制感内容改编：一般交互改为 tutor 修改，采用本项目七点量尺",
+          "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+        },
+        {
+          "id": "A3",
+          "text": "This approach’s decisions about whether to ask for clarification suited my needs across the tasks for this attribute.",
+          "scale": "agreement7",
+          "special": "unable_to_judge",
+          "source": "项目专用题，不声称来自标准量表",
+          "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+        },
+        {
+          "id": "A4",
+          "text": "Overall, I am satisfied with my experience of adjusting this attribute using this approach.",
+          "scale": "agreement7",
+          "special": "unable_to_judge",
+          "source": "项目自编单题满意度；不称 SUS 或 SASSI 分数",
+          "scope_adaptation": "Attribute-level overall judgment across all included tasks; not a per-task score or a standard-scale total."
+        }
+      ],
+      "ratings": [
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "E",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 4
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "E",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "E",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "E",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "E",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 4
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "A",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "A",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "A",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "A",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "A",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 4
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "N",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "N",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "N",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "N",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "N",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "S",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "S",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "S",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "S",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "S",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "E",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "E",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "E",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "E",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "E",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "A",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "A",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "A",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "A",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "A",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "N",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "N",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "N",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "N",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "N",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "S",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "S",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "S",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "S",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "S",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "E",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "E",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "E",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 4
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "E",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 4
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "E",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "A",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "A",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 4
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "A",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "A",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 4
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "A",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "N",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "N",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "N",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "N",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "N",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "S",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "S",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "S",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "S",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "S",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "E",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "E",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 7
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "E",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "E",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "E",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 4
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "A",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "A",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 3
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "A",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "A",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 4
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "A",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "N",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "N",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "N",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "N",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "N",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 5
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "S",
+          "item_id": "A0",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "S",
+          "item_id": "A1",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "S",
+          "item_id": "A2",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "S",
+          "item_id": "A3",
+          "status": "answered",
+          "value": 6
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "S",
+          "item_id": "A4",
+          "status": "answered",
+          "value": 6
+        }
+      ],
+      "preferences": [
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "status": "answered",
+          "choices": [
+            "S"
+          ],
+          "source_status": "answered",
+          "source_value": "S",
+          "amendment_id": null
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "status": "answered",
+          "choices": [
+            "S"
+          ],
+          "source_status": "answered",
+          "source_value": "S",
+          "amendment_id": null
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "status": "answered",
+          "choices": [
+            "N",
+            "S"
+          ],
+          "source_status": "unable_to_judge",
+          "source_value": null,
+          "amendment_id": "7884831c9630c6ef35e4265cca1665e0a04fe030b873e05dc39a4bf14a53205a"
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "status": "answered",
+          "choices": [
+            "S"
+          ],
+          "source_status": "answered",
+          "source_value": "S",
+          "amendment_id": null
+        }
+      ],
+      "comments": [
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "E",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "A",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "N",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "speech_rate",
+          "condition": "S",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "E",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "A",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "N",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "reply_length",
+          "condition": "S",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "E",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "A",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "N",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "tone",
+          "condition": "S",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "E",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "A",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "N",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        },
+        {
+          "participant_id": "P001",
+          "domain": "voice",
+          "condition": "S",
+          "extras": {
+            "reasons": [],
+            "comment": "",
+            "comment_confirmed": false
+          }
+        }
+      ],
+      "n_participants": 1,
+      "rating_summary": [
+        {
+          "domain": "speech_rate",
+          "condition": "E",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            4
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 4,
+          "median": 4
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "E",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "E",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "E",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "E",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            4
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 4,
+          "median": 4
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "A",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "A",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "A",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "A",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "A",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            4
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 4,
+          "median": 4
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "N",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "N",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "N",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "N",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "N",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "S",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "S",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "S",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "S",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "speech_rate",
+          "condition": "S",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "reply_length",
+          "condition": "E",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "reply_length",
+          "condition": "E",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "reply_length",
+          "condition": "E",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "reply_length",
+          "condition": "E",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "reply_length",
+          "condition": "E",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "reply_length",
+          "condition": "A",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "reply_length",
+          "condition": "A",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "reply_length",
+          "condition": "A",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "reply_length",
+          "condition": "A",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "reply_length",
+          "condition": "A",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "reply_length",
+          "condition": "N",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "reply_length",
+          "condition": "N",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "reply_length",
+          "condition": "N",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "reply_length",
+          "condition": "N",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "reply_length",
+          "condition": "N",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "reply_length",
+          "condition": "S",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "reply_length",
+          "condition": "S",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "reply_length",
+          "condition": "S",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "reply_length",
+          "condition": "S",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "reply_length",
+          "condition": "S",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "tone",
+          "condition": "E",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "tone",
+          "condition": "E",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "tone",
+          "condition": "E",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            4
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 4,
+          "median": 4
+        },
+        {
+          "domain": "tone",
+          "condition": "E",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            4
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 4,
+          "median": 4
+        },
+        {
+          "domain": "tone",
+          "condition": "E",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "tone",
+          "condition": "A",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "tone",
+          "condition": "A",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            4
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 4,
+          "median": 4
+        },
+        {
+          "domain": "tone",
+          "condition": "A",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "tone",
+          "condition": "A",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            4
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 4,
+          "median": 4
+        },
+        {
+          "domain": "tone",
+          "condition": "A",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "tone",
+          "condition": "N",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "tone",
+          "condition": "N",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "tone",
+          "condition": "N",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "tone",
+          "condition": "N",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "tone",
+          "condition": "N",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "tone",
+          "condition": "S",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "tone",
+          "condition": "S",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "tone",
+          "condition": "S",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "tone",
+          "condition": "S",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "tone",
+          "condition": "S",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "voice",
+          "condition": "E",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "voice",
+          "condition": "E",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            7
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 1
+          },
+          "mean": 7,
+          "median": 7
+        },
+        {
+          "domain": "voice",
+          "condition": "E",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "voice",
+          "condition": "E",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "voice",
+          "condition": "E",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            4
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 4,
+          "median": 4
+        },
+        {
+          "domain": "voice",
+          "condition": "A",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "voice",
+          "condition": "A",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            3
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 1,
+            "4": 0,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 3,
+          "median": 3
+        },
+        {
+          "domain": "voice",
+          "condition": "A",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "voice",
+          "condition": "A",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            4
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 1,
+            "5": 0,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 4,
+          "median": 4
+        },
+        {
+          "domain": "voice",
+          "condition": "A",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "voice",
+          "condition": "N",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "voice",
+          "condition": "N",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "voice",
+          "condition": "N",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "voice",
+          "condition": "N",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "voice",
+          "condition": "N",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            5
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 1,
+            "6": 0,
+            "7": 0
+          },
+          "mean": 5,
+          "median": 5
+        },
+        {
+          "domain": "voice",
+          "condition": "S",
+          "item_id": "A0",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "voice",
+          "condition": "S",
+          "item_id": "A1",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "voice",
+          "condition": "S",
+          "item_id": "A2",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "voice",
+          "condition": "S",
+          "item_id": "A3",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        },
+        {
+          "domain": "voice",
+          "condition": "S",
+          "item_id": "A4",
+          "n_total": 1,
+          "n_valid": 1,
+          "missing_by_status": {},
+          "values": [
+            6
+          ],
+          "distribution": {
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0,
+            "5": 0,
+            "6": 1,
+            "7": 0
+          },
+          "mean": 6,
+          "median": 6
+        }
+      ],
+      "preference_summary": [
+        {
+          "domain": "speech_rate",
+          "n_total": 1,
+          "n_answered": 1,
+          "missing_by_status": {},
+          "votes": {
+            "E": 0,
+            "A": 0,
+            "N": 0,
+            "S": 1,
+            "no_preference": 0
+          },
+          "multi_select_respondents": 0
+        },
+        {
+          "domain": "reply_length",
+          "n_total": 1,
+          "n_answered": 1,
+          "missing_by_status": {},
+          "votes": {
+            "E": 0,
+            "A": 0,
+            "N": 0,
+            "S": 1,
+            "no_preference": 0
+          },
+          "multi_select_respondents": 0
+        },
+        {
+          "domain": "tone",
+          "n_total": 1,
+          "n_answered": 1,
+          "missing_by_status": {},
+          "votes": {
+            "E": 0,
+            "A": 0,
+            "N": 1,
+            "S": 1,
+            "no_preference": 0
+          },
+          "multi_select_respondents": 1
+        },
+        {
+          "domain": "voice",
+          "n_total": 1,
+          "n_answered": 1,
+          "missing_by_status": {},
+          "votes": {
+            "E": 0,
+            "A": 0,
+            "N": 0,
+            "S": 1,
+            "no_preference": 0
+          },
+          "multi_select_respondents": 0
+        }
+      ]
+    }
+  ],
+  "constructs": {
+    "A0": "Requirement fulfillment",
+    "A1": "Ease of adjustment",
+    "A2": "Perceived control",
+    "A3": "Clarification appropriateness",
+    "A4": "Overall satisfaction"
+  },
+  "analysis_rules": [
+    "Each participant counts once; four attributes are repeated judgments, not four people.",
+    "Cohorts are separated by batch, source questionnaire version, task releases and collection method.",
+    "Each selected strategy receives one full preference vote; no_preference is exclusive.",
+    "Unable/unsubmitted scores are missing, never zero; preserve reasons and valid n.",
+    "Describe each construct separately; no combined standardized score or significance claim for n=1."
+  ]
+}

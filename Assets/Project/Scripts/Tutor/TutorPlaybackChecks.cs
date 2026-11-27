@@ -52,7 +52,15 @@ namespace IAI.Tutor
             client.feedbackVersion = "task-feedback-q1-q7-v1"; client.Connect();
             yield return Wait(() => client.Connected && !client.Busy, "Connect to combined speech fixture");
             string original = client.State.task_id;
-            panel.OpenTab(1); panel.SampleButton.onClick.Invoke(); yield return Wait(() => audio.Playing, "Baseline sample plays");
+            panel.OpenTab(0); yield return Recognize(0);
+            yield return Wait(() => client.State.branches.A.status == "awaiting_clarification" && client.State.branches.S.status == "awaiting_clarification" && TutorComparisonClient.Conditions.All(c => client.State.branches.Get(c).status != "processing"), "Initial spoken request reaches all four branches");
+            Check(!client.State.results_visible && !audio.CanReply, "Hidden results cannot play while clarification is pending");
+            yield return Select("A"); string sQuestion = client.State.branches.S.question.question_id;
+            yield return Recognize(.25f); yield return Wait(() => client.Branch.status == "waiting", "A spoken clarification resolves");
+            Check(!client.State.results_visible && client.State.branches.S.question.question_id == sQuestion, "A answer does not resolve S or reveal results early");
+            yield return Select("S"); yield return Recognize(.25f);
+            yield return Wait(() => client.State.results_visible && !client.Busy, "Final clarification reveals all strategies together");
+            yield return PlayReply();
             yield return Wait(() => TutorPlaybackOutbox.Instance.Error.Length > 0, "Lost playback ACK is visible as pending delivery");
             audio.Stop(reason: "user_stop");
             var old = TutorPlaybackOutbox.Instance;
@@ -62,14 +70,6 @@ namespace IAI.Tutor
             Check(restored.PendingCount == 2, "Fresh outbox instance reloads both durable reports");
             yield return Flush(); yield return Audit(original);
             Check(audit.started == 1 && audit.stopped == 1 && audit.events == audit.unique_events && audit.lost_ack, "Lost ACK retry records start and stop exactly once");
-            panel.OpenTab(0); yield return Recognize(0);
-            yield return Wait(() => client.State.branches.A.status == "awaiting_clarification" && client.State.branches.S.status == "awaiting_clarification" && TutorComparisonClient.Conditions.All(c => client.State.branches.Get(c).status != "processing"), "Initial spoken request reaches all four branches");
-            Check(!client.State.results_visible && !audio.CanReply, "Hidden results cannot play while clarification is pending");
-            yield return Select("A"); string sQuestion = client.State.branches.S.question.question_id;
-            yield return Recognize(.25f); yield return Wait(() => client.Branch.status == "waiting", "A spoken clarification resolves");
-            Check(!client.State.results_visible && client.State.branches.S.question.question_id == sQuestion, "A answer does not resolve S or reveal results early");
-            yield return Select("S"); yield return Recognize(.25f);
-            yield return Wait(() => client.State.results_visible && !client.Busy, "Final clarification reveals all strategies together");
             foreach (string condition in TutorComparisonClient.Conditions)
             {
                 yield return Select(condition); yield return PlayReply();

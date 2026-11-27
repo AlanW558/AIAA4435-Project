@@ -10,7 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 
-from study_answers import ATTRIBUTE_IDS, NATURAL_IDS, NATURAL_VERSION
+from study_answers import ATTRIBUTE_IDS, NATURAL_IDS, NATURAL_VERSION, ATTRIBUTE_SUMMARY_VERSIONS
 from study_store import StudyStore, encoded, now
 from study_reconcile import reconcile
 from tutor_dialogue_log import export_rows
@@ -49,6 +49,7 @@ def export_run(store, run_id, destination, local_journal=None):
     meta = {k: state[k] for k in META}
     attribute, natural, prefs, incomplete, dialogue = [], [], [], [], []
     common = list(META) + ['module_instance_id', 'task_id', 'task_code', 'domain', 'scenario', 'condition', 'session_id',
+                          'collection_unit', 'task_completions',
                           'questionnaire_id', 'questionnaire_version', 'answer_schema_version', 'submission_id',
                           'submitted_at', 'evaluation_revision', 'feedback_revision', 'record_stage', 'completeness', 'extras', 'evaluation']
     score_fields = ['scoring_version'] + [f'{name}_{k}' for name in ('sus', 'ueq_pragmatic', 'ueq_hedonic') for k in ('value', 'n_answered', 'score_status')]
@@ -58,9 +59,13 @@ def export_run(store, run_id, destination, local_journal=None):
         if q['record_stage'] != 'submitted':
             incomplete.append({**meta, 'kind': 'questionnaire_draft', **q}); continue
         row = {**meta, **{k: q.get(k) for k in common if k not in META}}
+        row['collection_unit'] = 'natural_session' if q['questionnaire_version'] == NATURAL_VERSION else 'attribute' if q['questionnaire_version'] in ATTRIBUTE_SUMMARY_VERSIONS else 'task'
         if q['task_id']:
             task = state['tasks'][q['task_id']]
             row.update({k: task[k] for k in ('task_code', 'domain', 'scenario')})
+        elif q['questionnaire_version'] in ATTRIBUTE_SUMMARY_VERSIONS:
+            row['domain'] = state['modules'][q['module_instance_id']]['domain']
+            row['task_completions'] = q['evaluation']['task_completions']
         for item, answer in q['answers'].items():
             for k in ('value', 'status', 'reason'): row[f'{item}_{k}'] = answer.get(k)
         if q['questionnaire_version'] == NATURAL_VERSION:
@@ -75,7 +80,17 @@ def export_run(store, run_id, destination, local_journal=None):
                 if inflight or json.loads(snapshot).get('processing'):
                     incomplete.append({**meta,'kind':'runtime_needs_reconciliation','runtime_id':rid,'target_id':target,'runtime_kind':kind,'pending_operation':json.loads(inflight) if inflight else None})
     for task in state['tasks'].values():
-        if not task['submission_id']: incomplete.append({**meta, 'kind': 'unsubmitted_task', **task})
+        if store.attribute_summary(state):
+            if not task.get('completion_id'): incomplete.append({**meta, 'kind': 'unfinished_task', **task})
+        elif not task['submission_id']: incomplete.append({**meta, 'kind': 'unsubmitted_task', **task})
+    if store.attribute_summary(state):
+        for domain in dict.fromkeys(t['domain'] for t in state['manifest']['tasks']):
+            module = next((m for m in state['modules'].values() if m['module_type'] == 'attribute_comparison' and m['domain'] == domain), None)
+            if module is None or not module.get('submission_id'):
+                incomplete.append({**meta, 'kind': 'attribute_feedback_not_submitted', 'domain': domain,
+                                   'module_instance_id': module['module_instance_id'] if module else None})
+            if domain not in state['preferences']:
+                incomplete.append({**meta, 'kind': 'attribute_preference_not_submitted', 'domain': domain})
     if state['end_reason'] != 'normal_completion':
         incomplete.append({**meta, 'kind': 'unfinished_run', 'lifecycle': state['lifecycle'], 'end_reason': state['end_reason']})
     for task in state['manifest']['tasks']:
@@ -93,7 +108,7 @@ def export_run(store, run_id, destination, local_journal=None):
     for row in projected:
         source=runtime_events[row['source_line']]
         dialogue.append({**row,**meta,'audit_event_id':source['event_id'],'study_target_id':source['target_id'],'runtime_id':source['runtime_id']})
-    pref_fields = list(META) + ['preference_id', 'submission_id', 'record_stage', 'questionnaire_version', 'scope', 'domain', 'answers', 'submitted_at', 'task_submissions']
+    pref_fields = list(META) + ['preference_id', 'submission_id', 'record_stage', 'questionnaire_version', 'scope', 'domain', 'answers', 'submitted_at', 'task_submissions', 'task_completions', 'attribute_submissions']
     destination.mkdir(parents=True, exist_ok=False)
     json_file(destination / 'session.json', state)
     csv_file(destination / 'attribute_feedback.csv', attribute, af)
@@ -105,7 +120,9 @@ def export_run(store, run_id, destination, local_journal=None):
     counts = {'attribute_feedback': len(attribute), 'natural_feedback': len(natural), 'preferences': len(prefs),
               'dialogue': len(dialogue), 'events': len(events), 'incomplete_records': len(incomplete)}
     if reconciliation is not None: json_file(destination / 'local_reconciliation.json', reconciliation)
-    manifest = {'export_schema_version': 'study-export-v1', **meta, 'generated_at': now(), 'source': str(store.path.resolve()),
+    manifest = {'export_schema_version': 'study-export-v2' if store.attribute_summary(state) else 'study-export-v1',
+                'attribute_feedback_unit': state['manifest'].get('attribute_feedback_unit', 'task'),
+                **meta, 'generated_at': now(), 'source': str(store.path.resolve()),
                 'source_revision': state['revision'], 'counts': counts,
                 'backend_record_status': 'complete' if state['end_reason'] == 'normal_completion' else 'partial',
                 'synchronization_status': 'unknown_client_pending', 'export_status': 'unreconciled',

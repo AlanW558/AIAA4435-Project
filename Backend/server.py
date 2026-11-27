@@ -120,10 +120,11 @@ class Handler(BaseHTTPRequestHandler):
                 is_study_speech=len(path)==4 and path[:2]==["study","runs"] and path[3]=="transcribe"
                 data=self.parse_body(10_700_000 if is_speech or is_study_speech else 300000 if path==["study","commands"] else 65536)
                 if path==["study","commands"]:
-                    if data.get('operation') in ('capture_evaluation','finish_natural'):
+                    if data.get('operation') in ('capture_evaluation','finish_task','finish_natural'):
                         state=self.server.study.read(data.get('study_run_id'))
                         payload=json.loads(data['payload_json']); target=state['tasks'].get(payload.get('task_id')) or state['modules'].get(payload.get('module_instance_id'))
-                        if target and target.get('runtime_id'):self.server.study_flow.checkpoint(target['runtime_id'])
+                        if target and target.get('runtime_id') and not target.get('frozen') and not target.get('submission_id'):
+                            self.server.study_flow.checkpoint(target['runtime_id'])
                     return self.send_json(200,self.server.study.command(data))
                 if len(path)==4 and path[:2]==["study","runs"] and path[3]=="runtime-receipt":
                     return self.send_json(200,self.server.study_flow.recover_receipt(path[2],data))

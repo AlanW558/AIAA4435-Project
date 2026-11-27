@@ -16,9 +16,6 @@ namespace IAI.Tutor
         public const string Version = "attribute-feedback-v2";
         public static readonly string[] RatingKeys = { "effort_ease", "control", "clarification_appropriateness", "satisfaction" };
         public static readonly string[] CompletionKeys = { "fully_met", "partly_met", "not_met", "unable_to_judge" };
-        public bool MaterialPageOpen => Visible && tab == 0 && !PreferenceMode;
-        public Button[] MaterialButtons { get; private set; }
-        Text materialStatus;
         public Button TaskButton { get; private set; }
         public Button BeginButton { get; private set; }
         public Button NextButton { get; private set; }
@@ -198,15 +195,6 @@ namespace IAI.Tutor
             Tint(TaskButton, tab == 0); Tint(questionnaireButton, tab == 1); Tint(notesButton, tab == 2);
             taskTitle.text = nav.Title;
             if (instructions.text != nav.Instructions) { instructions.text = nav.Instructions; FitScroll(taskScroll, instructions); }
-            var materials = nav.StudyPreview ? nav.Task?.materials : null;
-            for (int i = 0; i < MaterialButtons.Length; i++)
-            {
-                bool materialShown = materials != null && i < materials.Length;
-                MaterialButtons[i].gameObject.SetActive(materialShown);
-                MaterialButtons[i].interactable = materialShown && owner.Playback && owner.Playback.CanMaterial;
-                if (materialShown) MaterialButtons[i].GetComponentInChildren<Text>().text = owner.Playback && owner.Playback.Active ? "Stop sample" : "Play · " + materials[i].label;
-            }
-            materialStatus.text = materials != null && materials.Length > 0 ? !client.Connected ? "Start the task to enable listening samples." : owner.Playback.Status : "";
             BeginButton.interactable = nav.CanBegin;
             BeginButton.GetComponentInChildren<Text>().text = client.Connected ? "Continue task" : "Start task";
             bool supported = client.Connected && client.State.feedback_version == Version;
@@ -265,10 +253,7 @@ namespace IAI.Tutor
             feedbackHeading = Label(sheet, "Rating context", "", new Vector2(0, 276), new Vector2(750, 44), 18);
             taskPage = Rect("Task page", sheet, Vector2.zero, new Vector2(750, 500)).gameObject;
             taskTitle = Label(taskPage.transform, "Task title", "", new Vector2(0, 205), new Vector2(740, 70), 26);
-            taskScroll = Scroll(taskPage.transform, new Vector2(0, -15), new Vector2(740, 345), out instructions);
-            MaterialButtons = new Button[3];
-            for (int i = 0; i < 3; i++) { int index = i; MaterialButtons[i] = Button(taskPage.transform, "Play material", new Vector2(-250 + i * 250, -218), new Vector2(240, 42), () => owner.Playback.ToggleMaterial(index)); }
-            materialStatus = Label(taskPage.transform, "Listening status", "", new Vector2(0, -321), new Vector2(740, 50), 17);
+            taskScroll = Scroll(taskPage.transform, new Vector2(0, -25), new Vector2(740, 385), out instructions);
             BeginButton = Button(taskPage.transform, "Start task", new Vector2(0, -265), new Vector2(420, 48), () => { nav.Begin(); owner.Render(); });
             ratingPage = Rect("Ratings", sheet, Vector2.zero, new Vector2(750, 620)).gameObject;
             Label(ratingPage.transform, "Completion question", "To what extent did this approach's final outcome meet the task requirements?", new Vector2(0, 217), new Vector2(740, 72), 21);

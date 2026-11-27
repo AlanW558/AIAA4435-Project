@@ -6,9 +6,10 @@ import math
 from capabilities import AVATAR_DEFAULTS, DEMO_PROFILE
 from core import APIError, resolved_patch
 from tutor_state import DIALOGUE_DEFAULTS, DIALOGUE_OPTIONS, FIELDS, validate_patch, validate_settings
+from tutor_voice_catalog import VOICE_DESCRIPTIONS, VOICE_PROVIDERS, VOICE_IDS, VOICE_LABELS
 
 
-CAPABILITY_VERSION = "tutor-capabilities-v2"
+CAPABILITY_VERSION = "tutor-capabilities-v4"
 DIALOGUE_FIELDS = tuple(DIALOGUE_DEFAULTS)
 APPEARANCE_FIELDS = tuple(DEMO_PROFILE.fields)
 # Staged rollout: understanding a setting must not claim its output is connected.
@@ -31,8 +32,9 @@ def public_capabilities():
         "defaults": {**DIALOGUE_DEFAULTS, **DEMO_PROFILE.initial},
         "avatar_defaults": AVATAR_DEFAULTS,
         "outfits_by_avatar": {"liang": ["suit", "sport", "none"], "nailong": ["none"]},
-        "voice_descriptions": {},
-        "voice_resources_bound": False,
+        "voice_descriptions": VOICE_DESCRIPTIONS,
+        "voice_labels": VOICE_LABELS,
+        "voice_resources_bound": all(VOICE_PROVIDERS.get(voice) for voice in VOICE_IDS),
         "turn_fields": list(DIALOGUE_FIELDS),
     })
 

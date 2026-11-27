@@ -1,0 +1,1222 @@
+{
+  "description": "Exact public model responses captured from authorized 2026-11-27 engineering checks. No credentials or participant identifiers. Offline regressions only.",
+  "records": {
+    "R4-3": {
+      "query": "I want you to use ninety percent of your default speed now and keep everything else the same.",
+      "context": {
+        "query": "I want you to use ninety percent of your default speed now and keep everything else the same.",
+        "settings": {
+          "speech_rate": 1.1,
+          "reply_length": "balanced",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "change_history": [],
+        "task_start_settings": {
+          "speech_rate": 1.1,
+          "reply_length": "balanced",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "conversation": [
+          {
+            "sequence": 1,
+            "settings": {
+              "speech_rate": 1.1,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a",
+              "avatar_id": "liang",
+              "outfit": "suit",
+              "jacket_color": "blue",
+              "accessory": "glasses",
+              "scale": 1.0
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": "How can active recall help me study?"
+              },
+              {
+                "role": "assistant",
+                "content": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ]
+          }
+        ],
+        "soft_preferences": [
+          {
+            "field": "speech_rate",
+            "value": 1.1,
+            "text": "I usually prefer a pace of 1.10."
+          }
+        ],
+        "pending": null,
+        "implemented_fields": [
+          "speech_rate",
+          "reply_length",
+          "tone",
+          "voice",
+          "avatar_id",
+          "outfit",
+          "jacket_color",
+          "accessory",
+          "scale"
+        ],
+        "capabilities": {
+          "version": "tutor-capabilities-v2",
+          "options": {
+            "reply_length": [
+              "brief",
+              "balanced",
+              "detailed"
+            ],
+            "tone": [
+              "professional",
+              "friendly",
+              "encouraging"
+            ],
+            "voice": [
+              "voice_a",
+              "voice_b",
+              "voice_c",
+              "voice_d",
+              "voice_e"
+            ],
+            "jacket_color": [
+              "blue",
+              "orange",
+              "green",
+              "gray",
+              "red",
+              "purple",
+              "yellow"
+            ],
+            "accessory": [
+              "none",
+              "hat",
+              "glasses"
+            ],
+            "scale": {
+              "min": 0.85,
+              "max": 1.15,
+              "step": 0.05
+            },
+            "avatar_id": [
+              "liang",
+              "nailong"
+            ],
+            "outfit": [
+              "suit",
+              "sport",
+              "none"
+            ]
+          },
+          "speech_rate": {
+            "min": 0.7,
+            "max": 1.3,
+            "step": 0.01,
+            "default": 1.0,
+            "basis": [
+              "default",
+              "current"
+            ],
+            "operation": [
+              "multiply",
+              "add"
+            ]
+          },
+          "defaults": {
+            "speech_rate": 1.0,
+            "reply_length": "balanced",
+            "tone": "professional",
+            "voice": "voice_d",
+            "avatar_id": "liang",
+            "outfit": "suit",
+            "jacket_color": "blue",
+            "accessory": "glasses",
+            "scale": 1.0
+          },
+          "avatar_defaults": {
+            "liang": {
+              "avatar_id": "liang",
+              "outfit": "suit",
+              "jacket_color": "blue",
+              "accessory": "glasses",
+              "scale": 1.0
+            },
+            "nailong": {
+              "avatar_id": "nailong",
+              "outfit": "none",
+              "jacket_color": "yellow",
+              "accessory": "none",
+              "scale": 1.0
+            }
+          },
+          "outfits_by_avatar": {
+            "liang": [
+              "suit",
+              "sport",
+              "none"
+            ],
+            "nailong": [
+              "none"
+            ]
+          },
+          "voice_descriptions": {},
+          "voice_resources_bound": false,
+          "turn_fields": [
+            "speech_rate",
+            "reply_length",
+            "tone",
+            "voice"
+          ]
+        },
+        "reply_length_structures": {
+          "brief": "Give only the key answer or essential points.",
+          "balanced": "Give the key answer and a short supporting reason; omit a worked example.",
+          "detailed": "Give the key answer, explain the reasoning, and add a relevant example or steps when useful."
+        }
+      },
+      "response": {
+        "kind": "tailoring",
+        "conversation_query": "",
+        "scope": "session",
+        "requested_fields": [
+          "speech_rate"
+        ],
+        "required_fields": [
+          "speech_rate"
+        ],
+        "preserved_fields": [
+          "reply_length",
+          "tone",
+          "voice",
+          "avatar_id",
+          "outfit",
+          "jacket_color",
+          "accessory",
+          "scale"
+        ],
+        "proposal": {
+          "supported": true,
+          "reason": "The user asks to set speech rate to 90% of the model default speed, keeping all other settings unchanged.",
+          "candidates": [
+            {
+              "id": "c1",
+              "patch": {
+                "speech_rate": {
+                  "basis": "default",
+                  "operation": "multiply",
+                  "value": 0.9
+                }
+              },
+              "evidence": "speech_rate supports basis default with multiply operation; 90% of default = default × 0.90."
+            }
+          ],
+          "default_id": "c1",
+          "unresolved_references": [],
+          "possible_soft_preference_overrides": [
+            {
+              "field": "speech_rate",
+              "text": "I usually prefer a pace of 1.10.",
+              "value": 1.1
+            }
+          ],
+          "explicit_override": false
+        },
+        "clarification": null
+      }
+    },
+    "T3-1": {
+      "query": "Use friendlier wording, but keep the same speed and voice.",
+      "context": {
+        "query": "Use friendlier wording, but keep the same speed and voice.",
+        "settings": {
+          "speech_rate": 1.1,
+          "reply_length": "balanced",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "change_history": [],
+        "task_start_settings": {
+          "speech_rate": 1.1,
+          "reply_length": "balanced",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "conversation": [
+          {
+            "sequence": 1,
+            "settings": {
+              "speech_rate": 1.1,
+              "reply_length": "balanced",
+              "tone": "professional",
+              "voice": "voice_a",
+              "avatar_id": "liang",
+              "outfit": "suit",
+              "jacket_color": "blue",
+              "accessory": "glasses",
+              "scale": 1.0
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": "How can active recall help me study?"
+              },
+              {
+                "role": "assistant",
+                "content": "Use active recall to practise retrieving information from memory. Retrieving an answer helps you notice what you can remember and what needs more practice."
+              }
+            ]
+          }
+        ],
+        "soft_preferences": [],
+        "pending": {
+          "original_query": "I want talking to you to feel a little less intimidating.",
+          "text": "Which setting choice would you like for this task until changed?",
+          "options": [
+            {
+              "id": "c1",
+              "label": "Tone: Friendly"
+            },
+            {
+              "id": "c2",
+              "label": "Speech rate: 0.99× default speed"
+            },
+            {
+              "id": "other",
+              "label": "Something else — explain what you mean"
+            },
+            {
+              "id": "cancel",
+              "label": "Cancel this change"
+            }
+          ]
+        },
+        "implemented_fields": [
+          "speech_rate",
+          "reply_length",
+          "tone",
+          "voice",
+          "avatar_id",
+          "outfit",
+          "jacket_color",
+          "accessory",
+          "scale"
+        ],
+        "capabilities": {
+          "version": "tutor-capabilities-v2",
+          "options": {
+            "reply_length": [
+              "brief",
+              "balanced",
+              "detailed"
+            ],
+            "tone": [
+              "professional",
+              "friendly",
+              "encouraging"
+            ],
+            "voice": [
+              "voice_a",
+              "voice_b",
+              "voice_c",
+              "voice_d",
+              "voice_e"
+            ],
+            "jacket_color": [
+              "blue",
+              "orange",
+              "green",
+              "gray",
+              "red",
+              "purple",
+              "yellow"
+            ],
+            "accessory": [
+              "none",
+              "hat",
+              "glasses"
+            ],
+            "scale": {
+              "min": 0.85,
+              "max": 1.15,
+              "step": 0.05
+            },
+            "avatar_id": [
+              "liang",
+              "nailong"
+            ],
+            "outfit": [
+              "suit",
+              "sport",
+              "none"
+            ]
+          },
+          "speech_rate": {
+            "min": 0.7,
+            "max": 1.3,
+            "step": 0.01,
+            "default": 1.0,
+            "basis": [
+              "default",
+              "current"
+            ],
+            "operation": [
+              "multiply",
+              "add"
+            ]
+          },
+          "defaults": {
+            "speech_rate": 1.0,
+            "reply_length": "balanced",
+            "tone": "professional",
+            "voice": "voice_d",
+            "avatar_id": "liang",
+            "outfit": "suit",
+            "jacket_color": "blue",
+            "accessory": "glasses",
+            "scale": 1.0
+          },
+          "avatar_defaults": {
+            "liang": {
+              "avatar_id": "liang",
+              "outfit": "suit",
+              "jacket_color": "blue",
+              "accessory": "glasses",
+              "scale": 1.0
+            },
+            "nailong": {
+              "avatar_id": "nailong",
+              "outfit": "none",
+              "jacket_color": "yellow",
+              "accessory": "none",
+              "scale": 1.0
+            }
+          },
+          "outfits_by_avatar": {
+            "liang": [
+              "suit",
+              "sport",
+              "none"
+            ],
+            "nailong": [
+              "none"
+            ]
+          },
+          "voice_descriptions": {},
+          "voice_resources_bound": false,
+          "turn_fields": [
+            "speech_rate",
+            "reply_length",
+            "tone",
+            "voice"
+          ]
+        },
+        "reply_length_structures": {
+          "brief": "Give only the key answer or essential points.",
+          "balanced": "Give the key answer and a short supporting reason; omit a worked example.",
+          "detailed": "Give the key answer, explain the reasoning, and add a relevant example or steps when useful."
+        }
+      },
+      "response": {
+        "kind": "tailoring",
+        "conversation_query": "",
+        "scope": "session",
+        "requested_fields": [
+          "tone"
+        ],
+        "required_fields": [
+          "tone"
+        ],
+        "preserved_fields": [
+          "speech_rate",
+          "voice"
+        ],
+        "proposal": {
+          "supported": true,
+          "reason": "Request changes only the tone to friendlier wording while explicitly keeping the current speed and voice.",
+          "candidates": [
+            {
+              "id": "c1",
+              "patch": {
+                "tone": "friendly"
+              },
+              "evidence": "tone option 'friendly' = warm wording; speech_rate and voice preserved at current values"
+            }
+          ],
+          "default_id": "c1",
+          "unresolved_references": [],
+          "possible_soft_preference_overrides": [],
+          "explicit_override": false
+        },
+        "clarification": null
+      }
+    },
+    "T3-2": {
+      "query": "Yes, be more encouraging, but keep the answer short.",
+      "context": {
+        "query": "Yes, be more encouraging, but keep the answer short.",
+        "settings": {
+          "speech_rate": 1.0,
+          "reply_length": "brief",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "change_history": [],
+        "task_start_settings": {
+          "speech_rate": 1.0,
+          "reply_length": "brief",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "conversation": [
+          {
+            "sequence": 1,
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "brief",
+              "tone": "professional",
+              "voice": "voice_a",
+              "avatar_id": "liang",
+              "outfit": "suit",
+              "jacket_color": "blue",
+              "accessory": "glasses",
+              "scale": 1.0
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": "How can active recall help me study?"
+              },
+              {
+                "role": "assistant",
+                "content": "Use active recall to practise retrieving information from memory."
+              }
+            ]
+          }
+        ],
+        "soft_preferences": [],
+        "pending": {
+          "original_query": "I want you to help me feel more motivated to keep going.",
+          "text": "Apply this setting choice for this task until changed?",
+          "options": [
+            {
+              "id": "c1",
+              "label": "Tone: Encouraging"
+            },
+            {
+              "id": "other",
+              "label": "Something else — explain what you mean"
+            },
+            {
+              "id": "cancel",
+              "label": "Cancel this change"
+            }
+          ]
+        },
+        "implemented_fields": [
+          "speech_rate",
+          "reply_length",
+          "tone",
+          "voice",
+          "avatar_id",
+          "outfit",
+          "jacket_color",
+          "accessory",
+          "scale"
+        ],
+        "capabilities": {
+          "version": "tutor-capabilities-v2",
+          "options": {
+            "reply_length": [
+              "brief",
+              "balanced",
+              "detailed"
+            ],
+            "tone": [
+              "professional",
+              "friendly",
+              "encouraging"
+            ],
+            "voice": [
+              "voice_a",
+              "voice_b",
+              "voice_c",
+              "voice_d",
+              "voice_e"
+            ],
+            "jacket_color": [
+              "blue",
+              "orange",
+              "green",
+              "gray",
+              "red",
+              "purple",
+              "yellow"
+            ],
+            "accessory": [
+              "none",
+              "hat",
+              "glasses"
+            ],
+            "scale": {
+              "min": 0.85,
+              "max": 1.15,
+              "step": 0.05
+            },
+            "avatar_id": [
+              "liang",
+              "nailong"
+            ],
+            "outfit": [
+              "suit",
+              "sport",
+              "none"
+            ]
+          },
+          "speech_rate": {
+            "min": 0.7,
+            "max": 1.3,
+            "step": 0.01,
+            "default": 1.0,
+            "basis": [
+              "default",
+              "current"
+            ],
+            "operation": [
+              "multiply",
+              "add"
+            ]
+          },
+          "defaults": {
+            "speech_rate": 1.0,
+            "reply_length": "balanced",
+            "tone": "professional",
+            "voice": "voice_d",
+            "avatar_id": "liang",
+            "outfit": "suit",
+            "jacket_color": "blue",
+            "accessory": "glasses",
+            "scale": 1.0
+          },
+          "avatar_defaults": {
+            "liang": {
+              "avatar_id": "liang",
+              "outfit": "suit",
+              "jacket_color": "blue",
+              "accessory": "glasses",
+              "scale": 1.0
+            },
+            "nailong": {
+              "avatar_id": "nailong",
+              "outfit": "none",
+              "jacket_color": "yellow",
+              "accessory": "none",
+              "scale": 1.0
+            }
+          },
+          "outfits_by_avatar": {
+            "liang": [
+              "suit",
+              "sport",
+              "none"
+            ],
+            "nailong": [
+              "none"
+            ]
+          },
+          "voice_descriptions": {},
+          "voice_resources_bound": false,
+          "turn_fields": [
+            "speech_rate",
+            "reply_length",
+            "tone",
+            "voice"
+          ]
+        },
+        "reply_length_structures": {
+          "brief": "Give only the key answer or essential points.",
+          "balanced": "Give the key answer and a short supporting reason; omit a worked example.",
+          "detailed": "Give the key answer, explain the reasoning, and add a relevant example or steps when useful."
+        }
+      },
+      "response": {
+        "kind": "clarification",
+        "conversation_query": "",
+        "scope": "none",
+        "requested_fields": [],
+        "required_fields": [],
+        "preserved_fields": [],
+        "proposal": null,
+        "clarification": {
+          "option_id": "c1",
+          "free_text": "keep the answer short"
+        }
+      }
+    },
+    "R3-2": {
+      "query": "I mean speak more slowly, at eighty percent of the default speed. Keep the detailed explanation and the same tone and voice.",
+      "context": {
+        "query": "I mean speak more slowly, at eighty percent of the default speed. Keep the detailed explanation and the same tone and voice.",
+        "settings": {
+          "speech_rate": 1.2,
+          "reply_length": "detailed",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "change_history": [],
+        "task_start_settings": {
+          "speech_rate": 1.2,
+          "reply_length": "detailed",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "conversation": [
+          {
+            "sequence": 1,
+            "settings": {
+              "speech_rate": 1.2,
+              "reply_length": "detailed",
+              "tone": "professional",
+              "voice": "voice_a",
+              "avatar_id": "liang",
+              "outfit": "suit",
+              "jacket_color": "blue",
+              "accessory": "glasses",
+              "scale": 1.0
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": "I tried active recall, but I forgot most of the answer and feel stuck. How should I practise it next time?"
+              },
+              {
+                "role": "assistant",
+                "content": "Close your notes, retrieve one key idea from memory, and then check what you missed.\n\nRetrieving an answer helps you identify which parts need more practice; forgetting something gives you a specific point to work on.\n\nFor example, after reading a paragraph about photosynthesis, close the page and explain what plants use light for. Reopen the page to check one missing point, then try recalling it again later without looking. Work with one small chunk at a time rather than repeatedly reading the whole chapter."
+              }
+            ]
+          }
+        ],
+        "soft_preferences": [],
+        "pending": null,
+        "implemented_fields": [
+          "speech_rate",
+          "reply_length",
+          "tone",
+          "voice",
+          "avatar_id",
+          "outfit",
+          "jacket_color",
+          "accessory",
+          "scale"
+        ],
+        "capabilities": {
+          "version": "tutor-capabilities-v3",
+          "options": {
+            "reply_length": [
+              "brief",
+              "balanced",
+              "detailed"
+            ],
+            "tone": [
+              "professional",
+              "friendly",
+              "encouraging"
+            ],
+            "voice": [
+              "voice_a",
+              "voice_b",
+              "voice_c",
+              "voice_d",
+              "voice_e"
+            ],
+            "jacket_color": [
+              "blue",
+              "orange",
+              "green",
+              "gray",
+              "red",
+              "purple",
+              "yellow"
+            ],
+            "accessory": [
+              "none",
+              "hat",
+              "glasses"
+            ],
+            "scale": {
+              "min": 0.85,
+              "max": 1.15,
+              "step": 0.05
+            },
+            "avatar_id": [
+              "liang",
+              "nailong"
+            ],
+            "outfit": [
+              "suit",
+              "sport",
+              "none"
+            ]
+          },
+          "speech_rate": {
+            "min": 0.7,
+            "max": 1.3,
+            "step": 0.01,
+            "default": 1.0,
+            "basis": [
+              "default",
+              "current"
+            ],
+            "operation": [
+              "multiply",
+              "add"
+            ]
+          },
+          "defaults": {
+            "speech_rate": 1.0,
+            "reply_length": "balanced",
+            "tone": "professional",
+            "voice": "voice_d",
+            "avatar_id": "liang",
+            "outfit": "suit",
+            "jacket_color": "blue",
+            "accessory": "glasses",
+            "scale": 1.0
+          },
+          "avatar_defaults": {
+            "liang": {
+              "avatar_id": "liang",
+              "outfit": "suit",
+              "jacket_color": "blue",
+              "accessory": "glasses",
+              "scale": 1.0
+            },
+            "nailong": {
+              "avatar_id": "nailong",
+              "outfit": "none",
+              "jacket_color": "yellow",
+              "accessory": "none",
+              "scale": 1.0
+            }
+          },
+          "outfits_by_avatar": {
+            "liang": [
+              "suit",
+              "sport",
+              "none"
+            ],
+            "nailong": [
+              "none"
+            ]
+          },
+          "voice_descriptions": {
+            "voice_a": {
+              "catalog_gender": "female",
+              "source": "Official Plus voice list; recorded in STAGE_4_SPEECH_PROFILE.json"
+            },
+            "voice_c": {
+              "catalog_gender": "female",
+              "source": "Official Plus catalog Sheet1 B578:H578"
+            },
+            "voice_d": {
+              "catalog_gender": "male",
+              "source": "Official Plus catalog Sheet1 B582:H582"
+            },
+            "voice_e": {
+              "catalog_gender": "male",
+              "source": "Official Plus catalog Sheet1 B583:H583"
+            }
+          },
+          "voice_resources_bound": true,
+          "turn_fields": [
+            "speech_rate",
+            "reply_length",
+            "tone",
+            "voice"
+          ]
+        },
+        "reply_length_structures": {
+          "brief": "Give only the key answer or essential points.",
+          "balanced": "Give the key answer and a short supporting reason; omit a worked example.",
+          "detailed": "Give the key answer, explain the reasoning, and add a relevant example or steps when useful."
+        },
+        "clarification_resolution": {
+          "question": {
+            "original_query": "I want your explanation to be much easier to follow, but keep all the details.",
+            "text": "Apply this setting choice for this task until changed?",
+            "options": [
+              {
+                "id": "c1",
+                "label": "Detailed — explanation and a relevant example or steps"
+              },
+              {
+                "id": "other",
+                "label": "Something else — explain what you mean"
+              },
+              {
+                "id": "cancel",
+                "label": "Cancel this change"
+              }
+            ]
+          },
+          "original_scope": "session",
+          "answer": "I mean speak more slowly, at eighty percent of the default speed. Keep the detailed explanation and the same tone and voice.",
+          "preserved_fields": []
+        }
+      },
+      "response": {
+        "kind": "tailoring",
+        "conversation_query": "",
+        "scope": "session",
+        "requested_fields": [
+          "speech_rate"
+        ],
+        "required_fields": [
+          "speech_rate",
+          "reply_length",
+          "tone",
+          "voice"
+        ],
+        "preserved_fields": [
+          "reply_length",
+          "tone",
+          "voice"
+        ],
+        "proposal": {
+          "supported": true,
+          "reason": "The clarified answer asks for a slower speech rate at 80% of the default speed, while keeping the detailed explanation, tone and voice unchanged.",
+          "candidates": [
+            {
+              "id": "c1",
+              "patch": {
+                "speech_rate": {
+                  "basis": "default",
+                  "operation": "multiply",
+                  "value": 0.8
+                },
+                "reply_length": "detailed",
+                "tone": "professional",
+                "voice": "voice_a"
+              },
+              "evidence": "speech_rate supports default-basis multiply expressions; reply_length detailed, tone professional and voice_a are the current values explicitly preserved."
+            }
+          ],
+          "default_id": "c1",
+          "unresolved_references": [],
+          "possible_soft_preference_overrides": [],
+          "explicit_override": false
+        },
+        "clarification": null
+      }
+    },
+    "L3-2": {
+      "query": "I mean a fuller explanation with a reason and an example. Keep the professional tone and the same voice and speed.",
+      "context": {
+        "query": "I mean a fuller explanation with a reason and an example. Keep the professional tone and the same voice and speed.",
+        "settings": {
+          "speech_rate": 1.0,
+          "reply_length": "brief",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "change_history": [],
+        "task_start_settings": {
+          "speech_rate": 1.0,
+          "reply_length": "brief",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "conversation": [
+          {
+            "sequence": 1,
+            "settings": {
+              "speech_rate": 1.0,
+              "reply_length": "brief",
+              "tone": "professional",
+              "voice": "voice_a",
+              "avatar_id": "liang",
+              "outfit": "suit",
+              "jacket_color": "blue",
+              "accessory": "glasses",
+              "scale": 1.0
+            },
+            "messages": [
+              {
+                "role": "user",
+                "content": "I tried active recall, but I forgot most of the answer and feel stuck. How should I practise it next time?"
+              },
+              {
+                "role": "assistant",
+                "content": "Close your notes, retrieve one key idea from memory, and then check what you missed."
+              }
+            ]
+          }
+        ],
+        "soft_preferences": [],
+        "pending": null,
+        "implemented_fields": [
+          "speech_rate",
+          "reply_length",
+          "tone",
+          "voice",
+          "avatar_id",
+          "outfit",
+          "jacket_color",
+          "accessory",
+          "scale"
+        ],
+        "capabilities": {
+          "version": "tutor-capabilities-v3",
+          "options": {
+            "reply_length": [
+              "brief",
+              "balanced",
+              "detailed"
+            ],
+            "tone": [
+              "professional",
+              "friendly",
+              "encouraging"
+            ],
+            "voice": [
+              "voice_a",
+              "voice_b",
+              "voice_c",
+              "voice_d",
+              "voice_e"
+            ],
+            "jacket_color": [
+              "blue",
+              "orange",
+              "green",
+              "gray",
+              "red",
+              "purple",
+              "yellow"
+            ],
+            "accessory": [
+              "none",
+              "hat",
+              "glasses"
+            ],
+            "scale": {
+              "min": 0.85,
+              "max": 1.15,
+              "step": 0.05
+            },
+            "avatar_id": [
+              "liang",
+              "nailong"
+            ],
+            "outfit": [
+              "suit",
+              "sport",
+              "none"
+            ]
+          },
+          "speech_rate": {
+            "min": 0.7,
+            "max": 1.3,
+            "step": 0.01,
+            "default": 1.0,
+            "basis": [
+              "default",
+              "current"
+            ],
+            "operation": [
+              "multiply",
+              "add"
+            ]
+          },
+          "defaults": {
+            "speech_rate": 1.0,
+            "reply_length": "balanced",
+            "tone": "professional",
+            "voice": "voice_d",
+            "avatar_id": "liang",
+            "outfit": "suit",
+            "jacket_color": "blue",
+            "accessory": "glasses",
+            "scale": 1.0
+          },
+          "avatar_defaults": {
+            "liang": {
+              "avatar_id": "liang",
+              "outfit": "suit",
+              "jacket_color": "blue",
+              "accessory": "glasses",
+              "scale": 1.0
+            },
+            "nailong": {
+              "avatar_id": "nailong",
+              "outfit": "none",
+              "jacket_color": "yellow",
+              "accessory": "none",
+              "scale": 1.0
+            }
+          },
+          "outfits_by_avatar": {
+            "liang": [
+              "suit",
+              "sport",
+              "none"
+            ],
+            "nailong": [
+              "none"
+            ]
+          },
+          "voice_descriptions": {
+            "voice_a": {
+              "catalog_gender": "female",
+              "source": "Official Plus voice list; recorded in STAGE_4_SPEECH_PROFILE.json"
+            },
+            "voice_c": {
+              "catalog_gender": "female",
+              "source": "Official Plus catalog Sheet1 B578:H578"
+            },
+            "voice_d": {
+              "catalog_gender": "male",
+              "source": "Official Plus catalog Sheet1 B582:H582"
+            },
+            "voice_e": {
+              "catalog_gender": "male",
+              "source": "Official Plus catalog Sheet1 B583:H583"
+            }
+          },
+          "voice_resources_bound": true,
+          "turn_fields": [
+            "speech_rate",
+            "reply_length",
+            "tone",
+            "voice"
+          ]
+        },
+        "reply_length_structures": {
+          "brief": "Give only the key answer or essential points.",
+          "balanced": "Give the key answer and a short supporting reason; omit a worked example.",
+          "detailed": "Give the key answer, explain the reasoning, and add a relevant example or steps when useful."
+        },
+        "clarification_resolution": {
+          "question": {
+            "original_query": "I want the way you explain things to give me more support with understanding, not just make me feel better.",
+            "text": "Which setting choice would you like for this task until changed?",
+            "options": [
+              {
+                "id": "c1",
+                "label": "Reply length: Balanced — key points and a short reason; Tone: Encouraging"
+              },
+              {
+                "id": "c2",
+                "label": "Reply length: Detailed — explanation and a relevant example or steps; Tone: Encouraging"
+              },
+              {
+                "id": "other",
+                "label": "Something else — explain what you mean"
+              },
+              {
+                "id": "cancel",
+                "label": "Cancel this change"
+              }
+            ]
+          },
+          "original_scope": "session",
+          "answer": "I mean a fuller explanation with a reason and an example. Keep the professional tone and the same voice and speed.",
+          "preserved_fields": []
+        }
+      },
+      "response": {
+        "kind": "tailoring",
+        "conversation_query": "",
+        "scope": "session",
+        "requested_fields": [
+          "reply_length"
+        ],
+        "required_fields": [
+          "reply_length",
+          "tone",
+          "voice",
+          "speech_rate"
+        ],
+        "preserved_fields": [
+          "tone",
+          "voice",
+          "speech_rate"
+        ],
+        "proposal": {
+          "supported": true,
+          "reason": "The answer selects a fuller explanation with reasoning and an example, which is the detailed reply structure, while keeping professional tone, the same voice and the same speed.",
+          "candidates": [
+            {
+              "id": "c1",
+              "patch": {
+                "reply_length": "detailed",
+                "tone": "professional",
+                "voice": "voice_a",
+                "speech_rate": 1.0
+              },
+              "evidence": "reply_length_structures: detailed = key answer, reasoning, and a relevant example or steps; current settings show tone professional, voice_a, speech_rate 1.0, all explicitly preserved."
+            }
+          ],
+          "default_id": "c1",
+          "unresolved_references": [],
+          "possible_soft_preference_overrides": [],
+          "explicit_override": false
+        },
+        "clarification": null
+      }
+    }
+  }
+}

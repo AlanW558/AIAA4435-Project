@@ -68,7 +68,7 @@ def worker(args):
         body=parse(self,*a,**k);self.acceptance_body=body;return body
     def sent(self,status,data):
         b=getattr(self,'acceptance_body',{})
-        marker='drop-submit.once' if self.path=='/study/commands' and b.get('operation')=='submit_task' else 'drop-runtime.once' if self.path.endswith('/settings') else None
+        marker='drop-submit.once' if self.path=='/study/commands' and b.get('operation')=='submit_attribute' else 'drop-runtime.once' if self.path.endswith(('/settings','/round_settings')) else None
         if status<300 and marker and (args.out/marker).exists():
             (args.out/marker).unlink();save(args.out/(marker+'.dropped.json'),{'status_committed':status,'request_id':b.get('request_id')})
             self.close_connection=True

@@ -29,7 +29,9 @@ namespace IAI.Tutor
                 case "speech_rate": return s.speech_rate.ToString("0.00", CultureInfo.InvariantCulture) + "×";
                 case "reply_length": return Capital(s.reply_length);
                 case "tone": return Capital(s.tone);
-                case "voice": return string.IsNullOrEmpty(s.voice) ? "—" : "Voice " + s.voice.Substring(s.voice.Length - 1).ToUpperInvariant();
+                case "voice":
+                    int voiceIndex = System.Array.IndexOf(TutorVoiceCatalog.Ids, s.voice);
+                    return voiceIndex >= 0 ? TutorVoiceCatalog.Labels[voiceIndex] : "—";
                 case "avatar_id": return Capital(s.avatar_id);
                 case "outfit": return s.outfit == "sport" ? "Sportswear" : Capital(s.outfit);
                 case "jacket_color": return Capital(s.jacket_color);

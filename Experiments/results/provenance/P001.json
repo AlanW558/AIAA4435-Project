@@ -1,0 +1,8 @@
+{
+  "collection_method": "auxiliary_api_review",
+  "formal_vr_study": false,
+  "request_and_clarification_authorship": "Requests and clarification answers were drafted or revised by the assistant with explicit user authorization. They are not recordings of participant speech; this workflow bypassed STT.",
+  "rating_authorship": "Participant-entered ratings downloaded from the original v2 review page. No scores were filled or revised by the assistant.",
+  "preference_amendment": "Participant explicitly clarified the tone preference as N plus S after download. All other preferences and 80 numeric responses remain unchanged.",
+  "audio_timing_note": "text-check-v4 audio predates the subsequent clarification repair. The exported evidence and participant ratings have not been regenerated or regraded."
+}

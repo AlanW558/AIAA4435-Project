@@ -10,7 +10,7 @@ from unittest.mock import patch
 import uuid
 from core import APIError
 from tutor_comparison_service import TutorComparisons
-from tutor_preferences import validate_preference, validate_sequence, VERSION
+from tutor_preferences import validate_preference, validate_sequence, VERSION, LEGACY_VERSION
 from tutor_feedback import ATTRIBUTE_VERSION, ATTRIBUTE_RATINGS
 from tutor_transcription import TutorTranscription
 from tutor_dialogue_log import export_rows
@@ -32,10 +32,17 @@ def choice(kind='selected', selected=None):
 class PreferenceValidation(unittest.TestCase):
     def test_ties_and_special_categories(self):
         self.assertEqual(validate_preference(choice(selected=['S','E']))['selected_conditions'], ['E','S'])
-        for kind in ('no_clear_preference','none_acceptable','unable_to_compare'):
-            self.assertEqual(validate_preference(choice(kind))['choice_kind'], kind)
-        for value in [{}, choice(selected=[]), choice(selected=list('EANS')), choice(selected=['E','E']), choice(selected=['X']), {'choice_kind':'no_clear_preference','selected_conditions':['S']}]:
+        self.assertEqual(validate_preference(choice(selected=list('SNAE')))['selected_conditions'], list('EANS'))
+        self.assertEqual(validate_preference(choice('no_clear_preference'))['choice_kind'], 'no_clear_preference')
+        for value in [{}, choice(selected=[]), choice(selected=['E','E']), choice(selected=['X']), {'choice_kind':'no_clear_preference','selected_conditions':['S']}, choice('none_acceptable'), choice('unable_to_compare')]:
             with self.assertRaises(APIError): validate_preference(value)
+
+    def test_legacy_preferences_keep_original_categories_and_selection_limit(self):
+        for kind in ('no_clear_preference','none_acceptable','unable_to_compare'):
+            self.assertEqual(validate_preference(choice(kind), version=LEGACY_VERSION)['choice_kind'], kind)
+        self.assertEqual(validate_preference(choice(selected=['S','E','N']), version=LEGACY_VERSION)['selected_conditions'], ['E','N','S'])
+        with self.assertRaises(APIError): validate_preference(choice(selected=list('EANS')), version=LEGACY_VERSION)
+        with self.assertRaises(APIError): validate_preference(choice(), version='strategy-preference-v99')
 
     def test_only_confirmed_comment_text(self):
         v = choice(); v['comment'] = 'Reason'
@@ -104,10 +111,10 @@ class Preferences(unittest.TestCase):
     def test_one_preference_per_module_and_overall_requires_four(self):
         for i in range(4):
             self.submit_task(); self.assertEqual(self.view()['sequence']['preference_scope'],'attribute')
-            self.pref(choice('unable_to_compare') if i==1 else choice(selected=['E','S']))
+            self.pref(choice('no_clear_preference') if i==1 else choice(selected=list('EANS')))
             if i<3: self.advance(i+1)
         self.assertEqual(self.view()['sequence']['preference_scope'],'comparison_overall')
-        self.pref(choice('none_acceptable'))
+        self.pref(choice('no_clear_preference'))
         self.assertTrue(self.view()['sequence']['comparison_complete'])
         with self.assertRaises(APIError): self.pref()
         with self.assertRaises(APIError): self.advance(0)
@@ -116,6 +123,7 @@ class Preferences(unittest.TestCase):
         overall=next(p for p in prefs if p['scope']=='comparison_overall')
         self.assertEqual(len(overall['evaluated_tasks']),4);self.assertIsNone(overall['domain'])
         self.assertEqual(overall['questionnaire_version'],VERSION)
+        self.assertEqual(next(p for p in prefs if p['domain']=='speech_rate')['answers']['selected_conditions'], list('EANS'))
         rows=list(export_rows(enumerate(self.logs(),1)));self.assertEqual(len([r for r in rows if r['kind']=='strategy_preference']),5)
 
     def test_in_module_skip_and_premature_overall_rejected(self):

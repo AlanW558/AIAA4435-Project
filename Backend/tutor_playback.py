@@ -21,7 +21,7 @@ REASONS = {
                 'component_disabled', 'application_paused', 'task_paused', 'task_closed', 'strategy_changed', 'settings_changed'},
     'failed': {'decode_error', 'playback_error'},
 }
-BINDING_FIELDS = ('audio_request_id', 'condition', 'purpose', 'exchange_id', 'expected_revision', 'branch_revision',
+BINDING_FIELDS = ('audio_request_id', 'condition', 'purpose', 'exchange_id', 'question_id', 'expected_revision', 'branch_revision',
                   'state_revision', 'reveal_id', 'text_sha256', 'speech_settings', 'audio_duration_seconds', 'settings_scope')
 IDENTITY_FIELDS = ('run_id', 'participant_id', 'phase', 'mode', 'task_id', 'task_code', 'domain', 'scenario',
                    'series_id', 'sequence_index', 'session_id')

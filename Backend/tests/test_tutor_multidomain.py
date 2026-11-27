@@ -57,8 +57,15 @@ class MultiDomainTests(unittest.TestCase):
 
     def test_public_capabilities_do_not_invent_voice_traits(self):
         caps = public_capabilities()
-        self.assertEqual(caps["voice_descriptions"], {})
-        self.assertFalse(caps["voice_resources_bound"])
+        descriptions = caps["voice_descriptions"]
+        self.assertEqual({voice: info['catalog_gender'] for voice, info in descriptions.items()},
+                         {'voice_a': 'female', 'voice_b': 'female', 'voice_c': 'female', 'voice_d': 'male', 'voice_e': 'male'})
+        self.assertEqual(caps['voice_labels']['voice_b'], 'Female voice 2')
+        self.assertEqual(caps['voice_labels']['voice_d'], 'Male voice 1')
+        self.assertTrue(all(set(info) == {'catalog_gender', 'source'} for info in descriptions.values()))
+        self.assertTrue(caps["voice_resources_bound"])
+        caps['voice_descriptions']['voice_a']['catalog_gender'] = 'invented'
+        self.assertEqual(public_capabilities()['voice_descriptions']['voice_a']['catalog_gender'], 'female')
         caps["avatar_defaults"]["liang"]["outfit"] = "invented"
         self.assertEqual(public_capabilities()["avatar_defaults"]["liang"]["outfit"], "suit")
 

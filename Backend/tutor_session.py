@@ -30,6 +30,16 @@ Retain original_scope. If the answer changes scope, requests an unsupported fiel
 or cannot resolve the original request, return supported=false with a reason.
 Do not discard constraints explicitly preserved in the original request. A clear
 answer can give one candidate. Do not invent a learning question from 'yes/no'.
+The participant's full latest answer may correct a mistaken interpretation in the
+original question. An offered choice is not a restriction on which supported fields
+the answer may clarify. Include every explicit change and keep constraint in the
+latest answer; do not reduce a compound answer to a yes for an existing option.
+For example, keeping detailed content while specifying a numeric speaking pace must
+retain the detailed structure AND apply the stated pace, even if the old option only
+mentioned reply length. Do not preserve uncertainty that this answer has resolved;
+retain any genuinely remaining ambiguity instead of guessing.
+required_fields lists only requested changes, never fields kept unchanged;
+preserved_fields carries all keep constraints, disjoint from requested/required.
 Do not decide ASK/ACT; the controller consumes the clarified interpretation.'''
 
 
@@ -219,7 +229,7 @@ class TutorSessions:
                        generation_version=result["version"], completed_at_revision=s.revision + 1)
             self.log(s, "answer_generated", job_id=job_id, context=result["context"],
                      answer=job["answer"], settings=deepcopy(job["settings"]), generated_components=result["components"],
-                     exchange_id=job["exchange_id"], generation_version=result["version"])
+                     exchange_id=job["exchange_id"], generation_version=result["version"], response_kind=job.get("response_kind", "answer"))
         # A new request ID for an already completed job still reuses its answer.
         # It never calls the provider again or duplicates a conversation turn.
         s.last = {"decision": "ANSWER", "message": job["answer"], "generation_replay": replay,
@@ -227,7 +237,25 @@ class TutorSessions:
                                "audio_status": "available_on_request" if self.audio_available else "not_connected",
                                "exchange_id": job["exchange_id"]}}
 
+    def _queue_settings_response(self, s, query, before, outcome, scope="session"):
+        """A real model response to a completed adjustment, never a canned sample.
+
+        Existing learning jobs already supply an appropriate answer. Do not add a
+        second acknowledgement, or speak while clarification is still pending.
+        """
+        if s.pending or any(j["status"] != "completed" for j in s.generation_jobs) or not callable(getattr(self.model, "generate_tutor", None)):
+            return
+        effective = s.state.snapshot()["settings"]
+        if s.next_turn:
+            effective.update(s.next_turn)
+        changed = {key: {"before": before[key], "after": value} for key, value in effective.items() if before[key] != value}
+        self._queue(s, [query])
+        s.generation_jobs[-1].update(response_kind="settings_response", settings_response={
+            "outcome": outcome if outcome != "applied" or changed else "unchanged",
+            "scope": scope, "changed_fields": changed, "effective_settings": deepcopy(effective)})
+
     def _apply(self, s, interpretation, candidate, query, source, questions):
+        before = s.state.snapshot()["settings"]
         if self._execution_blocked(s, interpretation):
             if s.pending:
                 s.pending["questions"] = questions
@@ -251,8 +279,9 @@ class TutorSessions:
         s.deferred_questions = []
         s.last = {"decision": "ACT", "message": ("Response settings reserved for one answer." if interpretation["scope"] == "turn" else "Response settings applied."),
                   "applied_scope": interpretation["scope"]}
-        if {"speech_rate", "voice"} & set(interpretation["requested_fields"]):
+        if not self.audio_available and {"speech_rate", "voice"} & set(interpretation["requested_fields"]):
             s.last["message"] += " Audio playback is not connected yet."
+        self._queue_settings_response(s, query, before, "applied", interpretation["scope"])
 
     def _gate(self, s, query, interpretation):
         proposal = interpretation["proposal"]
@@ -270,6 +299,7 @@ class TutorSessions:
         questions = s.deferred_questions + ([interpretation["conversation_query"]] if interpretation["conversation_query"] else [])
         if proposal["supported"] and self._execution_blocked(s, interpretation):
             s.deferred_questions = questions
+            self._queue_settings_response(s, query, s.state.snapshot()["settings"], "unresolved")
             return
         if decision == "ASK":
             s.pending = {"id": uuid.uuid4().hex, "query": query, "interpretation": interpretation,
@@ -283,6 +313,7 @@ class TutorSessions:
         else:
             s.deferred_questions = questions
             s.last = {"decision": "UNRESOLVED", "reason": reason, "message": proposal["reason"] if not proposal["supported"] else "The request remains unresolved; settings were preserved."}
+            self._queue_settings_response(s, query, s.state.snapshot()["settings"], "unresolved")
 
     def _execution_blocked(self, s, interpretation):
         if execution_connected(interpretation):
@@ -309,6 +340,7 @@ class TutorSessions:
             s.pending = None
             self._queue(s, questions)
             s.last = {"decision": "CANCELLED", "message": "Change cancelled; persistent settings were preserved."}
+            self._queue_settings_response(s, pending["query"], s.state.snapshot()["settings"], "cancelled")
             return
         interpretation = pending["interpretation"]
         if option_id == "other":
@@ -320,7 +352,7 @@ class TutorSessions:
                                         preserved_fields=interpretation.get("preserved_fields", []))
             resolved = result["interpretation"]
             proposal = resolved["proposal"]
-            if resolved["kind"] not in ("tailoring", "mixed") or not proposal or not proposal["supported"] or len(proposal["candidates"]) != 1 or proposal["unresolved_references"] or resolved["scope"] != interpretation["scope"]:
+            if resolved["kind"] not in ("tailoring", "mixed") or not proposal or not proposal["supported"] or proposal.get("candidate_recovery") or len(proposal["candidates"]) != 1 or proposal["unresolved_references"] or proposal.get("ambiguities") or resolved["scope"] != interpretation["scope"]:
                 # Keep the same live question; don't run another policy gate or
                 # invent an answer. Additional learning content is retained.
                 pending["questions"] = questions + ([resolved["conversation_query"]] if resolved["conversation_query"] else [])
@@ -353,6 +385,7 @@ class TutorSessions:
         if operation in ("settings", "undo"):
             if s.pending:
                 raise APIError(409, "pending_question", "Resolve or cancel the pending change first.")
+            before = s.state.snapshot()["settings"]
             if operation == "settings":
                 patch = validate_patch(data.get("patch"))
                 if not patch or set(patch) - CONTROL_FIELDS:
@@ -364,8 +397,10 @@ class TutorSessions:
                 s.state.undo(data["field"], expected_revision=s.state.snapshot()["revision"])
             s.next_turn = None
             s.last = {"decision": "ACT", "message": "Response settings updated.", "applied_scope": "session"}
-            if (operation == "settings" and {"speech_rate", "voice"} & set(patch)) or (operation == "undo" and data.get("field") in ("speech_rate", "voice", "all")):
+            if not self.audio_available and ((operation == "settings" and {"speech_rate", "voice"} & set(patch)) or (operation == "undo" and data.get("field") in ("speech_rate", "voice", "all"))):
                 s.last["message"] += " Audio playback is not connected yet."
+            marker = "[Controls confirmed]" if operation == "settings" else "[Undo selected in Controls]"
+            self._queue_settings_response(s, marker, before, "applied")
             return
         query = text_value(data.get("query"), "query", 8000)
         if "question_id" in data:
@@ -374,7 +409,8 @@ class TutorSessions:
             raise APIError(503, "model_unavailable", "Tutor interpretation requires the live adapter or an explicit test fixture.")
         self.log(s, "user_request", query=query)
         result = self._model_result(s, self.interpreter.interpret, query, s.state.snapshot(),
-                                   preferences=s.preferences, pending=s.pending["question"] if s.pending else None)
+                                   preferences=s.preferences, pending=s.pending["question"] if s.pending else None,
+                                   answering_pending_question="question_id" in data)
         interpretation = result["interpretation"]
         self.log(s, "interpretation", result=result)
         kind = interpretation["kind"]

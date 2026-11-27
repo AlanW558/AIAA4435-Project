@@ -10,6 +10,7 @@ namespace IAI.Tutor
 {
     [Serializable] class TutorAudioRequest
     { public string request_id, condition, purpose; public int expected_revision, exchange_id; }
+    [Serializable] class TutorQuestionAudioRequest : TutorAudioRequest { public string question_id; }
 
     /// <summary>One manually requested clip, bound to a visible task/branch revision.
     /// Never synthesize from client-provided text or mutate speech with AudioSource.pitch.</summary>
@@ -33,43 +34,33 @@ namespace IAI.Tutor
         string reportEndpoint, reportRoute, audioRequestId;
         float playbackBegan, lastPosition;
         bool reportedStart;
+        string automaticallySpokenQuestion = "";
         public string AuditError => outbox ? outbox.Error : "";
-        bool Eligible
+        bool EligibleFor(bool question)
         {
-            get
-            {
                 if (!panel || !panel.isActiveAndEnabled || panel.Study && panel.Study.SpeechBusy || StudySurveyBusy || panel.TaskCardOpen || panel.seat && !panel.seat.IsSeated || Driver == null || !Driver.Connected ||
-                    Driver.Busy || Driver.UnknownOutcome || Driver.HasQuestion || Driver.HasQueuedAnswer || !Driver.View.audio_available ||
+                    Driver.Busy || Driver.UnknownOutcome || (!question && Driver.HasQuestion) || Driver.HasQueuedAnswer || !Driver.View.audio_available ||
+                    panel.client && panel.client.studyLocked ||
                     panel.Speech && (panel.Speech.Recording || panel.Speech.Working)) return false;
                 var c = panel.comparison;
-                return !c || c.Available && (c.State.phase == "awaiting_input" || c.CanEdit);
-            }
+                bool review=c && panel.StudyFlow && panel.StudyFlow.CanReviewAttributeResults && !c.Paused &&
+                    !c.instructionsOpen && c.State.results_visible && (c.Branch.status=="ready" || c.Branch.status=="stopped");
+                return !c || review || c.Available && (c.State.phase == "awaiting_input" || c.CanEdit);
         }
+        bool Eligible => EligibleFor(false);
         bool StudySurveyBusy => panel && panel.StudyFlow && panel.StudyFlow.Speech && (panel.StudyFlow.Speech.Recording || panel.StudyFlow.Speech.Working);
-        public bool CanMaterial => panel && panel.isActiveAndEnabled && (panel.StudyFlow ? panel.StudyFlow.MaterialAvailable : panel.Study && panel.Study.MaterialPageOpen && panel.Navigation.StudyPreview) && panel.comparison && panel.comparison.Connected && panel.comparison.Available &&
-            !StudySurveyBusy && !(panel.Study && panel.Study.SpeechBusy) && !(panel.Speech && (panel.Speech.Recording || panel.Speech.Working)) &&
-            (!panel.seat || panel.seat.IsSeated) && Driver.View.audio_available &&
-            (panel.comparison.State.phase == "awaiting_input" || panel.comparison.CanEditBranch ||
-             panel.comparison.State.results_visible && (panel.comparison.Branch.status == "ready" || panel.comparison.Branch.status == "stopped"));
-        public void ToggleMaterial(int index)
-        {
-            if (Active) { Stop(reason: "user_stop"); return; }
-            var materials = panel.StudyFlow ? panel.StudyFlow.CurrentCard?.materials : panel.Navigation.Task?.materials;
-            if (CanMaterial && materials != null && index >= 0 && index < materials.Length)
-                Begin("material", index + 1, materials[index].settings);
-        }
         TutorExchange Latest => (Driver?.View?.conversation ?? Array.Empty<TutorExchange>()).LastOrDefault();
-        public bool CanSample => Eligible && panel.CurrentTab == 1;
         public bool CanReply => Eligible && panel.CurrentTab == 0 && (!panel.comparison || panel.comparison.State.results_visible) && Latest != null;
-        string Context() => !(Purpose == "material" ? CanMaterial : Eligible) ? null : Endpoint + ":" + Driver.View.session_id + ":" + Driver.View.condition + ":" +
-            (panel.comparison ? panel.comparison.State.revision : Driver.View.revision) + ":" + panel.CurrentTab;
+        public bool CanClarification => panel && !panel.comparison && panel.CurrentTab==0 && EligibleFor(true) && Driver.HasQuestion;
+        string Context() => !(Purpose == "clarification" ? CanClarification : Eligible) ? null : Endpoint + ":" + Driver.View.session_id + ":" + Driver.View.condition + ":" +
+            (panel.comparison ? panel.comparison.State.revision : Driver.View.revision) + ":" + panel.CurrentTab + ":" + (Purpose=="clarification" ? Driver.View.question.question_id : "");
         void Awake()
         {
             source = gameObject.AddComponent<AudioSource>();
             source.playOnAwake = false; source.loop = false; source.spatialBlend = 0;
             source.pitch = 1; source.volume = 1; source.dopplerLevel = 0; source.reverbZoneMix = 0;
         }
-        public void ToggleSample() { if (Active) Stop(reason: "user_stop"); else if (CanSample) Begin("sample", 0, Driver.View.settings); }
+        public void ToggleClarification() { if (Active) Stop(reason: "user_stop"); else if (CanClarification) Begin("clarification", 0, Driver.View.settings); }
         public void ToggleReply() { if (Active) Stop(reason: "user_stop"); else if (CanReply) Begin("reply", Latest.id, Latest.settings); }
         void Begin(string purpose, int exchange, TutorSettings settings)
         {
@@ -77,9 +68,11 @@ namespace IAI.Tutor
             outbox = TutorPlaybackOutbox.Instance;
             if (!outbox.CanStart) { Status = outbox.Error.Length > 0 ? outbox.Error : "Playback log pending. Please wait for synchronization."; Notify(); return; }
             Purpose = purpose; captured = Context();
+            if(purpose=="clarification") automaticallySpokenQuestion=Driver.View.session_id+":"+Driver.View.question.question_id;
             var c = panel.comparison;
-            var body = new TutorAudioRequest { request_id = Guid.NewGuid().ToString("N"), purpose = purpose, exchange_id = exchange,
-                condition = Driver.View.condition, expected_revision = c ? c.State.revision : Driver.View.revision };
+            TutorAudioRequest body = purpose=="clarification" ? new TutorQuestionAudioRequest { question_id=Driver.View.question.question_id } : new TutorAudioRequest();
+            body.request_id=Guid.NewGuid().ToString("N");body.purpose=purpose;body.exchange_id=exchange;
+            body.condition=Driver.View.condition;body.expected_revision=c ? c.State.revision : Driver.View.revision;
             string route = c ? "/tutor/comparisons/" + c.State.task_id + "/audio" : "/tutor/sessions/" + Driver.View.session_id + "/audio";
             reportEndpoint = Endpoint; reportRoute = route.Substring(0, route.Length - "audio".Length) + "playback";
             audioRequestId = body.request_id; reportedStart = false; lastPosition = 0;
@@ -118,6 +111,12 @@ namespace IAI.Tutor
         }
         void Update()
         {
+            if (!Active && CanClarification && panel.client.QuestionForAutomaticSpeech==Driver.View.question.question_id)
+            {
+                string key=Driver.View.session_id+":"+Driver.View.question.question_id;
+                if(key!=automaticallySpokenQuestion)
+                { automaticallySpokenQuestion=key;Begin("clarification",0,Driver.View.settings); }
+            }
             if (captured == null) return;
             if (captured != Context()) { Stop(reason: ContextReason()); return; }
             if (Playing) lastPosition = Mathf.Max(lastPosition, source.time);
@@ -158,8 +157,10 @@ namespace IAI.Tutor
             if (clip) { Destroy(clip); clip = null; }
             Loading = false; captured = null; Status = message; Notify();
         }
-        void OnDisable() { Stop(reason: "component_disabled"); }
-        void OnApplicationPause(bool paused) { if (paused) Stop(reason: "application_paused"); }
+        void SuppressOldQuestionReplay()
+        { if(panel && !panel.comparison && panel.client && panel.client.HasQuestion) automaticallySpokenQuestion=panel.client.View.session_id+":"+panel.client.View.question.question_id; }
+        void OnDisable() { SuppressOldQuestionReplay();Stop(reason: "component_disabled"); }
+        void OnApplicationPause(bool paused) { if (paused) { SuppressOldQuestionReplay();Stop(reason: "application_paused"); } }
         void Notify() { Changed?.Invoke(); }
 
         public static AudioClip DecodeWav(byte[] bytes)

@@ -225,6 +225,35 @@ class TutorSessionTests(unittest.TestCase):
         self.assertEqual(v["settings"]["reply_length"], "balanced")
         self.assertEqual(self.choose(v)["settings"]["reply_length"], "brief")
 
+    def test_single_candidate_with_remaining_ambiguity_cannot_commit_clarification(self):
+        v = self.ask(self.create("A"))
+        question = deepcopy(v["question"])
+        self.model.resolved = tailoring("brief")
+        self.model.resolved['proposal']['ambiguities'] = [{
+            'kind': 'degree', 'fields': ['reply_length'], 'evidence': 'a bit less'}]
+        v = self.choose(v, 'other', free_text='Maybe a bit less, but I am not sure how much.')
+        self.assertEqual(v['decision'], 'UNRESOLVED')
+        self.assertEqual(v['question'], question)
+        self.assertEqual(v['settings']['reply_length'], 'balanced')
+
+    def test_bound_spoken_choice_cannot_discard_added_numeric_constraint(self):
+        v = self.create('A')
+        v = self.mutate(v, 'settings', patch={'speech_rate': 1.2, 'reply_length': 'detailed'})
+        self.model.raw = tailoring('detailed')
+        v = self.ask(v, 'Make it easier to follow, but keep all the details.')
+        question = deepcopy(v['question'])
+        self.model.raw = answer('c1')  # The model wrongly reduces the full answer to the old Detailed option.
+        self.model.resolved = tailoring('detailed', requested_fields=['speech_rate'],
+            required_fields=['speech_rate'], preserved_fields=['reply_length'])
+        self.model.resolved['proposal']['candidates'][0]['patch'] = {'speech_rate': .8}
+        full = 'Keep all those details, but slow the pace to eighty percent of your default speed.'
+        v = self.mutate(v, query=full, question_id=question['question_id'])
+        self.assertEqual(v['decision'], 'ACT')
+        self.assertEqual(v['settings']['speech_rate'], .8)
+        self.assertEqual(v['settings']['reply_length'], 'detailed')
+        self.assertEqual(self.model.calls.count('resolve'), 1)
+        self.assertEqual(self.model.contexts[-1]['clarification_resolution']['answer'], full)
+
     def test_resolution_cannot_silently_turn_one_answer_into_persistent_setting(self):
         self.model.raw = tailoring("brief", scope="turn")
         v = self.ask(self.create("A"))
@@ -250,6 +279,23 @@ class TutorSessionTests(unittest.TestCase):
         v = self.mutate(v, "undo", field="reply_length")
         self.assertEqual(v["settings"]["reply_length"], "balanced")
         self.assertEqual(v["settings"]["accessory"], "glasses")
+        self.assertEqual(self.model.calls, [])
+
+    def test_audio_control_status_tracks_backend_availability(self):
+        for available in (False, True):
+            self.app.audio_available = available
+            for field, value in (("speech_rate", .9), ("voice", "voice_e")):
+                for undo_field in (field, "all"):
+                    with self.subTest(available=available, field=field, undo=undo_field):
+                        view = self.create("A")
+                        baseline = deepcopy(view["settings"])
+                        view = self.mutate(view, "settings", patch={field: value})
+                        self.assertEqual(view["settings"][field], value)
+                        self.assertEqual("Audio playback is not connected yet." in view["message"], not available)
+                        view = self.mutate(view, "undo", field=undo_field)
+                        self.assertEqual(view["settings"], baseline)
+                        self.assertEqual("Audio playback is not connected yet." in view["message"], not available)
+                        self.assertEqual(view["audio_available"], available)
         self.assertEqual(self.model.calls, [])
 
     def test_idempotent_replay_never_calls_model_or_rolls_back_current_view(self):

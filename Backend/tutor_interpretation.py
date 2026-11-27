@@ -1,5 +1,6 @@
 """Read-only tutor intent interpretation. No gate decisions or setting commits."""
 from copy import deepcopy
+import re
 
 from core import APIError, IDENTIFIER, text_value
 from model import ModelError
@@ -7,7 +8,7 @@ from tutor_state import FIELDS, REPLY_LENGTH_GUIDANCE, validate_patch, validate_
 from tutor_capabilities import DIALOGUE_FIELDS, RateLimitError, candidate_patch, public_capabilities
 
 
-INTERPRETER_VERSION = "tutor-interpretation-v5"
+INTERPRETER_VERSION = "tutor-interpretation-v9"
 TUTOR_INTERPRETER_PROMPT = '''Interpret the user's public request to a VR tutor.
 You classify intent and propose interpretations, NOT decide whether to ask or act.
 Never answer the learning question or claim a change has happened.
@@ -41,28 +42,81 @@ and brief', both fields are required; for 'calmer' interpreted as either rate or
 requested_fields contains both and required_fields is empty. preserved_fields lists
 explicitly unchanged fields, disjoint from requested_fields. For chat/clarification
 these two lists are empty. Do not invent alternatives for an explicit conjunction.
+required_fields must be a SUBSET of requested_fields and must be disjoint from
+preserved_fields. A field explicitly kept unchanged belongs only in preserved_fields,
+not required_fields. For 'slow down but keep tone and voice', request/require only
+speech_rate; preserve tone and voice. Repeating their current values in a patch is
+allowed, but their values must match the current settings exactly.
 
 For tailoring/mixed, proposal is:
 {"supported":true,"reason":"brief English explanation",
  "candidates":[{"id":"c1","patch":{"reply_length":"brief"},"evidence":"public evidence"}],
  "default_id":"c1","unresolved_references":[],
- "possible_soft_preference_overrides":[],"explicit_override":false}
+ "possible_soft_preference_overrides":[],"explicit_override":false,"ambiguities":[]}
+unresolved_references and possible_soft_preference_overrides are arrays of short
+STRINGS only, never objects. For example, ["Usually prefer a faster pace"].
+Do not copy the field/value/text objects from soft_preferences into these arrays.
+ambiguities records uncertainty separately from the number of candidates. Always
+include it, using [] when the intended change is clear. Each entry has exactly
+{"kind":"dimension|degree|reference|basis","fields":["supported field"],
+ "evidence":"an exact nonempty span from the current public user query"}.
+Use at most four entries; fields must be distinct supported field names, not other.
+dimension means the desired benefit leaves the attribute to change unclear; degree
+means an unspecified amount or category choice; reference means an ambiguous prior
+state; basis means default versus current speed is genuinely unclear. A plausible
+single default does NOT resolve these uncertainties. Retain the uncertainty even
+when only one valid candidate can be proposed. Do not add uncertainty merely because
+a request is nonnumeric: exact voice labels, friendly/neutral wording, essentials
+only, and an unambiguous historical reference can each identify one clear outcome.
+An explicit contrast or negation constrains the intended benefit. Requests for more
+support in understanding, rather than emotional reassurance, must not be reduced to
+encouraging wording alone. Consider content structure and delivery as appropriate.
+"Keep the details" preserves content completeness; it does not by itself request
+reply_length=detailed or identify what should make an explanation easier to follow.
+Honor paraphrased retention constraints such as preserving all information, losing
+none of the explanation, or removing no details. At a current Detailed structure,
+those constraints require preserving reply_length=detailed: put reply_length in
+preserved_fields and do not offer Balanced/Brief or removal of examples/reasoning.
+If readability must improve without information loss, consider supported delivery
+or wording alternatives, or retain uncertainty; shortening is not a valid fallback.
+For an unclear desired benefit, retain plausible different attributes and mark
+dimension uncertainty instead of inventing one confident interpretation. A request
+for improvement is not fulfilled merely because the proposed setting is already
+active: if all candidates leave settings unchanged and the desired improvement is
+still unclear, record dimension uncertainty. Explicitly keeping a setting or naming
+an already-active precise value is a valid unambiguous no-op; do not invent doubt.
 Each patch may contain supported fields from capabilities. Include concrete values
 for required fields even if unchanged. Categorical values must be exact supported IDs.
 speech_rate is an absolute default-speed multiplier OR an expression object:
 {"basis":"default|current","operation":"multiply|add","value":number}.
-For relative or computed requests use the expression, NOT your computed final value:
+For explicit numeric relative or computed requests use the expression, NOT your computed final value:
 '90% of default' -> default/multiply/0.90; '10% slower than now' -> current/multiply/0.90;
 'reduce the multiplier by 0.10' -> current/add/-0.10. The program does arithmetic.
 If basis is genuinely ambiguous, offer grounded alternatives. 1.00 means the selected
 voice's model-default speed. Unsupported precision or range must remain unresolved,
-never rounded or clamped. Small qualitative changes use current public settings;
+never rounded or clamped. For qualitative requests such as slower or calmer, choose
+absolute supported speech_rate suggestions on the 0.01 grid; do not invent a numeric
+percentage and multiply the current rate into an unrepresentable value. Distinguish
+these model-proposed suggestions from explicit user arithmetic, which must remain
+exact. Preserve degree uncertainty when the desired amount is not specified.
+Small qualitative changes use current public settings;
 private study target intervals are unavailable and must not be invented.
 tone: professional = neutral, direct; friendly = warm wording; encouraging = supportive
-of effort and progress. These are categories, not intensities. Voice A/B/C/D/E are the five supported IDs (default D); F/G/H are unavailable.
-Voice identities are selected, but subjective acoustic descriptions remain unverified:
-voice_descriptions is empty until actual resources are bound, so do not invent acoustic
-traits or map 'warm voice' to B. Explicit IDs and grounded public history are usable.
+of effort and progress. These are categories, not intensities. Internal voice IDs
+voice_a/b/c/d/e remain stable (default voice_d). Use voice_labels for visible names:
+Female voice 1/2/3 map to voice_a/b/c; Male voice 1/2 map to voice_d/e.
+Treat these visible names as exact voice identities, including spoken numbers.
+Legacy Voice A/B/C/D/E names remain aliases; F/G/H are unavailable.
+Voice identities are selected. voice_descriptions contains only verified provider
+catalog gender labels: these may ground male/female voice requests. A catalog gender
+does not establish pitch, warmth, age, accent or perceived quality. Missing descriptions
+are unknown; never infer acoustic traits or map 'warm voice' to an arbitrary voice.
+Likewise, a comfort/gentleness request without an identified voice, requested catalog
+gender or grounded voice history does not justify picking an arbitrary voice ID.
+Offer grounded wording/pace alternatives and retain uncertainty; do not use female
+or male labels as evidence of a less intimidating sound. A request specifically to
+try a different voice can offer identity choices without claiming unknown qualities.
+Explicit IDs and grounded public history are usable. Preserve tone when changing voice.
 Appearance supports only listed assets, colours, accessories and whole-body scale.
 Nailong supports outfit none only. Avatar replacement loads avatar_defaults, overridden
 by explicit compatible keep constraints. Only include avatar_id for a real identity
@@ -103,10 +157,16 @@ clarification is allowed only when pending is present and this utterance answers
 pending question. It is an answer to the existing request, not a new tailoring request.
 Return kind=clarification, scope=none, requested_fields=[], proposal=null, and
 clarification={"option_id":"an offered id or other or cancel","free_text":""}.
+When answering_pending_question=true, the application has explicitly bound this
+utterance to the pending question. A restated choice such as 'Use friendlier wording,
+but keep the same speed and voice' is an answer, not a new independent request.
 Resolve a clear verbal choice to its offered id. 'Yes' selects an offered concrete
 option only if there is exactly one; 'no/cancel/keep things unchanged' cancels when clear.
 An ambiguous 'yes', a rephrasing, or an unlisted answer uses option_id=other and puts
 the user's original words in free_text; never guess an offered option.
+For any concrete option or cancel, free_text must be exactly empty. If the reply adds
+constraints that need checking, use other with the FULL original utterance instead of
+selecting an option and attaching extra text. The resolver then checks all constraints.
 If an answer also asks a learning question, preserve that question in conversation_query.
 An unrelated learning question is chat, not automatically a clarification answer.
 A clearly new setting request is tailoring/mixed, not automatically an answer.
@@ -156,13 +216,13 @@ def _pending(value):
             raise APIError(400, "invalid_pending", "Clarification option IDs must be distinct.")
         seen.add(ident)
         options.append({"id": ident, "label": text_value(item.get("label"), "option_label", 500)})
-    if not {"other", "cancel"} <= seen or not 3 <= len(options) <= 5:
-        raise APIError(400, "invalid_pending", "Offer 1–3 candidates plus other and cancel.")
+    if not {"other", "cancel"} <= seen or not 2 <= len(options) <= 5:
+        raise APIError(400, "invalid_pending", "Offer 0–3 candidates plus other and cancel.")
     return {"original_query": text_value(value.get("original_query"), "original_query", 8000),
             "text": text_value(value.get("text"), "question_text", 1000), "options": options}
 
 
-def build_context(query, snapshot, *, preferences=None, pending=None):
+def build_context(query, snapshot, *, preferences=None, pending=None, answering_pending_question=False):
     """Project internal state to a bounded allowlist; no task goals or condition."""
     query = text_value(query, "query", 8000)
     settings = _public_settings(snapshot["settings"])
@@ -182,18 +242,89 @@ def build_context(query, snapshot, *, preferences=None, pending=None):
                              "content": text_value(message.get("content"), "message", 16000)})
         conversation.append({"sequence": exchange["id"], "settings": _public_settings(exchange["settings"]),
                              "messages": messages})
-    return {"query": query, "settings": settings, "change_history": changes,
+    context = {"query": query, "settings": settings, "change_history": changes,
             "task_start_settings": _public_settings(snapshot["task_start_settings"]) if snapshot.get("task_start_settings") is not None else None,
             "conversation": conversation, "soft_preferences": _preferences([] if preferences is None else preferences),
             "pending": _pending(pending), "implemented_fields": list(FIELDS),
             "capabilities": public_capabilities(),
             "reply_length_structures": dict(REPLY_LENGTH_GUIDANCE)}
+    if type(answering_pending_question) is not bool or (answering_pending_question and context["pending"] is None):
+        raise APIError(400, "invalid_pending", "An explicitly bound answer requires a live question.")
+    if answering_pending_question:
+        context["answering_pending_question"] = True
+    return context
 
 
 def _text(value, limit=2000, empty=False):
     if not isinstance(value, str) or len(value) > limit or (not empty and not value.strip()):
         raise ValueError("invalid text")
     return value.strip()
+
+
+def _preference_override_text(value, preferences):
+    if isinstance(value, str):
+        return _text(value, 1000)
+    # Some model responses echo a supplied preference object rather than its
+    # text. Accept only an EXACT public preference, never invent or repair one.
+    if not isinstance(value, dict) or value not in preferences:
+        raise ValueError("Override must be text or an exact supplied preference.")
+    if "text" in value:
+        return _text(value["text"], 1000)
+    return _text(f"{value['field']}: {value['value']}", 1000)
+
+
+def _ambiguities(value, query):
+    """Bound public uncertainty evidence without inferring strategy or task goals."""
+    if not isinstance(value, list) or len(value) > 4:
+        raise ValueError("Invalid ambiguity list.")
+    result, seen = [], set()
+    for item in value:
+        if not isinstance(item, dict) or set(item) != {"kind", "fields", "evidence"}:
+            raise ValueError("Invalid ambiguity fields.")
+        kind, fields = item["kind"], item["fields"]
+        if kind not in ("dimension", "degree", "reference", "basis"):
+            raise ValueError("Invalid ambiguity kind.")
+        if (not isinstance(fields, list) or not 1 <= len(fields) <= len(FIELDS)
+                or any(not isinstance(field, str) or field not in FIELDS for field in fields)
+                or len(set(fields)) != len(fields)):
+            raise ValueError("Use distinct supported ambiguity fields.")
+        evidence = _text(item["evidence"], 500)
+        if evidence not in query:
+            raise ValueError("Ambiguity evidence must occur in the public query.")
+        identity = (kind, tuple(sorted(fields)), evidence)
+        if identity in seen:
+            raise ValueError("Duplicate ambiguity evidence.")
+        seen.add(identity)
+        result.append({"kind": kind, "fields": list(fields), "evidence": evidence})
+    return result
+
+
+def _simple_bound_confirmation(query, pending):
+    options = [item for item in pending["options"] if item["id"] not in ("other", "cancel")]
+    simple = query.strip().casefold().rstrip(".!?").strip()
+    return len(options) == 1 and simple in {"yes", "yes please", "yes, please", "okay", "ok", "sure", "correct", "that's right", "that is right", "yeah", "yep"}
+
+
+def _recoverable_rate_suggestion(proposal, context, valid_candidates):
+    """A conservative recovery boundary, not a parser or numeric approximation.
+
+    Recover when public uncertainty about rate was retained, or alternatives
+    visibly span different attributes and at least one candidate validated.
+    The public utterance must have no numeric wording. Numeric requests (including
+    spoken numbers/fractions) keep the strict unsupported-value path, even if
+    the model also labels them ambiguous. False negatives are intentionally safe.
+    """
+    explicit_uncertainty = any("speech_rate" in item["fields"] for item in proposal["ambiguities"])
+    candidate_fields = {tuple(sorted(item["patch"])) for item in proposal["candidates"]}
+    cross_attribute_alternatives = bool(valid_candidates) and len(candidate_fields) > 1
+    if not (explicit_uncertainty or cross_attribute_alternatives):
+        return False
+    numeric_words = (r"zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|"
+                     r"twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|"
+                     r"nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|"
+                     r"hundred|thousand|half|halve|quarter|third|double|twice|triple|"
+                     r"thrice|percent|percentage")
+    return not re.search(r"\d|[%‰]|\b(?:" + numeric_words + r")\b", context["query"], re.IGNORECASE)
 
 
 def normalize_interpretation(raw, context):
@@ -212,7 +343,7 @@ def normalize_interpretation(raw, context):
             raise ValueError()
         required = result.get("required_fields", fields)
         preserved = result.get("preserved_fields", [])
-        for values, allowed in ((required, fields), (preserved, FIELDS)):
+        for values, allowed in ((required, (*FIELDS, "other")), (preserved, FIELDS)):
             if not isinstance(values, list) or any(not isinstance(f, str) or f not in allowed for f in values) or len(set(values)) != len(values):
                 raise ValueError()
         if kind in ("tailoring", "mixed"):
@@ -220,8 +351,36 @@ def normalize_interpretation(raw, context):
             # merely by omitting it from the next model response.
             original_keeps = context.get("clarification_resolution", {}).get("preserved_fields", [])
             preserved = list(dict.fromkeys([*preserved, *original_keeps]))
-        if set(fields) & set(preserved):
+        overlap = set(fields) & set(preserved)
+        if overlap:
+            # Recover only redundant CHANGE labels when every candidate explicitly
+            # repeats the exact current KEEP value and another real change field
+            # remains. Never infer a missing value, evaluate an expression, drop a
+            # contradictory candidate, or repair a keep-only malformed request.
+            proposal = result.get("proposal")
+            items = proposal.get("candidates") if isinstance(proposal, dict) else None
+            current = context["settings"]
+            if (kind not in ("tailoring", "mixed") or not (set(fields) - overlap)
+                    or not isinstance(proposal, dict) or proposal.get("supported") is not True
+                    or not isinstance(items, list) or not 1 <= len(items) <= 3):
+                raise ValueError()
+            for item in items:
+                patch = item.get("patch") if isinstance(item, dict) else None
+                if not isinstance(patch, dict):
+                    raise ValueError()
+                for field in overlap:
+                    value = patch.get(field)
+                    valid_type = type(value) in (int, float) if type(current[field]) in (int, float) else type(value) is type(current[field])
+                    if field not in patch or not valid_type or value != current[field]:
+                        raise ValueError()
+            fields = [field for field in fields if field not in overlap]
+            result["requested_fields"] = fields
+        if set(required) - set(fields) - set(preserved):
             raise ValueError()
+        # Models sometimes list an explicit KEEP in both required and preserved.
+        # Canonicalize only that redundant label. The keep itself remains enforced
+        # against every candidate below; no patch value is changed or supplied here.
+        required = [field for field in required if field not in preserved]
         result.update(required_fields=required, preserved_fields=preserved)
         if kind in ("chat", "clarification"):
             if result["scope"] != "none" or fields or required or preserved or result["proposal"] is not None:
@@ -241,7 +400,18 @@ def normalize_interpretation(raw, context):
                 if answer["option_id"] == "other":
                     answer["free_text"] = context["query"]
                 elif answer["free_text"]:
-                    raise ValueError()
+                    if answer["option_id"] == "cancel":
+                        raise ValueError()
+                    # Do not discard an additional keep/change constraint or
+                    # commit the selected option blindly. Resolve the FULL answer.
+                    answer.update(option_id="other", free_text=context["query"])
+                elif (answer["option_id"] != "cancel" and context.get("answering_pending_question")
+                      and not _simple_bound_confirmation(context["query"], pending)):
+                    # A spoken/text answer may select an option AND add constraints.
+                    # Keep the entire utterance for the constrained resolver instead
+                    # of trusting a model-selected option to retain those words.
+                    # Direct UI option IDs bypass interpretation and are unaffected.
+                    answer.update(option_id="other", free_text=context["query"])
             return result
 
         if result["clarification"] is not None or not fields or result["scope"] not in ("session", "turn", "unspecified"):
@@ -251,15 +421,18 @@ def normalize_interpretation(raw, context):
         proposal = result["proposal"]
         keys = {"supported", "reason", "candidates", "default_id", "unresolved_references",
                 "possible_soft_preference_overrides", "explicit_override"}
-        if not isinstance(proposal, dict) or set(proposal) != keys:
+        if not isinstance(proposal, dict) or not keys <= set(proposal) or set(proposal) - keys - {"ambiguities"}:
             raise ValueError()
         if type(proposal["supported"]) is not bool or type(proposal["explicit_override"]) is not bool:
             raise ValueError()
         proposal["reason"] = _text(proposal["reason"])
+        proposal["ambiguities"] = _ambiguities(proposal.get("ambiguities", []), context["query"])
         for key in ("unresolved_references", "possible_soft_preference_overrides"):
             if not isinstance(proposal[key], list) or len(proposal[key]) > 10:
                 raise ValueError()
-            proposal[key] = [_text(item, 1000) for item in proposal[key]]
+            proposal[key] = [(_preference_override_text(item, context["soft_preferences"])
+                              if key == "possible_soft_preference_overrides" else _text(item, 1000))
+                             for item in proposal[key]]
         items = proposal["candidates"]
         if not isinstance(items, list):
             raise ValueError()
@@ -271,7 +444,7 @@ def normalize_interpretation(raw, context):
             raise ValueError()
         if result["scope"] == "turn" and set(fields) - set(DIALOGUE_FIELDS):
             raise ValueError()
-        seen, outcomes, remap, candidates = set(), {}, {}, []
+        seen, outcomes, remap, candidates, rejected = set(), {}, {}, [], []
         current = context["settings"]
         for item in items:
             if not isinstance(item, dict) or set(item) != {"id", "patch", "evidence"}:
@@ -280,22 +453,38 @@ def normalize_interpretation(raw, context):
             if not isinstance(ident, str) or not IDENTIFIER.fullmatch(ident) or ident in seen or ident in ("other", "cancel"):
                 raise ValueError()
             seen.add(ident)
+            evidence = _text(item["evidence"], 2000)
             try:
                 patch, target = candidate_patch(patch, current, fields, required, preserved)
             except RateLimitError as exc:
-                # Reject the entire request, not just the impossible candidate
-                # or rate part; all gates receive the same explained limitation.
-                proposal.update(supported=False, reason=str(exc), candidates=[], default_id="",
-                                unresolved_references=[], possible_soft_preference_overrides=[], explicit_override=False)
-                return result
-            evidence = _text(item["evidence"], 2000)
+                # Validate the other candidates before deciding whether there is
+                # enough public evidence for recovery. Remove the whole invalid
+                # suggestion, never just its rate or a required conjunct.
+                rejected.append({"id": ident, "field": "speech_rate", "reason": str(exc)})
+                continue
             if target in outcomes:
                 remap[ident] = outcomes[target]
             else:
                 outcomes[target] = ident
                 remap[ident] = ident
                 candidates.append({"id": ident, "patch": patch, "evidence": evidence})
-        proposal["default_id"] = remap[proposal["default_id"]]
+        if proposal["default_id"] not in seen:
+            raise ValueError()
+        if rejected:
+            if not _recoverable_rate_suggestion(proposal, context, candidates):
+                # An explicit/unclassified numeric request is not repaired,
+                # rounded, clamped or partially executed.
+                proposal.update(supported=False, reason=rejected[0]["reason"], candidates=[], default_id="",
+                                unresolved_references=[], possible_soft_preference_overrides=[], explicit_override=False,
+                                ambiguities=[])
+                return result
+            # Internal normalization metadata; the provider cannot submit it.
+            # Keep even a valid default non-executable until the user clarifies.
+            proposal["candidate_recovery"] = {"reason": "INVALID_MODEL_RATE_SUGGESTION",
+                                               "rejected_candidates": rejected}
+            proposal["default_id"] = remap.get(proposal["default_id"], "")
+        else:
+            proposal["default_id"] = remap[proposal["default_id"]]
         proposal["candidates"] = candidates
         # An invented preference flag cannot by itself create a strategy trigger.
         if not context["soft_preferences"]:
@@ -309,11 +498,19 @@ class TutorInterpreter:
     def __init__(self, model):
         self.model = model
 
-    def interpret(self, query, snapshot, *, preferences=None, pending=None):
-        context = build_context(query, snapshot, preferences=preferences, pending=pending)
+    def interpret(self, query, snapshot, *, preferences=None, pending=None, answering_pending_question=False):
+        context = build_context(query, snapshot, preferences=preferences, pending=pending,
+                                answering_pending_question=answering_pending_question)
         raw, records = self.model.interpret_tutor(deepcopy(context))
         try:
             result = normalize_interpretation(raw, context)
+            if answering_pending_question and result["kind"] in ("tailoring", "mixed"):
+                # A text answer submitted for a specific question must not run a
+                # second strategy gate. A misclassified proposal is NOT applied:
+                # feed the original utterance to the existing constrained resolver.
+                result = {"kind": "clarification", "conversation_query": "", "scope": "none",
+                          "requested_fields": [], "required_fields": [], "preserved_fields": [],
+                          "proposal": None, "clarification": {"option_id": "other", "free_text": context["query"]}}
         except ModelError as exc:
             exc.records = records
             raise

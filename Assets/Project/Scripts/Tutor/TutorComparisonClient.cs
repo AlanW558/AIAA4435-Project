@@ -124,7 +124,7 @@ namespace IAI.Tutor
                 if (Paused) return "Paused · Resume when ready, or end this task without submitting.";
                 if (!string.IsNullOrEmpty(RecordingError)) return RecordingError;
                 if (!string.IsNullOrEmpty(State.publication_error)) return "Results remain hidden: recording failed. Retry to publish.";
-                if (PreparationPending) return State.preparation_locked ? "Fixed study starting settings · Listen to the sample, then confirm to begin." : "Adjust the shared settings and try the sample, then confirm to begin.";
+                if (PreparationPending) return State.preparation_locked ? "Study starting settings are ready. Confirm to begin." : "Choose shared settings, confirm changes, then begin.";
                 if (State.phase == "awaiting_input") return "Shared settings fixed · Record one request for all four strategies.";
                 if (!State.results_visible)
                 {
@@ -258,6 +258,12 @@ namespace IAI.Tutor
         public bool CanUndoSetting(string field) => CanEditBranch && Conditions.All(c =>
             (State.branches.Get(c).result.state.changes ?? Array.Empty<TutorChange>()).Any(change => change.kind=="commit" &&
             (field=="all" ? (change.remaining_fields?.Length ?? 0)>0 : (change.remaining_fields ?? Array.Empty<string>()).Contains(field))));
+        public void SetDialogueSettings(TutorDialoguePatch patch)
+        {
+            if (!CanEdit || patch == null || !patch.Valid) return;
+            if (CanPrepare ? patch.Matches(View.settings) : Conditions.All(c=>patch.Matches(State.branches.Get(c).result.state.settings))) return;
+            TaskCommand(CanPrepare ? "prepare" : "round_settings", new TutorDialogueControl { patch = patch });
+        }
         public void UndoSetting(string field) { if (CanUndoSetting(field)) TaskCommand("round_undo", new TutorUndo { field = field }); }
         public void UndoReplyLength() { UndoSetting("reply_length"); }
         public void StopBranch() { if (CanStop) BranchCommand("stop", new ComparisonMutation()); }

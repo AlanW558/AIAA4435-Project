@@ -28,7 +28,7 @@ namespace IAI.Tutor
             get
             {
                 var d = PreferenceDraft(); string kind = d.Value<string>("choice_kind"); int n = ((JArray)d["selected_conditions"]).Count;
-                return kind == "selected" ? n >= 1 && n <= 3 : new[] { "no_clear_preference", "none_acceptable", "unable_to_compare" }.Contains(kind) && n == 0;
+                return kind == "selected" ? n >= 1 && n <= 4 : kind == "no_clear_preference" && n == 0;
             }
         }
         JObject PreferenceDraft()
@@ -42,12 +42,12 @@ namespace IAI.Tutor
             if (!CanEditPreference || !TutorComparisonClient.Conditions.Contains(condition)) return;
             var d = PreferenceDraft(); var array = (JArray)d["selected_conditions"];
             var old = array.FirstOrDefault(x => (string)x == condition);
-            if (old != null) old.Remove(); else if (array.Count < 3) array.Add(condition); else return;
+            if (old != null) old.Remove(); else if (array.Count < 4) array.Add(condition); else return;
             d["choice_kind"] = "selected"; Render();
         }
         public void ChoosePreferenceCategory(string kind)
         {
-            if (!CanEditPreference || !new[] { "no_clear_preference", "none_acceptable", "unable_to_compare" }.Contains(kind)) return;
+            if (!CanEditPreference || kind != "no_clear_preference") return;
             var d = PreferenceDraft(); d["choice_kind"] = kind; d["selected_conditions"] = new JArray(); Render();
         }
         public void SubmitPreference()
@@ -77,16 +77,16 @@ namespace IAI.Tutor
             preferenceQuestion.text = PreferenceScope == "comparison_overall"
                 ? "Considering the speech-rate, reply-length, tone, and voice tasks, which approach would you prefer to use overall?"
                 : $"For {attribute} adjustments, which approach would you prefer to use?";
-            preferenceHelp.text = "Choose one approach, or up to three tied approaches.\nIf there is no difference between all four, choose No clear preference.";
+            preferenceHelp.text = "Select all approaches you prefer (one to four).\nChoose No preference on its own.";
             var d = PreferenceDraft(); var selected = (JArray)d["selected_conditions"];
             for (int i = 0; i < 4; i++)
             {
                 bool chosen = selected.Any(x => (string)x == TutorComparisonClient.Conditions[i]);
-                PreferenceStrategyButtons[i].interactable = CanEditPreference && (selected.Count < 3 || chosen);
+                PreferenceStrategyButtons[i].interactable = CanEditPreference;
                 Tint(PreferenceStrategyButtons[i], chosen);
             }
-            string[] kinds = { "no_clear_preference", "none_acceptable", "unable_to_compare" };
-            for (int i = 0; i < 3; i++) { PreferenceCategoryButtons[i].interactable = CanEditPreference; Tint(PreferenceCategoryButtons[i], d.Value<string>("choice_kind") == kinds[i]); }
+            PreferenceCategoryButtons[0].interactable = CanEditPreference;
+            Tint(PreferenceCategoryButtons[0], d.Value<string>("choice_kind") == "no_clear_preference");
             string text = Speech && Speech.Transcript.Length > 0 ? Speech.Transcript : d.Value<string>("comment") ?? "";
             if (preferenceText.text != text) { preferenceText.text = text; FitScroll(preferenceScroll, preferenceText); }
             preferenceSpeechStatus.text = Speech && Speech.HasCapture ? Speech.Status : "Optional: explain your preference in your own words.";
@@ -119,11 +119,8 @@ namespace IAI.Tutor
             string[] labels = { "E · Execute-first", "A · Always-ask", "N · Native-gate", "S · Selective" };
             PreferenceStrategyButtons = new Button[4];
             for (int i = 0; i < 4; i++) { string c = TutorComparisonClient.Conditions[i]; PreferenceStrategyButtons[i] = Button(root, labels[i], new Vector2(i % 2 == 0 ? -190 : 190, 155 - (i / 2) * 62), new Vector2(360, 52), () => ChoosePreferenceStrategy(c)); }
-            string[] kinds = { "no_clear_preference", "none_acceptable", "unable_to_compare" };
-            string[] captions = { "No clear preference", "I would not want to use any of them", "Unable to compare" };
-            PreferenceCategoryButtons = new Button[3];
-            for (int i = 0; i < 3; i++) { string kind = kinds[i]; PreferenceCategoryButtons[i] = Button(root, captions[i], new Vector2(0, 20 - i * 53), new Vector2(740, 44), () => ChoosePreferenceCategory(kind)); }
-            preferenceScroll = Scroll(root, new Vector2(0, -185), new Vector2(740, 120), out preferenceText);
+            PreferenceCategoryButtons = new[] { Button(root, "No preference", new Vector2(0, 20), new Vector2(740, 44), () => ChoosePreferenceCategory("no_clear_preference")) };
+            preferenceScroll = Scroll(root, new Vector2(0, -135), new Vector2(740, 210), out preferenceText);
             preferenceSpeechStatus = Label(root, "Preference speech status", "", new Vector2(0, -276), new Vector2(740, 44), 17);
             preferenceRecord = Button(root, "Record reason", new Vector2(-249, -331), new Vector2(238, 44), () => Speech.PressRecord());
             preferenceUse = Button(root, "Use text", new Vector2(0, -331), new Vector2(238, 44), () => Speech.Submit());

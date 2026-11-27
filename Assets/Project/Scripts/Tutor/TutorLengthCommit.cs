@@ -3,7 +3,8 @@ using UnityEngine.EventSystems;
 
 namespace IAI.Tutor
 {
-    // Both sliders commit once on release. Never carry a gesture into another branch/state.
+    // Sliders edit a local draft. Only Confirm changes sends the complete patch.
+    // Never carry a gesture into another branch/state.
     public sealed class TutorLengthCommit : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, ISubmitHandler
     {
         public TutorPanel panel;

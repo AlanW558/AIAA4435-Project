@@ -1,0 +1,11 @@
+[
+  {
+    "domain": "tone",
+    "field": "preference",
+    "previous": {"status": "unable_to_judge", "value": null},
+    "replacement": {"status": "answered", "value": ["N", "S"]},
+    "reason": "The participant explicitly clarified that the original tone unable-to-judge selection meant simultaneous preference for Native-gate and Selective. Count one full vote for each selected strategy; preserve all 80 original scores.",
+    "authority": "Explicit participant correction in the project conversation; applies only to P001 tone preference.",
+    "recorded_on": "2026-11-28"
+  }
+]

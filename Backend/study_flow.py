@@ -32,7 +32,9 @@ class StudyFlow:
         keys(p,('target_id',))
         target=s['tasks'].get(p['target_id']) or s['modules'].get(p['target_id'])
         require(target is not None,'target_not_found','Choose a registered task or natural module.')
+        require(target.get('module_type') != 'attribute_comparison', 'invalid_runtime_target', 'Attribute summaries do not launch their own tutor runtime.')
         if target.get('runtime_id'):return {'runtime_id':target['runtime_id'],'kind':target['runtime_kind']}
+        require(not target.get('frozen') and not target.get('submission_id'), 'study_interaction_locked', 'Completed evaluations cannot launch another runtime.', 409)
         natural=target.get('module_type')=='natural_selective'
         if natural:
             view=self.server.tutor.create({'participant_id':s['participant_id'],'condition':'S','settings':target['initial_state']})
@@ -107,7 +109,9 @@ class StudyFlow:
                 return result
             self.guard(rid)
             binding=self.bound(rid); state=self.store.read(binding[1]);target=state['tasks'].get(binding[2]) or state['modules'].get(binding[2])
-            require(state['lifecycle']=='active' and not target.get('frozen') and not target.get('submission_id'),'study_interaction_locked','Study is paused, ended, or already submitted.',409)
+            result_navigation = binding[0] == 'comparisons' and operation == 'select' and bool(target.get('completion_id'))
+            require(state['lifecycle']=='active' and (result_navigation or not target.get('frozen') and not target.get('submission_id')),
+                    'study_interaction_locked','Study is paused, ended, or already submitted.',409)
             require(operation.split(':')[0] not in ('submit','next','feedback','preference','preference_pause','preference_resume','preference_exit'), 'use_study_panel','Use the durable study panel to submit evaluations.',409)
             inflight=db.execute('SELECT inflight FROM study_runtimes WHERE id=?',(rid,)).fetchone()[0]
             require(inflight is None,'runtime_busy','Another runtime command is unresolved; restore or inspect it.',409)
@@ -153,8 +157,9 @@ class StudyFlow:
             valid=(q is not None and q['record_stage']=='draft' and q['condition']==data['condition'])
             if data['condition']=='preference':
                 scope=data['question_id']; planned=[t for t in state['manifest']['tasks'] if scope=='comparison_overall' or t['domain']==scope]
-                done=self.store._submitted_tasks(state,None if scope=='comparison_overall' else scope)
-                valid=bool(planned) and len(planned)==len(done) and scope not in state['preferences']
+                domain=None if scope=='comparison_overall' else scope
+                valid=self.store._attribute_ready(state,domain) and scope not in state['preferences']
+                if domain is None:valid=valid and all(t['domain'] in state['preferences'] for t in planned)
             require(valid,'stale_speech_context','Comment is not bound to an editable questionnaire or preference.',409)
         context()
         try:
@@ -187,6 +192,12 @@ class StudyFlow:
         return {'recorded':True,'study_run_id':run_id,'runtime_id':packet['runtime_id'],'request_id':body['request_id'],'response':json.loads(row[1]),'replay_model_calls':False}
 
     def assert_current(self,s,target):
+        if target and target.get('module_type') == 'attribute_comparison':
+            require(target.get('evaluation') == self.store._attribute_evaluation(s, target),
+                    'stale_evaluation', 'Attribute summary no longer matches the completed task revisions.', 409)
+            for task_id in target['evaluation']['tasks']:
+                self.assert_current(s, s['tasks'][task_id])
+            return
         if not target or not target.get('runtime_id'):return
         rid=target['runtime_id'];self.guard(rid)
         if target.get('module_type')=='natural_selective':return

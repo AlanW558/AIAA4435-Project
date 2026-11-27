@@ -54,7 +54,10 @@ class StudyMaterialsTests(unittest.TestCase):
         self.assertEqual(set(TASKS),expected)
         for m in CATALOG['modules']:
             self.assertEqual(len(m['tasks']),8)
-            for c in ('C1','C2','C3','C4'):self.assertEqual(sum(t['scenario']==c for t in m['tasks']),2)
+            for c in ('C1','C2','C3','C4'):
+                members=[t for t in m['tasks'] if t['scenario']==c]
+                self.assertEqual(len(members),2)
+                self.assertEqual([t['display_code'].split('-')[-1] for t in members],['1','2'])
     def test_catalog_identity_and_private_field_rejection(self):
         for mut in (lambda p:p.update(catalog_sha256='0'*64),lambda p:p.update(materials_version='old'),lambda p:p['modules'][0]['tasks'].pop(),lambda p:p['modules'][0]['tasks'][0].update(instructions='PRIVATE'),lambda p:p.update(purpose='formal')):
             p=plan();mut(p)
@@ -76,33 +79,35 @@ class StudyMaterialsTests(unittest.TestCase):
         self.assertFalse(self.app.tasks)
     def test_numeric_reference_baselines_and_partial_restore_history(self):
         for code in ('R1-1','R1-2'):self.assertEqual(self.create(code)['baseline']['settings']['speech_rate'],1.2)
-        self.assertEqual(self.create('R4-1')['baseline']['changes'][0]['before']['speech_rate'],.9)
-        v=self.create('L4-3');self.assertEqual(v['baseline']['settings']['tone'],'friendly');self.assertEqual(v['baseline']['changes'][0]['before']['reply_length'],'balanced')
-        v=self.create('V4-3');self.assertEqual(v['baseline']['settings']['speech_rate'],1.15);self.assertEqual(v['baseline']['settings']['tone'],'friendly')
+        self.assertEqual(self.create('R2-1')['baseline']['settings']['speech_rate'],1.0)
+        self.assertEqual(self.create('R2-2')['baseline']['settings']['speech_rate'],1.0)
+        self.assertEqual(self.create('R4-1')['baseline']['changes'][0]['before']['speech_rate'],.75)
+        v=self.create('L4-3');self.assertEqual(v['baseline']['settings']['tone'],'friendly');self.assertEqual(v['baseline']['changes'][0]['before']['reply_length'],'brief')
+        v=self.create('V4-3');self.assertEqual(v['baseline']['settings']['speech_rate'],1.25);self.assertEqual(v['baseline']['settings']['tone'],'friendly')
     def test_public_preferences_not_private_targets(self):
-        for code,field,value in [('R4-3','speech_rate',1.1),('T4-3','tone','professional')]:
+        for code,field,value in [('R4-3','speech_rate',1.25),('T4-3','tone','professional')]:
             self.create(code)
             for b in self.app.get(self.id).branches.values():self.assertEqual(b.session.preferences[0]['value'],value)
             logs='\n'.join(p.read_text() for p in Path(self.temp.name).rglob('*.jsonl'))
             self.assertNotIn(TASKS[code][1]['instructions'],logs)
-    def test_voice_materials_are_authoritative_and_do_not_mutate_dialogue(self):
-        for code in (c for c in TASKS if c.startswith('V')):
-            v=self.create(code);before=deepcopy(v['baseline'])
-            for index,item in enumerate(TASKS[code][1]['materials'],1):
-                self.audio.synthesize('comparisons',self.id,self.audio_body(index))
-                self.assertEqual(self.tts.calls[-1],(item['text'],{**DEFAULT_SETTINGS,**item['settings']}))
-            self.assertEqual(self.view()['baseline'],before);self.assertEqual(self.model.calls,[])
-            with self.assertRaises(APIError):self.audio.synthesize('comparisons',self.id,self.audio_body(99))
+    def test_current_catalog_has_no_fixed_listening_examples(self):
+        for code, (_, task) in TASKS.items():
+            self.assertEqual(task['materials'], [])
+            self.assertTrue(task['keep_unchanged'])
+            self.assertTrue(task['request_example'])
+        self.create('V1-1')
+        before = deepcopy(self.view()['baseline'])
+        with self.assertRaises(APIError) as error:
+            self.audio.synthesize('comparisons', self.id, self.audio_body())
+        self.assertEqual(error.exception.code, 'invalid_material')
+        self.assertEqual(self.view()['baseline'], before)
+        self.assertFalse(self.tts.calls)
+
     def test_material_audio_hidden_during_clarification(self):
         self.create('V1-1');self.mutate('confirm_preparation');self.mutate('start',query='Compare an easier explanation.')
         self.wait(lambda v:all(b['status']!='processing' for b in v['branches'].values()))
         with self.assertRaises(APIError) as cm:self.audio.synthesize('comparisons',self.id,self.audio_body())
         self.assertEqual(cm.exception.code,'audio_hidden');self.assertFalse(self.tts.calls)
-    def test_material_audio_pause_and_late_return(self):
-        self.create('V1-1');self.tts.hook=lambda:self.mutate('pause')
-        with self.assertRaises(APIError):self.audio.synthesize('comparisons',self.id,self.audio_body())
-        logs='\n'.join(p.read_text() for p in Path(self.temp.name).rglob('*.jsonl'))
-        self.assertIn('audio_discarded',logs);self.assertNotIn('audio_ready',logs)
     def test_complete_registered_32_task_sequence_and_five_preferences(self):
         self.create();p=plan();flat=[{'domain':m['domain'],**t} for m in p['modules'] for t in m['tasks']]
         ids=[];preference_count=0

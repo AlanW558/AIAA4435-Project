@@ -53,7 +53,7 @@ def annotate(record):
                 add("participant", "option_selection", key=rid, status="received_not_acceptance", input_source="button", question_id=data.get("question_id"), option_id=response["option_id"])
     elif event == "answer_generated":
         add("tutor", "answer", record.get("answer"), key=record.get("job_id"), status="generated_not_presentation", origin="model",
-            job_id=record.get("job_id"), exchange_id=record.get("exchange_id"), settings=record.get("settings"))
+            job_id=record.get("job_id"), exchange_id=record.get("exchange_id"), settings=record.get("settings"), response_kind=record.get("response_kind", "answer"))
     elif event in ("operation_committed", "branch_checkpoint"):
         result = record.get("result", {})
         question = result.get("question") or {}
@@ -90,12 +90,12 @@ def annotate(record):
         add('evidence', event, key=record.get('request_id'), baseline=deepcopy(record.get('baseline')))
     elif event in ('audio_requested', 'audio_ready', 'audio_failed', 'audio_discarded'):
         add('evidence', event, key=[record.get('audio_request_id'), event],
-            **{k: deepcopy(record[k]) for k in ('audio_request_id', 'purpose', 'exchange_id', 'expected_revision',
+            **{k: deepcopy(record[k]) for k in ('audio_request_id', 'purpose', 'exchange_id', 'question_id', 'expected_revision',
                'branch_revision', 'state_revision', 'reveal_id', 'text_sha256', 'speech_settings', 'cache_hit',
                'audio_duration_seconds', 'settings_scope', 'error') if k in record})
     elif event == 'playback_report':
         add('evidence', 'playback_report', key=(record.get('report') or {}).get('event_id'),
-            **{k: deepcopy(record[k]) for k in ('audio_request_id', 'purpose', 'exchange_id', 'expected_revision',
+            **{k: deepcopy(record[k]) for k in ('audio_request_id', 'purpose', 'exchange_id', 'question_id', 'expected_revision',
                'branch_revision', 'state_revision', 'reveal_id', 'text_sha256', 'speech_settings', 'audio_duration_seconds',
                'evidence_source', 'receipt_run_id', 'report', 'settings_scope') if k in record})
     elif event == "strategy_preference_submitted":

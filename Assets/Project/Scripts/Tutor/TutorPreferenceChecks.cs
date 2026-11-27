@@ -71,7 +71,8 @@ namespace IAI.Tutor
                 if(module==0)
                 {
                     study.ChoosePreferenceStrategy("E");study.ChoosePreferenceStrategy("S");study.ChoosePreferenceStrategy("N");
-                    Check(!study.PreferenceStrategyButtons[1].interactable,"Fourth tie disabled; all-equal uses no clear preference");
+                    Check(study.PreferenceStrategyButtons[1].interactable,"Fourth strategy remains selectable");
+                    study.ChoosePreferenceStrategy("A");Check(((JArray)JObject.Parse(study.CurrentPreferenceAnswers)["selected_conditions"]).Count==4,"All four strategies can be preferred");
                     study.ChoosePreferenceCategory("no_clear_preference");Check(((JArray)JObject.Parse(study.CurrentPreferenceAnswers)["selected_conditions"]).Count==0,"Special category clears strategy selections");
                     study.ChoosePreferenceStrategy("E");study.ChoosePreferenceStrategy("S");
                     var draft=study.CurrentPreferenceAnswers;study.ToggleVisible();study.ToggleVisible();Check(draft==study.CurrentPreferenceAnswers,"Hiding preserves preference draft");
@@ -83,8 +84,8 @@ namespace IAI.Tutor
                     study.Speech.Submit();Check(study.CurrentPreferenceAnswers.Contains("useful control"),"Confirmed spoken reason enters preference only");
                     Screenshot("attribute-preference.png");
                 }
-                else if(module==1)study.ChoosePreferenceCategory("none_acceptable");
-                else if(module==2)study.ChoosePreferenceCategory("unable_to_compare");
+                else if(module==1)study.ChoosePreferenceCategory("no_clear_preference");
+                else if(module==2){study.ChoosePreferenceStrategy("N");study.ChoosePreferenceStrategy("S");}
                 else study.ChoosePreferenceStrategy("N");
                 study.SaveButton.onClick.Invoke();yield return Idle();
                 Check(client.State.sequence.attribute_saved,"Attribute preference acknowledged once");

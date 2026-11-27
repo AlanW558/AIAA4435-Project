@@ -34,8 +34,8 @@ namespace IAI.Tutor
             using (var r = UnityWebRequest.Get("http://127.0.0.1:8773/fixture/tts-count"))
             { r.timeout = 5; yield return r.SendWebRequest(); Check(r.result == UnityWebRequest.Result.Success, "Fixture synthesis count available"); count = JsonUtility.FromJson<Counts>(r.downloadHandler.text).calls; }
         }
-        IEnumerator PlaySample()
-        { panel.OpenTab(1); panel.SampleButton.onClick.Invoke(); yield return Wait(() => audio.Playing, "Sample starts from decoded WAV"); }
+        IEnumerator PlayReply()
+        { panel.OpenTab(0); panel.ReplyAudioButton.onClick.Invoke(); yield return Wait(() => audio.Playing, "Generated reply starts from decoded WAV"); }
         IEnumerator Start()
         {
             client = GetComponent<TutorComparisonClient>(); panel = FindObjectOfType<TutorPanel>(); audio = panel.Playback;
@@ -44,18 +44,13 @@ namespace IAI.Tutor
             Check(decoded.channels == 1 && decoded.frequency == 16000 && decoded.samples == 1600, "WAV decoder preserves PCM frames and sample rate"); Destroy(decoded);
             bool rejected = false; try { TutorAudioPlayback.DecodeWav(wav.Take(wav.Length - 1).ToArray()); } catch (InvalidDataException) { rejected = true; }
             Check(rejected, "Truncated WAV cannot reach playback");
-            panel.OpenTab(1); Check(!audio.CanSample, "Disconnected sample is disabled");
-            client.endpoint = "http://127.0.0.1:8773"; client.requirePreparation = false; // Legacy branch tests; shared preparation has dedicated acceptance coverage.
+            panel.OpenTab(1); Check(!audio.CanReply, "Disconnected reply audio is disabled");
+            Check(panel.GetComponentsInChildren<UnityEngine.UI.Button>(true).All(b => !b.name.Contains("sample")), "No fixed sample playback controls remain");
+            client.endpoint = "http://127.0.0.1:8773"; client.requirePreparation = false;
             client.Connect();
             yield return Wait(() => client.Connected && !client.Busy, "Connect to explicit audio fixture");
-            Check(client.View.audio_available && audio.CanSample, "Configured TTS capability enables baseline sample");
-            yield return PlaySample(); yield return Count(); int firstCount = count;
-            Check(panel.GetComponent<AudioSource>().pitch == 1, "Playback does not multiply speech rate or alter voice pitch");
-            Check(audio.Status.Contains("Voice D"), "Default sample uses Voice D");
-            panel.SampleButton.onClick.Invoke(); Check(!audio.Active, "Stop sample releases playback");
-            yield return PlaySample(); yield return Count();
-            Check(count == firstCount, "Replay uses speech cache without another synthesis");
-            panel.OpenTab(0); Check(!audio.Active, "Switching pages stops sample");
+            Check(client.View.audio_available && !audio.CanReply, "TTS waits for an actual model reply");
+            panel.OpenTab(0);
             client.SubmitUserUtterance("Compare an easier explanation.");
             yield return Wait(() => !client.Busy && client.State.branches.A.status == "awaiting_clarification" && client.State.branches.S.status == "awaiting_clarification" && TutorComparisonClient.Conditions.All(c => client.State.branches.Get(c).status != "processing"), "All initial branches settle behind reveal barrier");
             Check(!audio.CanReply && !audio.Playing, "No early reply playback before all clarifications");
@@ -68,29 +63,59 @@ namespace IAI.Tutor
             Check(!audio.Active && audio.CanReply, "Revealed replies wait for participant playback choice");
             panel.ReplyAudioButton.onClick.Invoke(); yield return Wait(() => audio.Playing, "Latest reply plays");
             client.Select("E"); yield return Wait(() => !client.Busy && client.Selected == "E" && !audio.Active, "Strategy switch stops previous branch audio");
-            panel.OpenTab(1); client.SetVoice(0); yield return Ready();
-            yield return PlaySample(); Check(audio.Status.Contains("Voice A"), "Sample follows the current voice setting");
-            yield return new WaitForEndOfFrame(); Directory.CreateDirectory(Folder);
-            ScreenCapture.CaptureScreenshot(Path.Combine(Folder, "sample-playing.png")); yield return new WaitForEndOfFrame();
-            panel.OpenTab(0); panel.ReplyAudioButton.onClick.Invoke();
-            yield return Wait(() => audio.Playing, "Old reply remains playable after setting change");
-            Check(audio.Status.Contains("Voice D"), "Old reply uses its original voice snapshot");
+            yield return PlayReply(); yield return Count(); int firstCount=count;
+            Check(panel.GetComponent<AudioSource>().pitch == 1, "Playback preserves the provider speech rate and pitch");
+            Check(audio.Status.Contains(TutorVoiceCatalog.Labels[3]), "Reply uses the recorded default voice");
+            audio.Stop(reason:"user_stop"); yield return PlayReply(); yield return Count();
+            Check(count==firstCount, "Replaying the same actual answer uses the TTS cache");
+            panel.OpenTab(1); Check(!audio.Active, "Leaving the conversation stops audio");
+            panel.VoiceButtons[0].onClick.Invoke();
+            Check(!client.Busy && panel.HasPendingControls, "Selecting a voice only changes the local draft");
+            panel.ConfirmControlsButton.onClick.Invoke(); yield return Ready(); yield return PlayReply();
+            Check(audio.Status.Contains(TutorVoiceCatalog.Labels[0]), "Confirmed controls produce a new answer using the new voice");
             panel.Speech.RecognizeFixture(TutorSpeechInput.EncodeWav(new float[8000], 1, 16000)); yield return null;
-            Check(!audio.Active, "Speech recognition and reply playback cannot overlap"); panel.Speech.Cancel();
-            panel.OpenTab(1); client.SetVoice(2); yield return Ready();
-            panel.SampleButton.onClick.Invoke(); yield return new WaitForSeconds(.2f);
-            Check(audio.Loading, "Delayed fixture synthesis is pending"); panel.OpenTab(0);
+            Check(!audio.Active, "Speech recognition and playback cannot overlap"); panel.Speech.Cancel();
+            panel.OpenTab(1); panel.VoiceButtons[2].onClick.Invoke(); panel.ConfirmControlsButton.onClick.Invoke(); yield return Ready();
+            panel.OpenTab(0); panel.ReplyAudioButton.onClick.Invoke(); yield return new WaitForSeconds(.2f);
+            Check(audio.Loading, "Delayed fixture synthesis is pending"); panel.OpenTab(2);
             yield return new WaitForSeconds(1.7f);
-            Check(!audio.Playing && !audio.Loading, "Late sample cannot play after leaving its context");
-            panel.OpenTab(1); client.SetVoice(4); yield return Ready(); panel.SampleButton.onClick.Invoke();
+            Check(!audio.Playing && !audio.Loading, "Late reply cannot play after leaving its context");
+            panel.OpenTab(1); panel.VoiceButtons[4].onClick.Invoke(); panel.ConfirmControlsButton.onClick.Invoke(); yield return Ready();
+            panel.OpenTab(0); panel.ReplyAudioButton.onClick.Invoke();
             yield return Wait(() => !audio.Loading, "Synthesis failure completes without automatic retry");
-            Check(!audio.Playing && audio.Status.Contains("unavailable") && audio.CanSample, "Synthesis failure leaves settings intact and offers explicit retry");
-            client.SetVoice(3); yield return Ready(); yield return PlaySample();
+            Check(!audio.Playing && audio.Status.Contains("unavailable") && audio.CanReply, "Failed synthesis leaves the actual reply available for explicit retry");
+            panel.OpenTab(1); panel.VoiceButtons[3].onClick.Invoke(); panel.ConfirmControlsButton.onClick.Invoke(); yield return Ready(); yield return PlayReply();
             client.PauseOrResume(); yield return Wait(() => client.Paused && !client.Busy && !audio.Active, "Pause stops active audio");
             client.PauseOrResume(); yield return Wait(() => !client.Paused && !client.Busy, "Resume task");
-            Check(!audio.Active, "Resume never replays old audio automatically");
-            yield return PlaySample(); client.Close(); yield return Wait(() => !client.Open && !client.Busy && !audio.Active, "Ending task stops audio");
+            Check(!audio.Active, "Resume never replays old reply audio automatically");
+            yield return PlayReply(); client.Close(); yield return Wait(() => !client.Open && !client.Busy && !audio.Active, "Ending task stops audio");
+            yield return NaturalClarification();
             Result = "PASS: " + passed.Count + " checks (silent fixture WAV; no paid calls or microphone recording)"; Save(); Debug.Log(Result);
+        }
+        IEnumerator NaturalClarification()
+        {
+            var root=new GameObject("Natural clarification speech checks");root.SetActive(false);root.transform.position=new Vector3(100,0,0);
+            var single=root.AddComponent<TutorClient>();single.connectOnStart=false;single.useEnvironmentEndpoint=false;single.endpoint="http://127.0.0.1:8773";single.condition="S";
+            var ui=root.AddComponent<TutorPanel>();ui.client=single;ui.desktopDebugInput=true;root.SetActive(true);yield return null;
+            single.Connect();yield return Wait(()=>single.Connected&&!single.Busy,"Natural Selective session connects");
+            single.SubmitUserUtterance("Make the explanation easier.");
+            yield return Wait(()=>single.HasQuestion&&!single.Busy&&ui.Playback.Playing,"New natural clarification speaks automatically");
+            Check(ui.QuestionAudioButton.gameObject.activeSelf&&ui.QuestionAudioButton.interactable,"Question remains visible with explicit replay/stop");
+            ui.Playback.Stop(reason:"user_stop");yield return new WaitForSecondsRealtime(.2f);
+            Check(!ui.Playback.Active,"Stopped question does not restart automatically");
+            string session=single.View.session_id;single.AttachStudyRuntime(session);
+            yield return Wait(()=>single.Connected&&!single.Busy,"Restore pending natural question");yield return new WaitForSecondsRealtime(.2f);
+            Check(single.HasQuestion&&!ui.Playback.Active,"Restored question keeps text without automatically replaying old audio");
+            ui.QuestionAudioButton.onClick.Invoke();yield return Wait(()=>ui.Playback.Playing,"Participant can explicitly replay restored question");
+            ui.Speech.RecognizeFixture(TutorSpeechInput.EncodeWav(new float[8000],1,16000));yield return null;
+            Check(!ui.Playback.Active,"Speech input interrupts question audio");ui.Speech.Cancel();
+            single.ChooseOption("cancel");yield return Wait(()=>!single.Busy&&!single.HasQuestion,"Cancel current adjustment before new request");
+            ui.OpenTab(1);ui.VoiceButtons[2].onClick.Invoke();ui.ConfirmControlsButton.onClick.Invoke();yield return Wait(()=>!single.Busy,"Confirm delayed fixture voice");
+            single.SubmitUserUtterance("Make the explanation easier.");yield return Wait(()=>ui.Playback.Loading,"New question begins delayed synthesis");
+            single.ChooseOption("c1");yield return Wait(()=>!single.Busy&&!single.HasQuestion,"Answer while old question synthesis is pending");
+            yield return new WaitForSecondsRealtime(1.7f);
+            Check(!ui.Playback.Active,"Answered question never plays late synthesized audio");
+            Destroy(root);yield return null;
         }
     }
 }

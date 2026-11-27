@@ -1,0 +1,267 @@
+{
+  "schema": "tutor-raw-model-replay-v1",
+  "source": "StudyData/validation/selective-repair-live-20261127-constraints/call-01.json",
+  "source_sha256": "3230ff794f71ac26a80608be6a2f4880608909af8a4c2f484b81544f0c40316a",
+  "note": "Exact public context and raw response from one user-authorized live probe; tests perform no model calls.",
+  "context": {
+    "query": "I want your explanation to be much easier to follow, but keep all the details.",
+    "settings": {
+      "speech_rate": 1.2,
+      "reply_length": "detailed",
+      "tone": "professional",
+      "voice": "voice_a",
+      "avatar_id": "liang",
+      "outfit": "suit",
+      "jacket_color": "blue",
+      "accessory": "glasses",
+      "scale": 1.0
+    },
+    "change_history": [],
+    "task_start_settings": {
+      "speech_rate": 1.2,
+      "reply_length": "detailed",
+      "tone": "professional",
+      "voice": "voice_a",
+      "avatar_id": "liang",
+      "outfit": "suit",
+      "jacket_color": "blue",
+      "accessory": "glasses",
+      "scale": 1.0
+    },
+    "conversation": [
+      {
+        "sequence": 1,
+        "settings": {
+          "speech_rate": 1.2,
+          "reply_length": "detailed",
+          "tone": "professional",
+          "voice": "voice_a",
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "messages": [
+          {
+            "role": "user",
+            "content": "I tried active recall, but I forgot most of the answer and feel stuck. How should I practise it next time?"
+          },
+          {
+            "role": "assistant",
+            "content": "Close your notes, retrieve one key idea from memory, and then check what you missed.\n\nRetrieving an answer helps you identify which parts need more practice; forgetting something gives you a specific point to work on.\n\nFor example, after reading a paragraph about photosynthesis, close the page and explain what plants use light for. Reopen the page to check one missing point, then try recalling it again later without looking. Work with one small chunk at a time rather than repeatedly reading the whole chapter."
+          }
+        ]
+      }
+    ],
+    "soft_preferences": [],
+    "pending": null,
+    "implemented_fields": [
+      "speech_rate",
+      "reply_length",
+      "tone",
+      "voice",
+      "avatar_id",
+      "outfit",
+      "jacket_color",
+      "accessory",
+      "scale"
+    ],
+    "capabilities": {
+      "version": "tutor-capabilities-v4",
+      "options": {
+        "reply_length": [
+          "brief",
+          "balanced",
+          "detailed"
+        ],
+        "tone": [
+          "professional",
+          "friendly",
+          "encouraging"
+        ],
+        "voice": [
+          "voice_a",
+          "voice_b",
+          "voice_c",
+          "voice_d",
+          "voice_e"
+        ],
+        "jacket_color": [
+          "blue",
+          "orange",
+          "green",
+          "gray",
+          "red",
+          "purple",
+          "yellow"
+        ],
+        "accessory": [
+          "none",
+          "hat",
+          "glasses"
+        ],
+        "scale": {
+          "min": 0.85,
+          "max": 1.15,
+          "step": 0.05
+        },
+        "avatar_id": [
+          "liang",
+          "nailong"
+        ],
+        "outfit": [
+          "suit",
+          "sport",
+          "none"
+        ]
+      },
+      "speech_rate": {
+        "min": 0.7,
+        "max": 1.3,
+        "step": 0.01,
+        "default": 1.0,
+        "basis": [
+          "default",
+          "current"
+        ],
+        "operation": [
+          "multiply",
+          "add"
+        ]
+      },
+      "defaults": {
+        "speech_rate": 1.0,
+        "reply_length": "balanced",
+        "tone": "professional",
+        "voice": "voice_d",
+        "avatar_id": "liang",
+        "outfit": "suit",
+        "jacket_color": "blue",
+        "accessory": "glasses",
+        "scale": 1.0
+      },
+      "avatar_defaults": {
+        "liang": {
+          "avatar_id": "liang",
+          "outfit": "suit",
+          "jacket_color": "blue",
+          "accessory": "glasses",
+          "scale": 1.0
+        },
+        "nailong": {
+          "avatar_id": "nailong",
+          "outfit": "none",
+          "jacket_color": "yellow",
+          "accessory": "none",
+          "scale": 1.0
+        }
+      },
+      "outfits_by_avatar": {
+        "liang": [
+          "suit",
+          "sport",
+          "none"
+        ],
+        "nailong": [
+          "none"
+        ]
+      },
+      "voice_descriptions": {
+        "voice_a": {
+          "catalog_gender": "female",
+          "source": "Official Plus voice list; recorded in STAGE_4_SPEECH_PROFILE.json"
+        },
+        "voice_b": {
+          "catalog_gender": "female",
+          "source": "https://help.aliyun.com/zh/model-studio/qwen-audio-tts-voice-list (longanhuan_v3.6; checked 2026-11-27)"
+        },
+        "voice_c": {
+          "catalog_gender": "female",
+          "source": "Official Plus catalog Sheet1 B578:H578"
+        },
+        "voice_d": {
+          "catalog_gender": "male",
+          "source": "Official Plus catalog Sheet1 B582:H582"
+        },
+        "voice_e": {
+          "catalog_gender": "male",
+          "source": "Official Plus catalog Sheet1 B583:H583"
+        }
+      },
+      "voice_labels": {
+        "voice_a": "Female voice 1",
+        "voice_b": "Female voice 2",
+        "voice_c": "Female voice 3",
+        "voice_d": "Male voice 1",
+        "voice_e": "Male voice 2"
+      },
+      "voice_resources_bound": true,
+      "turn_fields": [
+        "speech_rate",
+        "reply_length",
+        "tone",
+        "voice"
+      ]
+    },
+    "reply_length_structures": {
+      "brief": "Give only the key answer or essential points.",
+      "balanced": "Give the key answer and a short supporting reason; omit a worked example.",
+      "detailed": "Give the key answer, explain the reasoning, and add a relevant example or steps when useful."
+    }
+  },
+  "response": {
+    "kind": "tailoring",
+    "conversation_query": "",
+    "scope": "session",
+    "requested_fields": [
+      "speech_rate",
+      "tone",
+      "reply_length"
+    ],
+    "required_fields": [],
+    "preserved_fields": [
+      "reply_length"
+    ],
+    "proposal": {
+      "supported": true,
+      "reason": "The user wants the explanation easier to follow while keeping all details, so content completeness (detailed) is preserved and delivery/wording alternatives are offered; the specific attribute to change is unclear.",
+      "candidates": [
+        {
+          "id": "c1",
+          "patch": {
+            "speech_rate": {
+              "basis": "current",
+              "operation": "multiply",
+              "value": 0.9
+            },
+            "reply_length": "detailed"
+          },
+          "evidence": "slower delivery can aid comprehension without removing content"
+        },
+        {
+          "id": "c2",
+          "patch": {
+            "tone": "friendly",
+            "reply_length": "detailed"
+          },
+          "evidence": "warmer wording can make an explanation easier to follow without shortening"
+        }
+      ],
+      "default_id": "c1",
+      "unresolved_references": [],
+      "possible_soft_preference_overrides": [],
+      "explicit_override": false,
+      "ambiguities": [
+        {
+          "kind": "dimension",
+          "fields": [
+            "speech_rate"
+          ],
+          "evidence": "much easier to follow"
+        }
+      ]
+    },
+    "clarification": null
+  }
+}

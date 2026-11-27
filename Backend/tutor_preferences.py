@@ -5,7 +5,9 @@ import uuid
 from core import APIError, IDENTIFIER, text_value
 from tutor_study_materials import is_preview, validate_plan
 
-VERSION = 'strategy-preference-v1'
+VERSION = 'strategy-preference-v2'
+LEGACY_VERSION = 'strategy-preference-v1'
+SUPPORTED_VERSIONS = (LEGACY_VERSION, VERSION)
 DOMAINS = ('speech_rate', 'reply_length', 'tone', 'voice')
 CONDITIONS = ('E', 'A', 'N', 'S')
 
@@ -62,16 +64,20 @@ def sequence_view(rt):
             'preferences': deepcopy(rt.preferences)}
 
 
-def validate_preference(value):
+def validate_preference(value, version=VERSION):
+    if version not in SUPPORTED_VERSIONS:
+        raise APIError(400, 'invalid_preference', 'Use a registered preference questionnaire version.')
     if not isinstance(value, dict) or set(value) - {'choice_kind', 'selected_conditions', 'comment', 'comment_confirmed'}:
         raise APIError(400, 'invalid_preference', 'Use explicit preference choices and confirmed text only.')
     kind = value.get('choice_kind'); selected = value.get('selected_conditions')
-    if not isinstance(kind, str) or kind not in ('selected', 'no_clear_preference', 'none_acceptable', 'unable_to_compare'):
+    kinds = ('selected', 'no_clear_preference', 'none_acceptable', 'unable_to_compare') if version == LEGACY_VERSION else ('selected', 'no_clear_preference')
+    if not isinstance(kind, str) or kind not in kinds:
         raise APIError(400, 'invalid_preference', 'Choose a preference or an explicit comparison category.')
     if not isinstance(selected, list) or any(not isinstance(c, str) or c not in CONDITIONS for c in selected) or len(set(selected)) != len(selected):
         raise APIError(400, 'invalid_preference', 'Use unique E/A/N/S selections.')
-    if kind == 'selected' and not 1 <= len(selected) <= 3 or kind != 'selected' and selected:
-        raise APIError(400, 'invalid_preference', 'Select one to three tied approaches, or one exclusive category.')
+    limit = 3 if version == LEGACY_VERSION else 4
+    if kind == 'selected' and not 1 <= len(selected) <= limit or kind != 'selected' and selected:
+        raise APIError(400, 'invalid_preference', f'Select one to {limit} approaches, or an exclusive no-preference category.')
     comment = text_value(value.get('comment', ''), 'comment', 4000, empty=True)
     if 'comment_confirmed' in value and type(value['comment_confirmed']) is not bool or comment and value.get('comment_confirmed') is not True:
         raise APIError(400, 'unconfirmed_comment', 'Confirm optional spoken text before submission.')

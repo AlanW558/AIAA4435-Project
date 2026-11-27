@@ -3,8 +3,13 @@ from copy import deepcopy
 from core import APIError
 
 ATTRIBUTE_VERSION = 'attribute-feedback-v3'
+ATTRIBUTE_SUMMARY_VERSION = 'attribute-summary-feedback-v3'
+LEGACY_ATTRIBUTE_SUMMARY_VERSION = 'attribute-summary-feedback-v1'
+NUMERIC_SINGLE_ATTRIBUTE_SUMMARY_VERSION = 'attribute-summary-feedback-v2'
+NUMERIC_ATTRIBUTE_SUMMARY_VERSIONS = (NUMERIC_SINGLE_ATTRIBUTE_SUMMARY_VERSION, ATTRIBUTE_SUMMARY_VERSION)
+ATTRIBUTE_SUMMARY_VERSIONS = (LEGACY_ATTRIBUTE_SUMMARY_VERSION, *NUMERIC_ATTRIBUTE_SUMMARY_VERSIONS)
 NATURAL_VERSION = 'natural-selective-feedback-v2'
-PREFERENCE_VERSION = 'strategy-preference-v1'
+PREFERENCE_VERSION = 'strategy-preference-v2'
 ATTRIBUTE_IDS = tuple(f'A{i}' for i in range(5))
 NATURAL_IDS = tuple(f'N{i}' for i in range(8)) + tuple(f'S{i}' for i in range(1, 11)) + tuple(f'U{i}' for i in range(1, 9))
 REASONS = {'target_mismatch', 'unwanted_change', 'not_maintained', 'hard_to_verify', 'interaction_problem', 'other'}
@@ -15,7 +20,7 @@ def reject(message):
 
 
 def validate_answers(version, answers, *, final=False):
-    ids = ATTRIBUTE_IDS if version == ATTRIBUTE_VERSION else NATURAL_IDS if version == NATURAL_VERSION else None
+    ids = ATTRIBUTE_IDS if version in (ATTRIBUTE_VERSION, *ATTRIBUTE_SUMMARY_VERSIONS) else NATURAL_IDS if version == NATURAL_VERSION else None
     if ids is None or not isinstance(answers, dict) or set(answers) - set(ids):
         reject('Use the registered questionnaire version and item IDs.')
     result = {}
@@ -26,7 +31,7 @@ def validate_answers(version, answers, *, final=False):
         status, value = a['status'], a['value']
         standard = item.startswith(('S', 'U'))
         if status == 'answered':
-            if item in ('A0', 'N0'):
+            if item == 'N0' or item == 'A0' and version not in NUMERIC_ATTRIBUTE_SUMMARY_VERSIONS:
                 if value not in ('fully_met', 'partly_met', 'not_met'): reject('Invalid outcome category.')
             elif type(value) is not int or not 1 <= value <= (5 if item.startswith('S') else 7):
                 reject('Use an integer in the item scale, not a default or boolean.')
@@ -46,7 +51,7 @@ def validate_answers(version, answers, *, final=False):
     return result
 
 
-def extras(value, answers, *, natural=False, later_interaction=False):
+def extras(value, answers, *, natural=False, later_interaction=False, version=None):
     if not isinstance(value, dict) or set(value) - {'reasons', 'comment', 'comment_confirmed'}: reject('Invalid optional answer fields.')
     comment = value.get('comment', '')
     if not isinstance(comment, str) or len(comment) > 4000: reject('Comment must be bounded text.')
@@ -55,7 +60,9 @@ def extras(value, answers, *, natural=False, later_interaction=False):
     reasons = value.get('reasons', [])
     if not isinstance(reasons, list) or any(not isinstance(r, str) or r not in REASONS for r in reasons) or len(reasons) != len(set(reasons)):
         reject('Invalid reason codes.')
-    if reasons and (natural or answers['A0']['value'] == 'fully_met' or answers['A0']['status'] not in ('answered', 'unable_to_judge')):
+    if reasons and (natural or answers['A0']['value'] == 'fully_met'
+                    or version in NUMERIC_ATTRIBUTE_SUMMARY_VERSIONS and answers['A0']['value'] == 7
+                    or answers['A0']['status'] not in ('answered', 'unable_to_judge')):
         reject('Reasons do not apply to this answer.')
     if 'not_maintained' in reasons and not later_interaction: reject('No later interaction was registered.')
     return {'reasons': reasons, 'comment': comment, 'comment_confirmed': bool(comment)}

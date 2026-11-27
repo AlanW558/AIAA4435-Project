@@ -100,16 +100,20 @@ class ToneTests(unittest.TestCase):
         for tone in ("professional", "friendly"):
             view = self.sessions.create({})
             view = self.request(view, {"tone": tone}, scope="turn", question="")
-            self.assertEqual(view["next_turn_override"], {"tone": tone})
-            self.assertEqual(view["generation_jobs"], [])
-            view = self.generate(self.chat(view))
+            self.assertIsNone(view["next_turn_override"])
+            self.assertEqual(view["generation_jobs"][-1]["turn_override"], {"tone": tone})
+            self.assertEqual(view["generation_jobs"][-1]["response_kind"], "settings_response")
+            view = self.generate(view)
             self.assertEqual(view["response"]["settings"]["tone"], tone)
             self.assertIsNone(view["next_turn_override"])
+            view = self.generate(self.chat(view))
+            self.assertEqual(view["response"]["settings"]["tone"], "professional")
 
     def test_explicit_noop_length_in_one_turn_conjunction_is_retained(self):
         view = self.sessions.create({})
         view = self.request(view, {"tone": "friendly", "reply_length": "balanced"}, scope="turn", question="")
-        self.assertEqual(view["next_turn_override"], {"tone": "friendly", "reply_length": "balanced"})
+        self.assertIsNone(view["next_turn_override"])
+        self.assertEqual(view["generation_jobs"][-1]["turn_override"], {"tone": "friendly", "reply_length": "balanced"})
 
     def test_ask_waits_and_cancel_generates_with_unchanged_tone(self):
         view = self.request(self.sessions.create({"condition": "A"}), {"tone": "friendly"})
@@ -166,7 +170,9 @@ class ToneTests(unittest.TestCase):
         view = self.change(self.sessions.create({}), query="Friendly wording and change eye colour")
         self.assertEqual(view["decision"], "UNRESOLVED")
         self.assertEqual(view["settings"], DEFAULT_SETTINGS)
-        self.assertEqual(view["generation_jobs"], [])
+        self.assertEqual(len(view["generation_jobs"]), 1)
+        self.assertEqual(view["generation_jobs"][0]["settings_response"]["outcome"], "unresolved")
+        self.assertEqual(view["generation_jobs"][0]["settings_response"]["changed_fields"], {})
         for patch in ({}, {"tone": "friendly", "jacket_color": "green"}):
             with self.assertRaises(APIError): self.change(view, "settings", patch=patch)
 
