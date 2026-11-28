@@ -1,6 +1,6 @@
 # 最终 User Study：逐任务、分轮及最终问卷内容方案
 
-> **历史设计/阶段记录（2026-11-17 标记）：不作为当前施测说明。** 当前为四属性 32 题四策略比较＋Selective 自然模拟，采用 5／26 题问卷。请先读[当前主设计](FINAL_USER_STUDY_DESIGN_4_STRATEGIES.md)、[数据契约](STUDY_DATA_PERSISTENCE_CONTRACT.md)及[实现导航](../README.md)。本文保留早期讨论和当时进度，不恢复三策略、60 题或旧问卷。
+> **历史设计/阶段记录；导航更新于2026-11-28：不作为当前施测说明。** 当前研究为四属性＋外观40题，五模块均采用四策略并行及模块末20项评分＋多选偏好；自然情境仅用于demo。请先读[当前主设计](FINAL_USER_STUDY_DESIGN_4_STRATEGIES.md)、[40题任务库](CURRENT_TASK_BANK_40.md)、[当前问卷与数据规范](CURRENT_QUESTIONNAIRE_AND_DATA_CONTRACT.md)。下文各日期中的“当前”“最新”仅指当时阶段，保留历史讨论与旧实现，不恢复旧自然问卷、三策略或60题流程。
 
 > **2026-11-11 历史材料提示：** 当前实施依据为[主设计 v1.5](FINAL_USER_STUDY_DESIGN_4_STRATEGIES.md)及[流程与问卷字段对照表](STUDY_PROTOCOL_AND_QUESTIONNAIRE_CONTRACT.md)。四属性为 32 题、每策略分类＋四评分；自然情境为仅 Selective 的一段交流、分类＋五评分；偏好仅四次属性末＋一次比较总体，后者在自然情境之前。下文旧安排不作为当前实施要求。
 

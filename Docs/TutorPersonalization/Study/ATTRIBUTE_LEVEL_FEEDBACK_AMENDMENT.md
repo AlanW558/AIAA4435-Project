@@ -1,5 +1,7 @@
 # 四属性问卷填写单位修订
 
+> **范围更新（2026-11-28，设计层）：** 新主实验已改为四属性＋外观五模块，共40题；自然情境仅作demo，不再施测26题问卷。见[主设计v2.0](FINAL_USER_STUDY_DESIGN_4_STRATEGIES.md)。本文继续记录已实现的四属性v3契约与84项辅助页面；外观已另有独立网页及四份最终反馈；五模块统一调度与总体偏好尚未接线，不追溯改变旧批次或问卷答案。
+
 > **2026-11-27 最新实现修订：** Unity 新建运行与辅助工具统一为每属性八题后填写 20 项评价及一次属性偏好；任务卡采用三字段，移除固定试听，属性通过 Confirm changes 统一提交。详见[本次实现契约](GENERATED_REPLY_AND_ATTRIBUTE_CONFIRMATION.md)。下文较早日期的逐任务流程与试听设计为历史记录，不作为当前实现要求。
 
 日期：2026-11-28（更新）。当前辅助试听页面从“每道任务评价四策略”改为“每个属性整体评价四策略”。随后按用户要求，将 A0 从完成情况分类改为 1–7 分的需求满足程度。当前问卷为 `attribute-summary-feedback-v3`，题量与策略比较内容不变；旧运行保留原版本和保存单位。
@@ -56,7 +58,7 @@
 
 本次只升级问卷偏好及保存版本，不重新调用模型或 TTS，不修改既有批次音频、冻结结果、已填写页面或评分。可用 `report.py --directory SOURCE --output NEW_PAGE --questionnaire-version attribute-summary-feedback-v3` 在新位置生成引用旧音频的空白多选页。旧页面与新页有不同版本的浏览器草稿标识，不自动复制旧答案。助手代拟澄清的来源继续明示。
 
-自然情境的 Selective 单策略评估与 26 题问卷不在本次调整范围。原完整协议中的四属性总体偏好也未由本次需求新增到当前辅助页面；本页收集四次属性内偏好。Unity 新建属性级运行显式设置 `attribute_questionnaire_version: attribute-summary-feedback-v3` 与 `preference_questionnaire_version: strategy-preference-v2`，并保留原正式流程的比较总体偏好；缺少该字段的旧属性级 manifest 按 v1 识别，不静默升级。流程、保存与导出按版本区分，正式施测仍需预测试和头显整体验收。
+此前此轮属性量尺调整未改动自然问卷；随后主设计v2.0已取消自然评估，保留demo，并新增四策略外观模块。当前两套问卷与数据范围见[当前规范](CURRENT_QUESTIONNAIRE_AND_DATA_CONTRACT.md)。原完整协议中的四属性总体偏好也未由本次需求新增到当前辅助页面；本页收集四次属性内偏好。Unity 新建属性级运行显式设置 `attribute_questionnaire_version: attribute-summary-feedback-v3` 与 `preference_questionnaire_version: strategy-preference-v2`，并保留原正式流程的比较总体偏好；缺少该字段的旧属性级 manifest 按 v1 识别，不静默升级。流程、保存与导出按版本区分，正式施测仍需预测试和头显整体验收。
 
 ## 多选分析口径
 

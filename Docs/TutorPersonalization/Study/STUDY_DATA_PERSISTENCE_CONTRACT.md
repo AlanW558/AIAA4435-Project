@@ -1,12 +1,12 @@
 # 参与者、会话、问卷与数据保存契约
 
-> **2026-11-28 版本补充：** 新建四属性问卷使用 `attribute-summary-feedback-v3`（每属性20项A0–A4七点评分＋一项多选偏好），Unity偏好单独使用 `strategy-preference-v2`。E/A/N/S可选1–4项，No preference互斥；偏好题移除无法判断，A0–A4的独立无法判断保留。manifest显式固定 `attribute_questionnaire_version` 和 `preference_questionnaire_version`。旧属性v1分类、v2数值A0/单选偏好和偏好v1按原版本恢复导出，不自动转换。以下早期字段/题量记录以[当前属性问卷修订](ATTRIBUTE_LEVEL_FEEDBACK_AMENDMENT.md)为准；32题仍保存独立完成证据，当前最终问卷为16份属性策略评价＋1份自然评价。
+> **当前研究规范（2026-11-28）：** 四属性＋外观共40题，每模块20项评分和一项多选偏好，自然模拟不再施测。准确题干、当前独立网页的版本/身份/缺失/汇总规则见[当前问卷与数据范围](CURRENT_QUESTIONNAIRE_AND_DATA_CONTRACT.md)。本文件以下保留 `study-data-contract-v1` 的旧Unity实现与兼容读取规则，其中自然26题、逐任务评分及671项计数不作为新研究要求。
 
 版本：`study-data-contract-v1`；契约日期：2026-11-16；实现状态核对：2026-11-17。对应研究设计 `study-protocol-v1.7`。
 
-**状态：保存层、新版问卷、自然会话及实验控制器已接通。** 当前仍限工程/练习验证，不表示正式采集或头显验收已完成。字段含义以本文及[主设计](FINAL_USER_STUDY_DESIGN_4_STRATEGIES.md)为准，实际路径和实现差异见[保存层说明](../STUDY_DATA_PERSISTENCE_IMPLEMENTATION.md)和[流程接入](../STUDY_FLOW_INTEGRATION.md)。旧[流程契约 v1.5](STUDY_PROTOCOL_AND_QUESTIONNAIRE_CONTRACT.md)仅供历史追溯。
+**以下为旧Unity实现状态：保存层、当时新版问卷、自然会话及实验控制器已接通。** 当前仍限工程/练习验证，不表示正式采集或头显验收已完成。旧记录字段含义以其产生时的本文契约为准；新研究设计以[主设计](FINAL_USER_STUDY_DESIGN_4_STRATEGIES.md)及当前问卷规范为准，实际路径和实现差异见[保存层说明](../STUDY_DATA_PERSISTENCE_IMPLEMENTATION.md)和[流程接入](../STUDY_FLOW_INTEGRATION.md)。旧[流程契约 v1.5](STUDY_PROTOCOL_AND_QUESTIONNAIRE_CONTRACT.md)仅供历史追溯。
 
-## 1. 本步固定的范围
+## 1. 旧实现固定的范围（保留用于解释已有记录）
 
 - 四属性各八题，共 32 题；每题 E/A/N/S 四份反馈，共 128 份；每份五题。
 - 四次属性末偏好及一次四属性总体偏好，共五份，均在自然情境之前。

@@ -1,8 +1,10 @@
 # 四属性任务：对比幅度、起始材料与连续编号修订
 
+> **历史修订记录；导航更新于2026-11-28。** 下文的当前材料/批次指当时的text-check-v2。现行完整题卡见[40题任务库](CURRENT_TASK_BANK_40.md)，已发布四属性输出为text-check-v4；本文件保留数值与编号调整的来源，不恢复固定试听或旧问卷版本。
+
 日期：2026-11-27。适用范围：当前文本请求／API／TTS 辅助试听批次 `StudyData/text-check-v2/`。本文件记录已写入当前题库的内容，不是尚未采用的任务建议。
 
-当前执行依据为 [StudyTaskSequence.json](../../../Assets/Project/Resources/Tutor/StudyTaskSequence.json)：`task-navigation-v3`、材料版本 `attribute-materials-v2`，本次核对 SHA-256 为 `125c54f99f42685c6653a35d4ec4f14cb2e9c11a9b4b3df564bf847c17060dd5`。逐题填写表由同一题库生成：[TASK_REQUESTS.md](../../../StudyData/text-check-v2/TASK_REQUESTS.md)。下列 32 行的英文目标直接取自题库；“实际起点”通过依次应用 `public_setup` 中的 setting 事件得到，不能把历史题最早的设置当成当前起点。
+当时执行依据为 [StudyTaskSequence.json](../../../Assets/Project/Resources/Tutor/StudyTaskSequence.json)：`task-navigation-v3`、材料版本 `attribute-materials-v2`，当时核对 SHA-256 为 `125c54f99f42685c6653a35d4ec4f14cb2e9c11a9b4b3df564bf847c17060dd5`。逐题填写表由同一题库生成，原始本地路径为 `StudyData/text-check-v2/TASK_REQUESTS.md`（未随仓库发布）。下列 32 行的英文目标直接取自当时题库；“实际起点”通过依次应用 `public_setup` 中的 setting 事件得到，不能把历史题最早的设置当成当前起点。
 
 修订解决三类问题：起点与目标过近导致难以听辨；缺少起始或历史音频导致比较参照不足；删题后参与者看到不连续的 1／3 编号。保留四属性、四类情境、每情境两题、四策略同请求的结构，32 题不变。每属性仍在听完八题后填写四策略各五题，再选一次偏好，即 **20 个核心答案＋1 个偏好；四属性共 84 项**。完整范围与量表来源见[属性级问卷修订](ATTRIBUTE_LEVEL_FEEDBACK_AMENDMENT.md)。自然情境模块不在本次辅助试听修订内。
 

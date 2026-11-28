@@ -1,10 +1,20 @@
-# 四属性 API 辅助实验与结果
+# 四属性与外观辅助实验：材料、反馈与汇总
 
-这里集中保存四属性实验的文本 API 调用入口、可移植试听问卷、参与者反馈和分析 notebook。四策略规则、对话生成、澄清、统一展示屏障与 TTS **继续复用仓库中的权威实现**，不在本目录复制一套策略算法。自然情境模拟仍在 Unity/VR 中进行。
+这里集中保存四属性实验的文本 API 调用入口、可移植试听问卷、参与者反馈和分析 notebook。四策略规则、对话生成、澄清、统一展示屏障与 TTS **继续复用仓库中的权威实现**，不在本目录复制一套策略算法。
+
+**2026-11-28设计更新：** [主实验v2.0](../Docs/TutorPersonalization/Study/FINAL_USER_STUDY_DESIGN_4_STRATEGIES.md)已改为四属性＋外观40题；自然情境只保留为后续Unity/VR demo，不再收实验问卷。`runs/text-check-v4/`、原有scripts及results/P001继续表示此前32题四属性辅助评价。新增[appearance/](appearance/README.md)单独发布四位参与者的外观原始反馈、总数据汇总、问卷快照与可复算脚本；四人评价同一套Unity图像输出。五模块统一调度和总体偏好尚未接入，不把这两类记录合称完整40题样本。
 
 当前发布包 `runs/text-check-v4/` 包含 **32 道任务、128 段实际回复音频**。每个属性8题（4情境×2题），每个属性填写四策略×5个评分，共20格，再选择一次策略偏好；全四属性共80个评分和4次属性偏好。评分对象是某个属性下的整体表现，不能把它解释成单题评价。
 
-## 当前材料与参与者1
+## 外观结果入口
+
+- [外观说明与复算步骤](appearance/README.md)：P001–P004的四份原始最终JSON及独立汇总；其编号不自动对应四属性同名编号。
+- [外观总数据汇总](appearance/results/aggregate_results.json)：逐人来源、每策略各题的描述统计与多选偏好计数。
+- [当前40题任务库](../Docs/TutorPersonalization/Study/CURRENT_TASK_BANK_40.md)和[当前问卷与数据规范](../Docs/TutorPersonalization/Study/CURRENT_QUESTIONNAIRE_AND_DATA_CONTRACT.md)：五方向任务、两套准确英文题干、来源与评分方式。
+
+下文命令与P001更正记录继续只适用于原四属性数据包；外观使用其独立README中的脚本，不导入旧四属性汇总。
+
+## 四属性材料与参与者1
 
 | 内容 | 位置 |
 | --- | --- |

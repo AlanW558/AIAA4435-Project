@@ -1,0 +1,361 @@
+{
+  "schema": "appearance-summary-feedback-v1",
+  "questionnaire_version": "appearance-module-A0-A4-v1",
+  "domain": "appearance",
+  "collection_unit": "module",
+  "collection_mode": "api_assisted_output_review",
+  "status": "final",
+  "participant_id": "P002",
+  "evidence": {
+    "batch_id": "review-1ed3163dd5e94e36bbd3a89e0b36e0bb",
+    "capture_input_sha256": "53e8e54e8bf3d014355cfef819cb65567073a8950a24fcd3850b3090635c7418",
+    "capture_manifest_sha256": "af522cdf9001838bf8324f00f11038f089a5a2ae4d5b27190f4111516ce83896",
+    "catalog_sha256": "08b556fbfb3dfdd5643b987b12cab90e0e54fdd3401476b0c515b58bf89e0be2",
+    "tasks": [
+      {
+        "task_code": "AP-C1-01",
+        "task_id": "fc41f509267d442189db706b4ff8fec6",
+        "first_reveal_id": "8131a1b67ad2495db70df9b50330c809",
+        "branch_states_sha256": "56033875c2dab487d09bfb208585c04f2e52dc9a91782c17b9df1c43f4b04566",
+        "captures": {
+          "AP-C1-01/baseline": "37c19f8dd56799cebd30614aba2853f295a2ac174504db1966ffe4a89d9de0b6",
+          "AP-C1-01/E": "e849580740a94f5903dd7490a5d9691e41755256fa420666605410ec56138a71",
+          "AP-C1-01/A": "e849580740a94f5903dd7490a5d9691e41755256fa420666605410ec56138a71",
+          "AP-C1-01/N": "e849580740a94f5903dd7490a5d9691e41755256fa420666605410ec56138a71",
+          "AP-C1-01/S": "e849580740a94f5903dd7490a5d9691e41755256fa420666605410ec56138a71"
+        }
+      },
+      {
+        "task_code": "AP-C1-02",
+        "task_id": "54cd1a1391414f338730ae0fec646c65",
+        "first_reveal_id": "8cf7e1fdaca2499db2853a0c78910e04",
+        "branch_states_sha256": "5c9c4323b8e0060af341f353642ed8b47a17f73ac10c961a716d5c5e4d07419e",
+        "captures": {
+          "AP-C1-02/baseline": "a3f4fb1c383109c694aa2da46e751c275631d6a3a59a42782ef5d6b532737bf9",
+          "AP-C1-02/E": "e20a58d8f57c6c581a1902f16845c29f5d0572f72e1a9885e375c0c73d800c25",
+          "AP-C1-02/A": "e20a58d8f57c6c581a1902f16845c29f5d0572f72e1a9885e375c0c73d800c25",
+          "AP-C1-02/N": "e20a58d8f57c6c581a1902f16845c29f5d0572f72e1a9885e375c0c73d800c25",
+          "AP-C1-02/S": "e20a58d8f57c6c581a1902f16845c29f5d0572f72e1a9885e375c0c73d800c25"
+        }
+      },
+      {
+        "task_code": "AP-C2-01",
+        "task_id": "c7af422212e34277aa82cd022c337ce6",
+        "first_reveal_id": "3561b8e225d344398a91007a2db8a753",
+        "branch_states_sha256": "09baedc717da292cc4470c223114dfa542adb3426c18bf4e78748e15f5541bb3",
+        "captures": {
+          "AP-C2-01/baseline": "d12abf472f9c84b4120a11fe5b62b80a16abea1ebc9c2f9e4b4443d446185614",
+          "AP-C2-01/E": "04b32bed5e2fc392641c83f242e05c0ae7af7e64b4f66b4786190db6002b646d",
+          "AP-C2-01/A": "04b32bed5e2fc392641c83f242e05c0ae7af7e64b4f66b4786190db6002b646d",
+          "AP-C2-01/N": "04b32bed5e2fc392641c83f242e05c0ae7af7e64b4f66b4786190db6002b646d",
+          "AP-C2-01/S": "04b32bed5e2fc392641c83f242e05c0ae7af7e64b4f66b4786190db6002b646d"
+        }
+      },
+      {
+        "task_code": "AP-C2-02",
+        "task_id": "fdda2d6ae4cd4a10bf2c446fe764ef36",
+        "first_reveal_id": "8615c0deb0cc4a519419d139ab47cec2",
+        "branch_states_sha256": "3ad691bc3d610e9acad0a125928d41671aed84d9fdee35ed02d63e22f7743f54",
+        "captures": {
+          "AP-C2-02/baseline": "b1363b9925611a017464851dd469035a3a9213dca8c6055f368960d8905fbf2f",
+          "AP-C2-02/E": "03951852d8eb7ca403acf63893b14a52d2d62db7c451fdb4c8247335e7d1626a",
+          "AP-C2-02/A": "03951852d8eb7ca403acf63893b14a52d2d62db7c451fdb4c8247335e7d1626a",
+          "AP-C2-02/N": "03951852d8eb7ca403acf63893b14a52d2d62db7c451fdb4c8247335e7d1626a",
+          "AP-C2-02/S": "03951852d8eb7ca403acf63893b14a52d2d62db7c451fdb4c8247335e7d1626a"
+        }
+      },
+      {
+        "task_code": "AP-C3-01",
+        "task_id": "48ae44f286cd419986a16c70014fa0a9",
+        "first_reveal_id": "26e6e3f4204d45898b03b6ee6305b1f4",
+        "branch_states_sha256": "374a04348d46eed9b28b9fd778a339b6dd0912fd04ccd6306180e8ee51f72b61",
+        "captures": {
+          "AP-C3-01/baseline": "d88a65eeb492869ea248a6960db9555b2193b0326174e26e7c7827a23eab8b22",
+          "AP-C3-01/E": "d6bbd1a8da890a13d2b73d20861c98bbd728dca8910c00e9522138852da0bb3e",
+          "AP-C3-01/A": "d6bbd1a8da890a13d2b73d20861c98bbd728dca8910c00e9522138852da0bb3e",
+          "AP-C3-01/N": "d6bbd1a8da890a13d2b73d20861c98bbd728dca8910c00e9522138852da0bb3e",
+          "AP-C3-01/S": "d6bbd1a8da890a13d2b73d20861c98bbd728dca8910c00e9522138852da0bb3e"
+        }
+      },
+      {
+        "task_code": "AP-C3-02",
+        "task_id": "ecf37cb26fd94f8a80172709ebc19d71",
+        "first_reveal_id": "53052e2c771341ca8b2682e20b89728c",
+        "branch_states_sha256": "fb03a7a73565e3de340fc2494b523290c3eee009a565608a0aa03916a76afa0a",
+        "captures": {
+          "AP-C3-02/baseline": "b32787d6da82411c222bcfcf800c3c605f51cd483a947280ce2ca2ce3aca7c34",
+          "AP-C3-02/E": "7f9f0cf5341b8d0c1c5a9a4060221f611fd6678298e69d77b483636b0537832c",
+          "AP-C3-02/A": "65afa0e836f4c6af349f8147d30395d94925b49bc1a8e52a8746ed789e87d9af",
+          "AP-C3-02/N": "65afa0e836f4c6af349f8147d30395d94925b49bc1a8e52a8746ed789e87d9af",
+          "AP-C3-02/S": "65afa0e836f4c6af349f8147d30395d94925b49bc1a8e52a8746ed789e87d9af"
+        }
+      },
+      {
+        "task_code": "AP-C4-01",
+        "task_id": "f2a7913f47ef41fb8424c443e5d117fe",
+        "first_reveal_id": "1ab83015373b46c8b4169442c3251984",
+        "branch_states_sha256": "10a123abb78768c50fa6f45f800d5da2b53fa6a5e64860c311a55a9d720ba429",
+        "captures": {
+          "AP-C4-01/baseline": "49ff267978edf210949ab56f26f65a16dc201924a003f64aab62177bb3b33222",
+          "AP-C4-01/E": "a24e65edc2158991d4f654a9b5810a9e4c28f8d65749755b1ae0815c52da7fe4",
+          "AP-C4-01/A": "37c19f8dd56799cebd30614aba2853f295a2ac174504db1966ffe4a89d9de0b6",
+          "AP-C4-01/N": "37c19f8dd56799cebd30614aba2853f295a2ac174504db1966ffe4a89d9de0b6",
+          "AP-C4-01/S": "37c19f8dd56799cebd30614aba2853f295a2ac174504db1966ffe4a89d9de0b6",
+          "AP-C4-01/history-01": "4b0cd781337bc66e71cbd504bbbe7b8d109f96c4d800acd4dd701add98925d2c",
+          "AP-C4-01/history-02": "d28145114a04c21e0113ddd63fbc6d5abe907260096ff5de434a6d2e7adb7fd1",
+          "AP-C4-01/history-03": "935fc09a767be4809f5b55aa288fed58350d282c374a602aca87f8c407bb3dfd",
+          "AP-C4-01/history-04": "49ff267978edf210949ab56f26f65a16dc201924a003f64aab62177bb3b33222"
+        }
+      },
+      {
+        "task_code": "AP-C4-02",
+        "task_id": "85580c4726e646a2a2478211ddd18f72",
+        "first_reveal_id": "f75415fa7e064f4dac31e5a25a43097e",
+        "branch_states_sha256": "fd4f29059145284eb0016b05ced960b17d064d156d87f3b3dba7a3810dbee23f",
+        "captures": {
+          "AP-C4-02/baseline": "b63dfd69c2ce7ea95f4633a646eaa9412b931293a39a1778fdb98c70dc9886d2",
+          "AP-C4-02/E": "e849580740a94f5903dd7490a5d9691e41755256fa420666605410ec56138a71",
+          "AP-C4-02/A": "e849580740a94f5903dd7490a5d9691e41755256fa420666605410ec56138a71",
+          "AP-C4-02/N": "e849580740a94f5903dd7490a5d9691e41755256fa420666605410ec56138a71",
+          "AP-C4-02/S": "e849580740a94f5903dd7490a5d9691e41755256fa420666605410ec56138a71",
+          "AP-C4-02/history-01": "7c60313abeaba52222f0aeb027f45a7d975784aeab2df8abeafbfafbdf35a22a",
+          "AP-C4-02/history-02": "866e631cacd0214818649a4ab8cd2c17c1697f0385ee93b1860f3c0e968ba68c",
+          "AP-C4-02/history-03": "b63dfd69c2ce7ea95f4633a646eaa9412b931293a39a1778fdb98c70dc9886d2"
+        }
+      }
+    ],
+    "request_source": "mixed_user_authorized_requests",
+    "composition": {
+      "schema": "appearance-review-composition-provenance-v1",
+      "review_id": "review-1ed3163dd5e94e36bbd3a89e0b36e0bb",
+      "composition_kind": "seven_retained_trials_one_authorized_retest",
+      "rerun_task_codes": [
+        "AP-C4-01"
+      ],
+      "retained_task_codes": [
+        "AP-C1-01",
+        "AP-C1-02",
+        "AP-C2-01",
+        "AP-C2-02",
+        "AP-C3-01",
+        "AP-C3-02",
+        "AP-C4-02"
+      ],
+      "parent_batch_id": "a75427c7c3af4444b0861c346d8b3ef6",
+      "retest_batch_id": "3c03820efe5b4cb3a69e746d9c57a92e",
+      "catalog_sha256": "08b556fbfb3dfdd5643b987b12cab90e0e54fdd3401476b0c515b58bf89e0be2",
+      "request_source": "mixed_user_authorized_requests",
+      "source_artifacts": {
+        "parent_capture_input": {
+          "file": "evidence/parent-capture-input.json",
+          "sha256": "72c0d0ca4b6b0288a6fff81ed1ecb92256fc0201b2e06f4e224a4f6a397dceb3"
+        },
+        "parent_batch": {
+          "file": "evidence/parent-batch.json",
+          "sha256": "6987e120c74dd3020278bb6996fe74e2d6a21e46b814295616b40b87f5a4157f"
+        },
+        "parent_requests": {
+          "file": "evidence/parent-submitted-requests.json",
+          "sha256": "23c42c91f2eeb8d0db47f4e80f42190d262d156b2ef39dfeae3af33abe77a0d7"
+        },
+        "retest_trial": {
+          "file": "evidence/retest-trial.json",
+          "sha256": "f1016921730b98ced3444f827d2b1523e65645283615b4736a31aa0a668dc46f"
+        },
+        "retest_metadata": {
+          "file": "evidence/retest-metadata.json",
+          "sha256": "02716a171670968fac8848e9fb62a0b9d16a54a2eebd185d8bbf1041bd0c8f04"
+        }
+      },
+      "tasks": {
+        "AP-C1-01": {
+          "source_kind": "retained",
+          "source_batch_id": "a75427c7c3af4444b0861c346d8b3ef6",
+          "request_source": "user_supplied_text",
+          "trial_sha256": "00be617eb94738b0f26ecb47396b8ac4a4f92831a800d711e3a65ed3cf021962",
+          "original_request": "Could you only change the color of jacket to orange?",
+          "request": "Could you only change the color of jacket to orange?"
+        },
+        "AP-C1-02": {
+          "source_kind": "retained",
+          "source_batch_id": "a75427c7c3af4444b0861c346d8b3ef6",
+          "request_source": "user_supplied_text",
+          "trial_sha256": "62b3c9c50ded1e7591208040efcbbf42827c7a53178f56e03553fa66871f1f7d",
+          "original_request": "I want to switch to the sport outfit and replace the hat with glasses.",
+          "request": "I want to switch to the sport outfit and replace the hat with glasses."
+        },
+        "AP-C2-01": {
+          "source_kind": "retained",
+          "source_batch_id": "a75427c7c3af4444b0861c346d8b3ef6",
+          "request_source": "user_supplied_text",
+          "trial_sha256": "4015bbd3c8f5931d4c28997dad8b2f07993f56fb3cbb50094a210be1a0f5f1d3",
+          "original_request": "Could you make yourself a little bigger without changing other things?",
+          "request": "Could you make yourself a little bigger without changing other things?"
+        },
+        "AP-C2-02": {
+          "source_kind": "retained",
+          "source_batch_id": "a75427c7c3af4444b0861c346d8b3ef6",
+          "request_source": "user_supplied_text",
+          "trial_sha256": "cb8682e523943e74eb9c69fba72c82b9815fa04d4afa27fa821742590a7b0682",
+          "original_request": "Could you make yourself a little smaller without changing other things?",
+          "request": "Could you make yourself a little smaller without changing other things?"
+        },
+        "AP-C3-01": {
+          "source_kind": "retained",
+          "source_batch_id": "a75427c7c3af4444b0861c346d8b3ef6",
+          "request_source": "user_supplied_text",
+          "trial_sha256": "961d3828b083726e35ef010f326ba277899cac4002003194cfadce56c95bbc9e",
+          "original_request": "I want your appearance to look more casual.",
+          "request": "I want your appearance to look more casual."
+        },
+        "AP-C3-02": {
+          "source_kind": "retained",
+          "source_batch_id": "a75427c7c3af4444b0861c346d8b3ef6",
+          "request_source": "user_supplied_text",
+          "trial_sha256": "33f0caec11e60244212a1b04a6469d73a6160c7beb6165e4ee5478e83d50c8f4",
+          "original_request": "I want you to make your appearance more conspicuous.",
+          "request": "I want you to make your appearance more conspicuous."
+        },
+        "AP-C4-01": {
+          "source_kind": "retest",
+          "source_batch_id": "3c03820efe5b4cb3a69e746d9c57a92e",
+          "request_source": "assistant_revised_user_authorized",
+          "trial_sha256": "06f1dac2d10892a4fd298f12ca8c6b4ddae28274ce4277e0f25c95fa844ecbf2",
+          "original_request": "Can you go back to the previous color, but keep the hat?",
+          "request": "Can you go back to that earlier color, but keep the hat?"
+        },
+        "AP-C4-02": {
+          "source_kind": "retained",
+          "source_batch_id": "a75427c7c3af4444b0861c346d8b3ef6",
+          "request_source": "user_supplied_text",
+          "trial_sha256": "d32b1b56746d9cb1dd00f09d77133011dbbafc2128c4bc70ad435888508390ab",
+          "original_request": "Undo the last size change, but keep the hat and everything else.",
+          "request": "Undo the last size change, but keep the hat and everything else."
+        }
+      }
+    },
+    "provenance_sha256": "ddbd1da5e70665aab313a8bcbbd7f24ee4b2a5e97743401664bac8ef3607eb8c"
+  },
+  "request_source": "mixed_user_authorized_requests",
+  "clarification_source": "assistant_authored_user_authorized",
+  "conditions": {
+    "E": {
+      "answers": {
+        "A0": {
+          "status": "answered",
+          "value": 5
+        },
+        "A1": {
+          "status": "answered",
+          "value": 6
+        },
+        "A2": {
+          "status": "answered",
+          "value": 4
+        },
+        "A3": {
+          "status": "answered",
+          "value": 4
+        },
+        "A4": {
+          "status": "answered",
+          "value": 5
+        }
+      }
+    },
+    "A": {
+      "answers": {
+        "A0": {
+          "status": "answered",
+          "value": 7
+        },
+        "A1": {
+          "status": "answered",
+          "value": 5
+        },
+        "A2": {
+          "status": "answered",
+          "value": 6
+        },
+        "A3": {
+          "status": "answered",
+          "value": 3
+        },
+        "A4": {
+          "status": "answered",
+          "value": 4
+        }
+      }
+    },
+    "N": {
+      "answers": {
+        "A0": {
+          "status": "answered",
+          "value": 7
+        },
+        "A1": {
+          "status": "answered",
+          "value": 6
+        },
+        "A2": {
+          "status": "answered",
+          "value": 6
+        },
+        "A3": {
+          "status": "answered",
+          "value": 5
+        },
+        "A4": {
+          "status": "answered",
+          "value": 6
+        }
+      }
+    },
+    "S": {
+      "answers": {
+        "A0": {
+          "status": "answered",
+          "value": 7
+        },
+        "A1": {
+          "status": "answered",
+          "value": 6
+        },
+        "A2": {
+          "status": "answered",
+          "value": 6
+        },
+        "A3": {
+          "status": "answered",
+          "value": 7
+        },
+        "A4": {
+          "status": "answered",
+          "value": 7
+        }
+      }
+    }
+  },
+  "preference": {
+    "status": "answered",
+    "value": [
+      "S"
+    ]
+  },
+  "comment": "",
+  "review_opened": [
+    "AP-C1-01/E",
+    "AP-C1-01/A",
+    "AP-C1-01/N",
+    "AP-C1-01/S",
+    "AP-C4-01/E",
+    "AP-C4-01/A",
+    "AP-C4-01/N",
+    "AP-C4-01/S",
+    "AP-C4-02/E",
+    "AP-C4-02/N",
+    "AP-C4-02/A",
+    "AP-C4-02/S"
+  ],
+  "saved_at": "2026-11-28T09:38:06.644Z"
+}

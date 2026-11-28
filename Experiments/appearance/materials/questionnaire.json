@@ -1,0 +1,79 @@
+{
+  "schema": "appearance-questionnaire-definition-v1",
+  "version": "appearance-module-A0-A4-v1",
+  "response_schema": "appearance-summary-feedback-v1",
+  "domain": "appearance",
+  "collection_unit": "module",
+  "collection_mode": "api_assisted_output_review",
+  "strategy_names": {
+    "E": "Always Act",
+    "A": "Always Ask",
+    "N": "Native Gate",
+    "S": "Selective"
+  },
+  "items": [
+    {
+      "id": "A0",
+      "text": "Overall, to what extent did this approach’s outcomes meet your requirements across the appearance tasks?",
+      "left": "Not at all",
+      "right": "Completely",
+      "help": "Consider both the changes you wanted and the features you wanted to keep unchanged.",
+      "source": "Project-written requirement fulfilment item."
+    },
+    {
+      "id": "A1",
+      "text": "Overall, how difficult or easy was it to adjust the tutor’s appearance using this approach?",
+      "left": "Very difficult",
+      "right": "Very easy",
+      "source": "Adapted from SEQ task ease to a retrospective eight-task module; not the original SEQ administration or norms."
+    },
+    {
+      "id": "A2",
+      "text": "Across the appearance tasks, I felt in control of the changes made to the tutor with this approach.",
+      "left": "Strongly disagree",
+      "right": "Strongly agree",
+      "source": "Adapted from SASSI interaction-control content; not a validated standalone Control subscale."
+    },
+    {
+      "id": "A3",
+      "text": "This approach’s decisions about whether to ask for clarification suited my needs across the appearance tasks.",
+      "left": "Strongly disagree",
+      "right": "Strongly agree",
+      "source": "Project-written clarification-decision appropriateness item."
+    },
+    {
+      "id": "A4",
+      "text": "Overall, I am satisfied with my experience of adjusting the tutor’s appearance using this approach.",
+      "left": "Strongly disagree",
+      "right": "Strongly agree",
+      "source": "Project-written overall satisfaction item; not a SUS or SASSI total."
+    }
+  ],
+  "rating_values": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "missing_status": "unable_to_judge",
+  "missing_value": null,
+  "preference": {
+    "multiple_selection": true,
+    "allowed": [
+      "E",
+      "A",
+      "N",
+      "S"
+    ],
+    "exclusive_status": "no_preference"
+  },
+  "score_rule": "Report each item separately; no validated scale total is computed.",
+  "reference_links": {
+    "SEQ": "https://measuringu.com/evolution-of-seq/",
+    "SASSI": "https://bura.brunel.ac.uk/bitstream/2438/3077/1/SASSI%20Paper%202000.pdf"
+  },
+  "definition_source": "Tools/AppearanceTextCheck/feedback.py: ITEMS, SCHEMA, VERSION (snapshot; no runtime dependency)"
+}

@@ -6,7 +6,7 @@
 
 本次同步[生成回复、属性确认与属性级问卷](Docs/TutorPersonalization/Study/GENERATED_REPLY_AND_ATTRIBUTE_CONFIRMATION.md)：移除固定试听，四项设置确认后统一发送 API；四属性各八题，每属性填写 20 项 1–7 评价（含 A0 完成度）及一项可多选的策略偏好。新偏好题移除 Unable to judge，量表自己的无法判断选项保留。历史问卷按原版本读取。
 
-[Experiments](Experiments/README.md) 提供不经 STT 的文本 API 辅助实验、32 题的实际输出与 128 份音频、独立网页问卷、匿名参与者 1 与总数据汇总，以及可执行分析 notebook。已归档音频与反馈属于其生成时的版本，不因后续澄清修复而被替换或重新评分。
+[Experiments](Experiments/README.md) 提供不经 STT 的文本 API 辅助实验、32 题的实际输出与 128 份音频、独立网页问卷、匿名参与者 1 与总数据汇总，以及可执行分析 notebook。新增[外观数据包](Experiments/appearance/README.md)包含四位参与者的原始最终反馈、总数据汇总及复算脚本；他们评价同一套已冻结的外观输出。已归档音频与反馈属于其生成时的版本，不因后续澄清修复而被替换或重新评分。
 
 ## 从这里开始
 
@@ -17,12 +17,13 @@
 | 研究流程，桌面 | Comparison > Open Desktop | TutorComparisonDesktop.unity |
 | 研究流程，VR | Comparison > Open VR | TutorComparisonVR.unity |
 
-自由测试可选择 **Four-strategy comparison** 或 **Selective conversation**。比较模式的普通输入、追问及手动控件作用于四策略；四策略按钮只切换查看，澄清回复仅交给提问分支。所有策略完成或明确停止后统一显示该轮结果。研究任务固定模式：四属性比较、自然模拟 Selective。详见[交互模式](Docs/TutorPersonalization/INTERACTION_MODES.md)。
+自由测试可选择 **Four-strategy comparison** 或 **Selective conversation**。比较模式的普通输入、追问及手动控件作用于四策略；四策略按钮只切换查看，澄清回复仅交给提问分支。所有策略完成或明确停止后统一显示该轮结果。现有Unity研究控制器仍按四属性比较、自然模拟Selective的旧任务调度；新的研究设计为四属性＋外观四策略比较，自然会话仅保留作demo，统一调度迁移尚未完成。详见[交互模式](Docs/TutorPersonalization/INTERACTION_MODES.md)。
 
 - [项目与研究文档导航](Docs/README.md)：proposal、Formative、第一次外观实验与当前研究。
 - [Tutor 当前实现与使用说明](Docs/TutorPersonalization/README.md)：任务、问卷版本、语音、日志、保存/导出、验证边界。
-- [最终研究设计](Docs/TutorPersonalization/Study/FINAL_USER_STUDY_DESIGN_4_STRATEGIES.md)：32 道属性任务＋一段 Selective 自然模拟；5／26 题问卷、偏好及可选访谈。
-- [数据保存契约](Docs/TutorPersonalization/Study/STUDY_DATA_PERSISTENCE_CONTRACT.md)与[保存/导出实现](Docs/TutorPersonalization/STUDY_DATA_PERSISTENCE_IMPLEMENTATION.md)。
+- [最终研究设计 v2.0](Docs/TutorPersonalization/Study/FINAL_USER_STUDY_DESIGN_4_STRATEGIES.md)：设计已改为四属性＋外观共40题，每模块20项评分及多选偏好，另有一次总体偏好；自然情境仅用于demo。外观已有独立API/Unity图像辅助材料和四份反馈；Unity控制器仍是32题＋自然评估的旧调度，五模块统一调度及总体偏好尚待接入。
+- [当前40题完整任务库](Docs/TutorPersonalization/Study/CURRENT_TASK_BANK_40.md)与[当前问卷内容、评分和数据范围](Docs/TutorPersonalization/Study/CURRENT_QUESTIONNAIRE_AND_DATA_CONTRACT.md)。
+- [原Unity数据保存契约](Docs/TutorPersonalization/Study/STUDY_DATA_PERSISTENCE_CONTRACT.md)与[保存/导出实现](Docs/TutorPersonalization/STUDY_DATA_PERSISTENCE_IMPLEMENTATION.md)。
 
 `TutorPersonalizationDesktop/VR` 是早期单会话开发场景；`AppearanceDesktopDemo/AppearanceVR/AppearanceExperiment` 属于第一次外观实验；`CloudConversationRoom` 是原始房间原型。保留它们用于复现，不作为当前完整研究入口。
 

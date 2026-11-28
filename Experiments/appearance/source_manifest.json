@@ -1,0 +1,29 @@
+{
+  "schema": "appearance-source-files-v1",
+  "participants": [
+    {
+      "participant_id": "P001",
+      "stored_filename": "participant_001.json",
+      "original_download_filename": "P001_appearance_feedback_66a0145096.json",
+      "sha256": "3a1a9bf75ae176d449c0a498711ce0b2f8a8de0037ef5a9af2ac4d22275f051d"
+    },
+    {
+      "participant_id": "P002",
+      "stored_filename": "participant_002.json",
+      "original_download_filename": "P002_appearance_feedback_66a0145096.json",
+      "sha256": "ee654d1db4f1cb60bbc252e324048879e80c1a611100927196951fef68db8b21"
+    },
+    {
+      "participant_id": "P003",
+      "stored_filename": "participant_003.json",
+      "original_download_filename": "P003_appearance_feedback_66a0145096.json",
+      "sha256": "275e2198753c6ed4f76ec136f69a8e1a4a0bf3c856c9e3f52ad569e2594dfcd2"
+    },
+    {
+      "participant_id": "P004",
+      "stored_filename": "participant_004.json",
+      "original_download_filename": "P004_appearance_feedback_66a0145096.json",
+      "sha256": "3a459540ce018709211a872749fdcd01a8f0a5543423d2325d55ec6d51653d5d"
+    }
+  ]
+}

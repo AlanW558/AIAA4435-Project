@@ -1,6 +1,6 @@
 # 生成回复、属性确认与属性级问卷修订
 
-> **2026-11-28 版本补充：** 新建四属性问卷使用 `attribute-summary-feedback-v3`（每属性20项A0–A4七点评分＋一项多选偏好），Unity偏好单独使用 `strategy-preference-v2`。E/A/N/S可选1–4项，No preference互斥；偏好题移除无法判断，A0–A4的独立无法判断保留。manifest显式固定 `attribute_questionnaire_version` 和 `preference_questionnaire_version`。旧属性v1分类、v2数值A0/单选偏好和偏好v1按原版本恢复导出，不自动转换。以下早期字段/题量记录以[当前属性问卷修订](ATTRIBUTE_LEVEL_FEEDBACK_AMENDMENT.md)为准；32题仍保存独立完成证据，当前最终问卷为16份属性策略评价＋1份自然评价。
+> **2026-11-28 版本补充：** 新建四属性问卷使用 `attribute-summary-feedback-v3`（每属性20项A0–A4七点评分＋一项多选偏好），Unity偏好单独使用 `strategy-preference-v2`。E/A/N/S可选1–4项，No preference互斥；偏好题移除无法判断，A0–A4的独立无法判断保留。manifest显式固定 `attribute_questionnaire_version` 和 `preference_questionnaire_version`。旧属性v1分类、v2数值A0/单选偏好和偏好v1按原版本恢复导出，不自动转换。以下正文记录当时四属性与自然会话的实现；32题仍保存独立完成证据。当前研究已取消自然评估，新增四策略外观模块，准确范围见[当前问卷与数据规范](CURRENT_QUESTIONNAIRE_AND_DATA_CONTRACT.md)，不以本文旧自然段落作为新研究要求。
 
 更新：2026-11-27。适用于新建运行。实现阶段先完成本地验证；随后按用户新授权完成 v3 真实 API 批次，见文末执行记录。旧批次输出、原始请求、澄清、音频和问卷不重写、不迁移为新实验数据。
 
